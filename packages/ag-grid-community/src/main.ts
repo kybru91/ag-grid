@@ -823,6 +823,7 @@ export {
     UseGroupTotalRow,
     GetChartMenuItems,
 } from './entities/gridOptions';
+export type { ManagedGridOptionKey, ManagedGridOptions } from './gridOptionsInitial';
 
 export {
     FillOperationParams,

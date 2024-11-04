@@ -20,8 +20,8 @@ input[class^='ag-'][type='range'] {
     }
 }
 
-// IMPORTANT this block must contain ONLY -webkit styles, as any browsers that
-// don't support the -webkit prefix will ignore the entire block
+/* IMPORTANT this block must contain ONLY -webkit styles, as any browsers that
+   don't support the -webkit prefix will ignore the entire block */
 input[class^='ag-'][type='range'] {
     &::-webkit-slider-runnable-track {
         margin: 0;
@@ -58,8 +58,8 @@ input[class^='ag-'][type='range'] {
     }
 }
 
-// IMPORTANT this block must contain ONLY -moz styles, as any browsers that
-// don't support the -moz prefix will ignore the entire block
+/* IMPORTANT this block must contain ONLY -moz styles, as any browsers that
+   don't support the -moz prefix will ignore the entire block */
 input[class^='ag-'][type='range'] {
     &::-moz-range-track {
         margin: 0;

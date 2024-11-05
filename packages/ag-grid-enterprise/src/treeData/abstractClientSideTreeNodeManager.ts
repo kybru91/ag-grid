@@ -253,6 +253,12 @@ export abstract class AbstractClientSideTreeNodeManager<TData> extends AbstractC
 
         this.treeCommitPreOrder(details, node);
         this.treeCommitChildren(details, node, collapsed);
+
+        if (node.isEmptyFillerNode()) {
+            this.treeClear(node);
+            return; // Removed. No need to process further
+        }
+
         this.treeCommitPostOrder(details, node, collapsed);
     }
 
@@ -302,11 +308,6 @@ export abstract class AbstractClientSideTreeNodeManager<TData> extends AbstractC
         const oldRow = node.oldRow;
         const treeData = details.treeData;
 
-        if (node.isEmptyFillerNode()) {
-            this.treeClear(node);
-            return; // Removed. No need to process further
-        }
-
         if (node.childrenChanged) {
             if (node.updateChildrenAfterGroup(treeData)) {
                 markTreeRowPathChanged(row);
@@ -315,12 +316,6 @@ export abstract class AbstractClientSideTreeNodeManager<TData> extends AbstractC
 
         if (node.leafChildrenChanged) {
             node.updateAllLeafChildren();
-        }
-
-        const newRowPosition = node.getRowPosition();
-        if (node.oldSourceRowIndex !== newRowPosition) {
-            node.oldSourceRowIndex = newRowPosition;
-            parent.childrenChanged = true; // The order of children in parent might have changed
         }
 
         const hasChildren = !!row.childrenAfterGroup?.length;
@@ -386,6 +381,19 @@ export abstract class AbstractClientSideTreeNodeManager<TData> extends AbstractC
 
         if (collapsed && row.rowIndex !== null) {
             row.clearRowTopAndRowIndex(); // Hidden.
+        }
+
+        const sourceIdx = node.getNewSourceIdx();
+        const prevRowIdx = node.sourceIdx;
+        if (prevRowIdx !== sourceIdx) {
+            node.sourceIdx = sourceIdx;
+            if (prevRowIdx !== -1) {
+                // TODO: this is not optimal, it has false positives.
+                // we could optimize it if we have a way to know if a node
+                // is out of order, we could do this by using a linked list instead of a map, so
+                // we can directly know if a node is out of order in O(1)
+                parent.childrenChanged = true; // The order of children in parent might have changed
+            }
         }
     }
 

@@ -36,14 +36,21 @@
 
 /* HEADER CELL AND GROUP CELL */
 
+.ag-header-cell {
+    display: inline-flex;
+    /* without this the ag-header-row becomes scrollable */
+    overflow: hidden;
+}
+
+.ag-header-group-cell {
+    display: flex;
+}
+
 .ag-header-cell,
 .ag-header-group-cell {
-    display: inline-flex;
     align-items: center;
     position: absolute;
     height: 100%;
-    /* without this the ag-header-row becomes scrollable */
-    overflow: hidden;
     gap: var(--ag-cell-widget-spacing);
     padding: 0 var(--ag-cell-horizontal-padding);
 }

@@ -272,7 +272,7 @@
 }
 
 .ag-color-input {
-    & input[class^='ag-'][type='text'].ag-input-field-input {
+    .ag-input-field-input {
         padding-left: calc(var(--ag-icon-size) + (var(--ag-spacing) * 2));
     }
 

@@ -23,18 +23,16 @@ const rowData: any[] = (() => {
     return rowData;
 })();
 
-const defaultColDef = {
-    editable: true,
-    flex: 1,
-    minWidth: 100,
-    filter: true,
-};
-
 const gridOptions: GridOptions<IOlympicData> = {
     theme: myTheme,
     columnDefs,
     rowData,
-    defaultColDef,
+    defaultColDef: {
+        editable: true,
+        flex: 1,
+        minWidth: 100,
+        filter: true,
+    },
 };
 
 createGrid(document.querySelector<HTMLElement>('#myGrid')!, gridOptions);

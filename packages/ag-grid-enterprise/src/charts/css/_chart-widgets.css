@@ -149,28 +149,6 @@
     background-color: var(--ag-foreground-color);
 }
 
-.ag-picker-field-wrapper {
-    overflow: hidden;
-    border: var(--ag-input-border);
-    border-radius: 5px;
-    background-color: var(--ag-background-color);
-    min-height: max(var(--ag-list-item-height), calc(var(--ag-spacing) * 4));
-
-    &:disabled {
-        opacity: 0.5;
-    }
-
-    &.ag-picker-has-focus,
-    &:focus-within {
-        box-shadow: var(--ag-focus-shadow);
-        border: var(--ag-input-focus-border);
-    }
-}
-
-.ag-picker-field-button {
-    background-color: var(--ag-background-color);
-}
-
 .ag-dialog.ag-color-dialog {
     border-radius: 5px;
 }

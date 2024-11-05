@@ -856,7 +856,6 @@ export const coreDefaults = (): CoreParams => ({
     },
     cellEditingBorder: {
         color: { ref: 'accentColor' },
-        width: 2,
     },
     cellEditingShadow: {
         radius: 4,

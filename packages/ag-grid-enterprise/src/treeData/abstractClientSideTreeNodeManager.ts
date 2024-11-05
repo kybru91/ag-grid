@@ -529,7 +529,7 @@ export abstract class AbstractClientSideTreeNodeManager<TData> extends AbstractC
             this.rowsPendingDestruction = null;
         }
         if (nodesToUnselect) {
-            this.deselectNodes(nodesToUnselect, 'rowDataChanged');
+            this.deselectNodes(nodesToUnselect);
         }
     }
 

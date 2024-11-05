@@ -94,6 +94,7 @@ export class ClientSideChildrenTreeNodeManager<TData>
 
         const oldAllLeafChildren = rootNode.allLeafChildren;
         const allLeafChildren: TreeRow[] = [];
+        const nodesToUnselect: TreeRow<TData>[] = [];
 
         let orderChanged = false;
         let rowsChanged = false;
@@ -142,7 +143,10 @@ export class ClientSideChildrenTreeNodeManager<TData>
             let row = this.getRowNode(id) as TreeRow<TData> | undefined;
             if (row) {
                 if (row.data !== data) {
-                    row.setData(data);
+                    row.updateData(data);
+                    if (!row.selectable && row.isSelected()) {
+                        nodesToUnselect.push(row);
+                    }
                     update = true;
                 }
             } else {
@@ -200,6 +204,10 @@ export class ClientSideChildrenTreeNodeManager<TData>
 
         rootNode.allLeafChildren = allLeafChildren;
         treeRoot.allLeafChildren = allLeafChildren;
+
+        if (nodesToUnselect.length) {
+            this.deselectNodes(nodesToUnselect);
+        }
 
         this.treeCommit(changedPath);
 

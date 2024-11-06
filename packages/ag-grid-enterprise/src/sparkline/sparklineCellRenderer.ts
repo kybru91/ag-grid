@@ -42,7 +42,7 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
             this.sparklineOptions.height = height;
             this.sparklineOptions.data = data;
 
-            this.sparklineInstance?.update(this.sparklineOptions);
+            this.sparklineInstance?.updateDelta(this.sparklineOptions);
 
             return true;
         }

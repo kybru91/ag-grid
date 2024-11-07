@@ -365,13 +365,7 @@ export class GridBodyScrollFeature extends BeanStub {
         const frameNeeded = this.scrollTop != this.nextScrollTop;
 
         if (frameNeeded) {
-            const isInitialValue = this.nextScrollTop === 0 && this.scrollTop === -1;
             this.scrollTop = this.nextScrollTop;
-
-            if (isInitialValue) {
-                return false;
-            }
-
             this.redrawRowsAfterScroll();
         }
 

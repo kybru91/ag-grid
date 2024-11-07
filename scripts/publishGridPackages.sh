@@ -34,7 +34,7 @@ for file in *.tgz; do
     PACKAGE_NAME=`basename $file .tgz`
     echo $PACKAGE_NAME
 
-    npm publish "$file" --registry http://52.50.158.57:4873/
+    npm publish "$file" --registry http://52.50.158.57:4873/ --tag $TAG
     npm dist-tag add $PACKAGE_NAME@$RELEASE_VERSION $TAG --registry=http://52.50.158.57:4873
 done
 

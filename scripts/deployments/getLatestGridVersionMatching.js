@@ -5,13 +5,13 @@ const { execSync } = require('child_process');
 Gets the latest version of ag-grid-community from the internal registry matching the "base" supplied
 
 For example given:
-  '10.0.2-beta.20240711',
-  '10.0.2-beta.20240711.1518',
-  '10.0.2-beta.20240714',
+  '32.2.0-beta.20240711',
+  '32.2.0-beta.20240711.1518',
+  '32.2.0-beta.20240714',
 
 node scripts/deployments/getLatestGridVersionMatching.js 10.0.2
 
-would return 10.0.2-beta.20240714
+would return 32.2.0-beta.20240714
 
  */
 

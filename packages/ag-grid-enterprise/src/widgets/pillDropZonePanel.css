@@ -144,11 +144,6 @@
     }
 }
 
-.ag-sort-indicator-container {
-    display: flex;
-    gap: var(--ag-spacing);
-}
-
 .ag-column-drop-horizontal-half-width:where(:not(:last-child)) {
     border-right: var(--ag-column-border);
 }

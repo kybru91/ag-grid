@@ -275,3 +275,8 @@
 .ag-header-group-cell-no-group:where(.ag-header-span-height) {
     display: none;
 }
+
+.ag-sort-indicator-container {
+    display: flex;
+    gap: var(--ag-spacing);
+}

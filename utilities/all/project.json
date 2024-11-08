@@ -193,6 +193,9 @@
         "staging": {},
         "production": {}
       }
+    },
+    "link": {
+      "command": "./scripts/setupLocalDeps.sh"
     }
   },
   "implicitDependencies": [

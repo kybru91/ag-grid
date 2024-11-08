@@ -49,6 +49,7 @@
         "tsDeclarations",
         "sharedGlobals",
         "defaultExcludes",
+        "chartsTypes",
         {
           "externalDependencies": ["npm:typescript", "npm:esbuild"]
         }
@@ -78,7 +79,7 @@
     },
     "build:package": {
       "executor": "@nx/esbuild:esbuild",
-      "dependsOn": ["^build:types"],
+      "dependsOn": ["^build:types", "ag-charts-community:build:package"],
       "inputs": [
         "{projectRoot}/package.json",
         "{projectRoot}/src/**/*",
@@ -86,6 +87,7 @@
         "tsDeclarations",
         "sharedGlobals",
         "defaultExcludes",
+        "chartsPackages",
         {
           "externalDependencies": ["npm:typescript", "npm:esbuild"]
         }

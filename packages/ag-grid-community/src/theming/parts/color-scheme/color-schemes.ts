@@ -1,28 +1,14 @@
 import { createPart } from '../../Part';
-
-const defaultColorParams = {
-    backgroundColor: '#fff',
-    foregroundColor: '#181d1f',
-    borderColor: {
-        ref: 'foregroundColor',
-        mix: 0.15,
-    },
-    chromeBackgroundColor: {
-        ref: 'foregroundColor',
-        mix: 0.02,
-        onto: 'backgroundColor',
-    },
-    browserColorScheme: 'light',
-} as const;
+import { defaultLightColorSchemeParams } from '../../core/core-css';
 
 export const colorSchemeLight =
     /*#__PURE__*/
-    createPart('colorScheme', 'light').withParams(defaultColorParams);
+    createPart('colorScheme', 'light').withParams(defaultLightColorSchemeParams);
 
 export const colorSchemeLightWarm =
     /*#__PURE__*/
     createPart('colorScheme', 'lightWarm').withParams({
-        ...defaultColorParams,
+        ...defaultLightColorSchemeParams,
         foregroundColor: '#000000de',
         borderColor: '#60300026',
         chromeBackgroundColor: '#60300005',
@@ -31,7 +17,7 @@ export const colorSchemeLightWarm =
 export const colorSchemeLightCold =
     /*#__PURE__*/
     createPart('colorScheme', 'lightCold').withParams({
-        ...defaultColorParams,
+        ...defaultLightColorSchemeParams,
         foregroundColor: '#000',
         chromeBackgroundColor: '#f3f8f8',
     });
@@ -82,6 +68,6 @@ export const colorSchemeDarkBlue =
 export const colorSchemeVariable =
     /*#__PURE__*/
     createPart('colorScheme', 'variable')
-        .withParams(defaultColorParams, 'light')
+        .withParams(defaultLightColorSchemeParams, 'light')
         .withParams(darkParams, 'dark')
         .withParams(darkBlueParams, 'dark-blue');

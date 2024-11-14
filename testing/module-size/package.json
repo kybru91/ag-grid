@@ -4,7 +4,8 @@
   "version": "32.2.0",
   "scripts": {
     "dev": "vite",
-    "build-app": "cp ./src/App_src.tsx ./src/App_AUTO.tsx && vite build",
+    "cp-app": "cp ./src/App_src.tsx ./src/App_AUTO.tsx",
+    "build-app": "vite build",
     "preview": "vite preview",
     "module-stats": "ts-node moduleCombinations.ts && npm run module-validate",
     "module-validate": "ts-node moduleValidator.ts",

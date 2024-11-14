@@ -6,8 +6,6 @@ import {
     themeQuartz
 } from 'ag-grid-community';
 
-/** __CHARTS_PLACEHOLDER__START__ */  /** __CHARTS_PLACEHOLDER__END__ */
-
 import {
     /** __PLACEHOLDER__START__ */  /** __PLACEHOLDER__END__ */
 } from 'ag-grid-community';
@@ -68,8 +66,6 @@ export const App = () => {
                         rowData={rowData}
                         columnDefs={columnDefs}
                         defaultColDef={defaultColDef}
-                        enableCharts
-                        cellSelection={true}
                         onGridReady={onGridReady}
                     />
                 </div>

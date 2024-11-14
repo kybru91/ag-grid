@@ -7,7 +7,8 @@ const { globSync } = require('glob');
 const zlib = require('zlib');
 
 const distFilePattern = path.join(__dirname, 'dist/assets/agGridCommunityEnterprise*.js');
-const filePath = path.join(__dirname, 'src/App.tsx');
+const srcFilePath = path.join(__dirname, 'src/App_Src.tsx');
+const outFilePath = path.join(__dirname, 'src/App_AUTO.tsx');
 const placeholderStartRgx = '/\\*\\* __PLACEHOLDER__START__ \\*/';
 const placeholderEndRgx = '/\\*\\* __PLACEHOLDER__END__ \\*/';
 const placeholderStart = '/** __PLACEHOLDER__START__ */';
@@ -30,7 +31,7 @@ function reverseWords(str) {
     return str.split(' ').reverse().join(' ');
 }
 
-fs.readFile(filePath, 'utf8', (err, data) => {
+fs.readFile(srcFilePath, 'utf8', (err, data) => {
     if (err) {
         console.error('Error reading file:', err);
         return;
@@ -62,7 +63,7 @@ fs.readFile(filePath, 'utf8', (err, data) => {
         result = result.replace(chartsRegex, `${chartsPlaceholderStart}  ${chartsPlaceholderEnd}`);
     }
 
-    fs.writeFile(filePath, result, 'utf8', (err) => {
+    fs.writeFile(outFilePath, result, 'utf8', (err) => {
         if (err) {
             console.error('Error writing file:', err);
             return;

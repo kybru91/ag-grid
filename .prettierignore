@@ -19,4 +19,4 @@ community-modules/styles/src/internal/ag/generated/*
 documentation/update-algolia-indices/output
 
 # Don't reorganize the order of the imports
-testing/module-size/src/App.tsx
+testing/module-size/src/App_Src.tsx

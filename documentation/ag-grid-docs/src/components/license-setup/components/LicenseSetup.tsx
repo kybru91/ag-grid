@@ -62,16 +62,18 @@ export const LicenseSetup: FunctionComponent<Props> = ({ library, framework, pat
             getDependenciesSnippet({
                 library,
                 framework,
+                isIntegratedCharts,
             }),
-        [library, framework]
+        [library, framework, isIntegratedCharts]
     );
     const npmInstallSnippet = useMemo(
         () =>
             getNpmInstallSnippet({
                 library,
                 framework,
+                isIntegratedCharts,
             }),
-        [library, framework]
+        [library, framework, isIntegratedCharts]
     );
     const bootstrapSnippet = useMemo(
         () =>

@@ -24,7 +24,6 @@ import {
     ModuleRegistry,
 } from 'ag-grid-community';
 
-import { GridChartsModule } from './charts/main';
 import {
     AdvancedFilterModule,
     ClipboardModule,
@@ -40,7 +39,6 @@ import {
     ServerSideRowModelModule,
     SetFilterModule,
     SideBarModule,
-    SparklinesModule,
     StatusBarModule,
     ViewportRowModelModule,
 } from './main';
@@ -51,7 +49,6 @@ ModuleRegistry.registerModules([
     InfiniteRowModelModule,
     CsvExportModule,
     AdvancedFilterModule,
-    GridChartsModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     ExcelExportModule,
@@ -65,10 +62,11 @@ ModuleRegistry.registerModules([
     ServerSideRowModelModule,
     SetFilterModule,
     SideBarModule,
-    SparklinesModule,
     StatusBarModule,
     ViewportRowModelModule,
 ]);
 
 export * from 'ag-grid-community';
 export * from './main';
+// Export the overridden createGrid function which automatically registers AG Charts modules if present
+export { createGrid } from './main-umd-shared';

@@ -18,6 +18,7 @@ export const ENTERPRISE_MODULE_NAMES: Record<EnterpriseModuleName, 1> = {
     ExcelExportModule: 1,
     FiltersToolPanelModule: 1,
     GridChartsModule: 1,
+    IntegratedChartsModule: 1,
     GroupCellRendererModule: 1,
     GroupFilterModule: 1,
     GroupFloatingFilterModule: 1,

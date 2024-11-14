@@ -64,9 +64,6 @@ export {
 } from './rowHierarchy/rowHierarchyModule';
 export { PivotCoreModule, PivotModule } from './pivot/pivotModule';
 
-// tbd - having these here means all charts will be enterprise
-// once we have independent module imports this issue will go away
-export { GridChartsModule, GridChartsEnterpriseFeaturesModule } from './charts/gridChartsModule';
-export { GridChartsModule as GridChartsEnterpriseModule } from './charts-enterprise/gridChartsEnterpriseModule';
+export { GridChartsModule, IntegratedChartsModule } from './charts/integratedChartsModule';
 
 export { AllEnterpriseModule } from './allEnterpriseModule';

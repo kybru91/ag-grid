@@ -1,3 +1,4 @@
+import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
@@ -16,7 +17,7 @@ import {
     ColumnsToolPanelModule,
     ExcelExportModule,
     FiltersToolPanelModule,
-    GridChartsModule,
+    IntegratedChartsModule,
     MenuModule,
     RangeSelectionModule,
     RichSelectModule,
@@ -43,14 +44,14 @@ ModuleRegistry.registerModules([
     ColumnsToolPanelModule,
     ExcelExportModule,
     FiltersToolPanelModule,
-    GridChartsModule,
     MenuModule,
     RangeSelectionModule,
     RowGroupingModule,
     SetFilterModule,
     RichSelectModule,
     StatusBarModule,
-    SparklinesModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
+    SparklinesModule.with(AgChartsEnterpriseModule),
 ]);
 
 const numberFormatter: ValueFormatterFunc = ({ value }) => {

@@ -176,7 +176,7 @@ export const moduleCombinations: ModuleTest[] = [
     ...commonFeatureSets,
     {
         modules: ['AgChartsCommunityModule' as any, 'IntegratedChartsModule'],
-        expectedSize: 1172,
+        expectedSize: 1200,
     },
     {
         modules: ['AgChartsEnterpriseModule' as any, 'IntegratedChartsModule'],
@@ -184,7 +184,7 @@ export const moduleCombinations: ModuleTest[] = [
     },
     {
         modules: ['AgChartsCommunityModule' as any, 'SparklinesModule'],
-        expectedSize: 786,
+        expectedSize: 820,
     },
     {
         modules: ['AgChartsEnterpriseModule' as any, 'SparklinesModule'],

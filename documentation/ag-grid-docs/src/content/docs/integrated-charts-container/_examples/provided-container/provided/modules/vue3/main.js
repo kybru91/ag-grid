@@ -1,13 +1,14 @@
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import { createApp, onBeforeMount, ref, shallowRef } from 'vue';
 
-import { ClientSideRowModelModule, ModuleRegistry } from 'ag-grid-community';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry } from 'ag-grid-community';
 import { IntegratedChartsModule, MenuModule, RowGroupingModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     MenuModule,

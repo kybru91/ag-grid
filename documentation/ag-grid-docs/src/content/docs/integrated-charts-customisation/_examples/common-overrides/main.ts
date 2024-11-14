@@ -1,12 +1,13 @@
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
 import type { FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
-import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import { IntegratedChartsModule, MenuModule, RowGroupingModule } from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     MenuModule,

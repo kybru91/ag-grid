@@ -1,55 +1,11 @@
 /*
  * Used for umd bundles without styles
  */
-import {
-    ClientSideRowModelModule,
-    CommunityFeaturesModule,
-    CsvExportModule,
-    InfiniteRowModelModule,
-    ModuleRegistry,
-} from 'ag-grid-community';
+import { ModuleRegistry } from 'ag-grid-community';
 
-import {
-    AdvancedFilterModule,
-    ClipboardModule,
-    ColumnsToolPanelModule,
-    ExcelExportModule,
-    FiltersToolPanelModule,
-    MasterDetailModule,
-    MenuModule,
-    MultiFilterModule,
-    RangeSelectionModule,
-    RichSelectModule,
-    RowGroupingModule,
-    ServerSideRowModelModule,
-    SetFilterModule,
-    SideBarModule,
-    StatusBarModule,
-    ViewportRowModelModule,
-} from './main';
+import { AllEnterpriseModule } from './main';
 
-ModuleRegistry.registerModules([
-    CommunityFeaturesModule,
-    ClientSideRowModelModule,
-    InfiniteRowModelModule,
-    CsvExportModule,
-    AdvancedFilterModule,
-    ClipboardModule,
-    ColumnsToolPanelModule,
-    ExcelExportModule,
-    FiltersToolPanelModule,
-    MasterDetailModule,
-    MenuModule,
-    MultiFilterModule,
-    RangeSelectionModule,
-    RichSelectModule,
-    RowGroupingModule,
-    ServerSideRowModelModule,
-    SetFilterModule,
-    SideBarModule,
-    StatusBarModule,
-    ViewportRowModelModule,
-]);
+ModuleRegistry.registerModules([AllEnterpriseModule]);
 
 export * from 'ag-grid-community';
 export * from './main';

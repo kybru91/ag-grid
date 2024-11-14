@@ -11,12 +11,16 @@ import type {
     LineSparklineOptions,
     MarkerFormatterParams,
 } from 'ag-grid-community';
-import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import { SparklinesModule } from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([ClientSideRowModelModule, SparklinesModule.with(AgChartsCommunityModule)]);
+ModuleRegistry.registerModules([
+    AllCommunityModule,
+    ClientSideRowModelModule,
+    SparklinesModule.with(AgChartsCommunityModule),
+]);
 
 const palette = {
     blue: 'rgb(20,94,140)',

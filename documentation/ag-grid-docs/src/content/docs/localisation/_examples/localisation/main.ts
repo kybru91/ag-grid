@@ -2,8 +2,15 @@ import { AG_GRID_LOCALE_DE } from '@ag-grid-community/locale';
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
 import type { ColDef, GridApi, GridOptions, ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
-import { ClientSideRowModelModule, CsvExportModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import {
+    AllCommunityModule,
+    ClientSideRowModelModule,
+    CsvExportModule,
+    ModuleRegistry,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    CellSelectionModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     ExcelExportModule,
@@ -11,14 +18,15 @@ import {
     IntegratedChartsModule,
     MenuModule,
     MultiFilterModule,
-    RangeSelectionModule,
     RowGroupingModule,
+    RowGroupingPanelModule,
     SetFilterModule,
     SideBarModule,
     StatusBarModule,
 } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnsToolPanelModule,
@@ -28,11 +36,12 @@ ModuleRegistry.registerModules([
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     MenuModule,
     MultiFilterModule,
-    RangeSelectionModule,
+    CellSelectionModule,
     RowGroupingModule,
     SetFilterModule,
     SideBarModule,
     StatusBarModule,
+    RowGroupingPanelModule,
 ]);
 
 class NodeIdRenderer implements ICellRendererComp {

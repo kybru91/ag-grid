@@ -2,6 +2,7 @@ import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
+    AllCommunityModule,
     ClientSideRowModelModule,
     type ColDef,
     type GetRowIdFunc,
@@ -14,12 +15,12 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import {
     AdvancedFilterModule,
+    CellSelectionModule,
     ColumnsToolPanelModule,
     ExcelExportModule,
     FiltersToolPanelModule,
     IntegratedChartsModule,
     MenuModule,
-    RangeSelectionModule,
     RichSelectModule,
     RowGroupingModule,
     SetFilterModule,
@@ -39,13 +40,14 @@ interface Props {
 }
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     AdvancedFilterModule,
     ColumnsToolPanelModule,
     ExcelExportModule,
     FiltersToolPanelModule,
     MenuModule,
-    RangeSelectionModule,
+    CellSelectionModule,
     RowGroupingModule,
     SetFilterModule,
     RichSelectModule,

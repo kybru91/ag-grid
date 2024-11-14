@@ -9,12 +9,13 @@ import type {
     ValueFormatterParams,
 } from 'ag-grid-community';
 import { createGrid } from 'ag-grid-community';
-import { ModuleRegistry } from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AllEnterpriseModule, ClipboardModule, ContextMenuModule, TreeDataModule } from 'ag-grid-enterprise';
 
 import { modules } from './modules';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     TreeDataModule,
     RowSelectionModule,
@@ -83,6 +84,7 @@ const gridOptions: GridOptions = {
             }
         }
     },
+    groupDefaultExpanded: -1,
 };
 
 // setup the grid after the page has finished loading

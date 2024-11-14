@@ -1,13 +1,14 @@
 import type { GetContextMenuItemsParams, GridApi, GridOptions, MenuItemDef } from 'ag-grid-community';
-import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
-import { ClipboardModule, ExcelExportModule, MenuModule, RangeSelectionModule } from 'ag-grid-enterprise';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { CellSelectionModule, ClipboardModule, ExcelExportModule, MenuModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ExcelExportModule,
     MenuModule,
-    RangeSelectionModule,
+    CellSelectionModule,
 ]);
 
 let gridApi: GridApi<IOlympicData>;

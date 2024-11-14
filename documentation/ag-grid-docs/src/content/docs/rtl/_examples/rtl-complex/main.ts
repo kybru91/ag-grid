@@ -14,8 +14,15 @@ import type {
     SelectionChangedEvent,
     ValueSetterParams,
 } from 'ag-grid-community';
-import { ClientSideRowModelModule, CsvExportModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import {
+    AllCommunityModule,
+    ClientSideRowModelModule,
+    CsvExportModule,
+    ModuleRegistry,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    CellSelectionModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     ExcelExportModule,
@@ -23,9 +30,9 @@ import {
     IntegratedChartsModule,
     MenuModule,
     MultiFilterModule,
-    RangeSelectionModule,
     RichSelectModule,
     RowGroupingModule,
+    RowGroupingPanelModule,
     SetFilterModule,
     SideBarModule,
     StatusBarModule,
@@ -36,6 +43,7 @@ import { PersonFilter } from './person-filter_typescript';
 import { WinningsFilter } from './winnings-filter_typescript';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnsToolPanelModule,
@@ -45,12 +53,13 @@ ModuleRegistry.registerModules([
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     MenuModule,
     MultiFilterModule,
-    RangeSelectionModule,
+    CellSelectionModule,
     RichSelectModule,
     RowGroupingModule,
     SetFilterModule,
     SideBarModule,
     StatusBarModule,
+    RowGroupingPanelModule,
 ]);
 
 const colNames = [

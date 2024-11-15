@@ -1,5 +1,5 @@
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
-import { StrictMode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { StrictMode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry } from 'ag-grid-community';

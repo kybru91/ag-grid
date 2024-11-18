@@ -4,6 +4,7 @@
     box-shadow: var(--shadow-sm);
     border-radius: var(--radius-md);
     max-width: 1000px;
+    background-color: var(--color-bg-primary);
 }
 
 :global(#heroGrid.ag-theme-quartz) {

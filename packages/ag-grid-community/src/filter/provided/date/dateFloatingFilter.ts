@@ -131,12 +131,11 @@ export class DateFloatingFilter extends SimpleFloatingFilter {
         const {
             beans: { context, userCompFactory },
             eDateWrapper,
-            getDateComponentParams,
         } = this;
         this.dateComp = new DateCompWrapper(
             context,
             userCompFactory,
-            getDateComponentParams(),
+            this.getDateComponentParams(),
             eDateWrapper,
             (dateComp) => {
                 dateComp.setInputAriaLabel(this.getAriaLabel(this.params));

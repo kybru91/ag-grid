@@ -34,6 +34,7 @@ const gridOptions: GridOptions = {
     groupAggFiltering: true,
 
     onGridReady: (params) => {
+        document.querySelector<HTMLInputElement>('#groupAggFiltering')!.checked = true;
         params.api.setFilterModel({
             total: {
                 type: 'contains',
@@ -42,6 +43,11 @@ const gridOptions: GridOptions = {
         });
     },
 };
+
+function toggleProperty() {
+    const enable = document.querySelector<HTMLInputElement>('#groupAggFiltering')!.checked;
+    gridApi.setGridOption('groupAggFiltering', enable);
+}
 
 // setup the grid after the page has finished loading
 document.addEventListener('DOMContentLoaded', () => {

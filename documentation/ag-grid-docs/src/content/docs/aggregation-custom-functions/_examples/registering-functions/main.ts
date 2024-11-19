@@ -23,43 +23,31 @@ let gridApi: GridApi<IOlympicData>;
 
 const gridOptions: GridOptions<IOlympicData> = {
     columnDefs: [
+        { field: 'country', rowGroup: true, hide: true },
+        { field: 'total', aggFunc: 'range' },
         {
-            field: 'country',
-            rowGroup: true,
-            hide: true,
-            suppressColumnsToolPanel: true,
-        },
-        {
-            field: 'sport',
-            rowGroup: true,
-            hide: true,
-            suppressColumnsToolPanel: true,
-        },
-        { field: 'gold', aggFunc: 'sum', valueFormatter: numberFormatter },
-        { field: 'silver', aggFunc: 'sum', valueFormatter: numberFormatter },
-        {
-            headerName: 'Ratio',
+            headerName: 'Gold to Silver',
             colId: 'goldSilverRatio',
-            aggFunc: ratioAggFunc,
+            aggFunc: 'ratio',
             valueGetter: ratioValueGetter,
             valueFormatter: ratioFormatter,
         },
     ],
+    aggFuncs: {
+        range: (params) => {
+            const values = params.values;
+            return values.length > 0 ? Math.max(...values) - Math.min(...values) : null;
+        },
+        ratio: ratioAggFunc,
+    },
     defaultColDef: {
         flex: 1,
         minWidth: 150,
-        filter: true,
     },
     autoGroupColumnDef: {
         minWidth: 220,
     },
-    suppressAggFuncInHeader: true,
 };
-
-function numberFormatter(params: ValueFormatterParams): string {
-    if (!params.value || params.value === 0) return '0';
-    return '' + Math.round(params.value * 100) / 100;
-}
 
 function ratioValueGetter(params: ValueGetterParams<IOlympicData>) {
     if (!(params.node && params.node.group)) {

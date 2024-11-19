@@ -9,7 +9,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 export default defineConfig({
     plugins: [vue(), vueJsx(), vueDevTools()],
     build: {
-        sourcemap: true,
+        sourcemap: process.env.NODE_ENV !== 'production',
         lib: {
             // Could also be a dictionary or array of multiple entry points
             entry: resolve(__dirname, 'src/main.ts'),

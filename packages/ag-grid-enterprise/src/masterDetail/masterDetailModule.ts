@@ -10,6 +10,7 @@ import {
 import { DetailCellRenderer } from './detailCellRenderer';
 import { DetailCellRendererCtrl } from './detailCellRendererCtrl';
 import { addDetailGridInfo, forEachDetailGridInfo, getDetailGridInfo, removeDetailGridInfo } from './masterDetailApi';
+import { masterDetailModuleCSS } from './masterDetailModule.css-GENERATED';
 import { MasterDetailService } from './masterDetailService';
 
 /**
@@ -27,6 +28,7 @@ export const SharedMasterDetailModule: _ModuleWithApi<_MasterDetailGridApi> = {
         forEachDetailGridInfo,
     },
     dependsOn: [EnterpriseCoreModule, GroupCellRendererModule, StickyRowModule],
+    css: [masterDetailModuleCSS],
 };
 
 /**

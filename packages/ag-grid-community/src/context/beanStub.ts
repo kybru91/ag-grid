@@ -47,7 +47,6 @@ export abstract class BeanStub<TEventType extends string = BeanStubEvent>
         this.stubContext = beans.context;
         this.eventSvc = beans.eventSvc;
         this.gos = beans.gos;
-        this.registerPendingCSS();
     }
 
     // this was a test constructor niall built, when active, it prints after 5 seconds all beans/components that are
@@ -295,23 +294,4 @@ export abstract class BeanStub<TEventType extends string = BeanStubEvent>
     protected destroyBeans<T extends Bean | null | undefined>(beans: T[], context?: Context): T[] {
         return (context || this.stubContext).destroyBeans(beans);
     }
-
-    protected registerCSS(css: string): void {
-        if (this.beans?.environment) {
-            const debugId = 'component-' + Object.getPrototypeOf(this)?.constructor?.name;
-            this.pendingCSS?.forEach((css) => this.beans.environment.addGlobalCSS(css, debugId));
-        } else {
-            this.pendingCSS ||= [];
-            this.pendingCSS.push(css);
-        }
-    }
-
-    private registerPendingCSS(): void {
-        if (this.pendingCSS) {
-            this.pendingCSS.forEach((css) => this.registerCSS(css));
-            this.pendingCSS = undefined;
-        }
-    }
-
-    private pendingCSS: string[] | undefined;
 }

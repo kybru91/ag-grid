@@ -1,5 +1,7 @@
 import type {
+    BeanCollection,
     DetailGridInfo,
+    Environment,
     FullWidthRowFocusedEvent,
     GridApi,
     IDetailCellRenderer,
@@ -9,12 +11,11 @@ import type {
 } from 'ag-grid-community';
 import { BeanStub, _focusInto, _isSameRow, _missing, _warn } from 'ag-grid-community';
 
-import { detailCellRendererCSS } from './detailCellRenderer.css-GENERATED';
-
 export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRendererCtrl {
-    constructor() {
-        super();
-        this.registerCSS(detailCellRendererCSS);
+    private environment: Environment;
+
+    public wireBeans(beans: BeanCollection) {
+        this.environment = beans.environment;
     }
 
     private params: IDetailCellRendererParams;

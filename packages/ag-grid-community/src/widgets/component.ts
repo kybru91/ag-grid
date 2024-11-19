@@ -45,6 +45,8 @@ export class Component<TLocalEvent extends string = ComponentEvent>
     // if false, then CSS class "ag-invisible" is applied, which sets "visibility: hidden"
     private visible = true;
 
+    private css: string[] | undefined;
+
     protected parentComponent: Component | undefined;
 
     // unique id for this row component. this is used for getting a reference to the HTML dom.
@@ -67,6 +69,8 @@ export class Component<TLocalEvent extends string = ComponentEvent>
 
     public preConstruct(): void {
         this.wireTemplate(this.getGui());
+        const debugId = 'component-' + Object.getPrototypeOf(this)?.constructor?.name;
+        this.css?.forEach((css) => this.beans.environment.addGlobalCSS(css, debugId));
     }
 
     private wireTemplate(element: HTMLElement | undefined, paramsMap?: { [key: string]: any }): void {
@@ -371,6 +375,11 @@ export class Component<TLocalEvent extends string = ComponentEvent>
 
     public addOrRemoveCssClass(className: string, addOrRemove: boolean): void {
         this.cssClassManager.addOrRemoveCssClass(className, addOrRemove);
+    }
+
+    protected registerCSS(css: string): void {
+        this.css ||= [];
+        this.css.push(css);
     }
 }
 

@@ -9,19 +9,13 @@ interface VueWrappableInterface extends WrappableInterface {
 
 export class VueFrameworkComponentWrapper extends BaseComponentWrapper<WrappableInterface> {
     private parent: any | null;
-
-    private static provides: any;
+    private provides: any | null;
 
     constructor(parent: any, provides?: any) {
         super();
 
         this.parent = parent;
-
-        // when using master detail things provides to the master (like urlql) will not be available to the child components
-        // we capture the parent provides here (the first one will be the parent) - and re-use this when creating child components in VueComponentFactory
-        if (!VueFrameworkComponentWrapper.provides) {
-            VueFrameworkComponentWrapper.provides = provides;
-        }
+        this.provides = provides;
     }
 
     protected createWrapper(component: any): WrappableInterface {
@@ -36,7 +30,11 @@ export class VueFrameworkComponentWrapper extends BaseComponentWrapper<Wrappable
             public hasMethod(name: string): boolean {
                 const componentInstance = wrapper.getFrameworkComponentInstance();
                 if (!componentInstance[name]) {
-                    return componentInstance.$.setupState[name] != null;
+                    return (
+                        componentInstance.$.exposed?.[name] != null ||
+                        componentInstance.exposed?.[name] != null ||
+                        componentInstance.$.setupState[name] != null
+                    );
                 } else {
                     return true;
                 }
@@ -48,7 +46,11 @@ export class VueFrameworkComponentWrapper extends BaseComponentWrapper<Wrappable
                 if (frameworkComponentInstance[name]) {
                     return frameworkComponentInstance[name].apply(componentInstance, args);
                 } else {
-                    return frameworkComponentInstance.$.setupState[name]?.apply(componentInstance, args);
+                    const fn =
+                        componentInstance.$.exposed?.[name] ||
+                        componentInstance.exposed?.[name] ||
+                        componentInstance.$.setupState[name];
+                    return fn?.apply(componentInstance, args);
                 }
             }
 
@@ -78,12 +80,7 @@ export class VueFrameworkComponentWrapper extends BaseComponentWrapper<Wrappable
     }
 
     public createComponent(component: any, params: any): any {
-        return VueComponentFactory.createAndMountComponent(
-            component,
-            params,
-            this.parent!,
-            VueFrameworkComponentWrapper.provides!
-        );
+        return VueComponentFactory.createAndMountComponent(component, params, this.parent!, this.provides!);
     }
 
     protected override createMethodProxy(

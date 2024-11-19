@@ -67,12 +67,7 @@ export class VueComponentFactory {
     public static mount(component: any, props: any, parent: any, provides: any) {
         let vNode: any = createVNode(component, props);
 
-        vNode.appContext = parent.$.appContext;
-        vNode.appContext.provides = {
-            ...provides,
-            ...(vNode.appContext.provides ? vNode.appContext.provides : {}),
-            ...(parent.$parent.$options.provide ? parent.$parent.$options.provide : {}),
-        };
+        vNode.appContext = { ...parent.appContext, provides };
 
         let el: any = document.createElement('div');
         render(vNode, el);
@@ -92,8 +87,19 @@ export class VueComponentFactory {
     public static searchForComponentInstance(parent: any, component: any, maxDepth = 10, suppressError = false) {
         let componentInstance: any = null;
 
-        let currentParent = parent.$parent;
+        let currentParent = parent.parent;
+
+        // options first
         let depth = 0;
+        while (!componentInstance && currentParent && currentParent.components && ++depth < maxDepth) {
+            const currentParentAsThis = currentParent as any;
+            if (currentParent.components && currentParent.components![component as any]) {
+                componentInstance = currentParent.components![component as any];
+            }
+            currentParent = currentParent.parent;
+        }
+
+        depth = 0;
         while (!componentInstance && currentParent && currentParent.$options && ++depth < maxDepth) {
             const currentParentAsThis = currentParent as any;
             if (
@@ -105,13 +111,24 @@ export class VueComponentFactory {
             } else if (currentParentAsThis[component]) {
                 componentInstance = currentParentAsThis[component];
             }
-            // componentInstance =  : null;
-            currentParent = currentParent.$parent;
+            currentParent = currentParent.parent;
+        }
+
+        // composition next
+        depth = 0;
+        while (!componentInstance && currentParent && currentParent.exposed && ++depth < maxDepth) {
+            const currentParentAsThis = currentParent as any;
+            if (currentParentAsThis.exposed && currentParentAsThis.exposed[component as any]) {
+                componentInstance = currentParentAsThis.exposed![component as any];
+            } else if (currentParentAsThis[component]) {
+                componentInstance = currentParentAsThis[component];
+            }
+            currentParent = currentParent.parent;
         }
 
         // then search in globally registered components of app
         if (!componentInstance) {
-            const components = parent.$.appContext.components;
+            const components = parent.appContext.components;
             if (components && components[component]) {
                 componentInstance = components[component];
             }

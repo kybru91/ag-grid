@@ -92,7 +92,6 @@ export class VueComponentFactory {
         // options first
         let depth = 0;
         while (!componentInstance && currentParent && currentParent.components && ++depth < maxDepth) {
-            const currentParentAsThis = currentParent as any;
             if (currentParent.components && currentParent.components![component as any]) {
                 componentInstance = currentParent.components![component as any];
             }

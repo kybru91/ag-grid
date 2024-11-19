@@ -118,7 +118,7 @@ import {
     createGrid,
 } from 'ag-grid-community';
 
-const props = withDefaults(defineProps<Props<TData, TColDef>>(), getProps<TData, TColDef>());
+const props = withDefaults(defineProps<Props<TData, TColDef>>(), getProps());
 
 const rootRef = useTemplateRef<HTMLDivElement>('root');
 

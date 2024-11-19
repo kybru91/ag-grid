@@ -185,7 +185,7 @@ import type {
     VirtualRowRemovedEvent,
 } from 'ag-grid-community';
 // @END_EVENTS_IMPORTS@
-import type { GridApi, GridOptions, Module } from 'ag-grid-community';
+import type { GridOptions, Module } from 'ag-grid-community';
 
 export interface Properties {
     [propertyName: string]: any;
@@ -1583,7 +1583,7 @@ export interface Props<TData, TColDef> {
     // @END_EVENT_PROP_TYPES@
 }
 
-export function getProps<TData, TColDef>() {
+export function getProps() {
     return {
         gridOptions: {} as any,
         modules: [] as any,

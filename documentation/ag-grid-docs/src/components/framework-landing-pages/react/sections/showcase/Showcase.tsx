@@ -1,5 +1,3 @@
-import { Icon } from '@ag-website-shared/components/icon/Icon';
-import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 import Aerie from 'public/community/showcase/aerie.svg?react';
 import AIIcon from 'public/community/showcase/ai.svg?react';
 import DashboardIcon from 'public/community/showcase/dashboard.svg?react';

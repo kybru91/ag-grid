@@ -5,6 +5,7 @@ import { type FunctionComponent, useCallback, useMemo, useRef, useState } from '
 
 import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, RowSelectionModule } from 'ag-grid-community';
 import type {
+    ColDef,
     GetRowIdParams,
     IRowNode,
     RowSelectedEvent,
@@ -34,8 +35,11 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
     const allCommunityRef = useRef(false);
     const allEnterpriseRef = useRef(false);
 
-    const [defaultColDef] = useState({
+    const [defaultColDef] = useState<ColDef>({
         flex: 1,
+        sortable: false,
+        resizable: false,
+        suppressMovable: true,
     });
     const [columnDefs] = useState([{ field: 'moduleName' }]);
     const [autoGroupColumnDef] = useState({
@@ -150,8 +154,8 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
                     getRowId={getRowId}
                     rowSelection={rowSelection}
                     onRowSelected={onRowSelected}
-                    groupDefaultExpanded={-1}
                     loadThemeGoogleFonts
+                    suppressContextMenu
                 />
             </div>
             {selectedDependenciesSnippet && (

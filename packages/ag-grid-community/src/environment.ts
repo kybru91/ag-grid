@@ -1,10 +1,9 @@
-import { themeQuartz } from 'ag-grid-community';
-
 import type { NamedBean } from './context/bean';
 import { BeanStub } from './context/beanStub';
 import type { BeanCollection } from './context/context';
 import { ThemeImpl } from './theming/Theme';
 import { IS_SSR, _injectCoreAndModuleCSS, _injectGlobalCSS } from './theming/inject';
+import { themeQuartz } from './theming/parts/theme/themes';
 import { _observeResize } from './utils/dom';
 import { _error, _warn } from './validation/logging';
 

@@ -50,10 +50,12 @@
     z-index: 1;
 
     &:nth-child(1) {
+        border-top-left-radius: $spacing-size-2;
+
         @media screen and (max-width: $breakpoint-hero-small) {
             border-top-right-radius: $spacing-size-2;
         }
-        border-top-left-radius: $spacing-size-2;
+
         &:hover {
             z-index: 6;
         }
@@ -65,21 +67,25 @@
     }
     &:nth-child(3) {
         border-top-right-radius: $spacing-size-2;
+
         &:hover {
             z-index: 4;
         }
     }
     &:nth-child(4) {
         border-bottom-left-radius: $spacing-size-2;
+
         &:hover {
             z-index: 3;
         }
     }
     &:nth-child(5) {
+        border-bottom-right-radius: $spacing-size-2;
+
         @media screen and (max-width: $breakpoint-hero-small) {
             border-bottom-left-radius: $spacing-size-2;
         }
-        border-bottom-right-radius: $spacing-size-2;
+
         &:hover {
             z-index: 2;
         }

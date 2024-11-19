@@ -245,9 +245,9 @@
     /* stylelint-disable-next-line no-descending-specificity */
     .ag-full-width-row .ag-cell-wrapper.ag-row-group {
     padding-left: calc(
-        var(--ag-cell-horizontal-padding) + var(--ag-row-group-indent-size) * var(--ag-indentation-level)
+        var(--ag-cell-horizontal-padding) - 1px + var(--ag-row-group-indent-size) * var(--ag-indentation-level)
     );
-    padding-right: var(--ag-cell-horizontal-padding);
+    padding-right: calc(var(--ag-cell-horizontal-padding) - 1px);
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -255,8 +255,8 @@
       cell in between, in which case we need to apply the padding to the cell
       renderer's wrapper. */
 .ag-row > .ag-cell-wrapper {
-    padding-left: var(--ag-cell-horizontal-padding);
-    padding-right: var(--ag-cell-horizontal-padding);
+    padding-left: calc(var(--ag-cell-horizontal-padding) - 1px);
+    padding-right: calc(var(--ag-cell-horizontal-padding) - 1px);
 }
 
 .ag-row-dragging {

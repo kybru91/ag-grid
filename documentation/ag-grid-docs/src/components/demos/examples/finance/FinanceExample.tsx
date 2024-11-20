@@ -103,6 +103,18 @@ export const FinanceExample: React.FC<Props> = ({
                 minWidth: 380,
             },
             {
+                headerName: 'Last 24hrs',
+                field: 'last24',
+                cellRenderer: 'agSparklineCellRenderer',
+                cellRendererParams: {
+                    sparklineOptions: {
+                        line: {
+                            strokeWidth: 2,
+                        },
+                    },
+                },
+            },
+            {
                 field: 'instrument',
                 cellDataType: 'text',
                 type: 'rightAligned',
@@ -131,7 +143,7 @@ export const FinanceExample: React.FC<Props> = ({
                 cellDataType: 'number',
                 type: 'rightAligned',
                 valueFormatter: numberFormatter,
-                maxWidth: 150,
+                maxWidth: 75,
             },
             {
                 headerName: 'Price',
@@ -139,25 +151,13 @@ export const FinanceExample: React.FC<Props> = ({
                 cellDataType: 'number',
                 type: 'rightAligned',
                 valueFormatter: numberFormatter,
-                maxWidth: 150,
+                maxWidth: 75,
             },
             {
                 field: 'purchaseDate',
                 cellDataType: 'dateString',
                 type: 'rightAligned',
                 hide: true,
-            },
-            {
-                headerName: 'Last 24hrs',
-                field: 'last24',
-                cellRenderer: 'agSparklineCellRenderer',
-                cellRendererParams: {
-                    sparklineOptions: {
-                        line: {
-                            strokeWidth: 2,
-                        },
-                    },
-                },
             },
         ],
         []

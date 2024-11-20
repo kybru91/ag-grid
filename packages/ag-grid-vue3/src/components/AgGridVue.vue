@@ -270,8 +270,8 @@ onMounted(() => {
 });
 
 defineExpose({
-  api
-})
+    api,
+});
 </script>
 
 <template>

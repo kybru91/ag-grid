@@ -22,6 +22,12 @@ const LIST_ITEM_HEIGHT: Variable = {
     changeKey: 'listItemHeightChanged',
     defaultValue: 24,
 };
+const ROW_BORDER_WIDTH: Variable = {
+    cssName: '--ag-row-border',
+    changeKey: 'rowBorderWidthChanged',
+    defaultValue: 1,
+    border: true,
+};
 
 let paramsId = 0;
 
@@ -52,6 +58,8 @@ export class Environment extends BeanStub implements NamedBean {
         this.getSizeEl(ROW_HEIGHT);
         this.getSizeEl(HEADER_HEIGHT);
         this.getSizeEl(LIST_ITEM_HEIGHT);
+        this.getSizeEl(ROW_BORDER_WIDTH);
+        this.refreshRowBorderWidthVariable();
     }
 
     public getDefaultRowHeight(): number {
@@ -71,8 +79,12 @@ export class Environment extends BeanStub implements NamedBean {
         return Math.min(36, this.getDefaultRowHeight());
     }
 
-    public getDefaultListItemHeight() {
+    public getDefaultListItemHeight(): number {
         return this.getCSSVariablePixelValue(LIST_ITEM_HEIGHT);
+    }
+
+    public getRowBorderWidth(): number {
+        return this.getCSSVariablePixelValue(ROW_BORDER_WIDTH);
     }
 
     public applyThemeClasses(el: HTMLElement) {
@@ -177,7 +189,16 @@ export class Environment extends BeanStub implements NamedBean {
         const container = this.getMeasurementContainer();
 
         sizeEl = document.createElement('div');
-        sizeEl.style.width = `var(${variable.cssName}, ${NO_VALUE_SENTINEL}px)`;
+        const { border } = variable;
+        if (border) {
+            sizeEl.className = 'ag-measurement-element-border';
+            sizeEl.style.setProperty(
+                '--ag-measurement-border',
+                `var(${variable.cssName}, solid ${NO_VALUE_SENTINEL}px`
+            );
+        } else {
+            sizeEl.style.width = `var(${variable.cssName}, ${NO_VALUE_SENTINEL}px)`;
+        }
         container.appendChild(sizeEl);
         this.sizeEls.set(variable, sizeEl);
 
@@ -205,10 +226,18 @@ export class Environment extends BeanStub implements NamedBean {
     }
 
     private fireGridStylesChangedEvent(change: ChangeKey): void {
+        if (change === 'rowBorderWidthChanged') {
+            this.refreshRowBorderWidthVariable();
+        }
         this.eventSvc.dispatchEvent({
             type: 'gridStylesChanged',
             [change]: true,
         });
+    }
+
+    private refreshRowBorderWidthVariable(): void {
+        const width = this.getCSSVariablePixelValue(ROW_BORDER_WIDTH);
+        this.eGridDiv.style.setProperty('--ag-internal-row-border-width', `${width}px`);
     }
 
     private handleThemeGridOptionChange(): void {
@@ -269,8 +298,14 @@ type Variable = {
     cssName: string;
     changeKey: ChangeKey;
     defaultValue: number;
+    border?: boolean;
 };
 
-type ChangeKey = 'themeChanged' | 'headerHeightChanged' | 'rowHeightChanged' | 'listItemHeightChanged';
+type ChangeKey =
+    | 'themeChanged'
+    | 'headerHeightChanged'
+    | 'rowHeightChanged'
+    | 'listItemHeightChanged'
+    | 'rowBorderWidthChanged';
 
 const NO_VALUE_SENTINEL = 15538;

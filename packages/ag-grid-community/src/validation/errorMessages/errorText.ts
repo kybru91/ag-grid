@@ -9,15 +9,19 @@ import { ENTERPRISE_MODULE_NAMES } from '../enterpriseModuleNames';
 import { getErrorLink } from '../logging';
 import { resolveModuleNames } from '../resolvableModuleNames';
 
-export const moduleImportMsg = (moduleNames: `${ModuleName}Module`[]) => {
+export const moduleImportMsg = (moduleNames: ModuleName[]) => {
     const imports = moduleNames
         .map(
             (moduleName) =>
-                `import { ${moduleName} } from '${ENTERPRISE_MODULE_NAMES[moduleName as EnterpriseModuleName] ? 'ag-grid-enterprise' : 'ag-grid-community'}';`
+                `import { ${convertToUserModuleName(moduleName)} } from '${ENTERPRISE_MODULE_NAMES[moduleName as EnterpriseModuleName] ? 'ag-grid-enterprise' : 'ag-grid-community'}';`
         )
         .join(' \n');
-    return `import { ModuleRegistry } from 'ag-grid-community'; \n${imports} \n\nModuleRegistry.registerModules([ ${moduleNames.join(', ')} ]); \n\nFor more info see: ${BASE_URL}/javascript-grid/modules/`;
+    return `import { ModuleRegistry } from 'ag-grid-community'; \n${imports} \n\nModuleRegistry.registerModules([ ${moduleNames.map(convertToUserModuleName).join(', ')} ]); \n\nFor more info see: ${BASE_URL}/javascript-grid/modules/`;
 };
+
+function convertToUserModuleName(moduleName: ModuleName): `${ModuleName}Module` {
+    return `${moduleName}Module`;
+}
 
 const missingModule = ({
     reasonOrId,
@@ -37,7 +41,7 @@ const missingModule = ({
     const resolvedModuleNames = resolveModuleNames(moduleName, rowModelType);
     const reason = typeof reasonOrId === 'string' ? reasonOrId : MISSING_MODULE_REASONS[reasonOrId];
     return (
-        `Unable to use ${reason} as ${resolvedModuleNames.length > 1 ? 'one of ' + resolvedModuleNames.join(', ') : resolvedModuleNames[0]} is not registered${gridScoped ? ' for gridId: ' + gridId : ''}. Check if you have registered the module:
+        `Unable to use ${reason} as ${resolvedModuleNames.length > 1 ? 'one of ' + resolvedModuleNames.map(convertToUserModuleName).join(', ') : convertToUserModuleName(resolvedModuleNames[0])} is not registered${gridScoped ? ' for gridId: ' + gridId : ''}. Check if you have registered the module:
 ${moduleImportMsg(resolvedModuleNames)}` + (additionalText ? ` \n\n${additionalText}` : '')
     );
 };

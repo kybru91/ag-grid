@@ -77,7 +77,7 @@ export const MODULES_FOR_ROW_MODELS: Partial<Record<CommunityModuleName | Enterp
 export function resolveModuleNames(
     moduleName: ValidationModuleName | ValidationModuleName[],
     rowModelType: RowModelType
-): `${CommunityModuleName | EnterpriseModuleName}Module`[] {
+): (CommunityModuleName | EnterpriseModuleName)[] {
     const resolvedModuleNames: (CommunityModuleName | EnterpriseModuleName)[] = [];
     (Array.isArray(moduleName) ? moduleName : [moduleName]).forEach((modName) => {
         const resolved = RESOLVABLE_MODULE_NAMES[modName as ResolvableModuleName];
@@ -93,5 +93,5 @@ export function resolveModuleNames(
             resolvedModuleNames.push(modName as CommunityModuleName | EnterpriseModuleName);
         }
     });
-    return resolvedModuleNames.map((modName) => `${modName}Module` as const);
+    return resolvedModuleNames;
 }

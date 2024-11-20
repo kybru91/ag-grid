@@ -266,7 +266,7 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
                     reason: 'Pivot Mode is not supported with Tree Data.',
                 },
             },
-            module: 'Pivot',
+            module: 'SharedPivot',
         },
         pivotPanelShow: { module: 'RowGroupingPanel' },
         quickFilterText: {

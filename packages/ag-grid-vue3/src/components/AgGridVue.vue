@@ -268,6 +268,10 @@ onMounted(() => {
     api.value = createGrid(rootRef.value!, gridOptions, gridParams);
     gridCreated.value = true;
 });
+
+defineExpose({
+  api
+})
 </script>
 
 <template>

@@ -306,7 +306,7 @@ export const AG_GRID_ERRORS = {
         `Numeric value ${value} passed to ${param} param will be interpreted as ${value} seconds. If this is intentional use "${value}s" to silence this warning.` as const,
     105: ({ e }: { e: any }) => [`chart rendering failed`, e] as const,
     106: () =>
-        'Invalid mixing of Theming API and CSS File Themes in the same page. A Theming API theme has been provided to the `theme` grid option, but the file (ag-grid.css) is also included and will cause styling issues. Remove ag-grid.css from the page.' as const,
+        'Theming API and CSS File Themes are both used in the same page. A Theming API theme has been provided to the `theme` grid option, but the file (ag-grid.css) is also included and will cause styling issues. Remove ag-grid.css from the page.' as const,
     107: ({ key, value }: { key: string; value: unknown }) =>
         `Invalid value for theme param ${key} - ${value}` as const,
     108: ({ e }: { e: any }) => ['chart update failed', e] as const,
@@ -527,7 +527,7 @@ export const AG_GRID_ERRORS = {
         'Group Column Filter does not work with Tree Data enabled. Please disable Tree Data, or use a different filter.' as const,
     238: () => 'setRowCount can only accept a positive row count.' as const,
     239: () =>
-        'Invalid mixing of Theming API and CSS File Themes in the same page. No value was provided to the `theme` grid option so it defaulted to themeQuartz, but the file (ag-grid.css) is also included and will cause styling issues. Pass the string "legacy" to the theme grid option to use v32 style themes, or remove ag-grid.css from the page.' as const,
+        'Theming API and CSS File Themes are both used in the same page. In v33 we released the Theming API as the new default method of styling the grid. See the migration docs https://www.ag-grid.com/react-data-grid/theming-migration/. Because no value was provided to the `theme` grid option it defaulted to themeQuartz. But the file (ag-grid.css) is also included and will cause styling issues. Either pass the string "legacy" to the theme grid option to use v32 style themes, or remove ag-grid.css from the page to use Theming API.' as const,
     240: ({ theme }: { theme: any }) =>
         `theme grid option must be a Theming API theme object or the string "legacy", received: ${theme}` as const,
     241: () => `cannot select multiple rows when rowSelection.mode is set to 'singleRow'` as const,

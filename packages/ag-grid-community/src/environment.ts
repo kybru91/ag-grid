@@ -159,17 +159,22 @@ export class Environment extends BeanStub implements NamedBean {
         return newSize;
     }
 
-    private getSizeEl(variable: Variable): HTMLElement {
-        let sizeEl = this.sizeEls.get(variable);
-        if (sizeEl) {
-            return sizeEl;
-        }
+    private getMeasurementContainer(): HTMLElement {
         let container = this.eMeasurementContainer;
         if (!container) {
             container = this.eMeasurementContainer = document.createElement('div');
             container.className = 'ag-measurement-container';
             this.eGridDiv.appendChild(container);
         }
+        return container;
+    }
+
+    private getSizeEl(variable: Variable): HTMLElement {
+        let sizeEl = this.sizeEls.get(variable);
+        if (sizeEl) {
+            return sizeEl;
+        }
+        const container = this.getMeasurementContainer();
 
         sizeEl = document.createElement('div');
         sizeEl.style.width = `var(${variable.cssName}, ${NO_VALUE_SENTINEL}px)`;
@@ -245,9 +250,12 @@ export class Environment extends BeanStub implements NamedBean {
             this.applyThemeClasses(eGridDiv);
             this.fireGridStylesChangedEvent('themeChanged');
         }
-        // --ag-legacy-styles-loaded is defined by the legacy themes which
-        // shouldn't be used at the same time as Theming API
-        if (newGridTheme && getComputedStyle(document.body).getPropertyValue('--ag-legacy-styles-loaded')) {
+        // --ag-legacy-styles-loaded is defined on .ag-measurement-container by the
+        // legacy themes which shouldn't be used at the same time as Theming API
+        if (
+            newGridTheme &&
+            getComputedStyle(this.getMeasurementContainer()).getPropertyValue('--ag-legacy-styles-loaded')
+        ) {
             if (themeGridOption) {
                 _error(106);
             } else {

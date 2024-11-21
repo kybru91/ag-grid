@@ -17,6 +17,7 @@ import { AgGridReact } from 'ag-grid-react';
 
 import { ModuleConfiguration } from './ModuleConfiguration';
 import styles from './ModuleMappings.module.scss';
+import { ModuleSearch } from './ModuleSearch';
 import { useModuleConfig } from './useModuleConfig';
 
 interface Props {
@@ -134,6 +135,7 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
     return (
         <div className={styles.container}>
             <ModuleConfiguration moduleConfig={moduleConfig} />
+            <ModuleSearch gridRef={gridRef} />
             <div style={{ height: '600px' }}>
                 <AgGridReact
                     ref={gridRef}

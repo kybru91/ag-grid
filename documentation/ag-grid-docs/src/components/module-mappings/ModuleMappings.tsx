@@ -127,7 +127,7 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
                 return false;
             },
             groupSelects: 'descendants',
-            headerCheckbox: false,
+            headerCheckbox: bundleOption === '' || bundleOption === 'AllCommunityModule',
         };
     }, [bundleOption]);
 

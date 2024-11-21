@@ -172,7 +172,6 @@ export class DragService extends BeanStub implements NamedBean {
         };
 
         const target = _getRootNode(this.beans);
-        console.log(target);
         const events = [
             { target, type: 'mousemove', listener: mouseMoveEvent },
             { target, type: 'mouseup', listener: mouseUpEvent },

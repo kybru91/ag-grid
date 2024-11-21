@@ -35,7 +35,7 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
                 field: 'ticker',
                 cellRenderer: TickerCellRenderer,
             },
-            { field: 'performance', type: 'number' },
+            { field: 'performance', type: 'rightAligned' },
             { field: 'current', type: 'rightAligned' },
             { field: 'feb', type: 'rightAligned' },
         ],

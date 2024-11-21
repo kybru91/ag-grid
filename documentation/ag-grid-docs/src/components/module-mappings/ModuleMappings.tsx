@@ -4,14 +4,7 @@ import { Snippet } from '@ag-website-shared/components/snippet/Snippet';
 import { type FunctionComponent, useCallback, useMemo, useRef, useState } from 'react';
 
 import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, RowSelectionModule } from 'ag-grid-community';
-import type {
-    ColDef,
-    GetRowIdParams,
-    IRowNode,
-    RowSelectedEvent,
-    RowSelectionOptions,
-    ValueFormatterParams,
-} from 'ag-grid-community';
+import type { ColDef, GetRowIdParams, IRowNode, RowSelectedEvent, RowSelectionOptions } from 'ag-grid-community';
 import { ClipboardModule, ContextMenuModule, TreeDataModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
@@ -53,7 +46,10 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
             innerRenderer: ModuleCellRenderer,
         },
     });
-    const getRowId = useCallback((params: GetRowIdParams) => params.data.name, []);
+    const getRowId = useCallback(
+        (params: GetRowIdParams) => (params.data.children ? `${params.data.name} group` : params.data.moduleName),
+        []
+    );
 
     const onRowSelected = useCallback(
         (event: RowSelectedEvent) => {

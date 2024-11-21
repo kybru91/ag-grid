@@ -15,9 +15,8 @@ export class AnimateSlideCellRenderer extends Component implements ICellRenderer
     constructor() {
         super();
 
-        const eDocument = _getDocument(this.beans);
-        const template = eDocument.createElement('span');
-        const slide = eDocument.createElement('span');
+        const template = document.createElement('span');
+        const slide = document.createElement('span');
         slide.setAttribute('class', 'ag-value-slide-current');
         template.appendChild(slide);
 

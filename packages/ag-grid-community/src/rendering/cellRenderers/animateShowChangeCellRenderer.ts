@@ -1,4 +1,3 @@
-import { _getDocument } from '../../gridOptionsUtils';
 import { _clearElement } from '../../utils/dom';
 import { _exists } from '../../utils/generic';
 import { Component } from '../../widgets/component';
@@ -18,12 +17,11 @@ export class AnimateShowChangeCellRenderer extends Component implements ICellRen
     constructor() {
         super();
 
-        const eDocument = _getDocument(this.beans);
-        const template = eDocument.createElement('span');
-        const delta = eDocument.createElement('span');
+        const template = document.createElement('span');
+        const delta = document.createElement('span');
         delta.setAttribute('class', 'ag-value-change-delta');
 
-        const value = eDocument.createElement('span');
+        const value = document.createElement('span');
         value.setAttribute('class', 'ag-value-change-value');
 
         template.appendChild(delta);

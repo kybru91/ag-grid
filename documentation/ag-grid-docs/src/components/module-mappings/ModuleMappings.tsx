@@ -15,6 +15,7 @@ import type {
 import { ClipboardModule, ContextMenuModule, TreeDataModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
+import { ModuleCellRenderer } from './ModuleCellRenderer';
 import { ModuleConfiguration } from './ModuleConfiguration';
 import styles from './ModuleMappings.module.scss';
 import { ModuleSearch } from './ModuleSearch';
@@ -48,7 +49,9 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
     const [columnDefs] = useState([{ field: 'moduleName' }]);
     const [autoGroupColumnDef] = useState({
         headerName: 'Feature',
-        valueFormatter: (params: ValueFormatterParams) => `${params.value}${params.data.isEnterprise ? ' (e)' : ''}`,
+        cellRendererParams: {
+            innerRenderer: ModuleCellRenderer,
+        },
     });
     const getRowId = useCallback((params: GetRowIdParams) => params.data.name, []);
 

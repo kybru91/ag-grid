@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eu
 
-find ./packages/**/src -name \*.ts | xargs sed -e "s/'ag-charts-types\/scene'/'ag-charts-community\/scene'/" -i ''
+if [[ $(uname) == "Darwin" ]] ; then
+    find ./packages/**/src -name \*.ts | xargs sed -e "s/'ag-charts-types\/scene'/'ag-charts-community\/scene'/" -i ''
+else
+    find ./packages/**/src -name \*.ts | xargs sed -e "s/'ag-charts-types\/scene'/'ag-charts-community\/scene'/" -i''
+fi
 
 git apply <<EOF
 diff --git a/packages/ag-grid-enterprise/src/charts/agChartsExports.ts b/packages/ag-grid-enterprise/src/charts/agChartsExports.ts

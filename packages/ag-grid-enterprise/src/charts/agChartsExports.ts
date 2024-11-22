@@ -2,18 +2,19 @@ import type { IntegratedModule } from 'ag-charts-types';
 
 import type { NamedBean } from 'ag-grid-community';
 import { BeanStub } from 'ag-grid-community';
+type ChartTypes = IntegratedModule;
 
 /** Bean to expose the AG Charts apis from a single location and not require a code dependency on ag-charts-community */
 export class AgChartsExports extends BeanStub implements NamedBean {
     beanName = 'agChartsExports' as const;
 
     isEnterprise = false;
-    create: IntegratedModule['create'];
-    _Theme: IntegratedModule['_Theme'];
-    _Scene: any; // types not exposed as only used for mini charts
-    _Util: IntegratedModule['_Util'];
+    create: ChartTypes['create'];
+    _Theme: ChartTypes['_Theme'];
+    _Scene: ChartTypes['_Scene'];
+    _Util: ChartTypes['_Util'];
 
-    constructor(params: IntegratedModule) {
+    constructor(params: ChartTypes) {
         super();
         this.create = params.create;
         this._Theme = params._Theme;

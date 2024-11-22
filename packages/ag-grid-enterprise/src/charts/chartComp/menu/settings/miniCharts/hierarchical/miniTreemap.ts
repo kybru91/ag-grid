@@ -76,7 +76,7 @@ export class MiniTreemap extends MiniChart {
             rects.push(...xRects);
 
             return rects;
-        }, []);
+        }, [] as Rect[]);
 
         this.updateColors(fills, strokes, themeTemplate, isCustomTheme);
 

@@ -14,12 +14,12 @@ export class AgChartsExports extends BeanStub implements NamedBean {
     _Scene: ChartTypes['_Scene'];
     _Util: ChartTypes['_Util'];
 
-    constructor(params: ChartTypes) {
+    constructor(params: IntegratedModule) {
         super();
-        this.create = params.create;
-        this._Theme = params._Theme;
-        this._Scene = params._Scene;
-        this.isEnterprise = params.isEnterprise;
-        this._Util = params._Util;
+        this.create = params.create as any;
+        this._Theme = params._Theme as any;
+        this._Scene = params._Scene as any;
+        this.isEnterprise = params.isEnterprise as any;
+        this._Util = params._Util as any;
     }
 }

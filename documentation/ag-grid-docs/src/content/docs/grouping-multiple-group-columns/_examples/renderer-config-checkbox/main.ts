@@ -1,5 +1,5 @@
 import { ClientSideRowModelModule } from 'ag-grid-community';
-import { GridApi, GridOptions, HeaderValueGetterParams, createGrid } from 'ag-grid-community';
+import { GridApi, GridOptions, createGrid } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
@@ -8,25 +8,17 @@ ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, Ro
 let gridApi: GridApi<IOlympicData>;
 
 const gridOptions: GridOptions<IOlympicData> = {
-    columnDefs: [
-        { headerName: 'Country', field: 'country', rowGroup: true, hide: true },
-        { headerName: 'Year', field: 'year', rowGroup: true, hide: true },
-        { field: 'athlete' },
-        { field: 'sport' },
-        { field: 'total' },
-    ],
+    columnDefs: [{ field: 'country', rowGroup: true }, { field: 'athlete' }, { field: 'year' }, { field: 'sport' }],
     defaultColDef: {
         flex: 1,
         minWidth: 100,
     },
-    autoGroupColumnDef: {
-        headerValueGetter: (params: HeaderValueGetterParams) => `${params.colDef.headerName} Group Column`,
-        minWidth: 220,
-        cellRendererParams: {
-            suppressCount: true,
-        },
-    },
     groupDisplayType: 'multipleColumns',
+    rowSelection: {
+        mode: 'multiRow',
+        selectAll: 'all',
+        checkboxLocation: 'autoGroupColumn',
+    },
 };
 
 // setup the grid after the page has finished loading

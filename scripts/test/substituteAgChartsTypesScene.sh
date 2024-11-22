@@ -6,12 +6,12 @@ find ./packages/**/src -name \*.ts | xargs sed -e "s/'ag-charts-types\/scene'/'a
 
 git apply <<EOF
 diff --git a/packages/ag-grid-enterprise/src/charts/agChartsExports.ts b/packages/ag-grid-enterprise/src/charts/agChartsExports.ts
-index 2758dab026..90eb0075ae 100644
+index 923c41bbaa..c35e75565e 100644
 --- a/packages/ag-grid-enterprise/src/charts/agChartsExports.ts
 +++ b/packages/ag-grid-enterprise/src/charts/agChartsExports.ts
 @@ -1,8 +1,9 @@
 -import type { IntegratedModule } from 'ag-charts-types';
-+import type { AgChartsCommunityModule } from 'ag-charts-community';
++import type { AgChartsCommunityModule, IntegratedModule } from 'ag-charts-community';
  
  import type { NamedBean } from 'ag-grid-community';
  import { BeanStub } from 'ag-grid-community';

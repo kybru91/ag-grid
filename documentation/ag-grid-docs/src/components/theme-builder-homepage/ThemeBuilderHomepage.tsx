@@ -1,18 +1,16 @@
 import { ShadowDom } from '@components/ShadowDom';
+import { useDarkmode } from '@utils/hooks/useDarkmode';
 import React, { useMemo, useState } from 'react';
 
 import {
     AllCommunityModule,
     type ColDef,
     ModuleRegistry,
+    type Theme,
     themeAlpine,
     themeBalham,
     themeQuartz,
 } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-import 'ag-grid-community/styles/ag-theme-balham.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { RowGroupingPanelModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
@@ -25,9 +23,33 @@ interface Props {
     gridHeight?: number | null;
 }
 
+const themeCustom = themeQuartz
+    .withParams(
+        {
+            backgroundColor: '#e6bc9a',
+            foregroundColor: '#340c52',
+            borderColor: '#f59342',
+            chromeBackgroundColor: '#e3f5c4',
+            browserColorScheme: 'light',
+        },
+        'light'
+    )
+    .withParams(
+        {
+            backgroundColor: '#38200c',
+            foregroundColor: '#FFF',
+            borderColor: '#f59342',
+            chromeBackgroundColor: '#633713',
+            browserColorScheme: 'dark',
+        },
+        'dark-blue'
+    );
+
 export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => {
-    const [theme, setTheme] = useState(themeQuartz);
+    const [baseTheme, setBaseTheme] = useState<Theme>(themeQuartz);
     const [spacing, setSpacing] = useState(8);
+    const theme = useMemo(() => baseTheme.withParams({ spacing }), [baseTheme, spacing]);
+    const [isDarkMode] = useDarkmode();
 
     const columnDefs = useMemo<ColDef[]>(
         () => [
@@ -64,16 +86,6 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
         { ticker: 'JP10Y', performance: 94074, current: 94074, feb: 19321 },
     ];
 
-    const handleThemeChange = (newTheme: typeof themeQuartz | typeof themeBalham | typeof themeAlpine) => {
-        setTheme(newTheme.withParams({ spacing }));
-        setTheme(newTheme);
-    };
-
-    const handleSpacingChange = (newSpacing: number) => {
-        setSpacing(newSpacing);
-        setTheme(theme.withParams({ spacing: newSpacing }));
-    };
-
     const themeName = theme === themeAlpine ? 'themeAlpine' : theme === themeBalham ? 'themeBalham' : 'themeQuartz';
     const codeBlock = `import { ${themeName} } from 'ag-grid-community';
     
@@ -92,13 +104,12 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
                     <div className={styles.buttonGroup}>
                         {[
                             { value: themeQuartz, label: 'Quartz' },
-                            { value: themeBalham, label: 'Balham' },
-                            { value: themeAlpine, label: 'Alpine' },
+                            { value: themeCustom, label: 'Custom' },
                         ].map((themeOption) => (
                             <button
                                 key={themeOption.label}
-                                className={theme === themeOption.value ? styles.active : ''}
-                                onClick={() => handleThemeChange(themeOption.value)}
+                                className={baseTheme === themeOption.value ? styles.active : ''}
+                                onClick={() => setBaseTheme(themeOption.value)}
                             >
                                 {themeOption.label}
                             </button>
@@ -117,7 +128,7 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
                             <button
                                 key={spacingOption.label}
                                 className={spacing === spacingOption.value ? styles.active : ''}
-                                onClick={() => handleSpacingChange(spacingOption.value)}
+                                onClick={() => setSpacing(spacingOption.value)}
                             >
                                 {spacingOption.label}
                             </button>
@@ -131,12 +142,14 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
                     className={`${styles.grid} ${gridHeight ? '' : styles.gridHeight}`}
                 >
                     <ShadowDom>
-                        <AgGridReact
-                            theme={theme}
-                            columnDefs={columnDefs}
-                            rowData={rowData}
-                            defaultColDef={defaultColDef}
-                        />
+                        <div style={{ height: '100%' }} data-ag-theme-mode={isDarkMode ? 'dark-blue' : 'light'}>
+                            <AgGridReact
+                                theme={theme}
+                                columnDefs={columnDefs}
+                                rowData={rowData}
+                                defaultColDef={defaultColDef}
+                            />
+                        </div>
                     </ShadowDom>
                 </div>
                 <div className={styles.codeBlockWrapper}>

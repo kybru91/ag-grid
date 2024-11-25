@@ -16,6 +16,7 @@ import { AgGridReact } from 'ag-grid-react';
 
 import styles from './ThemeBuilderExample.module.scss';
 import { TickerCellRenderer } from './cell-renderer/TickerCellRenderer';
+import SpacingIcon from './spacing.svg?react';
 
 ModuleRegistry.registerModules([AllCommunityModule, RowGroupingPanelModule]);
 interface Props {
@@ -103,25 +104,37 @@ export const StockPerformanceGrid: React.FC<Props> = ({ gridHeight = null }) => 
                     <div className={styles.label}>Theme</div>
                     <div className={styles.buttonGroup}>
                         {[
-                            { value: themeQuartz, label: 'Quartz' },
-                            { value: themeCustom, label: 'Custom' },
+                            {
+                                value: themeQuartz,
+                                label: 'Choose from AG Grid Themes',
+                                description: 'Use our built-in themes Quartz, Alpine or Balham',
+                            },
+                            {
+                                value: themeCustom,
+                                label: 'Custom theme',
+                                description: 'Use the Theming API or CSS variables to create your theme',
+                            },
                         ].map((themeOption) => (
-                            <button
+                            <div
                                 key={themeOption.label}
-                                className={baseTheme === themeOption.value ? styles.active : ''}
+                                className={`${styles.buttonItem} ${baseTheme === themeOption.value ? styles.active : ''}`}
                                 onClick={() => setBaseTheme(themeOption.value)}
                             >
-                                {themeOption.label}
-                            </button>
+                                <div className={styles.title}>{themeOption.label}</div>
+                                <div className={styles.description}> {themeOption.description}</div>
+                            </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="spacing-options">
-                    <div className={styles.label}>Spacing</div>
+                <div className={styles.spacingOptions}>
+                    <div className={styles.label}>
+                        <SpacingIcon />
+                        Spacing
+                    </div>
                     <div className={styles.buttonGroup}>
                         {[
-                            { value: 6, label: 'Compact' },
+                            { value: 4, label: 'Tiny' },
                             { value: 8, label: 'Normal' },
                             { value: 12, label: 'Large' },
                         ].map((spacingOption) => (

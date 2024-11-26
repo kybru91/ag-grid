@@ -1,10 +1,6 @@
 import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 import { urlWithPrefix } from '@utils/urlWithPrefix';
 import classNames from 'classnames';
-import { TerminalIcon } from 'lucide-react';
-import { Download } from 'lucide-react';
-import { Code } from 'lucide-react';
-import { GitMerge } from 'lucide-react';
 
 import styles from './Quotes.module.scss';
 import type { QuotesData, QuotesDataItem } from './quotesData';
@@ -13,9 +9,9 @@ function filterAndSortByKey(data: QuotesData, sortKey: keyof QuotesDataItem) {
     return Object.values(data)
         .filter((d) => {
             const value = d[sortKey];
-            return value !== undefined && value >= 0;
+            return value !== undefined && (value as number) >= 0;
         })
-        .sort((a, b) => {
+        .sort((a: any, b: any) => {
             return a[sortKey]! - b[sortKey]!;
         });
 }

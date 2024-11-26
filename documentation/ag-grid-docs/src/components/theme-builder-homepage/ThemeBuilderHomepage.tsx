@@ -98,13 +98,16 @@ export const ThemeBuilderHomepage: React.FC<Props> = ({ gridHeight = null }) => 
         { ticker: 'JP10Y', performance: 94074, current: 94074, feb: 19321 },
     ];
 
-    const codeBlock = `// Using the Theming API
-import { ${themeSelection} } from 'ag-grid-community';
+    const codeBlock = useMemo(() => {
+        const importPath = themeSelection === 'themeCustom' ? '../themes/themeCustom' : 'ag-grid-community';
+        return `// Using the Theming API
+    import { ${themeSelection} } from '${importPath}';
     
-<AgGridReact
-    theme={${themeSelection}}
-    spacing={${spacing}}
-/>`;
+    <AgGridReact
+        theme={${themeSelection}}
+        spacing={${spacing}}
+    />`;
+    }, [themeSelection, spacing]);
 
     return (
         <div className={styles.gridColumns}>

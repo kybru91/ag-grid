@@ -101,12 +101,12 @@ export const ThemeBuilderHomepage: React.FC<Props> = ({ gridHeight = null }) => 
     const codeBlock = useMemo(() => {
         const importPath = themeSelection === 'themeCustom' ? '../themeCustom' : 'ag-grid-community';
         return `// Using the Theming API
-    import { ${themeSelection} } from '${importPath}';
-    
-    <AgGridReact
-        theme={${themeSelection}}
-        spacing={${spacing}}
-    />`;
+import { ${themeSelection} } from '${importPath}';
+
+<AgGridReact
+    theme={${themeSelection}}
+    spacing={${spacing}}
+/>`;
     }, [themeSelection, spacing]);
 
     return (

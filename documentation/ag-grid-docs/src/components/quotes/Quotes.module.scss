@@ -151,23 +151,23 @@
 
         &:last-child {
             border-right: none;
-    }
-
-    h4 {
-        color: var(--color-text-secondary);
-        display: flex;
-        gap: $spacing-size-4;
-        align-items: left;
-        flex-direction: column;
-
-        #{$selector-darkmode} & {
-            color: var(--color-util-brand-900);
         }
-
     }
+}
+h4 {
+    color: var(--color-text-secondary);
+    display: flex;
+    gap: $spacing-size-4;
+    align-items: left;
+    flex-direction: column;
 
-    h4 {
-        color: var(--color-util-brand-500);
+    #{$selector-darkmode} & {
+        color: var(--color-util-brand-900);
+    }
+}
+
+h4 {
+    color: var(--color-util-brand-500);
     @media screen and (max-width: $breakpoint-pricing-large) {
         display: grid;
         grid-template-columns: repeat(1, 1fr);

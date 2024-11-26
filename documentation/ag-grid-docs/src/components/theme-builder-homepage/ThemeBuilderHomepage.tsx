@@ -99,7 +99,7 @@ export const ThemeBuilderHomepage: React.FC<Props> = ({ gridHeight = null }) => 
     ];
 
     const codeBlock = useMemo(() => {
-        const importPath = themeSelection === 'themeCustom' ? '../themes/themeCustom' : 'ag-grid-community';
+        const importPath = themeSelection === 'themeCustom' ? '../themeCustom' : 'ag-grid-community';
         return `// Using the Theming API
     import { ${themeSelection} } from '${importPath}';
     
@@ -124,8 +124,21 @@ export const ThemeBuilderHomepage: React.FC<Props> = ({ gridHeight = null }) => 
                                     setBaseTheme(themeOption.value);
                                 }}
                             >
-                                <div className={styles.title}>{themeOption.label}</div>
-                                <div className={styles.description}> {themeOption.description}</div>
+                                <div className={styles.buttonItems}>
+                                    <input
+                                        type="radio"
+                                        name="charts"
+                                        checked={baseTheme === themeOption.value}
+                                        onChange={() => {
+                                            setThemeSelection(themeOption.themeName as ThemeSelection);
+                                            setBaseTheme(themeOption.value);
+                                        }}
+                                    />
+                                    <div className={styles.titleDescription}>
+                                        <div className={styles.title}>{themeOption.label}</div>
+                                        <div className={styles.description}> {themeOption.description}</div>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>

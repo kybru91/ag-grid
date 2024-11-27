@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { _theming } from 'ag-grid-community';
 import type { Theme } from 'ag-grid-community';
 
-import { _getAllRegisteredModules } from '../../../../../../../packages/ag-grid-community/src/modules/moduleRegistry';
 import { useRenderedTheme } from '../../model/rendered-theme';
 import { EditorPanel } from '../editors/EditorPanel';
 import { PresetSelector } from '../presets/PresetSelector';

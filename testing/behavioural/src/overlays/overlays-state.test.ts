@@ -93,6 +93,7 @@ describe('ag-grid overlays state', () => {
             api.applyTransaction({
                 add: [],
             });
+            expect(hasLoadingOverlay()).toBeFalsy();
             expect(hasNoRowsOverlay()).toBeTruthy();
         });
 

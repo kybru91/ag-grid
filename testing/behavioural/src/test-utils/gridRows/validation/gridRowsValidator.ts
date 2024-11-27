@@ -244,7 +244,7 @@ export class GridRowsValidator {
         }
         children ??= [];
         const parentErrors = this.errors.get(parentRow);
-        let duplicates = 0;
+        let duplicatesCount = 0;
         for (let index = 0; index < children.length; ++index) {
             const child = children[index];
             if (!(child instanceof RowNode)) {
@@ -252,7 +252,7 @@ export class GridRowsValidator {
                 continue;
             }
             if (set.has(child)) {
-                ++duplicates;
+                ++duplicatesCount;
                 continue;
             }
             if (child === parentRow) {
@@ -275,14 +275,14 @@ export class GridRowsValidator {
                 const childErrors = this.errors.get(child);
                 childErrors.expectValueEqual('childIndex', child.childIndex, child.footer ? undefined : index);
                 childErrors.expectValueEqual('firstChild', child.firstChild, index === 0);
-                if (duplicates === 0) {
+                if (duplicatesCount === 0) {
                     childErrors.expectValueEqual('lastChild', child.lastChild, index === children.length - 1);
                 }
             }
             this.validateRow(gridRows, child);
         }
-        if (duplicates > 0) {
-            parentErrors.add(`${name} has ${duplicates} duplicates.`);
+        if (duplicatesCount > 0) {
+            parentErrors.add(`${name} has ${duplicatesCount} duplicates.`);
         }
         return set as any;
     }
@@ -394,7 +394,7 @@ export class GridRowsValidator {
             this.errors.get(row).add('Found self building allChildren');
         }
         if (duplicates > 0) {
-            this.errors.get(row).add('Found ' + duplicates + ' building allChildren');
+            this.errors.get(row).add('Found ' + duplicates + ' duplicates building allChildren');
         }
 
         let allLeafChildrenDuplicates = 0;
@@ -413,7 +413,7 @@ export class GridRowsValidator {
             this.errors.get(row).add('Found self building allLeafChildren');
         }
         if (allLeafChildrenDuplicates > 0) {
-            this.errors.get(row).add('Found ' + allLeafChildrenDuplicates + ' building allLeafChildren');
+            this.errors.get(row).add('Found ' + allLeafChildrenDuplicates + ' duplicates building allLeafChildren');
         }
 
         const allLeafChildren = new Set(Array.isArray(row.allLeafChildren) ? row.allLeafChildren : []);

@@ -1,5 +1,11 @@
-import type { IClientSideNodeManager, NamedBean, RefreshModelParams, RowNode } from 'ag-grid-community';
-import { ChangedPath, _error, _getRowIdCallback } from 'ag-grid-community';
+import type {
+    AbstractClientSideNodeManager,
+    IClientSideNodeManager,
+    NamedBean,
+    RefreshModelParams,
+    RowNode,
+} from 'ag-grid-community';
+import { ChangedPath, _error, _getRowIdCallback, _warn } from 'ag-grid-community';
 
 import { AbstractClientSideTreeNodeManager } from './abstractClientSideTreeNodeManager';
 import { makeFieldPathGetter } from './fieldAccess';
@@ -46,7 +52,7 @@ export class ClientSideChildrenTreeNodeManager<TData>
         const rootNode = this.rootNode!;
         const childrenGetter = this.childrenGetter;
 
-        const processedDataSet = new Set<TData>();
+        const processedData = new Map<TData, RowNode<TData>>();
         const allLeafChildren: TreeRow<TData>[] = [];
 
         rootNode.allLeafChildren = allLeafChildren;
@@ -55,19 +61,18 @@ export class ClientSideChildrenTreeNodeManager<TData>
         treeRoot.setRow(rootNode);
 
         const processChild = (node: TreeNode, data: TData) => {
-            if (processedDataSet.has(data)) {
-                _error(5, { data }); // Duplicate node
+            let row = processedData.get(data);
+            if (row !== undefined) {
+                _error(2, { nodeId: row.id }); // Duplicate node
                 return;
             }
 
-            processedDataSet.add(data);
-
-            const row = this.createRowNode(data, allLeafChildren.length);
+            row = this.createRowNode(data, allLeafChildren.length);
+            processedData.set(data, row);
             allLeafChildren.push(row);
 
             node = node.upsertKey(row.id!);
             this.treeSetRow(node, row, true);
-
             const children = childrenGetter?.(data);
             if (children) {
                 for (let i = 0, len = children.length; i < len; ++i) {
@@ -75,7 +80,6 @@ export class ClientSideChildrenTreeNodeManager<TData>
                 }
             }
         };
-
         for (let i = 0, len = rowData.length; i < len; ++i) {
             processChild(treeRoot, rowData[i]);
         }
@@ -91,7 +95,7 @@ export class ClientSideChildrenTreeNodeManager<TData>
         const getRowIdFunc = _getRowIdCallback(gos)!;
         const canReorder = !gos.get('suppressMaintainUnsortedOrder');
 
-        const processedDataSet = new Set<TData>();
+        const processedData = new Map<TData, AbstractClientSideNodeManager.RowNode<TData>>();
 
         const changedPath = new ChangedPath(false, rootNode);
         params.changedPath = changedPath;
@@ -136,17 +140,16 @@ export class ClientSideChildrenTreeNodeManager<TData>
         const processChildren = canReorder ? processChildrenReOrder : processChildrenNoReorder;
 
         const processChild = (parent: TreeNode, data: TData): number => {
-            if (processedDataSet.has(data)) {
-                _error(5, { data }); // Duplicate node
+            let row = processedData.get(data);
+            if (row !== undefined) {
+                _warn(2, { nodeId: row.id }); // Duplicate node
                 return -1;
             }
-
-            processedDataSet.add(data);
 
             const id = getRowIdFunc({ data, level: parent.level + 1 });
 
             let created = false;
-            let row = this.getRowNode(id) as TreeRow<TData> | undefined;
+            row = this.getRowNode(id) as TreeRow<TData> | undefined;
             if (row) {
                 if (row.data !== data) {
                     changedRowNodes.update(row);
@@ -160,6 +163,8 @@ export class ClientSideChildrenTreeNodeManager<TData>
                 changedRowNodes.add(row);
                 created = true;
             }
+
+            processedData.set(data, row);
 
             let oldSourceRowIndex: number;
             let node: TreeNode;
@@ -190,9 +195,12 @@ export class ClientSideChildrenTreeNodeManager<TData>
             for (let i = 0, len = oldAllLeafChildren.length; i < len; ++i) {
                 const row = oldAllLeafChildren[i];
                 const node = row.treeNode as TreeNode | null;
-                if (node && !processedDataSet.has(row.data!)) {
-                    changedRowNodes.remove(row);
-                    this.treeRemove(node, row);
+                if (node) {
+                    const data = row.data;
+                    if (data && !processedData.has(data)) {
+                        changedRowNodes.remove(row);
+                        this.treeRemove(node, row);
+                    }
                 }
             }
         }

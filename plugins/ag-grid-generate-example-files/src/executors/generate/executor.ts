@@ -289,6 +289,12 @@ async function writeContents(
     internalFramework: InternalFramework,
     result: GeneratedContents
 ) {
+    // if((internalFramework === 'vue3' && result.files['main.ts']) ||
+    // (internalFramework === 'angular' && result.files['app.component.ts'])) {
+    //     const fc = await prettier.format(result.files[internalFramework === 'vue3' ? 'main.ts' : 'app.component.ts'], { parser: 'typescript' });
+    //     const op = path.join(options.outputPath, internalFramework, internalFramework === 'vue3' ? 'main.ts' : 'app.component.ts');
+    //     await writeFile(op, fc);
+    // }
     const outputPath = path.join(options.outputPath, internalFramework, 'contents.json');
     await writeFile(outputPath, JSON.stringify(result));
 
@@ -298,12 +304,12 @@ async function writeContents(
         }
     }
 }
-//  node --inspect-brk ./plugins/ag-grid-generate-example-files/dist/src/executors/generate/executor.js
+// node --inspect-brk ./plugins/ag-grid-generate-example-files/dist/src/executors/generate/executor.js
 // console.log('should generate')
 // generateFiles({
-//     examplePath: 'documentation/ag-grid-docs/src/content/docs/getting-started/_examples/working-with-data-example',
+//     examplePath: 'documentation/ag-grid-docs/src/content/docs/clipboard/_examples/process-all',
 //     mode: 'dev',
 //     inputs: [],
 //     output: '',
-//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/getting-started/_examples/working-with-data-example',
+//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/clipboard/_examples/process-all',
 // }).then(() => console.log('done'));

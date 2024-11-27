@@ -443,11 +443,6 @@ function internalParser(
                                 props.push(`${property.name.getText()}:${(property as any).initializer.getText()}`);
                             }
                         }
-                        if (props.length > 0) {
-                            const propStr =
-                                props.length === 1 ? `{ ${props.join()} }` : `{\n        ${props.join(',\n    ')} }`;
-                            bindings.vuePropertyBindings[propertyName] = propStr;
-                        }
                     }
                 }
                 if (
@@ -509,7 +504,6 @@ function internalParser(
      * eventHandlers -> grid related events
      * properties -> grid related properties
      * components -> name value pair of component name to actual component (ie name: myCustomCell, value: CustomCellRenderer)
-     * vuePropertyBindings => vue specific property bindings that can be safely parsed by the vue generators
      * parsedColDefs -> col defs with function values replaced with tokenised strings - for the functional react example generator
      * utils -> none grid related methods/variables (or methods that don't reference the gridApi) (i.e. non-instance)
      * instanceMethods -> methods that are either marked as "inScope" or ones that reference the gridApi
@@ -525,7 +519,6 @@ function internalParser(
             eventHandlers: [],
             properties: [],
             components: [],
-            vuePropertyBindings: {},
             defaultColDef: null,
             autoGroupColumnDef: null,
             globalComponents: [],

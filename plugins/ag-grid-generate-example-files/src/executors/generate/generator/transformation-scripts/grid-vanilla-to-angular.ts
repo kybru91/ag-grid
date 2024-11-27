@@ -159,7 +159,6 @@ export function vanillaToAngular(
     return () => {
         const imports = getImports(bindings, exampleConfig, componentFileNames, allStylesheets);
         const propertyAttributes = [];
-        const propertyVars = [];
         const propertyAssignments = [];
 
         properties
@@ -251,7 +250,6 @@ ${typeDeclares?.length > 0 ? '\n' + typeDeclares.join('\n') : ''}${interfaces?.l
 
 export class AppComponent {
 ${hasGridApi ? `    private gridApi!: GridApi${genericParams};\n` : ''}
-    ${propertyVars.join('\n')}
     ${propertyAssignments.join(';\n')}
 
 ${

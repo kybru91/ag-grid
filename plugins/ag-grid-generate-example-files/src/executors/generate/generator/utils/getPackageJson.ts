@@ -22,7 +22,14 @@ export function getPackageJson({ isLocale, internalFramework }: Params) {
 
 /** Used for type checking in plunker, and type checking & dep installation with codesandbox */
 function addPackageJson(isLocale, framework) {
-    const supportedFrameworks = new Set(['angular', 'typescript', 'reactFunctional', 'reactFunctionalTs', 'vanilla']);
+    const supportedFrameworks = new Set([
+        'angular',
+        'typescript',
+        'reactFunctional',
+        'reactFunctionalTs',
+        'vanilla',
+        'vue3',
+    ]);
     if (!supportedFrameworks.has(framework)) {
         return;
     }
@@ -43,6 +50,10 @@ function addPackageJson(isLocale, framework) {
         addDependency('@angular/platform-browser', '^17');
     }
 
+    if (framework === 'vue3') {
+        addDependency('vue', '^3.5.0');
+    }
+
     function isFrameworkReact() {
         return new Set(['reactFunctional', 'reactFunctionalTs']).has(framework);
     }
@@ -59,6 +70,7 @@ function addPackageJson(isLocale, framework) {
     const agGridEnterpriseVersion = getPackageJsonVersion('ag-grid-enterprise');
     const agGridReactVersion = getPackageJsonVersion('ag-grid-react');
     const agGridAngularVersion = getPackageJsonVersion('ag-grid-angular');
+    const agGridVue3Version = getPackageJsonVersion('ag-grid-vue3');
     const agGridLocaleVersion = getPackageJsonVersion('locale', true);
 
     if (isLocale) {
@@ -67,6 +79,9 @@ function addPackageJson(isLocale, framework) {
 
     if (framework === 'angular') {
         addDependency('ag-grid-angular', agGridAngularVersion);
+    }
+    if (framework === 'vue3') {
+        addDependency('ag-grid-vue3', agGridVue3Version);
     }
     if (isFrameworkReact()) {
         addDependency('ag-grid-react', agGridReactVersion);

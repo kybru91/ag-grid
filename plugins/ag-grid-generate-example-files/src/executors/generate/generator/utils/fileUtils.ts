@@ -96,7 +96,7 @@ export const getEntryFileName = (internalFramework: InternalFramework) => {
             return 'index.tsx';
         case 'vanilla':
         case 'vue3':
-            return 'main.js';
+            return 'main.ts';
         default:
             return;
     }

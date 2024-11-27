@@ -9,19 +9,51 @@ export const toMember = (property: Property) => `${property.name}: null`;
 export const toRef = (property: Property) => `const ${property.name} = ref(null)`;
 export const toComponent = (property: Property) => `'${property.name}': ${property.name}`;
 
-export function toAssignment(property: Property): string {
+export const quoteVueComponents = (value, componentFileNames: any[]) => {
+    if (componentFileNames) {
+        componentFileNames
+            .map((componentFileName) => getComponentName(componentFileName, 'Vue', ''))
+            .forEach((component) => {
+                value = value.replaceAll(component, `'${component}'`);
+            });
+    }
+    return value;
+};
+
+export const toMemberWithType = (property: Property, componentFileNames: any[]) => {
+    const value = quoteVueComponents(property.value, componentFileNames);
+    if (property.typings) {
+        const typing = property.typings.typeName;
+        // Don't include obvious types
+        if (!['number', 'string', 'boolean'].includes(typing)) {
+            let typeName = property.typings.typeName;
+            if (property.name === 'columnDefs') {
+                // Special logic for columnDefs as its a popular property
+                typeName = value.includes('children') ? '(ColDef | ColGroupDef)[]' : 'ColDef[]';
+            }
+            return `const ${property.name} = ref<${typeName}>(${value});`;
+        }
+    }
+    return `const ${property.name} = ref(${value});`;
+};
+
+export function toAssignment(property: Property, componentFileNames: any[]): string {
     // convert to arrow functions
-    const value = property.value.replace(/function\s*\(([^)]+)\)/, '($1) =>');
+    const value = quoteVueComponents(property.value.replace(/function\s*\(([^)]+)\)/, '($1) =>'), componentFileNames);
 
     return `this.${property.name} = ${value}`;
 }
 
-export function getImport(filename: string, tokenReplace, replaceValue) {
+export const getComponentName = (filename: string, tokenReplace, replaceValue) => {
     let componentName = filename.split('.')[0];
     if (tokenReplace) {
         componentName = componentName.replace(tokenReplace, replaceValue);
     }
-    return `import ${toTitleCase(componentName)} from './${filename}';`;
+
+    return toTitleCase(componentName);
+};
+export function getImport(filename: string, tokenReplace, replaceValue) {
+    return `import ${getComponentName(filename, tokenReplace, replaceValue)} from './${filename}';`;
 }
 
 export function indentTemplate(template: string, spaceWidth: number, start: number = 0) {

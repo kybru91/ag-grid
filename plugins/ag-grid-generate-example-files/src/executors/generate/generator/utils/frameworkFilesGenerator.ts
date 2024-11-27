@@ -49,46 +49,6 @@ type ConfigGenerator = ({
     exampleConfig: ExampleConfig;
 }) => Promise<FrameworkFiles>;
 
-const createVueFilesGenerator =
-    ({
-        sourceGenerator,
-        internalFramework,
-    }: {
-        sourceGenerator: (
-            bindings: ParsedBindings,
-            exampleConfig: ExampleConfig,
-            componentFilenames: string[],
-            allStylesheets: string[]
-        ) => () => string;
-        internalFramework: InternalFramework;
-    }): ConfigGenerator =>
-    async ({ bindings, indexHtml, componentScriptFiles, otherScriptFiles, styleFiles, isDev, exampleConfig }) => {
-        const componentNames = getComponentName(componentScriptFiles);
-        let mainJs = sourceGenerator(
-            deepCloneObject(bindings),
-            exampleConfig,
-            componentNames,
-            Object.keys(styleFiles)
-        )();
-
-        if (!isDev) {
-            mainJs = await prettier.format(mainJs, { parser: 'babel' });
-        }
-
-        const entryFileName = getEntryFileName(internalFramework)!;
-
-        const scriptFiles = { ...otherScriptFiles, ...componentScriptFiles };
-
-        return {
-            files: {
-                ...scriptFiles,
-                [entryFileName]: mainJs,
-                'index.html': indexHtml,
-            },
-            // NOTE: `scriptFiles` not required, as system js handles import
-        };
-    };
-
 export const frameworkFilesGenerator: Partial<Record<InternalFramework, ConfigGenerator>> = {
     vanilla: async ({ bindings, entryFile, indexHtml, componentScriptFiles, otherScriptFiles, isDev }) => {
         const internalFramework: InternalFramework = 'vanilla';
@@ -244,10 +204,41 @@ export const frameworkFilesGenerator: Partial<Record<InternalFramework, ConfigGe
             },
         };
     },
-    vue3: createVueFilesGenerator({
-        sourceGenerator: vanillaToVue3,
-        internalFramework: 'vue3',
-    }),
+    vue3: async ({
+        indexHtml,
+        typedBindings,
+        otherScriptFiles,
+        componentScriptFiles,
+        styleFiles,
+        isDev,
+        exampleConfig,
+    }) => {
+        const internalFramework: InternalFramework = 'vue3';
+        const componentNames = getComponentName(componentScriptFiles);
+        let mainJs = vanillaToVue3(
+            deepCloneObject(typedBindings),
+            exampleConfig,
+            componentNames,
+            Object.keys(styleFiles)
+        )();
+
+        if (!isDev) {
+            mainJs = await prettier.format(mainJs, { parser: 'babel' });
+        }
+
+        const entryFileName = getEntryFileName(internalFramework)!;
+
+        const scriptFiles = { ...otherScriptFiles, ...componentScriptFiles };
+
+        return {
+            files: {
+                ...scriptFiles,
+                [entryFileName]: mainJs,
+                'index.html': indexHtml,
+            },
+            // NOTE: `scriptFiles` not required, as system js handles import
+        };
+    },
 };
 
 function getComponentName(otherScriptFiles: FileContents) {

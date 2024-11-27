@@ -6,13 +6,12 @@ import {
     createGrid,
     themeQuartz,
 } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import {
     ColumnMenuModule,
     ColumnsToolPanelModule,
     ContextMenuModule,
     FiltersToolPanelModule,
+    PivotModule,
     RowGroupingModule,
     SetFilterModule,
 } from 'ag-grid-enterprise';
@@ -26,6 +25,7 @@ ModuleRegistry.registerModules([
     ContextMenuModule,
     RowGroupingModule,
     SetFilterModule,
+    PivotModule,
 ]);
 
 const myTheme = themeQuartz.withParams({

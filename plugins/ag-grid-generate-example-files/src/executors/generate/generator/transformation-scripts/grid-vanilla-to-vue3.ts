@@ -21,14 +21,7 @@ import {
     preferParamsApi,
     replaceGridReadyRowData,
 } from './parser-utils';
-import {
-    getImport,
-    toAssignment,
-    toConst,
-    toInput,
-    toMemberWithType,
-    toOutput,
-} from './vue-utils';
+import { getImport, toAssignment, toConst, toInput, toMemberWithType, toOutput } from './vue-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');

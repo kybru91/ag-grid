@@ -238,7 +238,23 @@ As with Column Headers, the grid will always handle resize and column moving. Th
 {% partial file="./_open-close-react.mdoc" /%}
 {% partial file="./_open-close-vue.mdoc" /%}
 
-### Inner Header Group Component
+### Dynamic Tooltips
+
+When using Custom Header Components it might be necessary to have a better control of how `Tooltips` are added instead of simply using the `headerTooltip` config. For this purpose, we provide the `setTooltip` method.
+{% if isFramework("javascript", "angular", "vue") %}
+{% interfaceDocumentation interfaceName="IHeaderGroupParams" names=["setTooltip"] /%}
+{% /if %}
+
+{% if isFramework("react") %}
+{% interfaceDocumentation interfaceName="IHeaderGroupParams" names=["setTooltip"] /%}
+{% /if %}
+
+The example below demonstrates using the Dynamic Tooltips with a Custom Group Component.
+* Note that only Group Headers where the text is not fully displayed will show tooltips.
+
+{% gridExampleRunner title="Dynamic Group Header Tooltip" name="dynamic-tooltips" /%}
+
+## Inner Header Group Component
 
 When using the Header Group Component, the `agColumnHeaderGroup` component will display the header group name,
 adjacent to the expand / collapse button.
@@ -277,18 +293,3 @@ colDef = {
 
 {% gridExampleRunner title="Custom Inner Header Group Component" name="inner-header-group-component" /%}
 
-### Dynamic Tooltips
-
-When using Custom Header Components it might be necessary to have a better control of how `Tooltips` are added instead of simply using the `headerTooltip` config. For this purpose, we provide the `setTooltip` method.
-{% if isFramework("javascript", "angular", "vue") %}
-{% interfaceDocumentation interfaceName="IHeaderGroupParams" names=["setTooltip"] /%}
-{% /if %}
-
-{% if isFramework("react") %}
-{% interfaceDocumentation interfaceName="IHeaderGroupParams" names=["setTooltip"] /%}
-{% /if %}
-
-The example below demonstrates using the Dynamic Tooltips with a Custom Group Component.
-* Note that only Group Headers where the text is not fully displayed will show tooltips.
-
-{% gridExampleRunner title="Dynamic Group Header Tooltip" name="dynamic-tooltips" /%}

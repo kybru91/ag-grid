@@ -1,13 +1,9 @@
-import * as JSON5 from 'json5';
-
 import type { ExampleConfig, ParsedBindings } from '../types';
 import {
     GRID_WIDE_COMPONENTS,
     OVERRIDABLE_AG_COMPONENTS,
     convertDefaultColDef,
-    getColumnDefs,
     getTemplate,
-    isComponent,
     isExternalVueFile,
 } from './grid-vanilla-to-vue-common';
 import {
@@ -15,7 +11,6 @@ import {
     addGenericInterfaceImport,
     addLicenseManager,
     addRelativeImports,
-    convertFunctionToConstProperty,
     convertFunctionToConstPropertyTs,
     findLocaleImport,
     getFunctionName,
@@ -28,13 +23,11 @@ import {
 } from './parser-utils';
 import {
     getImport,
-    quoteVueComponents,
     toAssignment,
     toConst,
     toInput,
     toMemberWithType,
     toOutput,
-    toRef,
 } from './vue-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

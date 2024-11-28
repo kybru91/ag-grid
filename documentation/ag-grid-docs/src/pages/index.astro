@@ -213,3 +213,26 @@ const frameworksData = [
         <LandingPageFAQ client:load FAQData={FAQData} framework={'react'} />
     </LandingPageSection>
 </Layout>
+
+<script>
+    const HEADER_SCROLL_POSITION = 566;
+    const SCROLLED_CLASS = 'header-scrolled';
+    const SITE_HEADER_SELECTOR = '.site-header';
+
+    function updateScrolledClass() {
+        const siteHeaderElement = document.querySelector(SITE_HEADER_SELECTOR);
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+        if (scrollPosition >= HEADER_SCROLL_POSITION) {
+            siteHeaderElement?.classList.add(SCROLLED_CLASS);
+        } else {
+            siteHeaderElement?.classList.remove(SCROLLED_CLASS);
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        updateScrolledClass();
+    });
+
+    updateScrolledClass();
+</script>

@@ -95,6 +95,7 @@ export const getEntryFileName = (internalFramework: InternalFramework) => {
         case 'reactFunctionalTs':
             return 'index.tsx';
         case 'vanilla':
+            return 'main.js';
         case 'vue3':
             return 'main.ts';
         default:

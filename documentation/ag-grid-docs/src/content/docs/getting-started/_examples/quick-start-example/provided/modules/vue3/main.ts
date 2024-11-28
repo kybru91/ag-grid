@@ -6,8 +6,6 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import type { ColDef } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import './styles.css';
-
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
 
 // Row Data Interface

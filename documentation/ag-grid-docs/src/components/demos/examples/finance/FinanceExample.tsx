@@ -35,11 +35,17 @@ import styles from './FinanceExample.module.css';
 import { TickerCellRenderer } from './cell-renderers/TickerCellRenderer';
 import { getData } from './data';
 
-interface Props {
+export interface Props {
     gridTheme?: string;
     isDarkMode?: boolean;
     gridHeight?: number | null;
+    isSmallerGrid?: boolean;
+    updateInterval?: number;
+    enableRowGroup?: boolean;
 }
+
+const DEFAULT_UPDATE_INTERVAL = 60;
+const PERCENTAGE_CHANGE = 20;
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
@@ -72,6 +78,9 @@ export const FinanceExample: React.FC<Props> = ({
     gridTheme = 'ag-theme-quartz',
     isDarkMode = false,
     gridHeight = null,
+    isSmallerGrid,
+    updateInterval = DEFAULT_UPDATE_INTERVAL,
+    enableRowGroup,
 }) => {
     const [rowData, setRowData] = useState(getData());
     const gridRef = useRef<AgGridReact>(null);
@@ -79,36 +88,48 @@ export const FinanceExample: React.FC<Props> = ({
     useEffect(() => {
         const intervalId = setInterval(() => {
             setRowData((rowData) =>
-                rowData.map((item) =>
-                    Math.random() < 0.1
-                        ? {
-                              ...item,
-                              price:
-                                  item.price +
-                                  item.price * ((Math.random() * 4 + 1) / 100) * (Math.random() > 0.5 ? 1 : -1),
-                          }
-                        : item
-                )
+                rowData.map((item) => {
+                    const isRandomChance = Math.random() < 0.1;
+
+                    if (!isRandomChance) {
+                        return item;
+                    }
+                    const rnd = (Math.random() * PERCENTAGE_CHANGE) / 100;
+                    const change = Math.random() > 0.5 ? 1 - rnd : 1 + rnd;
+                    const price =
+                        item.price < 10
+                            ? item.price * change
+                            : // Increase price if it is too low, so it does not hang around 0
+                              Math.random() * 40 + 10;
+
+                    const timeline = item.timeline.slice(1, item.timeline.length).concat(Number(price.toFixed(2)));
+
+                    return {
+                        ...item,
+                        price,
+                        timeline,
+                    };
+                })
             );
-        }, 1000);
+        }, updateInterval);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [updateInterval]);
 
-    const colDefs = useMemo<ColDef[]>(
-        () => [
+    const colDefs = useMemo<ColDef[]>(() => {
+        const cDefs: ColDef[] = [
             {
                 field: 'ticker',
                 cellRenderer: TickerCellRenderer,
                 minWidth: 380,
             },
             {
-                headerName: 'Last 24hrs',
-                field: 'last24',
+                headerName: 'Timeline',
+                field: 'timeline',
                 cellRenderer: 'agSparklineCellRenderer',
                 cellRendererParams: {
                     sparklineOptions: {
-                        strokeWidth: 2,
+                        type: 'bar',
                     },
                 },
             },
@@ -136,39 +157,39 @@ export const FinanceExample: React.FC<Props> = ({
                 valueFormatter: numberFormatter,
                 aggFunc: 'sum',
             },
-            {
-                field: 'quantity',
-                cellDataType: 'number',
-                type: 'rightAligned',
-                valueFormatter: numberFormatter,
-                maxWidth: 75,
-            },
-            {
-                headerName: 'Price',
-                field: 'purchasePrice',
-                cellDataType: 'number',
-                type: 'rightAligned',
-                valueFormatter: numberFormatter,
-                maxWidth: 75,
-            },
-            {
-                field: 'purchaseDate',
-                cellDataType: 'dateString',
-                type: 'rightAligned',
-                hide: true,
-            },
-        ],
-        []
-    );
+        ];
+
+        if (!isSmallerGrid) {
+            cDefs.push(
+                {
+                    field: 'quantity',
+                    cellDataType: 'number',
+                    type: 'rightAligned',
+                    valueFormatter: numberFormatter,
+                    maxWidth: 75,
+                },
+                {
+                    headerName: 'Price',
+                    field: 'purchasePrice',
+                    cellDataType: 'number',
+                    type: 'rightAligned',
+                    valueFormatter: numberFormatter,
+                    maxWidth: 75,
+                }
+            );
+        }
+
+        return cDefs;
+    }, [isSmallerGrid]);
 
     const defaultColDef: ColDef = useMemo(
         () => ({
             flex: 1,
             filter: true,
-            enableRowGroup: true,
+            enableRowGroup,
             enableValue: true,
         }),
-        []
+        [enableRowGroup]
     );
 
     const getRowId = useCallback<GetRowIdFunc>(({ data: { ticker } }: GetRowIdParams) => ticker, []);
@@ -202,7 +223,7 @@ export const FinanceExample: React.FC<Props> = ({
                 defaultColDef={defaultColDef}
                 cellSelection={true}
                 enableCharts
-                rowGroupPanelShow={'always'}
+                rowGroupPanelShow={enableRowGroup ? 'always' : 'never'}
                 suppressAggFuncInHeader
                 groupDefaultExpanded={-1}
                 statusBar={statusBar}

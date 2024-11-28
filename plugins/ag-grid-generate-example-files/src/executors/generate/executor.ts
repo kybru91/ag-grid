@@ -307,9 +307,9 @@ async function writeContents(
 // node --inspect-brk ./plugins/ag-grid-generate-example-files/dist/src/executors/generate/executor.js
 // console.log('should generate')
 // generateFiles({
-//     examplePath: 'documentation/ag-grid-docs/src/content/docs/clipboard/_examples/process-all',
+//     examplePath: 'documentation/ag-grid-docs/src/content/docs/column-updating-definitions/_examples/add-remove-columns',
 //     mode: 'dev',
 //     inputs: [],
 //     output: '',
-//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/clipboard/_examples/process-all',
+//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/column-updating-definitions/_examples/add-remove-columns',
 // }).then(() => console.log('done'));

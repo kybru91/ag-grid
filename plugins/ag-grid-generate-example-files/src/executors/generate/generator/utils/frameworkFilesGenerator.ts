@@ -227,7 +227,6 @@ export const frameworkFilesGenerator: Partial<Record<InternalFramework, ConfigGe
         }
 
         const entryFileName = getEntryFileName(internalFramework)!;
-
         const scriptFiles = { ...otherScriptFiles, ...componentScriptFiles };
 
         return {

@@ -577,6 +577,20 @@ describe('Row Selection Grid Options', () => {
                     clickRowByIndex(1, { shiftKey: true, ctrlKey: true });
                     assertSelectedRowsByIndex([4, 5], api);
                 });
+
+                test('CTRL/META+SHIFT-click with null selection root is no-op', () => {
+                    const api = createGrid({
+                        columnDefs,
+                        rowData,
+                        rowSelection: { mode: 'multiRow', checkboxes: false, enableClickSelection: true },
+                    });
+
+                    clickRowByIndex(2, { shiftKey: true, ctrlKey: true });
+                    assertSelectedRowsByIndex([], api);
+
+                    clickRowByIndex(2, { shiftKey: true, metaKey: true });
+                    assertSelectedRowsByIndex([], api);
+                });
             });
         });
 
@@ -979,6 +993,20 @@ describe('Row Selection Grid Options', () => {
 
                     toggleCheckboxByIndex(1, { shiftKey: true, ctrlKey: true });
                     assertSelectedRowsByIndex([4, 5], api);
+                });
+
+                test('CTRL/META+SHIFT-click with null selection root is no-op', () => {
+                    const api = createGrid({
+                        columnDefs,
+                        rowData,
+                        rowSelection: { mode: 'multiRow', checkboxes: true },
+                    });
+
+                    toggleCheckboxByIndex(2, { shiftKey: true, ctrlKey: true });
+                    assertSelectedRowsByIndex([], api);
+
+                    toggleCheckboxByIndex(2, { shiftKey: true, metaKey: true });
+                    assertSelectedRowsByIndex([], api);
                 });
             });
         });
@@ -1593,6 +1621,19 @@ describe('Row Selection Grid Options', () => {
                     toggleCheckboxByIndex(2);
                     toggleCheckboxByIndex(5, { shiftKey: true, ctrlKey: true });
                     assertSelectedRowsByIndex([2, 3, 4, 5], api);
+                });
+
+                test('CTRL/META+SHIFT-click with null selection root is no-op', async () => {
+                    const api = await createGridAndWait({
+                        ...groupGridOptions,
+                        rowSelection: { mode: 'multiRow' },
+                    });
+
+                    toggleCheckboxByIndex(2, { shiftKey: true, ctrlKey: true });
+                    assertSelectedRowsByIndex([], api);
+
+                    toggleCheckboxByIndex(2, { shiftKey: true, metaKey: true });
+                    assertSelectedRowsByIndex([], api);
                 });
             });
         });

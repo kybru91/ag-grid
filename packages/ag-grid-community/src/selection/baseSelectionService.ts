@@ -268,7 +268,10 @@ export abstract class BaseSelectionService extends BeanStub {
             // SHIFT+CTRL or SHIFT+CMD is used for bulk deselection, except where the selection root
             // is still selected, in which case we default to normal bulk selection behaviour
             const root = selectionCtx.getRoot();
-            if (root && !root.isSelected()) {
+            if (!root) {
+                // do nothing if there's no selection root
+                return null;
+            } else if (!root.isSelected()) {
                 // range deselection mode
                 const partition = selectionCtx.extend(node, groupSelectsDescendants);
                 return {

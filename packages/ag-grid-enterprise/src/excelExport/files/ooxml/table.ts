@@ -1,6 +1,7 @@
 import type { ExcelOOXMLTemplate } from 'ag-grid-community';
 
 import type { ExcelDataTable } from '../../assets/excelInterfaces';
+import { getExcelColumnName } from '../../assets/excelUtils';
 
 const tableFactory: ExcelOOXMLTemplate = {
     getTemplate(dataTable: ExcelDataTable, idx: number) {
@@ -32,11 +33,11 @@ const tableFactory: ExcelOOXMLTemplate = {
         }));
 
         const firstRow = headerRowIndex + 1;
-        const id: string = (idx + 1).toString();
         const firstCell = `A${firstRow}`;
-        const lastCell = `${String.fromCharCode(64 + columns.length)}${firstRow + rowCount}`;
+        const lastCell = `${getExcelColumnName(columns.length)}${firstRow + rowCount}`;
         const ref = `${firstCell}:${lastCell}`;
-        const displayNameToUse = idx ? `${displayName}_${idx + 1}` : displayName;
+        const id: string = `${idx + 1}`;
+        const displayNameToUse = idx ? `${displayName}_${id}` : displayName;
 
         return {
             name: 'table',
@@ -47,11 +48,11 @@ const tableFactory: ExcelOOXMLTemplate = {
                     'mc:Ignorable': 'xr xr3',
                     'xmlns:xr': 'http://schemas.microsoft.com/office/spreadsheetml/2014/revision',
                     'xmlns:xr3': 'http://schemas.microsoft.com/office/spreadsheetml/2016/revision3',
-                    name: name,
+                    name,
                     displayName: displayNameToUse,
-                    ref: ref,
+                    ref,
                     totalsRowShown: 0,
-                    id: id,
+                    id,
                 },
             },
             children: [

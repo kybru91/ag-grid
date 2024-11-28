@@ -21,7 +21,7 @@ import { ScaleValueEditor } from './ScaleValueEditor';
 import type { ValueEditorProps } from './ValueEditorProps';
 
 export type ParamEditorProps = {
-    param: ThemeParam | ParamModel<unknown>;
+    param: ThemeParam | ParamModel<boolean | string | object>;
     label?: string;
     showDocs?: boolean;
     icon?: ReactNode;

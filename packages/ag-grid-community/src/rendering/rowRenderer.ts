@@ -396,10 +396,10 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     /**
-     *
-     * Get the HTMLElement for every cell of a column. If the cell is spanning
-     * across multiple columns, it only returns the html element if the column
-     * passed is the first column of the span (used for auto width calculation).
+     * @param column AgColumn
+     * @returns An array with HTMLElement for every cell of the column passed as param.
+     * If the cell is spanning across multiple columns, it only returns the html element
+     * if the column passed is the first column of the span (used for auto width calculation).
      */
     public getAllCellsNotSpanningForColumn(column: AgColumn): HTMLElement[] {
         const res: HTMLElement[] = [];

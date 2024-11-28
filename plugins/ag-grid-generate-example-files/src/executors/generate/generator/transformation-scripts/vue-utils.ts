@@ -41,7 +41,7 @@ export function toAssignment(property: Property, componentFileNames: any[]): str
     // convert to arrow functions
     const value = quoteVueComponents(property.value.replace(/function\s*\(([^)]+)\)/, '($1) =>'), componentFileNames);
 
-    return `this.${property.name} = ${value}`;
+    return `${property.name}.value = ${value}`;
 }
 
 export const getComponentName = (filename: string, tokenReplace, replaceValue) => {

@@ -1,11 +1,5 @@
 import type { ExampleConfig, ParsedBindings } from '../types';
-import {
-    GRID_WIDE_COMPONENTS,
-    OVERRIDABLE_AG_COMPONENTS,
-    convertDefaultColDef,
-    getTemplate,
-    isExternalVueFile,
-} from './grid-vanilla-to-vue-common';
+import { OVERRIDABLE_AG_COMPONENTS, getTemplate } from './grid-vanilla-to-vue-common';
 import {
     addBindingImports,
     addGenericInterfaceImport,
@@ -21,7 +15,7 @@ import {
     preferParamsApi,
     replaceGridReadyRowData,
 } from './parser-utils';
-import { getImport, toAssignment, toConst, toInput, toMemberWithType, toOutput } from './vue-utils';
+import { getComponentName, getImport, toConst, toInput, toMemberWithType, toOutput } from './vue-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
@@ -72,33 +66,7 @@ function getAllMethods(bindings: ParsedBindings): [string[], string[], string[],
         .map(convertFunctionToConstPropertyTs);
     const instanceMethods = bindings.instanceMethods.map(replaceApiThisReference).map(convertFunctionToConstPropertyTs);
 
-    const utilFunctions = bindings.utils
-        .map((body) => {
-            const funcName = getFunctionName(body);
-
-            if (funcName) {
-                return `window.${funcName} = ${body}`;
-            }
-
-            // probably a var
-            return body;
-        })
-        .sort((a, b) => {
-            const aIsAssignedToWindow = a.startsWith('window.');
-            const bIsAssignedToWindow = b.startsWith('window.');
-
-            if (aIsAssignedToWindow && bIsAssignedToWindow) {
-                return 0;
-            }
-            if (aIsAssignedToWindow) {
-                return -1;
-            }
-            if (bIsAssignedToWindow) {
-                return 1;
-            }
-
-            return 0;
-        });
+    const utilFunctions = bindings.utils;
 
     const functionNames = bindings.eventHandlers
         .map((event) => event.handlerName)
@@ -113,9 +81,8 @@ function getPropertyBindings(
     rowDataType: string,
     componentFileNames: string[],
     vueComponents
-): [string[], string[], string[], string[], string[]] {
+): [string[], string[], string[], string[]] {
     const propertyAssignments = [];
-    const propertyVars = [];
     const propertyAttributes = [];
     const propertyNames = [];
 
@@ -128,55 +95,17 @@ function getPropertyBindings(
                         bindings.components.some(
                             (component) =>
                                 component.name === agComponentName &&
-                                !vueComponents.some((existingComp) => existingComp.includes(agComponentName))
+                                !vueComponents.has((existingComp) => existingComp.includes(agComponentName))
                         )
                     ).map((agComponentName) => `${agComponentName}: '${agComponentName}'`);
 
-                    vueComponents.push(...userAgComponents);
+                    userAgComponents.forEach(vueComponents.add, vueComponents);
                 }
             } else if (property.value === 'true' || property.value === 'false') {
                 propertyAttributes.push(toConst(property));
             } else if (property.value === null || property.value === 'null') {
                 propertyAttributes.push(toInput(property));
                 propertyNames.push(property.name);
-            } else if (property.name === 'groupRowRendererParams') {
-                const perLine = property.value.split('\n');
-                const result = [];
-                perLine.forEach((line) => {
-                    if (line.includes('innerRenderer')) {
-                        const component = line.match(/.*:\s*(.*),/)
-                            ? line.match(/.*:\s*(.*),/)[1]
-                            : line.match(/.*:\s*(.*)$/)[1];
-                        line = line.replace(component, `'${component}'`);
-                        result.push(line);
-
-                        if (!vueComponents.includes(component)) {
-                            vueComponents.push(component);
-                        }
-                    } else {
-                        result.push(line);
-                    }
-                });
-                const newValue = result.join('\n');
-
-                propertyAttributes.push(toInput(property));
-
-                propertyVars.push(toMemberWithType(property, componentFileNames));
-                propertyAssignments.push(`${property.name}.value = ${newValue}`);
-                propertyNames.push(property.name);
-            } else if (GRID_WIDE_COMPONENTS.includes(property.name)) {
-                const parsedValue = `${property.value.replace('AG_LITERAL_', '')}`;
-
-                propertyAttributes.push(toInput(property));
-
-                propertyVars.push(toMemberWithType(property, componentFileNames));
-                propertyAssignments.push(`${property.name}.value = '${parsedValue}'`);
-                propertyNames.push(property.name);
-                if (isExternalVueFile(componentFileNames, parsedValue)) {
-                    if (!vueComponents.includes(parsedValue)) {
-                        vueComponents.push(parsedValue);
-                    }
-                }
             } else {
                 propertyNames.push(property.name);
 
@@ -185,34 +114,28 @@ function getPropertyBindings(
                 // tabToNextCell needs to be bound to the react component
                 if (!isInstanceMethod(bindings.instanceMethods, property)) {
                     propertyAttributes.push(toInput(property));
-
-                    if (property.name !== 'defaultColDef' && property.name !== 'autoGroupColumnDef') {
-                        if (property.name === 'rowData') {
-                            propertyVars.push(`const rowData = ref<${rowDataType}[]>(null)`);
-                        } else {
-                            propertyVars.push(toMemberWithType(property, componentFileNames));
-                        }
-                    }
                 }
-
-                if (property.name !== 'defaultColDef' && property.name !== 'autoGroupColumnDef') {
-                    propertyAssignments.push(toAssignment(property, componentFileNames));
-                }
+                propertyAssignments.push(toMemberWithType(property, componentFileNames));
             }
         });
+
+    if (!propertyAttributes.find((item) => item.indexOf(':rowData') >= 0)) {
+        propertyAttributes.push(':rowData="rowData"');
+        propertyNames.push('rowData');
+    }
+
+    if (!propertyAssignments.find((item) => item.indexOf('rowData') >= 0)) {
+        propertyAssignments.push(`const rowData = ref<${rowDataType}[]>(null);`);
+    }
 
     if (bindings.data && bindings.data.callback.indexOf("gridApi.setGridOption('rowData',") >= 0) {
         if (propertyAttributes.filter((item) => item.indexOf(':rowData') >= 0).length === 0) {
             propertyAttributes.push(':rowData="rowData"');
             propertyNames.push('rowData');
         }
-
-        if (propertyVars.filter((item) => item.indexOf('rowData') >= 0).length === 0) {
-            propertyVars.push(`const rowData = ref<${rowDataType}[]>(null)`);
-        }
     }
 
-    return [propertyAssignments, propertyVars, propertyAttributes, vueComponents, propertyNames];
+    return [propertyAssignments, propertyAttributes, vueComponents, propertyNames];
 }
 
 function getModuleImports(
@@ -250,7 +173,7 @@ function getModuleImports(
         imports.push(...componentFileNames.map((componentFileName) => getImport(componentFileName, 'Vue', '')));
     }
 
-    addRelativeImports(bindings, imports, 'js');
+    addRelativeImports(bindings, imports, 'ts');
 
     return imports;
 }
@@ -285,24 +208,22 @@ export function vanillaToVue3(
     componentFileNames: string[],
     allStylesheets: string[]
 ): () => string {
-    const vueComponents = bindings.components.map((component) => `${component.name}:${component.value}`);
+    const vueComponents = new Set(bindings.components.map((component) => `${component.name}:${component.value}`));
+    componentFileNames
+        .map((componentFileName) => getComponentName(componentFileName, 'Vue', ''))
+        .forEach(vueComponents.add, vueComponents);
+
     const rowDataType = bindings.tData || 'any';
 
     const onGridReady = getOnGridReadyCode(bindings);
     const eventAttributes = bindings.eventHandlers.filter((event) => event.name !== 'onGridReady').map(toOutput);
     const [eventHandlers, externalEventHandlers, instanceMethods, utilFunctions, functionNames] =
         getAllMethods(bindings);
-    const defaultColDef = bindings.defaultColDef
-        ? convertDefaultColDef(bindings.defaultColDef, vueComponents, componentFileNames)
-        : null;
-    const autoGroupColumnDef = bindings.autoGroupColumnDef
-        ? convertDefaultColDef(bindings.autoGroupColumnDef, vueComponents, componentFileNames)
-        : null;
     const genericParams = rowDataType !== 'any' ? `<${rowDataType}>` : '';
 
     return () => {
         const imports = getImports(bindings, exampleConfig, componentFileNames, allStylesheets);
-        const [propertyAssignments, propertyVars, propertyAttributes, _, propertyNames] = getPropertyBindings(
+        const [propertyAssignments, propertyAttributes, _, propertyNames] = getPropertyBindings(
             bindings,
             rowDataType,
             componentFileNames,
@@ -316,6 +237,8 @@ ${imports.join('\n')}
 ${exampleConfig.licenseKey ? "// enter your license key here to suppress console message and watermark\nLicenseManager.setLicenseKey('');\n" : ''}
 ${bindings.classes.join('\n')}
 
+${utilFunctions.map((snippet) => `${snippet.trim()}`).join('\n\n')}
+
 const VueExample = {
     template: \`
         <div style="height: 100%">
@@ -324,18 +247,12 @@ const VueExample = {
     \`,
     components: {
         'ag-grid-vue': AgGridVue,
-        ${vueComponents.join(',\n')}
+        ${Array.from(vueComponents).join(',\n')}
     },
     setup(props) {
         const gridApi = shallowRef${genericParams}();
-        ${defaultColDef ? `const defaultColDef = ref(${defaultColDef});` : ''}
-        ${autoGroupColumnDef ? `const autoGroupColumnDef = ref(${autoGroupColumnDef});` : ''}
-        ${propertyVars.join(';\n')}
-        
-        onBeforeMount(() => {
-            ${propertyAssignments.join(';\n')}            
-        });
-        
+        ${propertyAssignments.join('\n')}
+       
         ${eventHandlers
             .concat(externalEventHandlers)
             .concat(onGridReady)
@@ -354,9 +271,6 @@ const VueExample = {
 
 createApp(VueExample)
     .mount("#app")
-
-${utilFunctions.map((snippet) => `${snippet.trim()}`).join('\n\n')}
-
 `,
             bindings.tData
         );

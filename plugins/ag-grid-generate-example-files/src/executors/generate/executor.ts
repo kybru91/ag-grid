@@ -34,6 +34,7 @@ export type ExecutorOptions = {
     examplePath: string;
     inputs: string[];
     output: string;
+    writeFiles: boolean;
 };
 
 export default async function (options: ExecutorOptions) {
@@ -289,12 +290,11 @@ async function writeContents(
     internalFramework: InternalFramework,
     result: GeneratedContents
 ) {
-    // if((internalFramework === 'vue3' && result.files['main.ts']) ||
-    // (internalFramework === 'angular' && result.files['app.component.ts'])) {
-    //     const fc = await prettier.format(result.files[internalFramework === 'vue3' ? 'main.ts' : 'app.component.ts'], { parser: 'typescript' });
-    //     const op = path.join(options.outputPath, internalFramework, internalFramework === 'vue3' ? 'main.ts' : 'app.component.ts');
-    //     await writeFile(op, fc);
-    // }
+    if (options.writeFiles) {
+        for (const file in result.files) {
+            await writeFile(path.join(options.outputPath, internalFramework, file), result.files[file]);
+        }
+    }
     const outputPath = path.join(options.outputPath, internalFramework, 'contents.json');
     await writeFile(outputPath, JSON.stringify(result));
 
@@ -307,9 +307,10 @@ async function writeContents(
 // node --inspect-brk ./plugins/ag-grid-generate-example-files/dist/src/executors/generate/executor.js
 // console.log('should generate')
 // generateFiles({
-//     examplePath: 'documentation/ag-grid-docs/src/content/docs/column-updating-definitions/_examples/add-remove-columns',
+//     examplePath: 'documentation/ag-grid-docs/src/content/docs/row-spanning/_examples/row-spanning-complex',
 //     mode: 'dev',
 //     inputs: [],
 //     output: '',
-//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/column-updating-definitions/_examples/add-remove-columns',
+//     outputPath: 'dist/generated-examples/ag-grid-docs/docs/row-spanning/_examples/row-spanning-complex',
+//     writeFiles: true
 // }).then(() => console.log('done'));

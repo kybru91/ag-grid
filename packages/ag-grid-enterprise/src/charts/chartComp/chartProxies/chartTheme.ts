@@ -148,6 +148,7 @@ function inbuiltStockThemeOverrides(params: ChartProxyParams, isEnterprise: bool
                 bottom: extraPadding.includes('bottom') ? 40 : 20,
                 left: extraPadding.includes('left') ? 30 : 20,
             },
+            suppressFieldDotNotation: true,
         },
     };
 }

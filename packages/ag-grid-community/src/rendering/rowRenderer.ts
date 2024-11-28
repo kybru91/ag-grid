@@ -141,10 +141,16 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
                 'enableRangeSelection',
                 'enableCellTextSelection',
-                'cellSelection',
             ],
             () => this.redrawRows()
         );
+
+        this.addManagedPropertyListener('cellSelection', ({ currentValue, previousValue }) => {
+            // Only redraw rows if cell selection is enabled or disabled
+            if ((!previousValue && currentValue) || (previousValue && !currentValue)) {
+                this.redrawRows();
+            }
+        });
 
         const { stickyRowSvc, gos } = this.beans;
         if (stickyRowSvc) {

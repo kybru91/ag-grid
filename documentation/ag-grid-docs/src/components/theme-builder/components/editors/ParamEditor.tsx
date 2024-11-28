@@ -69,7 +69,7 @@ export const ParamEditor = withErrorBoundary((props: ParamEditorProps) => {
             <ValueEditorComponent
                 param={param}
                 value={editorValue}
-                onChange={setValue}
+                onChange={(v) => setValue(v ?? undefined)}
                 icon={props.icon}
                 swipeAdjustmentDivisor={props.swipeAdjustmentDivisor}
             />

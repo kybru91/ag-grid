@@ -81,7 +81,7 @@ export type ColorValue =
 
 const colorValueToCss = (value: ColorValue): string | false => {
     if (typeof value === 'string') return value;
-    if ('ref' in value) {
+    if (value && 'ref' in value) {
         const colorExpr: string = paramToVariableExpression(value.ref);
         if (value.mix == null) {
             return colorExpr;
@@ -127,14 +127,14 @@ export type LengthValue =
 const lengthValueToCss = (value: LengthValue): string | false => {
     if (typeof value === 'string') return value;
     if (typeof value === 'number') return `${value}px`;
-    if ('calc' in value) {
+    if (value && 'calc' in value) {
         // ensure a space around operators other than `-` (which can be part of an identifier)
         const valueWithSpaces = value.calc.replace(/ ?[*/+] ?/g, ' $& ');
         // convert param names to variable expressions, e.g. "fooBar" -> "var(--ag-foo-bar)",
         // ignoring words that are part of function names "fooBar()" or variables "--fooBar"
         return `calc(${valueWithSpaces.replace(/-?[a-z][a-z0-9]*\b(?![-(])/gi, (p) => (p[0] === '-' ? p : ` ${paramToVariableExpression(p)} `))})`;
     }
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     return false;
 };
 
@@ -175,7 +175,7 @@ const borderValueToCss = (value: BorderValue, param: string) => {
     if (typeof value === 'string') return value;
     if (value === true) return 'solid 1px var(--ag-border-color)';
     if (value === false) return param === 'columnBorder' ? 'solid 1px transparent' : 'none';
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     return (
         borderStyleValueToCss(value.style ?? 'solid') +
         ' ' +
@@ -243,7 +243,7 @@ export type ShadowValue =
 const shadowValueToCss = (value: ShadowValue): string | false => {
     if (typeof value === 'string') return value;
     if (value === false) return 'none';
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     return [
         lengthValueToCss(value.offsetX ?? 0),
         lengthValueToCss(value.offsetY ?? 0),
@@ -279,8 +279,8 @@ export type FontFamilyValue =
 
 const fontFamilyValueToCss = (value: FontFamilyValue): string | false => {
     if (typeof value === 'string') return value;
-    if ('googleFont' in value) return fontFamilyValueToCss(value.googleFont);
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'googleFont' in value) return fontFamilyValueToCss(value.googleFont);
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     if (Array.isArray(value)) {
         return value
             .map((font) => {
@@ -332,9 +332,9 @@ export type ImageValue =
 
 const imageValueToCss = (value: ImageValue): string | false => {
     if (typeof value === 'string') return value;
-    if ('url' in value) return `url(${JSON.stringify(value.url)})`;
-    if ('svg' in value) return imageValueToCss({ url: `data:image/svg+xml,${encodeURIComponent(value.svg)}` });
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'url' in value) return `url(${JSON.stringify(value.url)})`;
+    if (value && 'svg' in value) return imageValueToCss({ url: `data:image/svg+xml,${encodeURIComponent(value.svg)}` });
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     return false;
 };
 
@@ -356,7 +356,7 @@ const durationValueToCss = (value: DurationValue, param: string): string | false
         }
         return `${value}s`;
     }
-    if ('ref' in value) return paramToVariableExpression(value.ref);
+    if (value && 'ref' in value) return paramToVariableExpression(value.ref);
     return false;
 };
 

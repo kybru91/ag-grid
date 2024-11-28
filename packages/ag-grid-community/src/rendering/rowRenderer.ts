@@ -395,11 +395,17 @@ export class RowRenderer extends BeanStub implements NamedBean {
         this.redrawAfterModelUpdate(params);
     }
 
-    public getAllCellsForColumn(column: AgColumn): HTMLElement[] {
+    /**
+     *
+     * Get the HTMLElement for every cell of a column. If the cell is spanning
+     * across multiple columns, it only returns the html element if the column
+     * passed is the first column of the span (used for auto width calculation).
+     */
+    public getAllCellsNotSpanningForColumn(column: AgColumn): HTMLElement[] {
         const res: HTMLElement[] = [];
 
         this.getAllRowCtrls().forEach((rowCtrl) => {
-            const eCell = rowCtrl.getCellCtrl(column)?.eGui;
+            const eCell = rowCtrl.getCellCtrl(column, true)?.eGui;
             if (eCell) {
                 res.push(eCell);
             }

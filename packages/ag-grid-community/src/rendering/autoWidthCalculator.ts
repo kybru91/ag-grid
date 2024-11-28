@@ -26,7 +26,7 @@ export class AutoWidthCalculator extends BeanStub implements NamedBean {
             return -1;
         }
 
-        const elements = this.beans.rowRenderer.getAllCellsForColumn(column);
+        const elements = this.beans.rowRenderer.getAllCellsNotSpanningForColumn(column);
 
         if (!skipHeader) {
             // we only consider the lowest level cell, not the group cell. in 99% of the time, this

@@ -1556,7 +1556,7 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         );
     }
 
-    public getCellCtrl(column: AgColumn): CellCtrl | null {
+    public getCellCtrl(column: AgColumn, skipColSpanSearch = false): CellCtrl | null {
         // first up, check for cell directly linked to this column
         let res: CellCtrl | null = null;
         this.getAllCellCtrls().forEach((cellCtrl) => {
@@ -1565,7 +1565,7 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
             }
         });
 
-        if (res != null) {
+        if (res != null || skipColSpanSearch) {
             return res;
         }
 

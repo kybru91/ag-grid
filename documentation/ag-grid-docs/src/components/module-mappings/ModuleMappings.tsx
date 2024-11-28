@@ -155,6 +155,7 @@ export const ModuleMappings: FunctionComponent<Props> = ({ framework, modules })
                     onRowSelected={onRowSelected}
                     loadThemeGoogleFonts
                     suppressContextMenu
+                    enableCellTextSelection
                 />
             </div>
             {selectedDependenciesSnippet && (

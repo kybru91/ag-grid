@@ -1,7 +1,11 @@
 import type { GridApi, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
+import {
+    AllCommunityModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    createGrid,
+    themeQuartz,
+} from 'ag-grid-community';
 import {
     ColumnMenuModule,
     ColumnsToolPanelModule,
@@ -22,8 +26,16 @@ ModuleRegistry.registerModules([
 
 let gridApi: GridApi<IOlympicData>;
 
+const myTheme = themeQuartz.withParams({
+    columnSelectIndentSize: 40,
+    columnDropCellBackgroundColor: 'purple',
+    columnDropCellTextColor: 'white',
+    columnDropCellDragHandleColor: 'white',
+    columnDropCellBorder: { color: 'yellow', style: 'dashed', width: 2 },
+});
+
 const gridOptions: GridOptions<IOlympicData> = {
-    theme: 'legacy',
+    theme: myTheme,
     rowData: null,
     columnDefs: [
         {

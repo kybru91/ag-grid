@@ -15,7 +15,8 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: var(--ag-column-drop-cell-background-color);
+    background-color: var(--ag-column-drop-cell-background-color);
+    color: var(--ag-column-drop-cell-text-color);
     border-radius: 500px;
     padding: calc(var(--ag-spacing) * 0.5);
     padding-left: calc(var(--ag-spacing) * 0.75);
@@ -23,6 +24,10 @@
 
     &:focus-visible {
         box-shadow: var(--ag-focus-shadow);
+    }
+
+    :where(.ag-drag-handle) {
+        color: var(--ag-column-drop-cell-drag-handle-color);
     }
 }
 

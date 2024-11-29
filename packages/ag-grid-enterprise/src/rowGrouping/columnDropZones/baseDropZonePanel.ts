@@ -13,6 +13,7 @@ export abstract class BaseDropZonePanel extends PillDropZonePanel<DropZoneColumn
         private dropZonePurpose: TDropZone
     ) {
         super(horizontal);
+        this.addElementClasses(this.getGui(), this.dropZonePurpose.toLowerCase());
     }
 
     public override init(params: PillDropZonePanelParams): void {

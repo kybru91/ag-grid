@@ -173,7 +173,7 @@ export abstract class PillDropZonePanel<TPill extends PillDragComp<TItem>, TItem
         }
     }
 
-    private addElementClasses(el: Element, suffix?: string) {
+    protected addElementClasses(el: Element, suffix?: string) {
         suffix = suffix ? `-${suffix}` : '';
         const direction = this.horizontal ? 'horizontal' : 'vertical';
         el.classList.add(`ag-column-drop${suffix}`, `ag-column-drop-${direction}${suffix}`);

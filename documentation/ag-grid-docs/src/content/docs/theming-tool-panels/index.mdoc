@@ -4,20 +4,31 @@ title: "Theming: Customising Tool Panels"
 
 Style the Filters [Tool Panel](./component-tool-panel/) and [Columns Tool Panel](./tool-panel-columns/).
 
-## Styling the Tool Panel Area
+## Styling the Sidebar Area
 
-The Tool Panel is a tabbed container. It exposes CSS variables:
+The sidebar is a tabbed container for opening and switching between tool panels. The grid exposes many theme parameters for customising the sidebar and tabbed buttons. Search "side" in the "All Parameters" section of the [Theme Builder](/theme-builder/) or use typescript autocompletion in your IDE.
+
+```js
+const myTheme = themeQuartz.withParams({
+    sideBarBackgroundColor: '#08f3',
+    sideButtonBarBackgroundColor: '#fff6',
+    sideButtonBarTopPadding: 20,
+    sideButtonSelectedUnderlineColor: 'orange',
+    sideButtonTextColor: '#0009',
+    sideButtonHoverBackgroundColor: '#fffa',
+    sideButtonSelectedBackgroundColor: '#08f1',
+    sideButtonHoverTextColor: '#000c',
+    sideButtonSelectedTextColor: '#000e',
+    sideButtonSelectedBorder: false,
+});
+```
+
+To create effects beyond what is possible with theme parameters, use CSS selectors:
 
 ```css
-.ag-theme-quartz {
-    --ag-control-panel-background-color: #CC222244;
-    --ag-side-button-selected-background-color: #CC222244;
-
-    --ag-selected-tab-underline-color: deeppink;
-    --ag-selected-tab-underline-width: 2px;
-    --ag-selected-tab-underline-transition-speed: 0.5s;
-
-    --ag-side-bar-panel-width: 300px;
+.ag-side-button.ag-selected {
+    text-shadow: 0 0 8px #039;
+    font-weight: 500;
 }
 ```
 
@@ -27,24 +38,30 @@ The Tool Panel is a tabbed container. It exposes CSS variables:
 
 The `--ag-column-select-indent-size` CSS Variable sets the indent of each column group within the columns tool panel. For further customisation, use CSS selectors.
 
-This example demonstrates changing the column indent and the style of the column drop component in the Row Groups area:
+This example demonstrates changing the child indent for grouped columns and the style of the column drop component in the Row Groups area:
+
+```js
+const myTheme = themeQuartz.withParams({
+    columnSelectIndentSize: 40,
+    columnDropCellBackgroundColor: 'purple',
+    columnDropCellTextColor: 'white',
+    columnDropCellDragHandleColor: 'white',
+    columnDropCellBorder: { color: 'yellow', style: 'dashed', width: 2 },
+});
+```
 
 ```css
-.ag-theme-quartz {
-    --ag-column-select-indent-size: 40px
+.ag-column-drop-cell {
+    box-shadow: 0 0 4px purple;
 }
-
-.ag-theme-quartz .ag-column-drop-cell {
-    background-color: purple;
+/* The different sections within the columns tool panel use
+   flex sizing to adapt to vertical space, use min-height
+   and max-height to constrain their heights */
+.ag-column-drop-vertical-rowgroup {
+    min-height: 120px;
 }
-
-.ag-theme-quartz .ag-column-drop-cell .ag-icon {
-    color: white;
-}
-
-.ag-theme-quartz .ag-column-drop-cell-text {
-    color: white;
-    font-weight: bold;
+.ag-column-drop-vertical-aggregation {
+    min-height: 90px;
 }
 ```
 

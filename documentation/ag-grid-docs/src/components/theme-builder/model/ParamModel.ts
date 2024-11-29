@@ -5,7 +5,6 @@ import { _theming, themeQuartz } from 'ag-grid-community';
 import { getThemeDefaultParams } from '../components/component-utils';
 import type { PersistentAtom } from './JSONStorage';
 import { atomWithJSONStorage } from './JSONStorage';
-import { getParamDocs } from './param-docs';
 import type { Store } from './store';
 import { type ThemeParam, memoize, titleCase } from './utils';
 
@@ -48,7 +47,7 @@ export class ParamModel<T> {
     private constructor(readonly property: ThemeParam) {
         this.label = titleCase(property);
         this.valueAtom = atomWithJSONStorage<T | undefined>(`param.${property}`, undefined);
-        this.docs = getParamDocs(property) || '';
+        this.docs = _theming.getParamDocs(property) || '';
         this.type = _theming.getParamType(property);
     }
 

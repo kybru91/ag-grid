@@ -15,7 +15,7 @@
     padding-right: var(--ag-widget-container-horizontal-padding);
 
     /* match header height instead of using vertical padding, because this is
-     often displayed aligned with headers and it looks neater */
+       often displayed aligned with headers and it looks neater */
     height: var(--ag-header-height);
     gap: var(--ag-widget-horizontal-spacing);
 }

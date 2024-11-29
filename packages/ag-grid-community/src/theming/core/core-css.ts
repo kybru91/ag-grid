@@ -103,12 +103,22 @@ type CoreParamsDefinitions = {
     columnBorder: 'infer';
 
     /**
-     * Background color for the representation of columns within the column drop component
+     * Background color of the pill shape representing columns in the column drop component
      */
     columnDropCellBackgroundColor: 'infer';
 
     /**
-     * Border for the representation of columns within the column drop component
+     * Text color for the pill shape representing columns in the column drop component
+     */
+    columnDropCellTextColor: 'infer';
+
+    /**
+     * Color of the drag grip icon in the pill shape representing columns in the column drop component
+     */
+    columnDropCellDragHandleColor: 'infer';
+
+    /**
+     * Border for the pill shape representing columns in the column drop component
      */
     columnDropCellBorder: 'infer';
 
@@ -463,9 +473,14 @@ type CoreParamsDefinitions = {
     setFilterIndentSize: 'infer';
 
     /**
-     * Background color for non-data areas of the grid. Headers, tool panels and menus use this color by default.
+     * Background color of the sidebar that contains the columns and filters tool panels
      */
     sideBarBackgroundColor: 'infer';
+
+    /**
+     * Background color of the row of tab buttons at the edge of the sidebar
+     */
+    sideButtonBarBackgroundColor: 'infer';
 
     /**
      * Default width of the sidebar that contains the columns and filters tool panels
@@ -476,6 +491,77 @@ type CoreParamsDefinitions = {
      * Borders between the grid and side panels including the column and filter tool bars, and chart settings
      */
     sidePanelBorder: 'infer';
+
+    /**
+     * Spacing between the topmost side button and the top of the sidebar
+     */
+    sideButtonBarTopPadding: 'infer';
+
+    /**
+     * Width of the underline below the selected tab in the sidebar
+     */
+    sideButtonSelectedUnderlineWidth: 'infer';
+
+    /**
+     * Color of the underline below the selected tab in the sidebar, or 'transparent' to disable the underline effect
+     */
+    sideButtonSelectedUnderlineColor: 'infer';
+
+    /**
+     * Duration of the transition effect for the underline below the selected tab in the sidebar
+     */
+    sideButtonSelectedUnderlineTransitionDuration: 'infer';
+
+    /**
+     * Background color of the tab buttons in the sidebar
+     */
+    sideButtonBackgroundColor: 'infer';
+
+    /**
+     * Text color of the tab buttons in the sidebar
+     */
+    sideButtonTextColor: 'infer';
+
+    /**
+     * Background color of the tab buttons in the sidebar when hovered
+     */
+    sideButtonHoverBackgroundColor: 'infer';
+
+    /**
+     * Text color of the tab buttons in the sidebar when hovered
+     */
+    sideButtonHoverTextColor: 'infer';
+
+    /**
+     * Background color of the selected tab button in the sidebar
+     */
+    sideButtonSelectedBackgroundColor: 'infer';
+
+    /**
+     * Text color of the selected tab button in the sidebar
+     */
+    sideButtonSelectedTextColor: 'infer';
+
+    /**
+     * Color of the border drawn above and below the selected tab button in the
+     * sidebar, or 'transparent' to disable the border on the selected tab
+     */
+    sideButtonSelectedBorder: 'infer';
+
+    /**
+     * Padding to the left of the text in tab buttons in the sidebar (this is always the padding on the inward facing side of the button, so in right-to-left layout it will be on the right)
+     */
+    sideButtonLeftPadding: 'infer';
+
+    /**
+     * Padding to the right of the text in tab buttons in the sidebar (this is always the padding on the outward facing side of the button, so in right-to-left layout it will be on the left)
+     */
+    sideButtonRightPadding: 'infer';
+
+    /**
+     * Padding above and below the text in tab buttons in the sidebar
+     */
+    sideButtonVerticalPadding: 'infer';
 
     /**
      * Color of text and UI elements that should stand out less than the default.
@@ -623,6 +709,27 @@ export const coreDefaults: Readonly<CoreParams> = {
     pinnedColumnBorder: true,
     pinnedRowBorder: true,
     sidePanelBorder: true,
+    sideBarPanelWidth: 250,
+    sideBarBackgroundColor: {
+        ref: 'chromeBackgroundColor',
+    },
+    sideButtonBarBackgroundColor: {
+        ref: 'sideBarBackgroundColor',
+    },
+    sideButtonBarTopPadding: 0,
+    sideButtonSelectedUnderlineWidth: 2,
+    sideButtonSelectedUnderlineColor: 'transparent',
+    sideButtonSelectedUnderlineTransitionDuration: 0,
+    sideButtonBackgroundColor: 'transparent',
+    sideButtonTextColor: { ref: 'textColor' },
+    sideButtonHoverBackgroundColor: { ref: 'sideButtonBackgroundColor' },
+    sideButtonHoverTextColor: { ref: 'sideButtonTextColor' },
+    sideButtonSelectedBackgroundColor: { ref: 'sideButtonBackgroundColor' },
+    sideButtonSelectedTextColor: { ref: 'sideButtonTextColor' },
+    sideButtonSelectedBorder: true,
+    sideButtonLeftPadding: { ref: 'spacing' },
+    sideButtonRightPadding: { ref: 'spacing' },
+    sideButtonVerticalPadding: { calc: 'spacing * 3' },
     fontFamily: [
         '-apple-system',
         'BlinkMacSystemFont',
@@ -746,10 +853,6 @@ export const coreDefaults: Readonly<CoreParams> = {
         spread: 3,
         color: { ref: 'accentColor', mix: 0.5 },
     },
-    sideBarPanelWidth: 250,
-    sideBarBackgroundColor: {
-        ref: 'chromeBackgroundColor',
-    },
     headerColumnResizeHandleHeight: '30%',
     headerColumnResizeHandleWidth: 2,
     headerColumnResizeHandleColor: {
@@ -855,10 +958,15 @@ export const coreDefaults: Readonly<CoreParams> = {
         ref: 'textColor',
     },
     tooltipBorder: true,
-
     columnDropCellBackgroundColor: {
         ref: 'foregroundColor',
         mix: 0.07,
+    },
+    columnDropCellTextColor: {
+        ref: 'textColor',
+    },
+    columnDropCellDragHandleColor: {
+        ref: 'textColor',
     },
     columnDropCellBorder: {
         color: {

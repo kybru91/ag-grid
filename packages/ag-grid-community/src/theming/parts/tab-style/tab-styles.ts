@@ -136,8 +136,8 @@ const baseParams: WithParamTypes<TabStyleParams> = {
     tabSelectedBorderWidth: 1,
     tabSelectedBorderColor: 'transparent',
     tabSelectedUnderlineColor: 'transparent',
-    tabSelectedUnderlineWidth: '0',
-    tabSelectedUnderlineTransitionDuration: '0',
+    tabSelectedUnderlineWidth: 0,
+    tabSelectedUnderlineTransitionDuration: 0,
     tabBarBorder: false,
 };
 

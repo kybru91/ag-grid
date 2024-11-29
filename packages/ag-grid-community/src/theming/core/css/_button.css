@@ -7,8 +7,13 @@
     font-size: inherit;
     font-family: inherit;
     line-height: inherit;
-    cursor: pointer;
     font-weight: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    text-transform: inherit;
+    text-indent: inherit;
+    text-shadow: inherit;
+    cursor: pointer;
 
     &:focus-visible {
         outline: none;

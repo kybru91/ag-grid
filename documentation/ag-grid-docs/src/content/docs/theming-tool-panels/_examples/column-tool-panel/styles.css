@@ -1,20 +1,12 @@
-.ag-theme-quartz,
-.ag-theme-quartz-dark {
-    --ag-column-select-indent-size: 40px;
+.ag-column-drop-cell {
+    box-shadow: 0 0 4px purple;
 }
-
-.ag-theme-quartz .ag-column-drop-cell,
-.ag-theme-quartz-dark .ag-column-drop-cell {
-    background-color: purple;
+/* The different sections within the columns tool panel use
+   flex sizing to adapt to vertical space, use min-height
+   and max-height to constrain their heights */
+.ag-column-drop-vertical-rowgroup {
+    min-height: 120px;
 }
-
-.ag-theme-quartz .ag-column-drop-cell .ag-icon,
-.ag-theme-quartz-dark .ag-column-drop-cell .ag-icon {
-    color: white;
-}
-
-.ag-theme-quartz .ag-column-drop-cell-text,
-.ag-theme-quartz-dark .ag-column-drop-cell-text {
-    color: white;
-    font-weight: bold;
+.ag-column-drop-vertical-aggregation {
+    min-height: 90px;
 }

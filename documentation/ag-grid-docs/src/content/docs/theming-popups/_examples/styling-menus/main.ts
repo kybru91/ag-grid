@@ -24,8 +24,10 @@ ModuleRegistry.registerModules([
     SetFilterModule,
 ]);
 
+// Set a blue background and red shadows for all menus
 const myTheme = themeQuartz.withParams({
-    menuBackgroundColor: '#99C',
+    menuBackgroundColor: 'cornflowerblue',
+    menuShadow: { radius: 10, spread: 5, color: 'red' },
 });
 
 const columnDefs: ColDef[] = [

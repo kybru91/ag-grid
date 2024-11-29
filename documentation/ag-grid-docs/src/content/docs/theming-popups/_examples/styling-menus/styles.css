@@ -1,7 +1,3 @@
-/* add a red shadow on menus by default */
-.ag-menu {
-    box-shadow: 0 0 10px 5px red;
-}
 /* add a green shadow on set filter menus like "Athlete"
    but not other filter menus like "Age" */
 .ag-menu:has(.ag-set-filter) {

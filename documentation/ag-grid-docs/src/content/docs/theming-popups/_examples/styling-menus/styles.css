@@ -1,12 +1,13 @@
-.ag-theme-quartz,
-.ag-theme-quartz-dark {
-    --ag-card-radius: 10px;
-    --ag-card-shadow: 0 10px 40px rgb(83, 0, 106);
-    --ag-popup-shadow: var(--ag-card-shadow);
+/* add a red shadow on menus by default */
+.ag-menu {
+    box-shadow: 0 0 10px 5px red;
 }
-
-.ag-theme-quartz .ag-menu,
-.ag-theme-quartz-dark .ag-menu {
-    min-width: 350px;
-    background-color: #55aa77;
+/* add a green shadow on set filter menus like "Athlete"
+   but not other filter menus like "Age" */
+.ag-menu:has(.ag-set-filter) {
+    box-shadow: 0 0 10px 5px green;
+}
+/* and a blue shadow on column menus */
+.ag-menu.ag-column-menu {
+    box-shadow: 0 0 10px 5px blue;
 }

@@ -4,9 +4,32 @@ title: "Theming: Customising the grid with CSS"
 
 Customising the grid with CSS
 
-A running grid instance contains thousands of DOM elements, and each of them has class names like `ag-header` and `ag-row` that can be used in CSS rules that change the style of that element.
+## Custom CSS Rules
 
-The [Theming API](./theming/) works by generating CSS that is inserted into your document. These styles are just a starting point, and you can use your own CSS to create advanced customisations.
+A running grid instance contains thousands of DOM elements, and each of them has class names like `ag-header` and `ag-row`. The class names on DOM elements within the grid are a stable API that you can target with your own CSS rules, allowing limitless customisation.
+
+If your designer has specified, for example, animated rainbow text on the header, that's achievable:
+
+```css
+.ag-header-cell-text {
+    background: radial-gradient(circle at 100%, red, orange, yellow, green, blue, indigo, violet);
+    font-weight: 600;
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animatedTextGradient 1.5s linear infinite;
+}
+@keyframes animatedTextGradient {
+    to {
+        background-position: -200% center;
+    }
+}
+```
+
+{% gridExampleRunner title="Custom Properties" name="css-rules"  exampleHeight=450 /%}
+
+The best way to find the right class name to use in a CSS rule is using the browser's developer tools. You will notice that components often have multiple class names, some more general than others. For example, the [row grouping panel](./tool-panel-columns/#example) is a component onto which you can drag columns to group them. The internal name for this is the "column drop" component, and there are two kinds - a horizontal one at the top of the header and a vertical one in the columns tool panel. You can use the class name `ag-column-drop` to target either kind, or `ag-column-drop-vertical` / `ag-column-drop-horizontal` to target one only.
 
 ## Overriding Theme Parameters with Custom Properties
 
@@ -17,13 +40,15 @@ The names of the CSS custom properties are prefixed with `--ag-` to avoid confli
 ```css
 body {
     /* override value of backgroundColor, foregroundColor and spacing parameters */
-    --ag-background-color: #880000;
-    --ag-foreground-color: #00000088;
+    --ag-background-color: darkred;
+    --ag-foreground-color: lightpink;
     --ag-spacing: 4px;
+    /* use dark scrollbars */
+    --ag-browser-color-scheme: dark;
 }
 ```
 
-TODO example here (due in AG-13129)
+{% gridExampleRunner title="Custom Properties" name="custom-properties"  exampleHeight=450 /%}
 
 Values for CSS custom properties are inherited by child elements. The above example sets the variable on the `body` element, so will affect every grid on the page. You can use different selectors to target individual grids or groups of grids.
 
@@ -37,20 +62,6 @@ body {
     --ag-foreground-color: var(--appMainTextColor);
 }
 ```
-
-## Custom CSS Rules
-
-Some design effects can't be achieved through CSS variables alone. For example, there is no variable to set the `font-style` on header cells. If you want your column headers to be italic, use regular CSS.
-
-```css
-.ag-header-cell-label {
-    font-style: italic;
-}
-```
-
-TODO example here (due in AG-13129)
-
-The best way to find the right class name to use in a CSS rule is using the browser's developer tools. You will notice that components often have multiple class names, some more general than others. For example, the [row grouping panel](./tool-panel-columns/#example) is a component onto which you can drag columns to group them. The internal name for this is the "column drop" component, and there are two kinds - a horizontal one at the top of the header and a vertical one in the columns tool panel. You can use the class name `ag-column-drop` to target either kind, or `ag-column-drop-vertical` / `ag-column-drop-horizontal` to target one only.
 
 ### Understanding CSS rule maintenance and breaking changes
 

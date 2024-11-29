@@ -1409,6 +1409,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     @Input({ transform: booleanAttribute }) public accentedSort: boolean | undefined = undefined;
     /** Set to `true` to show the 'no sort' icon.
      * @default false
+     * @deprecated v33 Use `defaultColDef.unSortIcon` instead
      */
     @Input({ transform: booleanAttribute }) public unSortIcon: boolean | undefined = undefined;
     /** Set to `true` to suppress multi-sort when the user shift-clicks a column header.

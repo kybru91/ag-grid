@@ -1547,6 +1547,7 @@ export interface GridOptions<TData = any> {
     /**
      * Set to `true` to show the 'no sort' icon.
      * @default false
+     * @deprecated v33 Use `defaultColDef.unSortIcon` instead
      */
     unSortIcon?: boolean;
     /**

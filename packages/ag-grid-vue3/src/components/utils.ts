@@ -1241,6 +1241,7 @@ export interface Props<TData, TColDef> {
     accentedSort?: boolean | undefined;
     /** Set to `true` to show the 'no sort' icon.
      * @default false
+     * @deprecated v33 - Use `defaultColDef.unSortIcon` instead
      */
     unSortIcon?: boolean | undefined;
     /** Set to `true` to suppress multi-sort when the user shift-clicks a column header.

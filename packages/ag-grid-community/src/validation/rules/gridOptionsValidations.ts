@@ -81,6 +81,8 @@ const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
         version: '32.3',
         message: 'Use `suppressGroupChangesColumnVisibility: "suppressShowOnUngroup"` instead.',
     },
+
+    unSortIcon: { version: '32.3', message: 'Use `defaultColDef.unSortIcon` instead.' },
 });
 
 function toConstrainedNum(

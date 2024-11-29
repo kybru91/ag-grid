@@ -33,6 +33,7 @@ export interface IColsService {
     columnExtractors?: ColumnExtractors;
 
     setColumns(colKeys: ColKey[] | undefined, source: ColumnEventType): void;
+    getColumns(): AgColumn[];
     addColumns(keys: Maybe<ColKey>[] | undefined, source: ColumnEventType): void;
     removeColumns(keys: Maybe<ColKey>[] | undefined, source: ColumnEventType): void;
     extractCols(source: ColumnEventType, oldProvidedCols: AgColumn[] | undefined): void;

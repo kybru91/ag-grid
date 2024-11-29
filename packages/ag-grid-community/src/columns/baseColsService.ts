@@ -46,6 +46,10 @@ export abstract class BaseColsService extends BeanStub implements IColsService {
         this.setColList(colKeys, this.columns, this.eventName, true, true, this.columnProcessors!.set, source);
     }
 
+    public getColumns(): AgColumn[] {
+        return this.columns;
+    }
+
     public addColumns(colKeys: ColKey[] | undefined, source: ColumnEventType): void {
         this.updateColList(colKeys, this.columns, true, true, this.columnProcessors!.add, this.eventName, source);
     }

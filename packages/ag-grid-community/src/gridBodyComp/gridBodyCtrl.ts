@@ -1,8 +1,10 @@
+import type { ColumnModel } from '../columns/columnModel';
 import { BeanStub } from '../context/beanStub';
 import type { BeanCollection } from '../context/context';
 import type { CtrlsService } from '../ctrlsService';
 import type { FilterManager } from '../filter/filterManager';
 import { _isAnimateRows, _isDomLayout } from '../gridOptionsUtils';
+import type { IColsService } from '../interfaces/iColsService';
 import { _requestAnimationFrame } from '../misc/animationFrameService';
 import type { PinnedRowModel } from '../pinnedRowModel/pinnedRowModel';
 import type { LayoutView } from '../styling/layoutFeature';
@@ -42,19 +44,24 @@ export interface IGridBodyComp extends LayoutView {
     setPinnedTopBottomOverflowY(overflow: 'scroll' | 'hidden'): void;
     registerBodyViewportResizeListener(listener: () => void): void;
     setBodyViewportWidth(width: string): void;
+    setGridRootRole(role: 'grid' | 'treegrid'): void;
 }
 
 export class GridBodyCtrl extends BeanStub {
     private ctrlsSvc: CtrlsService;
+    private colModel: ColumnModel;
     private scrollVisibleSvc: ScrollVisibleService;
+    private rowGroupColsSvc?: IColsService;
     private pinnedRowModel?: PinnedRowModel;
     private filterManager?: FilterManager;
 
     public wireBeans(beans: BeanCollection): void {
         this.ctrlsSvc = beans.ctrlsSvc;
+        this.colModel = beans.colModel;
         this.scrollVisibleSvc = beans.scrollVisibleSvc;
         this.pinnedRowModel = beans.pinnedRowModel;
         this.filterManager = beans.filterManager;
+        this.rowGroupColsSvc = beans.rowGroupColsSvc;
     }
 
     private comp: IGridBodyComp;
@@ -118,6 +125,7 @@ export class GridBodyCtrl extends BeanStub {
 
         this.addEventListeners();
         this.addFocusListeners([eTop, eBodyViewport, eBottom, eStickyTop, eStickyBottom]);
+        this.setGridRootRole();
         this.onGridColumnsChanged();
         this.addBodyViewportListener();
         this.setFloatingHeights();
@@ -131,15 +139,82 @@ export class GridBodyCtrl extends BeanStub {
     }
 
     private addEventListeners(): void {
-        const setFloatingHeights = this.setFloatingHeights.bind(this);
         this.addManagedEventListeners({
             gridColumnsChanged: this.onGridColumnsChanged.bind(this),
             scrollVisibilityChanged: this.onScrollVisibilityChanged.bind(this),
-            scrollGapChanged: this.updateScrollingClasses.bind(this),
-            pinnedRowDataChanged: setFloatingHeights,
-            pinnedHeightChanged: setFloatingHeights,
-            headerHeightChanged: this.setStickyTopOffsetTop.bind(this),
+            scrollGapChanged: this.onScrollGapChanged.bind(this),
+            pinnedRowDataChanged: this.onPinnedRowDataChanged.bind(this),
+            pinnedHeightChanged: this.onPinnedHeightChanged.bind(this),
+            headerHeightChanged: this.onHeaderHeightChanged.bind(this),
+            columnRowGroupChanged: this.onColumnRowGroupChanged.bind(this),
+            columnPivotChanged: this.onColumnPivotChanged.bind(this),
         });
+
+        this.addManagedPropertyListener('treeData', this.onTreeDataChanged.bind(this));
+    }
+
+    private onGridColumnsChanged(): void {
+        const columns = this.beans.colModel.getCols();
+        this.comp.setColumnCount(columns.length);
+    }
+
+    private onScrollVisibilityChanged(): void {
+        const { scrollVisibleSvc } = this;
+        const visible = scrollVisibleSvc.verticalScrollShowing;
+        this.setVerticalScrollPaddingVisible(visible);
+        this.setStickyWidth(visible);
+        this.setStickyBottomOffsetBottom();
+
+        const scrollbarWidth = visible ? scrollVisibleSvc.getScrollbarWidth() || 0 : 0;
+        const pad = _isInvisibleScrollbar() ? 16 : 0;
+        const width = `calc(100% + ${scrollbarWidth + pad}px)`;
+
+        _requestAnimationFrame(this.beans, () => this.comp.setBodyViewportWidth(width));
+
+        this.updateScrollingClasses();
+    }
+
+    private onScrollGapChanged(): void {
+        this.updateScrollingClasses();
+    }
+
+    private onPinnedRowDataChanged(): void {
+        this.setFloatingHeights();
+    }
+
+    private onPinnedHeightChanged(): void {
+        this.setFloatingHeights();
+    }
+
+    private onHeaderHeightChanged(): void {
+        this.setStickyTopOffsetTop();
+    }
+
+    private onColumnRowGroupChanged(): void {
+        this.setGridRootRole();
+    }
+
+    private onColumnPivotChanged(): void {
+        this.setGridRootRole();
+    }
+
+    private onTreeDataChanged(): void {
+        this.setGridRootRole();
+    }
+
+    private setGridRootRole(): void {
+        const { rowGroupColsSvc, colModel } = this;
+
+        let isTreeGrid = this.gos.get('treeData');
+
+        if (!isTreeGrid) {
+            const isPivotActive = colModel.isPivotMode();
+            const rowGroupColumnLen = !rowGroupColsSvc ? 0 : rowGroupColsSvc.getColumns().length;
+            const columnsNeededForGrouping = isPivotActive ? 2 : 1;
+            isTreeGrid = rowGroupColumnLen >= columnsNeededForGrouping;
+        }
+
+        this.comp.setGridRootRole(isTreeGrid ? 'treegrid' : 'grid');
     }
 
     private addFocusListeners(elements: HTMLElement[]): void {
@@ -187,22 +262,6 @@ export class GridBodyCtrl extends BeanStub {
         this.comp.setCellSelectableCss(CSS_CLASS_CELL_SELECTABLE, selectable);
     }
 
-    private onScrollVisibilityChanged(): void {
-        const { scrollVisibleSvc } = this;
-        const visible = scrollVisibleSvc.verticalScrollShowing;
-        this.setVerticalScrollPaddingVisible(visible);
-        this.setStickyWidth(visible);
-        this.setStickyBottomOffsetBottom();
-
-        const scrollbarWidth = visible ? scrollVisibleSvc.getScrollbarWidth() || 0 : 0;
-        const pad = _isInvisibleScrollbar() ? 16 : 0;
-        const width = `calc(100% + ${scrollbarWidth + pad}px)`;
-
-        _requestAnimationFrame(this.beans, () => this.comp.setBodyViewportWidth(width));
-
-        this.updateScrollingClasses();
-    }
-
     private updateScrollingClasses(): void {
         const {
             eGridBody: { classList },
@@ -210,11 +269,6 @@ export class GridBodyCtrl extends BeanStub {
         } = this;
         classList.toggle('ag-body-vertical-content-no-gap', !scrollVisibleSvc.verticalScrollGap);
         classList.toggle('ag-body-horizontal-content-no-gap', !scrollVisibleSvc.horizontalScrollGap);
-    }
-
-    private onGridColumnsChanged(): void {
-        const columns = this.beans.colModel.getCols();
-        this.comp.setColumnCount(columns.length);
     }
 
     // if we do not do this, then the user can select a pic in the grid (eg an image in a custom cell renderer)

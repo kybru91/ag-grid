@@ -215,24 +215,11 @@ const frameworksData = [
 </Layout>
 
 <script>
-    const HEADER_SCROLL_POSITION = 566;
-    const SCROLLED_CLASS = 'header-scrolled';
-    const SITE_HEADER_SELECTOR = '.site-header';
+    import { initScrollClassListener } from '@ag-website-shared/utils/initScrollClassListener';
 
-    function updateScrolledClass() {
-        const siteHeaderElement = document.querySelector(SITE_HEADER_SELECTOR);
-        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-
-        if (scrollPosition >= HEADER_SCROLL_POSITION) {
-            siteHeaderElement?.classList.add(SCROLLED_CLASS);
-        } else {
-            siteHeaderElement?.classList.remove(SCROLLED_CLASS);
-        }
-    }
-
-    window.addEventListener('scroll', () => {
-        updateScrolledClass();
+    initScrollClassListener({
+        targetSelector: '.site-header',
+        scrolledClass: 'header-scrolled',
+        scrollPosition: 566,
     });
-
-    updateScrolledClass();
 </script>

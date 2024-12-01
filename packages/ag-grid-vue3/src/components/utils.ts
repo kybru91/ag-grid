@@ -1233,6 +1233,7 @@ export interface Props<TData, TColDef> {
     suppressClearOnFillReduction?: boolean | undefined;
     /** Array defining the order in which sorting occurs (if sorting is enabled). Values can be `'asc'`, `'desc'` or `null`. For example: `sortingOrder: ['asc', 'desc']`.
      * @default [null, 'asc', 'desc']
+     * @deprecated v33 - Use `defaultColDef.sortingOrder` instead
      */
     sortingOrder?: SortDirection[] | undefined;
     /** Set to `true` to specify that the sort should take accented characters into account. If this feature is turned on the sort will be slower.

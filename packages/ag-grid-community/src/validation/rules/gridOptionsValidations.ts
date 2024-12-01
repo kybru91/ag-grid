@@ -83,6 +83,7 @@ const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
     },
 
     unSortIcon: { version: '32.3', message: 'Use `defaultColDef.unSortIcon` instead.' },
+    sortingOrder: { version: '32.3', message: 'Use `defaultColDef.sortingOrder` instead.' },
 });
 
 function toConstrainedNum(

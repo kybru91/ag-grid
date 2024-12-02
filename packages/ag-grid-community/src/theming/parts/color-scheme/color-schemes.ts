@@ -34,6 +34,10 @@ const darkParams = {
         onto: 'backgroundColor',
     },
     browserColorScheme: 'dark',
+    advancedFilterBuilderJoinPillColor: '#7a3a37',
+    advancedFilterBuilderColumnPillColor: '#355f2d',
+    advancedFilterBuilderOptionPillColor: '#5a3168',
+    advancedFilterBuilderValuePillColor: '#374c86',
 } as const;
 
 export const colorSchemeDark = /*#__PURE__*/ createPart({
@@ -56,14 +60,13 @@ export const colorSchemeDarkWarm = /*#__PURE__*/ createPart({
 });
 
 const darkBlueParams = {
+    ...darkParams,
     backgroundColor: '#1f2836',
-    foregroundColor: '#FFF',
     chromeBackgroundColor: {
         ref: 'foregroundColor',
         mix: 0.07,
         onto: 'backgroundColor',
     },
-    browserColorScheme: 'dark',
 } as const;
 
 export const colorSchemeDarkBlue = /*#__PURE__*/ createPart({

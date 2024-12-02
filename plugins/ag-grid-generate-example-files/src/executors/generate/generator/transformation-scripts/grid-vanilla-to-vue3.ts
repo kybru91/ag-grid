@@ -1,5 +1,5 @@
 import type { ExampleConfig, ParsedBindings } from '../types';
-import { OVERRIDABLE_AG_COMPONENTS, getTemplate } from './grid-vanilla-to-vue-common';
+import { getTemplate } from './grid-vanilla-to-vue-common';
 import {
     addBindingImports,
     addGenericInterfaceImport,

@@ -828,16 +828,8 @@ export const coreDefaults: Readonly<CoreParams> = {
         calc: 'max(iconSize, dataFontSize) + spacing * 4 * headerVerticalPaddingScale',
     },
     headerVerticalPaddingScale: 1,
-    popupShadow: {
-        radius: 16,
-        color: '#00000026',
-    },
-    dropdownShadow: {
-        radius: 4,
-        spread: 1,
-        offsetY: 1,
-        color: '#babfc766',
-    },
+    popupShadow: '0 0 16px #00000026',
+    dropdownShadow: '0 1px 4px 1px #babfc766',
     dragAndDropImageBackgroundColor: {
         ref: 'backgroundColor',
     },
@@ -928,12 +920,7 @@ export const coreDefaults: Readonly<CoreParams> = {
     cellEditingBorder: {
         color: { ref: 'accentColor' },
     },
-    cellEditingShadow: {
-        radius: 4,
-        spread: 1,
-        offsetY: 1,
-        color: '#babfc766',
-    },
+    cellEditingShadow: '0 1px 4px 1px #babfc766',
     dialogBorder: {
         color: {
             ref: 'foregroundColor',

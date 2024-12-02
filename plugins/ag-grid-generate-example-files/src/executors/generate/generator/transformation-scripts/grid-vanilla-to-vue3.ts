@@ -89,20 +89,6 @@ function getPropertyBindings(
     bindings.properties
         .filter((property) => property.name !== 'onGridReady')
         .forEach((property) => {
-            // debugger
-            // if (componentFileNames.length > 0 && property.name === 'components') {
-            //     if (bindings.components) {
-            //         const userAgComponents = OVERRIDABLE_AG_COMPONENTS.filter((agComponentName) =>
-            //             bindings.components.some(
-            //                 (component) =>
-            //                     component.name === agComponentName &&
-            //                     !vueComponents.has((existingComp) => existingComp.includes(agComponentName))
-            //             )
-            //         ).map((agComponentName) => `${agComponentName}: '${agComponentName}'`);
-            //
-            //         userAgComponents.forEach(vueComponents.add, vueComponents);
-            //     }
-            // } else
             if (property.value === 'true' || property.value === 'false') {
                 propertyAttributes.push(toConst(property));
             } else if (property.value === null || property.value === 'null') {

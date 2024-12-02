@@ -139,18 +139,21 @@ export class GridBodyCtrl extends BeanStub {
     }
 
     private addEventListeners(): void {
+        const setFloatingHeights = this.setFloatingHeights.bind(this);
+        const setGridRootRole = this.setGridRootRole.bind(this);
+
         this.addManagedEventListeners({
             gridColumnsChanged: this.onGridColumnsChanged.bind(this),
             scrollVisibilityChanged: this.onScrollVisibilityChanged.bind(this),
-            scrollGapChanged: this.onScrollGapChanged.bind(this),
-            pinnedRowDataChanged: this.onPinnedRowDataChanged.bind(this),
-            pinnedHeightChanged: this.onPinnedHeightChanged.bind(this),
-            headerHeightChanged: this.onHeaderHeightChanged.bind(this),
-            columnRowGroupChanged: this.onColumnRowGroupChanged.bind(this),
-            columnPivotChanged: this.onColumnPivotChanged.bind(this),
+            scrollGapChanged: this.updateScrollingClasses.bind(this),
+            pinnedRowDataChanged: setFloatingHeights,
+            pinnedHeightChanged: setFloatingHeights,
+            headerHeightChanged: this.setStickyTopOffsetTop.bind(this),
+            columnRowGroupChanged: setGridRootRole,
+            columnPivotChanged: setGridRootRole,
         });
 
-        this.addManagedPropertyListener('treeData', this.onTreeDataChanged.bind(this));
+        this.addManagedPropertyListener('treeData', setGridRootRole);
     }
 
     private onGridColumnsChanged(): void {
@@ -174,34 +177,6 @@ export class GridBodyCtrl extends BeanStub {
         this.updateScrollingClasses();
     }
 
-    private onScrollGapChanged(): void {
-        this.updateScrollingClasses();
-    }
-
-    private onPinnedRowDataChanged(): void {
-        this.setFloatingHeights();
-    }
-
-    private onPinnedHeightChanged(): void {
-        this.setFloatingHeights();
-    }
-
-    private onHeaderHeightChanged(): void {
-        this.setStickyTopOffsetTop();
-    }
-
-    private onColumnRowGroupChanged(): void {
-        this.setGridRootRole();
-    }
-
-    private onColumnPivotChanged(): void {
-        this.setGridRootRole();
-    }
-
-    private onTreeDataChanged(): void {
-        this.setGridRootRole();
-    }
-
     private setGridRootRole(): void {
         const { rowGroupColsSvc, colModel } = this;
 
@@ -209,7 +184,7 @@ export class GridBodyCtrl extends BeanStub {
 
         if (!isTreeGrid) {
             const isPivotActive = colModel.isPivotMode();
-            const rowGroupColumnLen = !rowGroupColsSvc ? 0 : rowGroupColsSvc.getColumns().length;
+            const rowGroupColumnLen = !rowGroupColsSvc ? 0 : rowGroupColsSvc.columns.length;
             const columnsNeededForGrouping = isPivotActive ? 2 : 1;
             isTreeGrid = rowGroupColumnLen >= columnsNeededForGrouping;
         }

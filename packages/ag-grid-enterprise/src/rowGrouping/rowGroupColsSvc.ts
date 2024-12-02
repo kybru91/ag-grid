@@ -41,7 +41,7 @@ export class RowGroupColsSvc extends BaseColsService implements NamedBean, ICols
     };
 
     public moveColumn(fromIndex: number, toIndex: number, source: ColumnEventType): void {
-        if (this.getColumns().length === 0) {
+        if (this.columns.length === 0) {
             return;
         }
 

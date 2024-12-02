@@ -89,24 +89,26 @@ function getPropertyBindings(
     bindings.properties
         .filter((property) => property.name !== 'onGridReady')
         .forEach((property) => {
-            if (componentFileNames.length > 0 && property.name === 'components') {
-                if (bindings.components) {
-                    const userAgComponents = OVERRIDABLE_AG_COMPONENTS.filter((agComponentName) =>
-                        bindings.components.some(
-                            (component) =>
-                                component.name === agComponentName &&
-                                !vueComponents.has((existingComp) => existingComp.includes(agComponentName))
-                        )
-                    ).map((agComponentName) => `${agComponentName}: '${agComponentName}'`);
-
-                    userAgComponents.forEach(vueComponents.add, vueComponents);
-                }
-            } else if (property.value === 'true' || property.value === 'false') {
+            // debugger
+            // if (componentFileNames.length > 0 && property.name === 'components') {
+            //     if (bindings.components) {
+            //         const userAgComponents = OVERRIDABLE_AG_COMPONENTS.filter((agComponentName) =>
+            //             bindings.components.some(
+            //                 (component) =>
+            //                     component.name === agComponentName &&
+            //                     !vueComponents.has((existingComp) => existingComp.includes(agComponentName))
+            //             )
+            //         ).map((agComponentName) => `${agComponentName}: '${agComponentName}'`);
+            //
+            //         userAgComponents.forEach(vueComponents.add, vueComponents);
+            //     }
+            // } else
+            if (property.value === 'true' || property.value === 'false') {
                 propertyAttributes.push(toConst(property));
             } else if (property.value === null || property.value === 'null') {
                 propertyAttributes.push(toInput(property));
                 propertyNames.push(property.name);
-            } else {
+            } else if (property.name !== 'components') {
                 propertyNames.push(property.name);
 
                 // for when binding a method

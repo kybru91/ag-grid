@@ -26,6 +26,7 @@ export const colorSchemeLightCold = /*#__PURE__*/ createPart({
 });
 
 const darkParams = {
+    ...defaultLightColorSchemeParams,
     backgroundColor: 'hsl(217, 0%, 17%)',
     foregroundColor: '#FFF',
     chromeBackgroundColor: {

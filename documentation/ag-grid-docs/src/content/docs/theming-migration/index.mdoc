@@ -115,7 +115,6 @@ While developing the Theming API we took the opportunity to rename many of our p
 
 Note: the replacement parameter is given as name for use in the TypeScript theming API, e.g. `chromeBackgroundColor`. To use this in CSS, convert it to kebab-case and add the `--ag-` prefix, e.g. `--ag-chrome-background-color`.
 
- * `--ag-secondary-border-color` -> there is no longer a concept of "secondary" borders use `borderColor` or CSS rules to target specific borders
  * `--ag-secondary-foreground-color` -> `chromeBackgroundColor`
  * `--ag-selected-tab-underline-color` -> `tabSelectedUnderlineColor`
  * `--ag-selected-tab-underline-transition-speed` -> `tabSelectedUnderlineTransitionDuration`
@@ -128,7 +127,6 @@ Note: the replacement parameter is given as name for use in the TypeScript themi
  * `--ag-borders-input-invalid` -> `inputInvalidBorder`
  * `--ag-card-radius` -> `borderRadius`
  * `--ag-cell-horizontal-border` -> `columnBorder`
- * `--ag-checkbox-*` -> there has been a significant overhaul of checkbox parameters giving greater control over the appearance of checkboxes. See the Theming API docs.
  * `--ag-chip-background-color` -> `columnDropCellBackgroundColor`
  * `--ag-chip-border-color` -> `columnDropCellBorder`
  * `--ag-control-panel-background-color` -> `chromeBackgroundColor`
@@ -146,17 +144,19 @@ Note: the replacement parameter is given as name for use in the TypeScript themi
  * `--ag-panel-border-color` -> `dialogBorder`
  * `--ag-quartz-icon-active-color` -> this was used to apply an outline to focussed icons, now all focussed elements throughout the grid use `focusShadow`
  * `--ag-quartz-icon-hover-color` -> `iconButtonHoverColor`
- *  `--ag-toggle-button-border-width`, `--ag-toggle-button-off-border-color`, `--ag-toggle-button-on-border-color`, and `--ag-toggle-button-switch-border-color` have been removed. In most use cases they can be replaced with the new `toggleButtonSwitchInset` parameter. Other use cases can use CSS. See [Styling Toggle Buttons](./theming-widgets/#styling-toggle-buttons an example)
 
-#### Components with new theming parameters
+#### Components with significantly different theming parameters
 
  * The [Sidebar](./side-bar/). Sidebar styling has been overhauled. Custom CSS rules you have written are likely still valid, but custom property names have changed. See [Customising Tool Panels](./theming-tool-panels/). In particular, in v32 themes the sidebar tabs shared the same custom properties as horizontal tabs. Now they have their own set of parameters beginning "sideBar" or "sideButton".
+ * `--ag-checkbox-*` -> there has been a significant overhaul of checkbox parameters giving greater control over the appearance of checkboxes. See the Theming API docs.
+ *  `--ag-toggle-button-border-width`, `--ag-toggle-button-off-border-color`, `--ag-toggle-button-on-border-color`, and `--ag-toggle-button-switch-border-color` have been removed. In most use cases they can be replaced with the new `toggleButtonSwitchInset` parameter. Other use cases can use CSS. See [Styling Toggle Buttons](./theming-widgets/#styling-toggle-buttons an example)
 
 
 #### Properties removed with no replacement, use CSS rules to achieve the same effect
 
 These properties were either outdated, confusing to use, or provided no benefit over using CSS rules.
 
+ * `--ag-secondary-border-color` -> there is no longer a concept of "secondary" borders use `borderColor` or CSS rules to target specific borders
  * `--ag-borders-side-button`
  * `--ag-tab-min-width`
  * `--ag-menu-min-width`

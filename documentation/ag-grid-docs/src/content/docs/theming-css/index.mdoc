@@ -50,11 +50,11 @@ body {
 
 {% gridExampleRunner title="Custom Properties" name="custom-properties"  exampleHeight=450 /%}
 
-Values for CSS custom properties are inherited by child elements. The above example sets the variable on the `body` element, so will affect every grid on the page. You can use different selectors to target individual grids or groups of grids.
+Values for CSS custom properties are inherited by child elements. The above example sets the custom property on the `body` element, so will affect every grid on the page. You can use different selectors to target individual grids or groups of grids.
 
 ### Using Your App's Existing Custom Properties
 
-If your app already defines a colour scheme using CSS variables and you want to use those existing variable names within the grid, you can connect the grid variables to your own variables using `var()` expressions:
+If your app already defines a colour scheme using CSS custom properties and you want to use those values within the grid, you can use `var()` expressions as parameter values:
 
 ```css
 body {
@@ -65,13 +65,13 @@ body {
 
 ### Understanding CSS rule maintenance and breaking changes
 
-With each release of the grid we add features and improve existing ones, and as a result the DOM structure changes with every release - even minor releases. Of course we test and update the CSS rules in our themes to make sure they still work, and this includes ensuring that customisations made via CSS variables does not break between releases. But if you have written your own CSS rules, you will need to test and update them.
+With each release of the grid we add features and improve existing ones, and as a result the DOM structure changes with every release - even minor releases. Of course we test and update the CSS rules in our themes to make sure they still work, and this includes ensuring that customisations made via CSS custom property does not break between releases. But if you have written your own CSS rules, you will need to test and update them.
 
 The simpler your CSS rules are, the less likely they are to break between releases. Prefer selectors that target a single class name where possible.
 
 ### Avoiding Breaking the Grid with CSS Rules
 
-Browsers use the same mechanism - CSS - for controlling how elements work (e.g. scrolling and whether they respond to mouse events), where elements appear, and how elements look. Our "structural stylesheet" (ag-grid.scss) sets CSS rules that control how the grid works, and the code depends on those rules not being overridden. There is nothing that we can do to prevent themes overriding critical rules, so as a theme author you need to be careful not to break the grid. Here's a guide:
+Browsers use the same mechanism - CSS - for controlling how elements work (e.g. scrolling and whether they respond to mouse events), where elements appear, and how elements look. Some of the styles applied by our CSS are essential to how the grid works, and the grid depends on those rules not being overridden. There is nothing that we can do to prevent themes overriding critical rules, so as a theme author you need to be careful not to break the grid. Here's a guide:
 
 * Visual styles including margins, paddings, sizes, colours, fonts, borders etc are all fine to change in a theme.
 

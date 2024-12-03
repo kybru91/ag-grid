@@ -1,11 +1,11 @@
 .ag-header-cell-text {
-    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
     font-weight: 600;
-    background-size: 200% auto;
-    color: #000;
+    font-size: 20px;
+    animation: animatedTextGradient 2.5s linear infinite;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: animatedTextGradient 2.5s linear infinite;
+    background-size: 200% auto;
 }
 
 @keyframes animatedTextGradient {

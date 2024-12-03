@@ -15,7 +15,9 @@ export function readAsJsFile(srcFile, internalFramework: InternalFramework) {
         tsFile = tsFile.replace(/import {((.|\n)*?)} from(?!(\s['"]\.\/)).*\n/g, '');
     } else {
         tsFile = tsFile.replace(/import ((.|\n)*?)from.*\n/g, '');
-        tsFile = tsFile.replace(/export /g, '');
+
+        // ignore "export default {" as this is used in vue(3).ts files
+        tsFile = tsFile.replace(/export (?!.*default \{) /g, '');
     }
 
     const jsFile = transform(tsFile, { transforms: ['typescript'], disableESTransforms: true }).code;
@@ -525,7 +527,9 @@ export function addRelativeImports(bindings: ParsedBindings, imports: string[], 
     const bImports = [...(bindings.imports.filter((b) => filterOtherFiles(b)) || [])];
     if (bImports.length > 0) {
         bImports.forEach((b) => {
-            imports.push(`import { ${b.imports.join(', ')} } from '${b.module.replace(/['"]/g, '')}.${extension}';`);
+            imports.push(
+                `import { ${b.imports.join(', ')} } from '${b.module.replace(/['"]/g, '')}${extension ? `.${extension}` : ''}';`
+            );
         });
     }
 }

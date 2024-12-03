@@ -3,7 +3,7 @@ import { createApp, ref, shallowRef } from 'vue';
 import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import MedalRenderer from './medalRenderer.js';
+import MedalRenderer from './medalRenderer';
 import './styles.css';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);

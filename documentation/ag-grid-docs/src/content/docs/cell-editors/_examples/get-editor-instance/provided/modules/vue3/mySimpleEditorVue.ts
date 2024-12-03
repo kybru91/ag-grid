@@ -1,9 +1,9 @@
-import { nextTick } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 // backspace starts the editor on Windows
 const KEY_BACKSPACE = 'Backspace';
 
-export default {
+export default defineComponent({
     template: `<input v-model="value" :ref="'input'" class="my-simple-editor" />`,
     data() {
         return {
@@ -49,4 +49,4 @@ export default {
             this.$refs.input.focus();
         });
     },
-};
+});

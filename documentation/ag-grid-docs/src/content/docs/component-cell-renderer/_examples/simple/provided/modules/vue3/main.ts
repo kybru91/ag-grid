@@ -4,8 +4,8 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import MedalCellRenderer from './medalCellRendererVue.js';
-import TotalValueRenderer from './totalValueRendererVue.js';
+import MedalCellRenderer from './medalCellRendererVue';
+import TotalValueRenderer from './totalValueRendererVue';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
 

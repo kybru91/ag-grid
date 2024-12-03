@@ -14,7 +14,7 @@ import {
 import { RowGroupingModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import CustomGroupCellRenderer from './customGroupCellRenderer.js';
+import CustomGroupCellRenderer from './customGroupCellRenderer';
 import './styles.css';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);

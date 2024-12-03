@@ -1,6 +1,6 @@
-import { nextTick } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
-export default {
+export default defineComponent({
     template: `
       <div :ref="'container'" class="mood" tabindex="0" @keydown="onKeyDown">
       <img src="https://www.ag-grid.com/example-assets/smileys/happy.png" @click="onClick(true)" :class="{ selected: happy, default: !happy }">
@@ -51,4 +51,4 @@ export default {
             this.$refs.container.focus();
         });
     },
-};
+});

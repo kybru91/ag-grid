@@ -5,7 +5,7 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import CustomMedalCellRenderer from './customMedalCellRenderer.js';
+import CustomMedalCellRenderer from './customMedalCellRenderer';
 import './styles.css';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);

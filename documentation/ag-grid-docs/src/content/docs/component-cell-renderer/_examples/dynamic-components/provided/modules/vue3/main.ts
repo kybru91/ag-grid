@@ -4,11 +4,11 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import ChildMessageRenderer from './childMessageRendererVue.js';
-import CubeRenderer from './cubeRendererVue.js';
-import CurrencyRenderer from './currencyRendererVue.js';
-import ParamsRenderer from './paramsRendererVue.js';
-import SquareRenderer from './squareRendererVue.js';
+import ChildMessageRenderer from './childMessageRendererVue';
+import CubeRenderer from './cubeRendererVue';
+import CurrencyRenderer from './currencyRendererVue';
+import ParamsRenderer from './paramsRendererVue';
+import SquareRenderer from './squareRendererVue';
 import './styles.css';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);

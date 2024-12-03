@@ -4,7 +4,7 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-import { getData } from './data.js';
+import { getData } from './data';
 import './styles.css';
 
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);

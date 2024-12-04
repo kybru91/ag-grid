@@ -16,8 +16,13 @@ export function readAsJsFile(srcFile, internalFramework: InternalFramework) {
     } else {
         tsFile = tsFile.replace(/import ((.|\n)*?)from.*\n/g, '');
 
-        // ignore "export default {" as this is used in vue(3).ts files
-        tsFile = tsFile.replace(/export (?!.*default \{) /g, '');
+        // if(internalFramework === 'vue3') {
+        //     // ignore "export default {" as this is used in vue(3).ts files
+        //     tsFile = tsFile.replace(/export (?!.*default \{) /g, '');
+        // } else {
+        debugger
+            tsFile = tsFile.replace(/export /g, '');
+        // }
     }
 
     const jsFile = transform(tsFile, { transforms: ['typescript'], disableESTransforms: true }).code;

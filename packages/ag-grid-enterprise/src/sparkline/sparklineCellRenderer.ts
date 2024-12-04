@@ -85,7 +85,7 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
     }
 
     private createDefaultContent(params: any) {
-        return `${params.yValue}`;
+        return { content: `${params.yValue}` };
     }
 
     private wrapItemStyler(container: { itemStyler?: any }) {

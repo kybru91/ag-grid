@@ -174,4 +174,3 @@ export const getOtherScriptFiles = async ({
     });
     return [others, filteredToFramework];
 };
-

@@ -312,5 +312,5 @@ generateFiles({
     inputs: [],
     output: '',
     outputPath: 'dist/generated-examples/ag-grid-docs/docs/cell-editing-full-row/_examples/full-row-editing',
-    writeFiles: true
+    writeFiles: true,
 }).then(() => console.log('done'));

@@ -178,6 +178,7 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
         getContextMenuItems: { module: 'ContextMenu' },
         getLocaleText: { module: 'Locale' },
         getRowStyle: { module: 'RowStyle' },
+        grandTotalRow: { module: 'SharedRowGrouping' },
         groupDefaultExpanded: {
             supportedRowModels: ['clientSide'],
         },

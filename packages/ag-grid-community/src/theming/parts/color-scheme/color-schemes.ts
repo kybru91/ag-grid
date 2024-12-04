@@ -41,6 +41,16 @@ const darkParams = {
     advancedFilterBuilderColumnPillColor: '#355f2d',
     advancedFilterBuilderOptionPillColor: '#5a3168',
     advancedFilterBuilderValuePillColor: '#374c86',
+    checkboxUncheckedBorderColor: {
+        ref: 'foregroundColor',
+        mix: 0.4,
+        onto: 'backgroundColor',
+    },
+    toggleButtonOffBackgroundColor: {
+        ref: 'foregroundColor',
+        mix: 0.4,
+        onto: 'backgroundColor',
+    },
 } as const;
 
 export const colorSchemeDark = /*#__PURE__*/ createPart({
@@ -53,11 +63,6 @@ export const colorSchemeDarkWarm = /*#__PURE__*/ createPart({
     params: {
         backgroundColor: 'hsl(29, 10%, 17%)',
         foregroundColor: '#FFF',
-        chromeBackgroundColor: {
-            ref: 'foregroundColor',
-            mix: 0.05,
-            onto: 'backgroundColor',
-        },
         browserColorScheme: 'dark',
     },
 });
@@ -65,11 +70,6 @@ export const colorSchemeDarkWarm = /*#__PURE__*/ createPart({
 const darkBlueParams = {
     ...darkParams,
     backgroundColor: '#1f2836',
-    chromeBackgroundColor: {
-        ref: 'foregroundColor',
-        mix: 0.07,
-        onto: 'backgroundColor',
-    },
 } as const;
 
 export const colorSchemeDarkBlue = /*#__PURE__*/ createPart({

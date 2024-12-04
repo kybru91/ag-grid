@@ -729,7 +729,7 @@ export const coreDefaults: Readonly<CoreParams> = {
     sideButtonTextColor: { ref: 'textColor' },
     sideButtonHoverBackgroundColor: { ref: 'sideButtonBackgroundColor' },
     sideButtonHoverTextColor: { ref: 'sideButtonTextColor' },
-    sideButtonSelectedBackgroundColor: { ref: 'sideButtonBackgroundColor' },
+    sideButtonSelectedBackgroundColor: { ref: 'backgroundColor' },
     sideButtonSelectedTextColor: { ref: 'sideButtonTextColor' },
     sideButtonSelectedBorder: true,
     sideButtonLeftPadding: { ref: 'spacing' },

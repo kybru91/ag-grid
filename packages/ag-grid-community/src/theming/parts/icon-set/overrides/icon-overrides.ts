@@ -28,9 +28,10 @@ type IconSetOverridesArgs = IconSetOverridesImage | IconSetOverridesFont;
 export const iconOverrides = (args: IconSetOverridesArgs) => {
     const cssParts = [sharedIconStylesCSS];
     if (args.type === 'image') {
-        for (const [key, value] of Object.entries(args.icons)) {
+        const { icons, mask } = args;
+        for (const [key, value] of Object.entries(icons)) {
             const imageCssValue = imageValueToCss(value);
-            if (args.mask) {
+            if (mask) {
                 cssParts.push(`.ag-icon-${key}::before { mask-image: ${imageCssValue}; }`);
             } else {
                 cssParts.push(`.ag-icon-${key}::before { background-image: ${imageCssValue}; ${unsetMaskIcon} }`);
@@ -38,17 +39,18 @@ export const iconOverrides = (args: IconSetOverridesArgs) => {
         }
     }
     if (args.type === 'font') {
+        const { family, weight, color, icons } = args;
         let properties = unsetMaskIcon;
-        if (args.family) {
-            properties += ` font-family: ${fontFamilyValueToCss(args.family)};`;
+        if (family) {
+            properties += ` font-family: ${fontFamilyValueToCss(family)};`;
         }
-        if (args.weight) {
-            properties += ` font-weight: ${fontWeightValueToCss(args.weight)};`;
+        if (weight) {
+            properties += ` font-weight: ${fontWeightValueToCss(weight)};`;
         }
-        if (args.color) {
-            properties += ` color: ${colorValueToCss(args.color)};`;
+        if (color) {
+            properties += ` color: ${colorValueToCss(color)};`;
         }
-        for (const [key, value] of Object.entries(args.icons)) {
+        for (const [key, value] of Object.entries(icons)) {
             cssParts.push(`.ag-icon-${key}::before { content: ${JSON.stringify(value)}; ${properties} }`);
         }
     }

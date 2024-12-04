@@ -1,5 +1,6 @@
 import { createPart } from '../../Part';
 import { defaultLightColorSchemeParams } from '../../core/core-css';
+import { foregroundBackgroundMix } from '../../theme-utils';
 
 export const colorSchemeLight = /*#__PURE__*/ createPart({
     feature: 'colorScheme',
@@ -29,11 +30,7 @@ const darkParams = {
     ...defaultLightColorSchemeParams,
     backgroundColor: 'hsl(217, 0%, 17%)',
     foregroundColor: '#FFF',
-    chromeBackgroundColor: {
-        ref: 'foregroundColor',
-        mix: 0.05,
-        onto: 'backgroundColor',
-    },
+    chromeBackgroundColor: foregroundBackgroundMix(0.05),
     browserColorScheme: 'dark',
     popupShadow: '0 0px 20px #0008',
     cardShadow: '0 1px 4px 1px #0008',
@@ -41,16 +38,8 @@ const darkParams = {
     advancedFilterBuilderColumnPillColor: '#355f2d',
     advancedFilterBuilderOptionPillColor: '#5a3168',
     advancedFilterBuilderValuePillColor: '#374c86',
-    checkboxUncheckedBorderColor: {
-        ref: 'foregroundColor',
-        mix: 0.4,
-        onto: 'backgroundColor',
-    },
-    toggleButtonOffBackgroundColor: {
-        ref: 'foregroundColor',
-        mix: 0.4,
-        onto: 'backgroundColor',
-    },
+    checkboxUncheckedBorderColor: foregroundBackgroundMix(0.4),
+    toggleButtonOffBackgroundColor: foregroundBackgroundMix(0.4),
 } as const;
 
 export const colorSchemeDark = /*#__PURE__*/ createPart({

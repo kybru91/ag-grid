@@ -1,5 +1,4 @@
 import { sharedIconStylesCSS } from '../shared-icon-styles.css-GENERATED';
-import { iconSetQuartzCSS } from './icon-set-quartz.css-GENERATED';
 
 const iconNameToSvgFragment: Record<string, string | undefined> = {
     aggregation: '<path d="M18 7V4H6l6 8-6 8h12v-3"/>',
@@ -72,12 +71,12 @@ const iconNameToFullSvg: Record<string, string | undefined> = {
 };
 
 export const getQuartzIconsCss = (args: { strokeWidth?: number } = {}) => {
-    let result = iconSetQuartzCSS;
+    let result = sharedIconStylesCSS;
     for (const iconName of [...Object.keys(iconNameToSvgFragment), ...Object.keys(iconNameToFullSvg)]) {
         const iconSvg = quartzIconSvg(iconName, args.strokeWidth);
         result += `.ag-icon-${iconName}::before { mask-image: url('data:image/svg+xml,${encodeURIComponent(iconSvg)}'); }\n`;
     }
-    return sharedIconStylesCSS + result;
+    return result;
 };
 
 const quartzIconSvg = (name: string, strokeWidth = 1.5): string => {

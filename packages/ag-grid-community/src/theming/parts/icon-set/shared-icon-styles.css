@@ -1,7 +1,9 @@
 :where(.ag-icon)::before {
     content: '';
     background-color: currentcolor;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--ag-icon-size);
     height: var(--ag-icon-size);
     mask-size: contain;
@@ -17,6 +19,12 @@
 }
 
 .ag-icon {
+    display: block;
+    position: relative;
+    user-select: none;
+    width: var(--ag-icon-size);
+    height: var(--ag-icon-size);
+
     /* Background properties to allow apps to set a background-image and have it work */
     background-position: center;
     background-size: contain;

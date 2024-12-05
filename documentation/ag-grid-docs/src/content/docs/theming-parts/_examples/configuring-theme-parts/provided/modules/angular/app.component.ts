@@ -6,7 +6,6 @@ import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
 import {
     AllCommunityModule,
-    ClientSideRowModelModule,
     ModuleRegistry,
     colorSchemeDark,
     colorSchemeDarkBlue,
@@ -28,8 +27,6 @@ import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'a
 
 ModuleRegistry.registerModules([
     AllCommunityModule,
-    ClientSideRowModelModule,
-
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,

@@ -4,7 +4,6 @@ import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
 import {
     AllCommunityModule,
-    ClientSideRowModelModule,
     ModuleRegistry,
     themeAlpine,
     themeBalham,
@@ -13,7 +12,7 @@ import {
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
     standalone: true,

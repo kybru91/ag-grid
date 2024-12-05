@@ -1,6 +1,6 @@
-import { createApp } from 'vue';
+import { createApp, defineComponent } from 'vue';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
+import type { ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { ClipboardModule } from 'ag-grid-enterprise';
 import { ExcelExportModule } from 'ag-grid-enterprise';
@@ -11,7 +11,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import './styles.css';
 
 // Register shared Modules globally
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, ColumnMenuModule, ContextMenuModule]);
+ModuleRegistry.registerModules([AllCommunityModule, ColumnMenuModule, ContextMenuModule]);
 
 let rowIdSequence = 100;
 const createRowBlock = () =>
@@ -21,7 +21,7 @@ const createRowBlock = () =>
         value1: Math.floor(Math.random() * 100),
     }));
 
-const VueExample = {
+const VueExample = defineComponent({
     /* html */
     template: `<div class="example-wrapper">
 
@@ -61,19 +61,19 @@ const VueExample = {
             rightRowData: [],
             leftModules: [SetFilterModule, ClipboardModule],
             rightModules: [ExcelExportModule],
-            defaultColDef: {
+            defaultColDef: <ColDef>{
                 flex: 1,
                 minWidth: 100,
                 filter: true,
                 floatingFilter: true,
             },
-            columns: [{ field: 'id' }, { field: 'color' }, { field: 'value1' }],
+            columns: <ColDef[]>[{ field: 'id' }, { field: 'color' }, { field: 'value1' }],
         };
     },
     beforeMount() {
         this.leftRowData = createRowBlock();
         this.rightRowData = createRowBlock();
     },
-};
+});
 
 createApp(VueExample).mount('#app');

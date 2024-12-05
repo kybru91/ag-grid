@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { ClipboardModule } from 'ag-grid-enterprise';
@@ -12,7 +11,7 @@ import { SetFilterModule } from 'ag-grid-enterprise';
 import './styles.css';
 
 // Register shared Modules globally
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, ColumnMenuModule, ContextMenuModule]);
+ModuleRegistry.registerModules([AllCommunityModule, ColumnMenuModule, ContextMenuModule]);
 
 @Component({
     selector: 'my-app',

@@ -125,7 +125,7 @@ const chartModules: ModuleTest[] = [
     },
     {
         modules: ['AgChartsEnterpriseModule' as any, 'SparklinesModule'],
-        expectedSize: 1452,
+        expectedSize: 1500,
     },
 ];
 

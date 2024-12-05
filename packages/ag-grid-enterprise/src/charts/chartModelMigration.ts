@@ -31,6 +31,7 @@ export function upgradeChartModel(model: ChartModel): ChartModel {
     model = migrateIfBefore('30.0.0', model, migrateV30);
     model = migrateIfBefore('31.0.0', model, migrateV31);
     model = migrateIfBefore('32.0.0', model, migrateV32);
+    model = migrateIfBefore('33.0.0', model, migrateV33);
     model = cleanup(model);
 
     // Bump version to latest.
@@ -309,6 +310,34 @@ function migrateV32(model: ChartModel) {
     return model;
 }
 
+function migrateV33(model: ChartModel) {
+    model = jsonDelete('chartOptions.*.axes.category.label.formatter', model);
+    model = jsonRename('chartOptions.*.axes.*.label.padding', 'spacing', model);
+    model = jsonDelete('chartOptions.*.axes.*.crossLines.label.className', model);
+    model = jsonMutateProperty('chartOptions.*.axes.*.crossLines.label.position', true, model, (parent, targetProp) => {
+        if (typeof parent[targetProp] === 'string') {
+            parent[targetProp] = parent[targetProp].replace(/([A-Z])/, '-$1').toLowerCase();
+        }
+    });
+    model = jsonDelete('chartOptions.bullet', model);
+    model = jsonRenameEnumValues('chartOptions.bar.series.label.placement', model, {
+        inside: 'inside-center',
+        outside: 'inside-end',
+    });
+    model = jsonRenameEnumValues('chartOptions.waterfall.series.item.*.label.placement', model, {
+        inside: 'inside-center',
+        start: 'outside-start',
+        end: 'outside-end',
+    });
+    model = jsonDelete('chartOptions.*.navigator.min', model);
+    model = jsonDelete('chartOptions.*.navigator.max', model);
+    model = jsonDelete('chartOptions.*.zoom.ratioX', model);
+    model = jsonDelete('chartOptions.*.zoom.ratioY', model);
+    model = jsonDelete('chartOptions.*.zoom.rangeX', model);
+    model = jsonDelete('chartOptions.*.zoom.rangeY', model);
+    return model;
+}
+
 function cleanup(model: ChartModel) {
     // Remove fixed width/height - this has never been supported via UI configuration.
     model = jsonDelete('chartOptions.*.width', model);
@@ -534,6 +563,14 @@ function jsonMutate(path: string | string[], json: any, mutator: (v: any) => any
     }
 
     return json;
+}
+
+function jsonRenameEnumValues(path: string | string[], json: any, values: Record<string, string>) {
+    return jsonMutateProperty(path, true, json, (parent, targetProp) => {
+        if (typeof parent[targetProp] === 'string') {
+            parent[targetProp] = values[targetProp] ?? targetProp;
+        }
+    });
 }
 
 const merge = (r: object, n: object) => ({ ...r, ...n });

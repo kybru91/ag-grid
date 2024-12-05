@@ -29,6 +29,7 @@ export const memoize = <R, A = void>(fn: (arg: A) => R): ((arg: A) => R) => {
     };
 };
 
+export const accentMix = (mix: number): ColorValue => ({ ref: 'accentColor', mix });
 export const foregroundMix = (mix: number): ColorValue => ({ ref: 'foregroundColor', mix });
 export const foregroundBackgroundMix = (mix: number): ColorValue => ({
     ref: 'foregroundColor',
@@ -36,3 +37,4 @@ export const foregroundBackgroundMix = (mix: number): ColorValue => ({
     onto: 'backgroundColor',
 });
 export const foregroundColor: ColorValue = { ref: 'foregroundColor' };
+export const accentColor: ColorValue = { ref: 'accentColor' };

@@ -1,5 +1,5 @@
 import { createPart } from '../../Part';
-import { foregroundBackgroundMix } from '../../theme-utils';
+import { accentColor, foregroundBackgroundMix } from '../../theme-utils';
 import { checkboxStyleDefaultCSS } from './checkbox-style-default.css-GENERATED';
 
 type CheckboxStyleDefaultParams = {
@@ -80,12 +80,8 @@ export const checkboxStyleDefault = createPart<CheckboxStyleDefaultParams>({
             ref: 'backgroundColor',
         },
         checkboxUncheckedBorderColor: foregroundBackgroundMix(0.3),
-        checkboxCheckedBackgroundColor: {
-            ref: 'accentColor',
-        },
-        checkboxCheckedBorderColor: {
-            ref: 'accentColor',
-        },
+        checkboxCheckedBackgroundColor: accentColor,
+        checkboxCheckedBorderColor: accentColor,
         checkboxCheckedShapeImage: {
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" fill="none"><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M1 3.5 3.5 6l5-5"/></svg>',
         },

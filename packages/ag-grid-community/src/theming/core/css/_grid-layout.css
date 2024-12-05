@@ -110,6 +110,7 @@
            avoid layout shift when we add a selection border. */
     border: 1px solid transparent;
     line-height: var(--ag-internal-content-line-height);
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .ag-cell {
@@ -252,7 +253,6 @@
         var(--ag-cell-horizontal-padding) - 1px + var(--ag-row-group-indent-size) * var(--ag-indentation-level)
     );
     padding-right: calc(var(--ag-cell-horizontal-padding) - 1px);
-    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 /* in full width rows, a cell renderer is rendered directly into a row with no

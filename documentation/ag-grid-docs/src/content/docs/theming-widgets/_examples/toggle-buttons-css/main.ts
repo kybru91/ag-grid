@@ -30,11 +30,9 @@ ModuleRegistry.registerModules([
 
 const myTheme = themeQuartz.withParams({
     toggleButtonWidth: 50,
-    toggleButtonHeight: 30,
-    toggleButtonSwitchInset: 10,
+    toggleButtonHeight: 26,
     toggleButtonOffBackgroundColor: 'darkred',
     toggleButtonOnBackgroundColor: 'darkgreen',
-    toggleButtonSwitchBackgroundColor: 'yellow',
 });
 
 const columnDefs: ColDef[] = [

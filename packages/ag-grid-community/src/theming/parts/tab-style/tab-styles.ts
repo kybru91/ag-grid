@@ -1,6 +1,6 @@
 import { createPart } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
-import { foregroundMix } from '../../theme-utils';
+import { accentColor, foregroundMix } from '../../theme-utils';
 import { tabStyleBaseCSS } from './tab-style-base.css-GENERATED';
 import { tabStyleRolodexCSS } from './tab-style-rolodex.css-GENERATED';
 
@@ -214,15 +214,9 @@ export const tabStyleAlpine = /*#__PURE__*/ createPart({
         tabBarBackgroundColor: {
             ref: 'chromeBackgroundColor',
         },
-        tabHoverTextColor: {
-            ref: 'accentColor',
-        },
-        tabSelectedTextColor: {
-            ref: 'accentColor',
-        },
-        tabSelectedUnderlineColor: {
-            ref: 'accentColor',
-        },
+        tabHoverTextColor: accentColor,
+        tabSelectedTextColor: accentColor,
+        tabSelectedUnderlineColor: accentColor,
         tabSelectedUnderlineWidth: 2,
         tabSelectedUnderlineTransitionDuration: '0.3s',
     },

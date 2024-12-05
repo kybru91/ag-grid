@@ -1,6 +1,6 @@
 import { createPart } from '../../Part';
 import { defaultLightColorSchemeParams } from '../../core/core-css';
-import { foregroundBackgroundMix } from '../../theme-utils';
+import { accentMix, foregroundBackgroundMix } from '../../theme-utils';
 
 export const colorSchemeLight = /*#__PURE__*/ createPart({
     feature: 'colorScheme',
@@ -31,6 +31,8 @@ const darkParams = {
     backgroundColor: 'hsl(217, 0%, 17%)',
     foregroundColor: '#FFF',
     chromeBackgroundColor: foregroundBackgroundMix(0.05),
+    rowHoverColor: accentMix(0.15),
+    selectedRowBackgroundColor: accentMix(0.2),
     browserColorScheme: 'dark',
     popupShadow: '0 0px 20px #0008',
     cardShadow: '0 1px 4px 1px #0008',

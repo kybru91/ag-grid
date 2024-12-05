@@ -1,6 +1,6 @@
 import type { ExpandTypeKeys } from '../Part';
 import type { WithParamTypes } from '../theme-types';
-import { foregroundBackgroundMix, foregroundColor, foregroundMix } from '../theme-utils';
+import { accentColor, accentMix, foregroundBackgroundMix, foregroundColor, foregroundMix } from '../theme-utils';
 
 export { coreCSS } from './core.css-GENERATED';
 
@@ -768,31 +768,14 @@ export const coreDefaults: Readonly<CoreParams> = {
         mix: 0.5,
     },
     rangeSelectionBorderStyle: 'solid',
-    rangeSelectionBorderColor: {
-        ref: 'accentColor',
-    },
-    rangeSelectionBackgroundColor: {
-        ref: 'accentColor',
-        mix: 0.2,
-    },
+    rangeSelectionBorderColor: accentColor,
+    rangeSelectionBackgroundColor: accentMix(0.2),
     rangeSelectionChartBackgroundColor: '#0058FF1A',
     rangeSelectionChartCategoryBackgroundColor: '#00FF841A',
-    rangeSelectionHighlightColor: {
-        ref: 'accentColor',
-        mix: 0.5,
-    },
-    rowHoverColor: {
-        ref: 'accentColor',
-        mix: 0.08,
-    },
-    columnHoverColor: {
-        ref: 'accentColor',
-        mix: 0.05,
-    },
-    selectedRowBackgroundColor: {
-        ref: 'accentColor',
-        mix: 0.12,
-    },
+    rangeSelectionHighlightColor: accentMix(0.5),
+    rowHoverColor: accentMix(0.08),
+    columnHoverColor: accentMix(0.05),
+    selectedRowBackgroundColor: accentMix(0.12),
     modalOverlayBackgroundColor: {
         ref: 'backgroundColor',
         mix: 0.66,
@@ -838,7 +821,7 @@ export const coreDefaults: Readonly<CoreParams> = {
     dragHandleColor: foregroundMix(0.7),
     focusShadow: {
         spread: 3,
-        color: { ref: 'accentColor', mix: 0.5 },
+        color: accentMix(0.5),
     },
     headerColumnResizeHandleHeight: '30%',
     headerColumnResizeHandleWidth: 2,
@@ -863,9 +846,7 @@ export const coreDefaults: Readonly<CoreParams> = {
     iconSize: 16,
     toggleButtonWidth: 28,
     toggleButtonHeight: 18,
-    toggleButtonOnBackgroundColor: {
-        ref: 'accentColor',
-    },
+    toggleButtonOnBackgroundColor: accentColor,
     toggleButtonOffBackgroundColor: foregroundBackgroundMix(0.3),
     toggleButtonSwitchBackgroundColor: {
         ref: 'backgroundColor',
@@ -892,7 +873,7 @@ export const coreDefaults: Readonly<CoreParams> = {
         ref: 'popupShadow',
     },
     cellEditingBorder: {
-        color: { ref: 'accentColor' },
+        color: accentColor,
     },
     cellEditingShadow: { ref: 'cardShadow' },
     dialogBorder: {
@@ -942,5 +923,5 @@ export const coreDefaults: Readonly<CoreParams> = {
         ref: 'spacing',
     },
     iconButtonHoverBackgroundColor: foregroundMix(0.1),
-    rowLoadingSkeletonEffectColor: 'rgba(66, 66, 66, 0.2)',
+    rowLoadingSkeletonEffectColor: foregroundMix(0.15),
 };

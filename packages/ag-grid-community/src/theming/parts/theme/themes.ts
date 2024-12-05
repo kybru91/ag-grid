@@ -1,5 +1,5 @@
 import { createTheme } from '../../Theme';
-import { foregroundMix } from '../../theme-utils';
+import { accentColor, accentMix, foregroundMix } from '../../theme-utils';
 import { checkboxStyleDefault } from '../checkbox-style/checkbox-styles';
 import { colorSchemeVariable } from '../color-scheme/color-schemes';
 import { iconSetAlpine, iconSetQuartzRegular } from '../icon-set/icon-sets';
@@ -36,19 +36,16 @@ export const themeAlpine =
         .withPart(inputStyleBordered)
         .withParams({
             accentColor: '#2196f3',
-            selectedRowBackgroundColor: {
-                ref: 'accentColor',
-                mix: 0.3,
-            },
+            selectedRowBackgroundColor: accentMix(0.3),
             inputFocusBorder: {
-                color: { ref: 'accentColor', mix: 0.4 },
+                color: accentMix(0.4),
             },
             fontSize: 13,
             dataFontSize: 14,
             headerFontWeight: 700,
             borderRadius: 3,
             wrapperBorderRadius: 3,
-            tabSelectedUnderlineColor: { ref: 'accentColor' },
+            tabSelectedUnderlineColor: accentColor,
             tabSelectedBorderWidth: 2,
             tabSelectedUnderlineTransitionDuration: 0.3,
         });

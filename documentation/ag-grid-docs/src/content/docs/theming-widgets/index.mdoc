@@ -91,16 +91,20 @@ Radio Buttons, such as those in the chart settings UI, are specialised checkboxe
 
 ## Styling Toggle Buttons
 
-Toggle Buttons, such as the "Pivot Mode" toggle in the example below, are styled using theme parameters beginning `toggleButton*`. Search "toggle" in the "All Parameters" section of the [Theme Builder](/theme-builder/) or use typescript autocompletion in your IDE.
+Toggle Buttons, such as the "Pivot Mode" toggle in the example below, are styled using theme parameters beginning `toggleButton*`.
 
 ```js
 const myTheme = themeQuartz.withParams({
     toggleButtonWidth: 50,
-    toggleButtonHeight: 26,
+    toggleButtonHeight: 30,
+    toggleButtonSwitchInset: 10,
     toggleButtonOffBackgroundColor: 'darkred',
     toggleButtonOnBackgroundColor: 'darkgreen',
+    toggleButtonSwitchBackgroundColor: 'yellow',
 });
 ```
+
+{% gridExampleRunner title="Toggle Button Styling" name="toggle-buttons" exampleHeight=450 /%}
 
 If there is no parameter that achieves the effect you want, you can use CSS selectors:
 
@@ -119,4 +123,4 @@ If there is no parameter that achieves the effect you want, you can use CSS sele
 }
 ```
 
-{% gridExampleRunner title="Checkbox Styling" name="toggle-buttons" exampleHeight=450 /%}
+{% gridExampleRunner title="Toggle Button Styling with CSS" name="toggle-buttons-css" exampleHeight=450 /%}

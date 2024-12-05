@@ -43,9 +43,9 @@
 }
 
 .copyToClipboardIcon {
+    --icon-size: 20px;
+
     position: absolute;
-    width: 20px;
-    height: 20px;
 
     &.copyIcon {
         animation: scaleUp 0.2s ease-out;

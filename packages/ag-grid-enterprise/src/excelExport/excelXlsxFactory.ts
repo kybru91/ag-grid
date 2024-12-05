@@ -100,10 +100,6 @@ export function showExcelTableNonCompatibleFeaturesWarning(featureName: string) 
     _warn(163, { featureName });
 }
 
-export function getXlsxTableNameFromIndex(idx: number) {
-    return `table${idx + 1}`;
-}
-
 export function getXlsxSanitizedTableName(name: string) {
     return name
         .replace(/^[^a-zA-Z_]+/, '_')
@@ -166,7 +162,7 @@ function processTableConfig(worksheet: ExcelWorksheet, config: ExcelGridSerializ
     }
 
     addXlsxTableToSheet(sheetIndex, {
-        name: getXlsxTableNameFromIndex(sheetIndex),
+        name: `table${XLSX_WORKSHEET_DATA_TABLES.size + 1}`,
         displayName: tableName,
         columns: tableColumns,
         showFilterButtons: showFilterButtons,
@@ -443,13 +439,13 @@ export function createXlsxVmlDrawingRel(sheetIndex: number) {
 export function createXlsxRelationships({
     drawingIndex,
     vmlDrawingIndex,
-    tableIndex,
+    tableName,
 }: {
     drawingIndex?: number;
     vmlDrawingIndex?: number;
-    tableIndex?: number;
+    tableName?: string;
 } = {}) {
-    if (drawingIndex === undefined && vmlDrawingIndex === undefined && tableIndex === undefined) {
+    if (drawingIndex === undefined && vmlDrawingIndex === undefined && tableName === undefined) {
         return '';
     }
 
@@ -470,11 +466,11 @@ export function createXlsxRelationships({
         });
     }
 
-    if (tableIndex != null) {
+    if (tableName != null) {
         config.push({
             Id: `rId${config.length + 1}`,
             Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/table',
-            Target: `../tables/${getXlsxTableNameFromIndex(tableIndex)}.xml`,
+            Target: `../tables/${tableName}.xml`,
         });
     }
 

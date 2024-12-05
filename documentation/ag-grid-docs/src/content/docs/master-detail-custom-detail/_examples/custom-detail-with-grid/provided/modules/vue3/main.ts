@@ -1,6 +1,6 @@
 import { createApp, defineComponent } from 'vue';
 
-import type {ChartRef, ColDef, FirstDataRenderedEvent, GridApi, GridReadyEvent} from 'ag-grid-community';
+import type { ChartRef, ColDef, FirstDataRenderedEvent, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
 import { MasterDetailModule } from 'ag-grid-enterprise';

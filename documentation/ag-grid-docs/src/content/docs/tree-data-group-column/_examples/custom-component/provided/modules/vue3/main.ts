@@ -1,12 +1,12 @@
 import { createApp, defineComponent } from 'vue';
 
-import type {ColDef, GridApi, ValueFormatterParams} from 'ag-grid-community';
+import type { ColDef, GridApi, ValueFormatterParams } from 'ag-grid-community';
 import {
     AllCommunityModule,
     CellDoubleClickedEvent,
     CellKeyDownEvent,
     GridReadyEvent,
-    ModuleRegistry
+    ModuleRegistry,
 } from 'ag-grid-community';
 import { TreeDataModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';

@@ -25,12 +25,7 @@ import {
 } from 'ag-grid-community';
 import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([
-    AllCommunityModule,
-    SideBarModule,
-    ColumnsToolPanelModule,
-    FiltersToolPanelModule,
-]);
+ModuleRegistry.registerModules([AllCommunityModule, SideBarModule, ColumnsToolPanelModule, FiltersToolPanelModule]);
 
 @Component({
     standalone: true,

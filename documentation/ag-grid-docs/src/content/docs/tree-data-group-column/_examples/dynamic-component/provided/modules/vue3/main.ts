@@ -1,6 +1,6 @@
 import { createApp, defineComponent } from 'vue';
 
-import type {CellDoubleClickedEvent, CellKeyDownEvent, ColDef, GridApi, GridReadyEvent} from 'ag-grid-community';
+import type { CellDoubleClickedEvent, CellKeyDownEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { TreeDataModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';

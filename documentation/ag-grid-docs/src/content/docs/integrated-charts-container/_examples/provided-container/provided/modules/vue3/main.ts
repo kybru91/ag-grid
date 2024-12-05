@@ -1,10 +1,10 @@
-import {createApp, defineComponent, onBeforeMount, ref, shallowRef} from 'vue';
+import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
+import { createApp, defineComponent, onBeforeMount, ref, shallowRef } from 'vue';
 
 import type { ChartRef, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import {AllCommunityModule, ModuleRegistry} from 'ag-grid-community';
-import {AgChartsEnterpriseModule} from 'ag-charts-enterprise';
-import {ColumnMenuModule, ContextMenuModule, IntegratedChartsModule, RowGroupingModule} from 'ag-grid-enterprise';
-import {AgGridVue} from 'ag-grid-vue3';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { ColumnMenuModule, ContextMenuModule, IntegratedChartsModule, RowGroupingModule } from 'ag-grid-enterprise';
+import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
@@ -42,14 +42,14 @@ const VueExample = defineComponent({
     },
     setup(props) {
         const columnDefs = ref<ColDef[]>([
-            {field: 'athlete', width: 150, chartDataType: 'category'},
-            {field: 'gold', chartDataType: 'series'},
-            {field: 'silver', chartDataType: 'series'},
-            {field: 'bronze', chartDataType: 'series'},
-            {field: 'total', chartDataType: 'series'},
+            { field: 'athlete', width: 150, chartDataType: 'category' },
+            { field: 'gold', chartDataType: 'series' },
+            { field: 'silver', chartDataType: 'series' },
+            { field: 'bronze', chartDataType: 'series' },
+            { field: 'total', chartDataType: 'series' },
         ]);
         const gridApi = shallowRef<GridApi | null>(null);
-        const defaultColDef = ref<ColDef>({flex: 1});
+        const defaultColDef = ref<ColDef>({ flex: 1 });
         const popupParent = ref(null);
         const rowData = ref<any[]>(null);
 

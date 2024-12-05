@@ -110,7 +110,12 @@ const VueExample = defineComponent({
                 minWidth: 100,
                 filter: true,
             },
-            columns: <ColDef[]>[{ field: 'id', rowDrag: true }, { field: 'color' }, { field: 'value1' }, { field: 'value2' }],
+            columns: <ColDef[]>[
+                { field: 'id', rowDrag: true },
+                { field: 'color' },
+                { field: 'value1' },
+                { field: 'value2' },
+            ],
         };
     },
     beforeMount() {

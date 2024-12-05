@@ -6,7 +6,7 @@ import type {
     GridApi,
     GridReadyEvent,
     RowClassRules,
-    RowDropZoneParams
+    RowDropZoneParams,
 } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
@@ -119,7 +119,12 @@ const VueExample = defineComponent({
                 minWidth: 100,
                 filter: true,
             },
-            columns: <ColDef[]>[{ field: 'id', rowDrag: true }, { field: 'color' }, { field: 'value1' }, { field: 'value2' }],
+            columns: <ColDef[]>[
+                { field: 'id', rowDrag: true },
+                { field: 'color' },
+                { field: 'value1' },
+                { field: 'value2' },
+            ],
         };
     },
     beforeMount() {

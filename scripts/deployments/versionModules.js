@@ -4,8 +4,8 @@ const path = require('path');
 
 const pipe =
     (...fns) =>
-    (x) =>
-        fns.reduce((v, f) => f(v), x);
+        (x) =>
+            fns.reduce((v, f) => f(v), x);
 
 const ROOT_PACKAGE_JSON = '../../package.json';
 const packageDirectories = require(ROOT_PACKAGE_JSON).workspaces.packages;
@@ -61,7 +61,7 @@ function updatePackageJsonFiles() {
         updateFileWithNewVersions(packageJsonFile);
 
         // angular projects have "sub" projects which we need to update
-        if (packageDirectory.includes('angular')) {
+        if (packageDirectory.includes('angular') && !packageDirectory.includes('module-size-angular')) {
             updateAngularProject(CWD, packageDirectory);
         }
 

@@ -45,7 +45,7 @@ export const AllCommunityModules: Record<`${CommunityModuleName}Module`, number>
     TextFilterModule: 104,
     TooltipModule: 22.24,
     UndoRedoEditModule: 23.5,
-    ValidationModule: 69.56,
+    ValidationModule: 72,
     ValueCacheModule: 0.65,
 };
 export const AllEnterpriseModules: Record<`${EnterpriseModuleName}Module`, number> = {

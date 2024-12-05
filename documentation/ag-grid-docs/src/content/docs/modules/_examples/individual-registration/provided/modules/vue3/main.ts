@@ -1,17 +1,26 @@
 import { createApp, defineComponent } from 'vue';
 
+import {
+    ClientSideRowModelModule,
+    CsvExportModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+} from 'ag-grid-community';
 import type { ColDef } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ClipboardModule } from 'ag-grid-enterprise';
-import { ExcelExportModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClipboardModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ExcelExportModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
 // Register shared Modules globally
-ModuleRegistry.registerModules([AllCommunityModule, ColumnMenuModule, ContextMenuModule]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, ColumnMenuModule, ContextMenuModule]);
 
 let rowIdSequence = 100;
 const createRowBlock = () =>
@@ -59,8 +68,8 @@ const VueExample = defineComponent({
         return {
             leftRowData: [],
             rightRowData: [],
-            leftModules: [SetFilterModule, ClipboardModule],
-            rightModules: [ExcelExportModule],
+            leftModules: [SetFilterModule, ClipboardModule, CsvExportModule],
+            rightModules: [TextFilterModule, NumberFilterModule, CsvExportModule, ExcelExportModule],
             defaultColDef: <ColDef>{
                 flex: 1,
                 minWidth: 100,

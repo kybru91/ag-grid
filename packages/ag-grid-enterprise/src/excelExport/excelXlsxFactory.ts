@@ -1,5 +1,6 @@
 import type {
     AgColumn,
+    ExcelExportParams,
     ExcelFactoryMode,
     ExcelHeaderFooterImage,
     ExcelImage,
@@ -116,13 +117,13 @@ export function addXlsxTableToSheet(sheetIndex: number, table: ExcelDataTable): 
     XLSX_WORKSHEET_DATA_TABLES.set(sheetIndex, table);
 }
 
-function processTableConfig(worksheet: ExcelWorksheet, config: ExcelGridSerializingParams) {
-    if (!config.exportAsExcelTable) {
+function processTableConfig(worksheet: ExcelWorksheet, config: ExcelGridSerializingParams & ExcelExportParams) {
+    const { exportAsExcelTable, prependContent, appendContent, colModel } = config;
+    if (!exportAsExcelTable) {
         return;
     }
 
-    const tableConfig: Partial<ExcelTableConfig> =
-        typeof config.exportAsExcelTable === 'boolean' ? {} : config.exportAsExcelTable;
+    const tableConfig: Partial<ExcelTableConfig> = typeof exportAsExcelTable === 'boolean' ? {} : exportAsExcelTable;
 
     const {
         name: nameFromConfig,
@@ -138,8 +139,9 @@ function processTableConfig(worksheet: ExcelWorksheet, config: ExcelGridSerializ
     const sheetIndex = XLSX_SHEET_NAMES.length - 1;
     const { table } = worksheet;
     const { rows, columns } = table;
-    const headerRowCount = _getHeaderRowCount(config.colModel);
-    const tableHeaderRowIndex: number = headerRowCount - 1; // Assuming that header starts at row 0
+    const headerRowCount = _getHeaderRowCount(colModel);
+    const skipTopRows = prependContent ? prependContent.length : 0;
+    const removeFromBottom = appendContent ? appendContent.length : 0;
     const tableRowCount = rows.length;
     const tableColCount = columns.length;
 
@@ -166,8 +168,7 @@ function processTableConfig(worksheet: ExcelWorksheet, config: ExcelGridSerializ
         displayName: tableName,
         columns: tableColumns,
         showFilterButtons: showFilterButtons,
-        headerRowIndex: tableHeaderRowIndex,
-        rowCount: tableRowCount - headerRowCount,
+        rowRange: [headerRowCount + skipTopRows, headerRowCount + (tableRowCount - headerRowCount) - removeFromBottom],
         showRowStripes: showRowStripes ?? true,
         showColumnStripes: showColumnStripes ?? false,
         highlightFirstColumn: highlightFirstColumn ?? false,

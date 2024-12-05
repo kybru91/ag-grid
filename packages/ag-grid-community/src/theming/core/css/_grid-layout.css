@@ -113,6 +113,14 @@
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
+/* :has(*) selector targets containers that have children,
+but unlike :not(:empty), it will not consider a textNode as child,
+so it will not target <button>Hello</button> as a target for example.
+*/
+:where(.ag-cell:not(.ag-cell-auto-height) > :has(*)) {
+    min-height: min(var(--ag-row-height), var(--ag-internal-calculated-line-height));
+}
+
 .ag-cell {
     border-right: var(--ag-column-border);
 }

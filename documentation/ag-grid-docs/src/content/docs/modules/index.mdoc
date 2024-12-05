@@ -42,7 +42,7 @@ We need to register the grid modules we wish to use via the `ModuleRegistry`.
 import { ModuleRegistry, ClientSideRowModelModule, CsvExportModule } from 'ag-grid-community';
 import { ExcelExportModule, MasterDetailModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules(
+ModuleRegistry.registerModules([
     ClientSideRowModelModule,
     CsvExportModule,
     ExcelExportModule,

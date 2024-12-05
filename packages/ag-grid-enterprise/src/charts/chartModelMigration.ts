@@ -311,7 +311,10 @@ function migrateV32(model: ChartModel) {
 }
 
 function migrateV33(model: ChartModel) {
-    model = jsonDelete('chartOptions.*.axes.category.label.formatter', model);
+    model = jsonDelete('chartOptions.*.axes.category.label.format', model);
+    model = jsonDelete('chartOptions.*.axes.category.crosshair.label.format', model);
+    model = jsonDelete('chartOptions.*.axes.angle-category.label.format', model);
+    model = jsonDelete('chartOptions.*.axes.radius-category.label.format', model);
     model = jsonRename('chartOptions.*.axes.*.label.padding', 'spacing', model);
     model = jsonDelete('chartOptions.*.axes.*.crossLines.label.className', model);
     model = jsonMutateProperty('chartOptions.*.axes.*.crossLines.label.position', true, model, (parent, targetProp) => {

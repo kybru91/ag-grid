@@ -1801,6 +1801,32 @@
             }
         }
     },
+    "theme": {
+        "meta": {
+            "displayName": "Theme",
+            "page": {
+                "name": "Theming",
+                "url": "./theming/"
+            }
+        },
+        "theme": {
+            "displayName": "Themes",
+            "more": {
+                "name": "Built-in themes",
+                "url": "./themes/"
+            },
+            "interfaceHierarchyOverrides": {
+                "exclude": ["Theme", "Part"]
+            }
+        },
+        "loadThemeGoogleFonts": {
+            "displayName": "Tooltips",
+            "more": {
+                "name": "Loading Google Fonts",
+                "url": "./theming-fonts/#loading-google-fonts"
+            }
+        }
+    },
     "tooltips": {
         "meta": {
             "displayName": "Tooltips",

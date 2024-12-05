@@ -1634,21 +1634,16 @@ export interface GridOptions<TData = any> {
     reactiveCustomComponents?: boolean;
 
     /**
-     * Theme to apply to the grid. In no value is provided, the default theme
-     * will be applied.
+     * Theme to apply to the grid, or the string "legacy" to opt back into the
+     * v32 style of theming where themes were imported as CSS files and applied
+     * by setting a class name on the parent element.
      *
-     * In AG Grid v23 and earlier, themes were applied by setting a class name
-     * on the parent element of the grid. To opt back in to this behaviour, pass
-     * the string "legacy"
+     * @default themeQuartz
      */
     theme?: Theme | 'legacy';
 
     /**
-     * Whether to load supported theme fonts from the Google Fonts server.
-     *
-     * - `true` -> load fonts automatically if your theme uses them
-     * - `false` -> do not load fonts. You must load them from Google Fonts yourself or download
-     *              them and serve them from your app, otherwise a fallback font will be used.
+     * If your theme uses a font that is available on Google Fonts, pass true to load it from Google's CDN.
      */
     loadThemeGoogleFonts?: boolean;
 

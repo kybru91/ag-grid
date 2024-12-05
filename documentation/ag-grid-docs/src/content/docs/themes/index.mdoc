@@ -8,21 +8,6 @@ Themes are objects imported from the `ag-grid-community` package and provided to
 
 ```js
 import { themeBalham } from 'ag-grid-community';
-```
-
-## Built-in Themes
-
- * Quartz - Our default theme, with high contrast and generous padding.
- * Balham - A more traditional theme modelled after a spreadsheet application.
- * Alpine - The default theme before Quartz. We recommend quartz for new projects; this theme is intended to ease migration to the Theming API for
- applications already using Alpine.
-
-{% gridExampleRunner title="Built-in themes" name="built-in-themes" /%}
-
-## Changing the Default Theme
-
-```js
-import { themeBalham } from 'ag-grid-community';
 
 {% if isFramework("javascript") %}
 const gridOptions = {
@@ -61,9 +46,14 @@ public theme = themeBalham;
 {% /if %}
 ```
 
-This is a minimal example of importing a theme from `ag-grid-community` and applying it to a grid instance.
+## Built-in Themes
 
-{% gridExampleRunner title="Basic Theming API Example" name="basic" /%}
+ * Quartz - Our default theme, with high contrast and generous padding.
+ * Balham - A more traditional theme modelled after a spreadsheet application.
+ * Alpine - The default theme before Quartz. We recommend quartz for new projects; this theme is intended to ease migration to the Theming API for
+ applications already using Alpine.
+
+{% gridExampleRunner title="Built-in themes" name="built-in-themes" /%}
 
 ## Customising Built-in Themes
 

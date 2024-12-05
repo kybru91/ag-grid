@@ -64,25 +64,25 @@ const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
     },
 
     groupRemoveSingleChildren: {
-        version: '32.3',
+        version: '33',
         message: 'Use `groupHideParentOfSingleChild` instead.',
     },
     groupRemoveLowestSingleChildren: {
-        version: '32.3',
+        version: '33',
         message: 'Use `groupHideParentOfSingleChild: "leafGroupsOnly"` instead.',
     },
 
     suppressRowGroupHidesColumns: {
-        version: '32.3',
+        version: '33',
         message: 'Use `suppressGroupChangesColumnVisibility: "suppressHideOnGroup"` instead.',
     },
     suppressMakeColumnVisibleAfterUnGroup: {
-        version: '32.3',
+        version: '33',
         message: 'Use `suppressGroupChangesColumnVisibility: "suppressShowOnUngroup"` instead.',
     },
 
-    unSortIcon: { version: '32.3', message: 'Use `defaultColDef.unSortIcon` instead.' },
-    sortingOrder: { version: '32.3', message: 'Use `defaultColDef.sortingOrder` instead.' },
+    unSortIcon: { version: '33', message: 'Use `defaultColDef.unSortIcon` instead.' },
+    sortingOrder: { version: '33', message: 'Use `defaultColDef.sortingOrder` instead.' },
 });
 
 function toConstrainedNum(

@@ -4,8 +4,8 @@ const path = require('path');
 
 const pipe =
     (...fns) =>
-        (x) =>
-            fns.reduce((v, f) => f(v), x);
+    (x) =>
+        fns.reduce((v, f) => f(v), x);
 
 const ROOT_PACKAGE_JSON = '../../package.json';
 const packageDirectories = require(ROOT_PACKAGE_JSON).workspaces.packages;

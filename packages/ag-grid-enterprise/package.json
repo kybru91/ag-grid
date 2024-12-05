@@ -8,8 +8,8 @@
   "exports": {
     ".": {
       "import": "./dist/package/main.esm.mjs",
-      "require": "./dist/package/main.cjs.js",
       "types": "./dist/types/src/main.d.ts",
+      "require": "./dist/package/main.cjs.js",
       "default": "./dist/package/main.cjs.js"
     },
     "./styles/ag-grid-no-native-widgets.css": "./styles/ag-grid-no-native-widgets.css",
@@ -88,14 +88,14 @@
     "ag-grid-community": "32.2.0"
   },
   "optionalDependencies": {
-    "ag-charts-community": "10.3.3-beta.20241204",
-    "ag-charts-enterprise": "10.3.3-beta.20241204"
+    "ag-charts-community": "10.3.3-beta.20241205",
+    "ag-charts-enterprise": "10.3.3-beta.20241205"
   },
   "devDependencies": {
     "source-map-loader": "^5.0.0",
     "@ag-grid-community/styles": "32.2.0",
-    "ag-charts-community": "10.3.3-beta.20241204",
-    "ag-charts-enterprise": "10.3.3-beta.20241204",
+    "ag-charts-community": "10.3.3-beta.20241205",
+    "ag-charts-enterprise": "10.3.3-beta.20241205",
     "ts-loader": "^9.5.1",
     "style-loader": "^3.3.4",
     "css-loader": "^6.10.0",

@@ -118,7 +118,7 @@ but unlike :not(:empty), it will not consider a textNode as child,
 so it will not target <button>Hello</button> as a target for example.
 */
 :where(.ag-cell:not(.ag-cell-auto-height) > :has(*)) {
-    min-height: min(var(--ag-row-height), var(--ag-internal-calculated-line-height));
+    min-height: calc(min(var(--ag-row-height), var(--ag-internal-calculated-line-height)) - 2px);
 }
 
 .ag-cell {

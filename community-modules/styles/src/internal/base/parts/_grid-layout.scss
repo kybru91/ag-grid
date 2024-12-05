@@ -205,7 +205,7 @@
     }
 
     .ag-cell:not(.ag-cell-auto-height) > :has(*) {
-        min-height: min(var(--ag-row-height), var(--ag-internal-calculated-line-height));
+        min-height: calc(min(var(--ag-row-height), var(--ag-internal-calculated-line-height)) - 2px);
     }
 
     // in full width rows, a cell renderer is rendered directly into a row with no cell in between,

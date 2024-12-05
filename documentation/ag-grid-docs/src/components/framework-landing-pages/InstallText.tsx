@@ -22,7 +22,7 @@ const FRAMEWORK_CONFIGS: Record<Framework, { Icon: any; command: string; name: s
     },
     vue: {
         Icon: VueIcon,
-        command: 'npm install ag-grid-vue-3',
+        command: 'npm install ag-grid-vue3',
         name: 'Vue',
     },
     javascript: {

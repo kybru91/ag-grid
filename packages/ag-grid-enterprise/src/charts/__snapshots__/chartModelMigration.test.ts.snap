@@ -39,7 +39,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 22.1.0 successfull
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -85,7 +85,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 22.1.0 successfull
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -245,7 +245,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 22.1.0-bar success
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -291,7 +291,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 22.1.0-bar success
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -943,7 +943,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 22.1.0-scatter suc
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1086,7 +1086,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 23.0.0 successfull
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1132,7 +1132,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 23.0.0 successfull
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1283,7 +1283,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 24.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1335,7 +1335,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 24.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1400,7 +1400,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 24.0.0 successfull
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -1410,7 +1409,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 24.0.0 successfull
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -1513,7 +1511,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1565,7 +1563,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1630,7 +1628,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0 successfull
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -1640,7 +1637,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0 successfull
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -1769,7 +1765,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0-line succes
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1824,7 +1820,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0-line succes
             "fontSize": 12,
             "fontStyle": "normal",
             "fontWeight": "normal",
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -1890,7 +1886,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0-line succes
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -1900,7 +1895,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 25.0.0-line succes
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2013,8 +2007,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 335,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2067,8 +2061,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2134,7 +2128,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0 successfull
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2144,7 +2137,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0 successfull
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2177,7 +2169,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0 successfull
           "enabled": false,
           "fontFamily": "Verdana, sans-serif",
           "fontSize": 12,
-          "placement": "inside",
+          "placement": "placement",
         },
         "lineDash": [
           0,
@@ -2287,8 +2279,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0-scatter suc
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2353,7 +2345,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0-scatter suc
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2363,7 +2354,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.0.0-scatter suc
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2482,8 +2472,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.1.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 335,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2536,8 +2526,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.1.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2603,7 +2593,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.1.0 successfull
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2613,7 +2602,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.1.0 successfull
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2645,7 +2633,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.1.0 successfull
           "enabled": false,
           "fontFamily": "Verdana, sans-serif",
           "fontSize": 12,
-          "placement": "inside",
+          "placement": "placement",
         },
         "lineDash": [
           0,
@@ -2736,8 +2724,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2777,8 +2765,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2819,8 +2807,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2860,8 +2848,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2901,8 +2889,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -2960,7 +2948,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
           "stroke": "#999999",
           "strokeWidth": 1,
         },
-        "max": 1,
         "maxHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -2970,7 +2957,6 @@ exports[`chartModelMigration upgradeChartModel should upgrade 26.2.0 successfull
           "strokeWidth": 1,
           "width": 8,
         },
-        "min": 0,
         "minHandle": {
           "fill": "#f2f2f2",
           "gripLineGap": 2,
@@ -3106,8 +3092,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3147,8 +3133,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3189,8 +3175,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3230,8 +3216,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3271,8 +3257,8 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
             "rotation": 0,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3372,7 +3358,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 27.0.0 successfull
           "enabled": false,
           "fontFamily": "Verdana, sans-serif",
           "fontSize": 12,
-          "placement": "inside",
+          "placement": "placement",
         },
         "lineDash": [
           0,
@@ -3471,7 +3457,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3511,7 +3497,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3552,7 +3538,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3592,7 +3578,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3632,7 +3618,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
             "color": "rgb(87, 87, 87)",
             "fontFamily": "Verdana, sans-serif",
             "fontSize": 12,
-            "padding": 5,
+            "spacing": 5,
           },
           "left": {},
           "line": {
@@ -3731,7 +3717,7 @@ exports[`chartModelMigration upgradeChartModel should upgrade 28.0.0 successfull
           "enabled": false,
           "fontFamily": "Verdana, sans-serif",
           "fontSize": 12,
-          "placement": "inside",
+          "placement": "placement",
         },
         "lineDash": [
           0,

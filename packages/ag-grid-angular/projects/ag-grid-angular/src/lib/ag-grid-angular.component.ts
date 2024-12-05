@@ -548,13 +548,13 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
         | undefined = undefined;
     /** By default, when a column is un-grouped, i.e. using the Row Group Panel, it is made visible in the grid. This property stops the column becoming visible again when un-grouping.
      * @default false
-     * @deprecated v32.3.0 - Use `suppressGroupChangesColumnVisibility: 'suppressShowOnUngroup'` instead.
+     * @deprecated v33.0.0 - Use `suppressGroupChangesColumnVisibility: 'suppressShowOnUngroup'` instead.
      */
     @Input({ transform: booleanAttribute }) public suppressMakeColumnVisibleAfterUnGroup: boolean | undefined =
         undefined;
     /** If `true`, when you drag a column into a row group panel the column is not hidden.
      * @default false
-     * @deprecated v32.3.0 - Use `suppressGroupChangesColumnVisibility: 'suppressHideOnGroup'` instead.
+     * @deprecated v33.0.0 - Use `suppressGroupChangesColumnVisibility: 'suppressHideOnGroup'` instead.
      */
     @Input({ transform: booleanAttribute }) public suppressRowGroupHidesColumns: boolean | undefined = undefined;
     /** Set to `'shift'` to have shift-resize as the default resize operation (same as user holding down `Shift` while resizing).
@@ -1134,12 +1134,12 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     @Input() public groupHideParentOfSingleChild: boolean | 'leafGroupsOnly' | undefined = undefined;
     /** Set to `true` to collapse groups that only have one child.
      * @default false
-     * @deprecated v32.3.0 - use `groupHideParentOfSingleChild` instead.
+     * @deprecated v33.0.0 - use `groupHideParentOfSingleChild` instead.
      */
     @Input({ transform: booleanAttribute }) public groupRemoveSingleChildren: boolean | undefined = undefined;
     /** Set to `true` to collapse lowest level groups that only have one child.
      * @default false
-     * @deprecated v32.3.0 - use `groupHideParentOfSingleChild: 'leafGroupsOnly'` instead.
+     * @deprecated v33.0.0 - use `groupHideParentOfSingleChild: 'leafGroupsOnly'` instead.
      */
     @Input({ transform: booleanAttribute }) public groupRemoveLowestSingleChildren: boolean | undefined = undefined;
     /** Set to `true` to hide parents that are open. When used with multiple columns for showing groups, it can give a more pleasing user experience.
@@ -1462,19 +1462,14 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      * @initial
      */
     @Input() public initialState: GridState | undefined = undefined;
-    /** Theme to apply to the grid. In no value is provided, the default theme
-     * will be applied.
+    /** Theme to apply to the grid, or the string "legacy" to opt back into the
+     * v32 style of theming where themes were imported as CSS files and applied
+     * by setting a class name on the parent element.
      *
-     * In AG Grid v23 and earlier, themes were applied by setting a class name
-     * on the parent element of the grid. To opt back in to this behaviour, pass
-     * the string "legacy"
+     * @default themeQuartz
      */
     @Input() public theme: Theme | 'legacy' | undefined = undefined;
-    /** Whether to load supported theme fonts from the Google Fonts server.
-     *
-     * - `true` -> load fonts automatically if your theme uses them
-     * - `false` -> do not load fonts. You must load them from Google Fonts yourself or download
-     *              them and serve them from your app, otherwise a fallback font will be used.
+    /** If your theme uses a font that is available on Google Fonts, pass true to load it from Google's CDN.
      */
     @Input({ transform: booleanAttribute }) public loadThemeGoogleFonts: boolean | undefined = undefined;
     /** For customising the context menu.

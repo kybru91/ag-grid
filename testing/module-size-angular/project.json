@@ -1,5 +1,5 @@
 {
-  "name": "ag-module-size-angular",
+  "name": "ag-grid-module-size-angular",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "testing/module-size-angular",
   "projectType": "app",

@@ -44,6 +44,7 @@ packageNames
             agSubAngularChartDeps,
         } = agPackage;
 
+        debugger;
         function checkDependency(dependencyName, currentVersion, expectedVersion) {
             if (currentVersion !== expectedVersion) {
                 console.error(

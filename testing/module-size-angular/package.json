@@ -1,5 +1,5 @@
 {
-  "name": "ag-module-size-angular",
+  "name": "ag-grid-module-size-angular",
   "version": "32.2.0",
   "scripts": {
     "ng": "ng",

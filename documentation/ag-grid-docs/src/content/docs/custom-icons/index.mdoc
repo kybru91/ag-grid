@@ -42,7 +42,7 @@ The `iconOverrides` part can be used to change individual icons to an image, sol
 | Parameter | Description |
 |-|-|
 | `type` | `image` |
-| `mask` | if `true`, the icon shape is taken from the image and the color from the grid `foregroundColor` parameter. This allows one icon to serve in both light and dark modes |
+| `mask` | If `true`, the icon shape is taken from the image and the color from the grid `foregroundColor` parameter. This allows one icon to serve in both light and dark modes |
 | `icons` | A map of [icon name](#icon-names) to images. Values use [image parameter syntax](./theming-parameters/#image-values) to accept image urls or svg source code. |
 
 ```js
@@ -70,10 +70,10 @@ Using `iconOverrides` with image icons:
 | Parameter | Description |
 |-|-|
 | `type` | `font` |
-| `family` | optional, the name of the icon font family to use |
-| `cssImports` | optional, an array CSS file URLs to import, can be used to load the CSS file that defines the icon font |
-| `weight` | optional, e.g. `bold`. Some icon fonts such as fontawesome require a bold font weight. |
-| `color` | optional CSS color e.g. `red`. Can use [color parameter syntax](./theming-parameters/#color-values) to reference and mix other color parameters. |
+| `family` | Optional, the name of the icon font family to use |
+| `cssImports` | Aptional, an array CSS file URLs to import, can be used to load the CSS file that defines the icon font |
+| `weight` | Optional, e.g. `bold`. Some icon fonts such as fontawesome require a bold font weight. |
+| `color` | Optional CSS color e.g. `red`. Can use [color parameter syntax](./theming-parameters/#color-values) to reference and mix other color parameters. |
 | `icons` | A map of [icon name](#icon-names) to text data. If you're using an icon font, the correct character for each icon will be documented by your font. But you can use any text or emoji. |
 
 ```js
@@ -149,34 +149,43 @@ columnGroupClosed: 'contracted'
 columnSelectClosed: 'tree-closed',
 // column tool panel column group expanded (click to contract)
 columnSelectOpen: 'tree-open',
-// column tool panel header expand/collapse all button, shown when some children are expanded and
-//     others are collapsed
+// column tool panel header expand/collapse all button, shown
+// when some children are expanded and others are collapsed
 columnSelectIndeterminate: 'tree-indeterminate',
 // accordion open (filter tool panel group, charts group)
 accordionOpen: 'tree-open',
 // accordion closed (filter tool panel group, charts group)
 accordionClosed: 'tree-closed',
 // accordion indeterminate - shown when some children are expanded and
-//     others are collapsed (filter tool panel group, charts group)
+// others are collapsed (filter tool panel group, charts group)
 accordionIndeterminate: 'tree-indeterminate',
-// shown on drag and drop image component icon while dragging column to the side of the grid to pin
+// shown on drag and drop image component icon while dragging
+// column to the side of the grid to pin
 columnMovePin: 'pin'
-// shown on drag and drop image component icon while dragging over part of the page that is not a drop zone
+// shown on drag and drop image component icon while dragging over
+// part of the page that is not a drop zone
 columnMoveHide: 'eye-slash'
-// shown on drag and drop image component icon while dragging columns to reorder
+// shown on drag and drop image component icon while dragging
+// columns to reorder
 columnMoveMove: 'arrows'
-// animating icon shown when dragging a column to the right of the grid causes horizontal scrolling
+// animating icon shown when dragging a column to the right of
+// the grid causes horizontal scrolling
 columnMoveLeft: 'left'
-// animating icon shown when dragging a column to the left of the grid causes horizontal scrolling
+// animating icon shown when dragging a column to the left of
+// the grid causes horizontal scrolling
 columnMoveRight: 'right'
-// shown on drag and drop image component icon while dragging over Row Groups drop zone
+// shown on drag and drop image component icon while dragging
+// over Row Groups drop zone
 columnMoveGroup: 'group'
-// shown on drag and drop image component icon while dragging over Values drop zone
+// shown on drag and drop image component icon while dragging
+// over Values drop zone
 columnMoveValue: 'aggregation'
-// shown on drag and drop image component icon while dragging over pivot drop zone
+// shown on drag and drop image component icon while dragging
+// over pivot drop zone
 columnMovePivot: 'pivot'
-// shown on drag and drop image component icon while dragging over drop zone that doesn't support it, e.g.
-//     string column over aggregation drop zone
+// shown on drag and drop image component icon while dragging
+// over drop zone that doesn't support it, e.g.
+// string column over aggregation drop zone
 dropNotAllowed: 'not-allowed'
 // shown on row group when contracted (click to expand)
 groupContracted: 'tree-closed'
@@ -186,8 +195,9 @@ groupExpanded: 'tree-open'
 setFilterGroupClosed: 'tree-closed',
 // set filter tree list group expanded (click to contract)
 setFilterGroupOpen: 'tree-open',
-// set filter tree list expand/collapse all button, shown when some children are expanded and
-//     others are collapsed
+// set filter tree list expand/collapse all button, shown when
+// some children are expanded and
+// others are collapsed
 setFilterGroupIndeterminate: 'tree-indeterminate',
 // context menu chart item
 chart: 'chart'
@@ -195,7 +205,8 @@ chart: 'chart'
 close: 'cross'
 // X (remove) on column 'pill' after adding it to a drop zone list
 cancel: 'cancel'
-// indicates the currently active pin state in the "Pin column" sub-menu of the column menu
+// indicates the currently active pin state in the "Pin column"
+// sub-menu of the column menu
 check: 'tick'
 // "go to first" button in pagination controls
 first: 'first'
@@ -205,9 +216,11 @@ previous: 'previous'
 next: 'next'
 // "go to last" button in pagination controls
 last: 'last'
-// shown on top right of chart when chart is linked to range data (click to unlink)
+// shown on top right of chart when chart is linked to range
+// data (click to unlink)
 linked: 'linked'
-// shown on top right of chart when chart is not linked to range data (click to link)
+// shown on top right of chart when chart is not linked to
+// range data (click to link)
 unlinked: 'unlinked'
 // rotating spinner shown by the loading cell renderer
 groupLoading: 'loading'
@@ -235,7 +248,8 @@ maximize: 'maximize'
 minimize: 'minimize'
 // "Pin column" item in column header menu
 menuPin: 'pin'
-// "Value aggregation" column menu item (shown on numeric columns when grouping is active)"
+// "Value aggregation" column menu item (shown on numeric
+// columns when grouping is active)"
 menuValue: 'aggregation'
 // "Group by {column-name}" item in column header menu
 menuAddRowGroup: 'group'
@@ -273,7 +287,8 @@ richSelectRemove: 'cancel',
 subMenuOpen: 'small-right',
 // version of subMenuOpen used in RTL mode
 subMenuOpenRtl: 'small-left',
-// separator between column 'pills' when you add multiple columns to the header drop zone
+// separator between column 'pills' when you add multiple
+// columns to the header drop zone
 panelDelimiter: 'small-right',
 // version of panelDelimiter used in RTL mode
 panelDelimiterRtl: 'small-left',
@@ -281,7 +296,8 @@ panelDelimiterRtl: 'small-left',
 sortAscending: 'asc'
 // show on column header when column is sorted descending
 sortDescending: 'desc'
-// show on column header when column has no sort, only when enabled with colDef.unSortIcon=true
+// show on column header when column has no sort, only when
+// enabled with colDef.unSortIcon=true
 sortUnSort: 'none',
 // Builder button in Advanced Filter
 advancedFilterBuilder: 'group',

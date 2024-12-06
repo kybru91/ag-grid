@@ -63,7 +63,7 @@ export const SharedDragAndDropModule: _ModuleWithoutApi = {
         // shown on drag and drop image component icon while dragging over pivot drop zone
         columnMovePivot: 'pivot',
         // shown on drag and drop image component icon while dragging over drop zone that doesn't support it, e.g.
-        //     string column over aggregation drop zone
+        // string column over aggregation drop zone
         dropNotAllowed: 'not-allowed',
         // drag handle used to pick up draggable rows
         rowDrag: 'grip',

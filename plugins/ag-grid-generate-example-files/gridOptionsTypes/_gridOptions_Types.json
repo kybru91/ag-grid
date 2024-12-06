@@ -175,12 +175,6 @@
       "StatusPanelDef"
     ]
   },
-  "sideBar": {
-    "typeName": "SideBarDef | string | string[] | boolean | null",
-    "typesToInclude": [
-      "SideBarDef"
-    ]
-  },
   "chartThemeOverrides": {
     "typeName": "AgChartThemeOverrides",
     "typesToInclude": [
@@ -227,12 +221,6 @@
       "SizeColumnsToFitGridStrategy",
       "SizeColumnsToFitProvidedWidthStrategy",
       "SizeColumnsToContentStrategy"
-    ]
-  },
-  "cellSelection": {
-    "typeName": "boolean | CellSelectionOptions<TData>",
-    "typesToInclude": [
-      "CellSelectionOptions"
     ]
   },
   "selectionColumnDef": {
@@ -788,12 +776,6 @@
       "GetRowIdFunc"
     ]
   },
-  "groupAggFiltering": {
-    "typeName": "boolean | IsRowFilterable<TData>",
-    "typesToInclude": [
-      "IsRowFilterable"
-    ]
-  },
   "chartMenuItems": {
     "typeName": "(DefaultChartMenuItem | MenuItemDef)[] | GetChartMenuItems<TData>",
     "typesToInclude": [
@@ -813,6 +795,10 @@
     "typesToInclude": [
       "IRowNode"
     ]
+  },
+  "loadThemeGoogleFonts": {
+    "typeName": "boolean",
+    "typesToInclude": []
   },
   "suppressMakeColumnVisibleAfterUnGroup": {
     "typeName": "boolean",
@@ -1362,8 +1348,34 @@
     "typeName": "boolean",
     "typesToInclude": []
   },
+  "cellSelection": {
+    "typeName": "boolean | CellSelectionOptions<TData>",
+    "typesToInclude": [
+      "CellSelectionOptions"
+    ]
+  },
+  "sideBar": {
+    "typeName": "SideBarDef | string | string[] | boolean | null",
+    "typesToInclude": [
+      "SideBarDef"
+    ]
+  },
+  "suppressGroupChangesColumnVisibility": {
+    "typeName": "boolean | 'suppressHideOnGroup' | 'suppressShowOnUngroup'",
+    "typesToInclude": []
+  },
+  "groupAggFiltering": {
+    "typeName": "boolean | IsRowFilterable<TData>",
+    "typesToInclude": [
+      "IsRowFilterable"
+    ]
+  },
   "suppressStickyTotalRow": {
     "typeName": "boolean | 'grand' | 'group'",
+    "typesToInclude": []
+  },
+  "groupHideParentOfSingleChild": {
+    "typeName": "boolean | 'leafGroupsOnly'",
     "typesToInclude": []
   },
   "theme": {
@@ -1372,22 +1384,10 @@
       "Theme"
     ]
   },
-  "loadThemeGoogleFonts": {
-    "typeName": "boolean",
-    "typesToInclude": []
-  },
   "rowSelection": {
     "typeName": "RowSelectionOptions<TData> | 'single' | 'multiple'",
     "typesToInclude": [
       "RowSelectionOptions"
     ]
-  },
-  "groupHideParentOfSingleChild": {
-    "typeName": "boolean | 'leafGroupsOnly'",
-    "typesToInclude": []
-  },
-  "suppressGroupChangesColumnVisibility": {
-    "typeName": "boolean | 'suppressHideOnGroup' | 'suppressShowOnUngroup'",
-    "typesToInclude": []
   }
 }

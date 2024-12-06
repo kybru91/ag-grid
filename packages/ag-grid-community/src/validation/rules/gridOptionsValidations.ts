@@ -83,6 +83,12 @@ const GRID_OPTION_DEPRECATIONS = (): Deprecations<GridOptions> => ({
 
     unSortIcon: { version: '33', message: 'Use `defaultColDef.unSortIcon` instead.' },
     sortingOrder: { version: '33', message: 'Use `defaultColDef.sortingOrder` instead.' },
+
+    suppressPropertyNamesCheck: {
+        version: '33',
+        message:
+            '`gridOptions` and `columnDefs` both have a `context` property that should be used for arbitrary user data. This means that column definitions and gridOptions should only contain valid properties making this property redundant.',
+    },
 });
 
 function toConstrainedNum(

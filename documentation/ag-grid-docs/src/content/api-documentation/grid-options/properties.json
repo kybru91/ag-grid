@@ -784,7 +784,6 @@
         "dragAndDropImageComponent": {},
         "noRowsOverlayComponentParams": {},
         "suppressFocusAfterRefresh": {},
-        "suppressPropertyNamesCheck": {},
         "suppressChangeDetection": {
             "more": {
                 "name": "Triggering Value Change Detection",

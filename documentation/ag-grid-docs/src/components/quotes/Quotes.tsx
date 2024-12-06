@@ -59,8 +59,8 @@ export const Quotes = ({ data }: { data: QuotesData }) => {
                     <p>Weekly NPM downloads</p>
                 </div>
                 <div className={styles.stat}>
-                    <h4 className="text-2xl">4</h4>
-                    <p>Frameworks supported</p>
+                    <h4 className="text-2xl">13k+</h4>
+                    <p>Github Stars</p>
                 </div>
                 <div className={styles.stat}>
                     <h4 className="text-2xl">40K+</h4>

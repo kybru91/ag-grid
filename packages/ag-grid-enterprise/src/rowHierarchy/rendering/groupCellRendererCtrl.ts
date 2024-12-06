@@ -29,6 +29,7 @@ import {
     _getGrandTotalRow,
     _getInnerCellRendererDetails,
     _isElementInEventPath,
+    _isRowSelection,
     _isStopPropagationForAgGrid,
     _missing,
     _removeAriaExpanded,
@@ -710,7 +711,8 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
             !rowNode.rowPinned &&
             // details cannot be selected
             !rowNode.detail &&
-            !!this.selectionSvc;
+            !!this.selectionSvc &&
+            _isRowSelection(this.gos);
 
         if (checkboxNeeded) {
             const cbSelectionComponent = this.selectionSvc!.createCheckboxSelectionComponent();

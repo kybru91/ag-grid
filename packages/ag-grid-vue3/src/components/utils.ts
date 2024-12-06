@@ -182,6 +182,8 @@ import type {
     VirtualRowRemovedEvent,
 } from 'ag-grid-community';
 import type { GridOptions, Module } from 'ag-grid-community';
+import type { AgChartTheme, AgChartThemeOverrides } from 'ag-charts-types';
+import { isProxy, isReactive, isRef, toRaw } from 'vue';
 
 export interface Properties {
     [propertyName: string]: any;

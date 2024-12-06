@@ -84,7 +84,6 @@
 
 .ag-floating-filter-button-button {
     appearance: none;
-    background: transparent;
     border: none;
     width: var(--ag-icon-size);
     height: var(--ag-icon-size);

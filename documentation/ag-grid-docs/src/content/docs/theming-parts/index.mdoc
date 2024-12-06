@@ -61,8 +61,8 @@ To remove a part from a theme, call `theme.withoutPart(featureName)`, which retu
 const myCustomTheme = themeQuartz.withoutPart('checkboxStyle');
 ```
 
-After removing the built-in part, this example uses CSS in a separate stylesheet to style the checkboxes:
+After removing the built-in part, this example uses CSS in a separate style sheet to style the checkboxes:
 
 {% gridExampleRunner title="Configuring Theme Parts" name="removing-parts" /%}
 
-The above example uses an empty part to disable the default checkbox styles and adds its own checkbox styles in the application stylesheet. If you want to disctibute the checkbox style as a library, you can add the new styles to the part itself, see [Distributing Shared Themes & Parts](./theming-distribution/#creating-your-own-parts).
+The above example uses an empty part to disable the default checkbox styles and adds its own checkbox styles in the application style sheet. If you want to distribute the checkbox style as a library, you can add the new styles to the part itself, see [Distributing Shared Themes & Parts](./theming-distribution/#creating-your-own-parts).

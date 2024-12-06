@@ -189,6 +189,8 @@ export const FinanceExample: React.FC<Props> = ({
             {
                 headerName: 'Timeline',
                 field: 'timeline',
+                sortable: false,
+                filter: false,
                 cellRenderer: 'agSparklineCellRenderer',
                 cellRendererParams: {
                     sparklineOptions: {
@@ -215,6 +217,7 @@ export const FinanceExample: React.FC<Props> = ({
                 colId: 'p&l',
                 headerName: 'P&L',
                 cellDataType: 'number',
+                filter: 'agNumberColumnFilter',
                 type: 'rightAligned',
                 cellRenderer: 'agAnimateShowChangeCellRenderer',
                 valueGetter: ({ data }: ValueGetterParams) => data && data.quantity * (data.price / data.purchasePrice),
@@ -228,6 +231,7 @@ export const FinanceExample: React.FC<Props> = ({
                 headerName: 'Total Value',
                 type: 'rightAligned',
                 cellDataType: 'number',
+                filter: 'agNumberColumnFilter',
                 valueGetter: ({ data }: ValueGetterParams) => data && data.quantity * data.price,
                 cellRenderer: 'agAnimateShowChangeCellRenderer',
                 valueFormatter: numberFormatter,

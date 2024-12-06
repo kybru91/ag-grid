@@ -33,6 +33,7 @@ const darkParams = {
     chromeBackgroundColor: foregroundBackgroundMix(0.05),
     rowHoverColor: accentMix(0.15),
     selectedRowBackgroundColor: accentMix(0.2),
+    menuBackgroundColor: foregroundBackgroundMix(0.1),
     browserColorScheme: 'dark',
     popupShadow: '0 0px 20px #0008',
     cardShadow: '0 1px 4px 1px #0008',

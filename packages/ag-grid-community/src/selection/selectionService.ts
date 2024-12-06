@@ -426,7 +426,8 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
     }
 
     public deselectAllRowNodes(params: { source: SelectionEventSourceType; selectAll?: SelectAllMode }) {
-        const callback = (rowNode: RowNode) => this.selectRowNode(rowNode, false, undefined, source);
+        const callback = (rowNode: RowNode) =>
+            this.selectRowNode(rowNode.footer ? rowNode.sibling : rowNode, false, undefined, source);
         const rowModelClientSide = _isClientSideRowModel(this.gos);
 
         const { source, selectAll } = params;
@@ -513,7 +514,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
                     return;
                 }
 
-                if (!node.expanded) {
+                if (!node.expanded && !node.footer) {
                     // even with groupSelectsChildren, do this recursively as only the filtered children
                     // are considered as the current page
                     const recursivelyAddChildren = (child: RowNode) => {
@@ -577,7 +578,9 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
 
         const { source, selectAll } = params;
 
-        this.getNodesToSelect(selectAll).forEach((rowNode) => this.selectRowNode(rowNode, true, undefined, source));
+        this.getNodesToSelect(selectAll).forEach((rowNode) => {
+            this.selectRowNode(rowNode.footer ? rowNode.sibling : rowNode, true, undefined, source);
+        });
 
         // the above does not clean up the parent rows if they are selected
         if (_isClientSideRowModel(gos) && this.groupSelectsDescendants) {

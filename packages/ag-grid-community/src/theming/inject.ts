@@ -32,10 +32,8 @@ export const _injectGlobalCSS = (css: string, container: HTMLElement, debugId: s
 
     if (injection.last) {
         injection.last.insertAdjacentElement('afterend', style);
-    } else if (root.firstElementChild) {
-        root.firstElementChild.insertAdjacentElement('beforebegin', style);
     } else {
-        root.appendChild(style);
+        root.insertBefore(style, root.querySelector(':not(title, meta)'));
     }
 
     injection.css.add(css);

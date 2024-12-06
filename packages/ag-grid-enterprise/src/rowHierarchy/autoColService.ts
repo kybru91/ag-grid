@@ -203,7 +203,7 @@ export class AutoColService extends BeanStub implements NamedBean, IAutoColServi
         const autoGroupColumnDef = this.gos.get('autoGroupColumnDef');
         _mergeDeep(res, autoGroupColumnDef);
 
-        res = _addColumnDefaultAndTypes(this.beans, res, colId);
+        res = _addColumnDefaultAndTypes(this.beans, res, colId, true);
 
         // For tree data the filter is always allowed
         if (!this.gos.get('treeData')) {

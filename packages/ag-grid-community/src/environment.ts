@@ -2,7 +2,13 @@ import type { NamedBean } from './context/bean';
 import { BeanStub } from './context/beanStub';
 import type { BeanCollection } from './context/context';
 import { ThemeImpl } from './theming/Theme';
-import { IS_SSR, _injectCoreAndModuleCSS, _injectGlobalCSS } from './theming/inject';
+import {
+    IS_SSR,
+    _injectCoreAndModuleCSS,
+    _injectGlobalCSS,
+    _registerGridUsingThemingAPI,
+    _unregisterGridUsingThemingAPI,
+} from './theming/inject';
 import { themeQuartz } from './theming/parts/theme/themes';
 import { _observeResize } from './utils/dom';
 import { _error, _warn } from './validation/logging';
@@ -60,6 +66,8 @@ export class Environment extends BeanStub implements NamedBean {
         this.getSizeEl(LIST_ITEM_HEIGHT);
         this.getSizeEl(ROW_BORDER_WIDTH);
         this.refreshRowBorderWidthVariable();
+
+        this.addDestroyFunc(() => _unregisterGridUsingThemingAPI(this));
     }
 
     public getDefaultRowHeight(): number {
@@ -256,6 +264,7 @@ export class Environment extends BeanStub implements NamedBean {
         }
         if (newGridTheme !== oldGridTheme) {
             if (newGridTheme) {
+                _registerGridUsingThemingAPI(this);
                 _injectCoreAndModuleCSS(eGridDiv);
                 for (const [css, debugId] of globalCSS) {
                     _injectGlobalCSS(css, eGridDiv, debugId);

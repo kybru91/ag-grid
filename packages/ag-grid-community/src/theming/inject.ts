@@ -1,3 +1,4 @@
+import type { Environment } from '../environment';
 import { _getAllRegisteredModules } from '../modules/moduleRegistry';
 import { coreCSS } from './core/core.css-GENERATED';
 
@@ -8,7 +9,7 @@ type Injection = {
     last?: HTMLStyleElement;
 };
 
-const injections = new WeakMap<HTMLElement, Injection>();
+let injections = new WeakMap<HTMLElement, Injection>();
 
 export const _injectGlobalCSS = (css: string, container: HTMLElement, debugId: string) => {
     if (IS_SSR) return;
@@ -47,4 +48,19 @@ export const _injectCoreAndModuleCSS = (container: HTMLElement) => {
         .forEach((module) =>
             module.css?.forEach((css) => _injectGlobalCSS(css, container, `module-${module.moduleName}`))
         );
+};
+
+const gridsUsingThemingAPI = new Set<object>();
+
+export const _registerGridUsingThemingAPI = (environment: Environment) => {
+    gridsUsingThemingAPI.add(environment);
+};
+export const _unregisterGridUsingThemingAPI = (environment: Environment) => {
+    gridsUsingThemingAPI.delete(environment);
+    if (gridsUsingThemingAPI.size === 0) {
+        injections = new WeakMap();
+        for (const style of document.head.querySelectorAll('style[data-ag-global-css]')) {
+            style.remove();
+        }
+    }
 };

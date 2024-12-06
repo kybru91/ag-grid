@@ -855,8 +855,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      * @initial
      */
     @Input({ transform: booleanAttribute }) public suppressBrowserResizeObserver: boolean | undefined = undefined;
-    /** @deprecated As of v33 `gridOptions` and `colDef` have a `context` property that should be used for arbitrary user data.
-     * Disables showing a warning message in the console if using a `gridOptions` or `colDef` property that doesn't exist.
+    /** @deprecated As of v33 `gridOptions` and `columnDefs` both have a `context` property that should be used for arbitrary user data. This means that column definitions and gridOptions should only contain valid properties making this property redundant.
      * @default false
      * @initial
      */

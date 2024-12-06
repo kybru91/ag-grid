@@ -28,12 +28,12 @@
   "scripts": {
     "clean": "rimraf dist lib",
     "dev": "vite",
-    "build": "run-p type-check  \"build-only {@}\" --",
+    "update-properties": "node updateGridAndColumnProperties.cjs",
+    "build": "run-p update-properties type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force --declaration --emitDeclarationOnly",
-    "bootstrap": "YARN_REGISTRY=\"http://52.50.158.57:4873\" yarn"
+    "type-check": "vue-tsc --build --force --declaration --emitDeclarationOnly"
   },
   "dependencies": {
     "ag-grid-community": "32.2.0"

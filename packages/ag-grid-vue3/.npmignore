@@ -20,3 +20,4 @@ vue.config.js
 !dist
 !dist/types/src
 *.map
+updateGridAndColumnProperties.cjs

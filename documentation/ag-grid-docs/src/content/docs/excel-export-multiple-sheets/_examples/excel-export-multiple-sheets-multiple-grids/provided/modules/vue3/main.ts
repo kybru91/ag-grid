@@ -10,6 +10,7 @@ import type {
 } from 'ag-grid-community';
 import {
     ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
     CsvExportModule,
     ModuleRegistry,
     RowDragModule,
@@ -23,6 +24,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import './styles.css';
 
 ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
     RowDragModule,
     ClientSideRowModelApiModule,
     TextFilterModule,

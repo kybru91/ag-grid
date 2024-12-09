@@ -8,6 +8,7 @@ import type {
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
     RenderApiModule,
     RowApiModule,
     TextEditorModule,
@@ -19,6 +20,7 @@ import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule, MasterDeta
 ModuleRegistry.registerModules([
     RenderApiModule,
     TextEditorModule,
+    NumberEditorModule,
     RowApiModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,

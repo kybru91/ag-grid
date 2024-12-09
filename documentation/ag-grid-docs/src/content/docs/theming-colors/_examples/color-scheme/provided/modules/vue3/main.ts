@@ -4,6 +4,7 @@ import type { ColDef } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -20,6 +21,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,
 ]);

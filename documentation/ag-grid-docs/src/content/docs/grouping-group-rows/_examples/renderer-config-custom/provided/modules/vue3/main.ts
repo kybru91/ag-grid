@@ -3,6 +3,7 @@ import { createApp, defineComponent, onBeforeMount, ref, shallowRef } from 'vue'
 import {
     CellDoubleClickedEvent,
     CellKeyDownEvent,
+    ClientSideRowModelModule,
     ColDef,
     GridApi,
     GridReadyEvent,
@@ -16,7 +17,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import CustomGroupCellRenderer from './customGroupCellRenderer';
 import './styles.css';
 
-ModuleRegistry.registerModules([RowGroupingModule, ValidationModule /* Development Only */]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, RowGroupingModule, ValidationModule /* Development Only */]);
 
 const VueExample = defineComponent({
     template: `

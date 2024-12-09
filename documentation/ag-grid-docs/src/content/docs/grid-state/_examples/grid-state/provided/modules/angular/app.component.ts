@@ -18,6 +18,7 @@ import {
     GridStateModule,
     ModuleRegistry,
     NumberFilterModule,
+    PaginationModule,
     RowSelectionModule,
     ValidationModule,
 } from 'ag-grid-community';
@@ -34,13 +35,14 @@ import './styles.css';
 
 ModuleRegistry.registerModules([
     NumberFilterModule,
-    RowSelectionModule,
     GridStateModule,
+    PaginationModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
-    SetFilterModule,
+    RowSelectionModule,
     CellSelectionModule,
+    SetFilterModule,
     PivotModule,
     ValidationModule /* Development Only */,
 ]);

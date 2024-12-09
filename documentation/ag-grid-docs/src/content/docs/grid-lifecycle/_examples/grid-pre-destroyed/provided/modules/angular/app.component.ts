@@ -3,24 +3,13 @@ import { Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef, GridApi, GridOptions, GridPreDestroyedEvent, GridReadyEvent } from 'ag-grid-community';
-import {
-    ClientSideRowModelModule,
-    ColumnApiModule,
-    ModuleRegistry,
-    TextEditorModule,
-    ValidationModule,
-} from 'ag-grid-community';
+import { ClientSideRowModelModule, ColumnApiModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
 
 import type { TAthlete } from './data';
 import { getData } from './data';
 import './styles.css';
 
-ModuleRegistry.registerModules([
-    ColumnApiModule,
-    TextEditorModule,
-    ClientSideRowModelModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ColumnApiModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 interface ColumnWidth {
     field: string;
@@ -59,7 +48,6 @@ interface ColumnWidth {
                 <ag-grid-angular
                     style="width: 100%; height: 100%;"
                     [columnDefs]="columnDefs"
-                    [defaultColDef]="defaultColDef"
                     [rowData]="rowData"
                     [gridOptions]="gridOptions"
                     (gridReady)="onGridReady($event)"
@@ -84,10 +72,6 @@ export class AppComponent {
     ];
 
     public columnsWidthOnPreDestroyed: ColumnWidth[] = [];
-
-    public defaultColDef: ColDef = {
-        editable: true,
-    };
 
     public rowData: any[] | null = getData();
 

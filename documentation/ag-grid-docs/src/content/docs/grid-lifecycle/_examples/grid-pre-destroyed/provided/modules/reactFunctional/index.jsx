@@ -1,24 +1,13 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import {
-    ClientSideRowModelModule,
-    ColumnApiModule,
-    ModuleRegistry,
-    TextEditorModule,
-    ValidationModule,
-} from 'ag-grid-community';
+import { ClientSideRowModelModule, ColumnApiModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
 import { getData } from './data.jsx';
 import './styles.css';
 
-ModuleRegistry.registerModules([
-    ColumnApiModule,
-    TextEditorModule,
-    ClientSideRowModelModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ColumnApiModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 const GridExample = () => {
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
@@ -31,11 +20,6 @@ const GridExample = () => {
         { field: 'medals.gold', headerName: 'Gold Medals' },
         { field: 'person.age', headerName: 'Age' },
     ]);
-    const defaultColDef = useMemo(() => {
-        return {
-            editable: true,
-        };
-    }, []);
 
     const onGridReady = useCallback((params) => {
         setGridApi(params.api);
@@ -141,7 +125,6 @@ const GridExample = () => {
                         {gridVisible && (
                             <AgGridReact
                                 columnDefs={columnDefs}
-                                defaultColDef={defaultColDef}
                                 rowData={rowData}
                                 onGridReady={onGridReady}
                                 onGridPreDestroyed={onGridPreDestroyed}

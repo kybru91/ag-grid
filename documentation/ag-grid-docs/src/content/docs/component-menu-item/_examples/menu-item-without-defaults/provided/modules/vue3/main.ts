@@ -20,6 +20,7 @@ import MenuItem from './menuItemVue';
 import './style.css';
 
 ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
     TextFilterModule,
     NumberFilterModule,
     ColumnMenuModule,

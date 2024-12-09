@@ -14,6 +14,7 @@ import {
     GridStateModule,
     ModuleRegistry,
     NumberFilterModule,
+    PaginationModule,
     RowSelectionModule,
     ValidationModule,
 } from 'ag-grid-community';
@@ -29,8 +30,10 @@ import { AgGridVue } from 'ag-grid-vue3';
 import './styles.css';
 
 ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
     NumberFilterModule,
     RowSelectionModule,
+    PaginationModule,
     GridStateModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,

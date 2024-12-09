@@ -5,6 +5,8 @@ import type { FirstDataRenderedEvent, GridApi, GridOptions, GridReadyEvent } fro
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -17,6 +19,8 @@ import { getData } from './data';
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
+    NumberFilterModule,
     ClientSideRowModelModule,
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnMenuModule,

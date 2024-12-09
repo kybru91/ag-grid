@@ -3,6 +3,7 @@ import { createApp, defineComponent } from 'vue';
 import type { ColDef, GridReadyEvent } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
+    CustomEditorModule,
     ModuleRegistry,
     NumberEditorModule,
     TextEditorModule,
@@ -16,6 +17,7 @@ import './style.css';
 
 ModuleRegistry.registerModules([
     NumberEditorModule,
+    CustomEditorModule,
     TextEditorModule,
     TextFilterModule,
     ClientSideRowModelModule,

@@ -3,6 +3,7 @@ import {
     ClientSideRowModelModule,
     EventApiModule,
     ModuleRegistry,
+    RowApiModule,
     RowSelectionModule,
     TextEditorModule,
     TextFilterModule,
@@ -21,6 +22,7 @@ ModuleRegistry.registerModules([
     ClientSideRowModelModule,
     CellSelectionModule,
     StatusBarModule,
+    RowApiModule,
     EventApiModule,
     ValidationModule /* Development Only */,
 ]);

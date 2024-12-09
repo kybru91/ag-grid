@@ -9,6 +9,7 @@ import {
     FiltersToolPanelModule,
     MultiFilterModule,
     SetFilterModule,
+    TextFilterModule,
 } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
@@ -18,6 +19,7 @@ import './style.css';
 
 ModuleRegistry.registerModules([
     NumberFilterModule,
+    TextFilterModule,
     ClientSideRowModelModule,
     MultiFilterModule,
     SetFilterModule,

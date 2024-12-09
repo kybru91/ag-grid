@@ -2,6 +2,7 @@ import type { ColDef, GridOptions } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
     RowSelectionModule,
     TextEditorModule,
     TextFilterModule,
@@ -15,6 +16,7 @@ import {
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     RowSelectionModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,

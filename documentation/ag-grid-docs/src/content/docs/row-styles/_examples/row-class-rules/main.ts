@@ -2,6 +2,7 @@ import type { GridApi, GridOptions } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
     RowApiModule,
     RowStyleModule,
     TextEditorModule,
@@ -13,6 +14,7 @@ import { getData } from './data';
 
 ModuleRegistry.registerModules([
     TextEditorModule,
+    NumberEditorModule,
     RowApiModule,
     RowStyleModule,
     ClientSideRowModelModule,

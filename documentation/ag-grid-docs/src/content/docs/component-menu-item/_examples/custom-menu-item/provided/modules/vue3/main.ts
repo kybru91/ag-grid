@@ -20,6 +20,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import MenuItem from './menuItemVue';
 
 ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
     ColumnMenuModule,
     ContextMenuModule,
     ExcelExportModule,

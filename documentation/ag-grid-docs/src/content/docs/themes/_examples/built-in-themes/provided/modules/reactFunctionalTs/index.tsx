@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -17,6 +18,7 @@ import { AgGridReact } from 'ag-grid-react';
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     ClientSideRowModelModule,
     SideBarModule,
     ColumnsToolPanelModule,

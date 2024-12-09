@@ -3,7 +3,6 @@ import {
     ClientSideRowModelModule,
     ColumnApiModule,
     ModuleRegistry,
-    TextEditorModule,
     ValidationModule,
     createGrid,
 } from 'ag-grid-community';
@@ -11,12 +10,7 @@ import {
 import type { TAthlete } from './data';
 import { getDataSet } from './data';
 
-ModuleRegistry.registerModules([
-    ColumnApiModule,
-    TextEditorModule,
-    ClientSideRowModelModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ColumnApiModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 interface ColumnWidth {
     field: string;
@@ -33,9 +27,6 @@ const gridOptions: GridOptions = {
         { field: 'medals.gold', headerName: 'Gold Medals' },
         { field: 'person.age', headerName: 'Age' },
     ],
-    defaultColDef: {
-        editable: true,
-    },
     rowData: getDataSet(),
     onGridPreDestroyed: (params: GridPreDestroyedEvent<TAthlete>) => {
         const allColumns = params.api.getColumns();

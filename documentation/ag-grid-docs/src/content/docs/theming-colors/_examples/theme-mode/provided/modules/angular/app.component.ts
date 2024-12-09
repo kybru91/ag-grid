@@ -2,11 +2,18 @@ import { Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
-import { ModuleRegistry, TextFilterModule, ValidationModule, themeQuartz } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    TextFilterModule,
+    ValidationModule,
+    themeQuartz,
+} from 'ag-grid-community';
 import { ColumnsToolPanelModule, FiltersToolPanelModule, PivotModule, SideBarModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
     TextFilterModule,
+    ClientSideRowModelModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,

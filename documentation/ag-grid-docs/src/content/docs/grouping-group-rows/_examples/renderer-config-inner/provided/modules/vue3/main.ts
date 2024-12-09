@@ -8,7 +8,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 import CustomMedalCellRenderer from './customMedalCellRenderer';
 import './styles.css';
 
-ModuleRegistry.registerModules([RowGroupingModule, ValidationModule /* Development Only */]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, RowGroupingModule, ValidationModule /* Development Only */]);
 
 const VueExample = defineComponent({
     template: `

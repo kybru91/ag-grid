@@ -4,6 +4,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
 import {
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -17,6 +18,7 @@ import {
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,
 ]);

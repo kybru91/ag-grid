@@ -17,10 +17,11 @@ import './styles.css';
 ModuleRegistry.registerModules([
     ClientSideRowModelApiModule,
     RowApiModule,
+    ClientSideRowModelModule,
+    ColumnsToolPanelModule,
     MasterDetailModule,
     ColumnMenuModule,
     ContextMenuModule,
-    ColumnsToolPanelModule,
     ValidationModule /* Development Only */,
 ]);
 

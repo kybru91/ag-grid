@@ -3,6 +3,7 @@ import { computed, createApp, defineComponent, ref } from 'vue';
 import type { ColDef } from 'ag-grid-community';
 import {
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -34,6 +35,7 @@ import { AgGridVue } from 'ag-grid-vue3';
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,

@@ -14,65 +14,14 @@ import type {
     SelectionChangedEvent,
     ValueSetterParams,
 } from 'ag-grid-community';
-import {
-    CellStyleModule,
-    ClientSideRowModelModule,
-    CsvExportModule,
-    ModuleRegistry,
-    NumberFilterModule,
-    RowSelectionModule,
-    SelectEditorModule,
-    TooltipModule,
-    ValidationModule,
-    createGrid,
-} from 'ag-grid-community';
-import {
-    CellSelectionModule,
-    ClipboardModule,
-    ColumnMenuModule,
-    ColumnsToolPanelModule,
-    ContextMenuModule,
-    ExcelExportModule,
-    FiltersToolPanelModule,
-    IntegratedChartsModule,
-    MultiFilterModule,
-    PivotModule,
-    RichSelectModule,
-    RowGroupingPanelModule,
-    SetFilterModule,
-    SideBarModule,
-    StatusBarModule,
-} from 'ag-grid-enterprise';
+import { ModuleRegistry, createGrid } from 'ag-grid-community';
+import { AllEnterpriseModule } from 'ag-grid-enterprise';
 
 import { CountryCellRenderer } from './country-renderer_typescript';
 import { PersonFilter } from './person-filter_typescript';
 import { WinningsFilter } from './winnings-filter_typescript';
 
-ModuleRegistry.registerModules([
-    RowSelectionModule,
-    TooltipModule,
-    CellStyleModule,
-    ClientSideRowModelModule,
-    ClipboardModule,
-    ColumnsToolPanelModule,
-    CsvExportModule,
-    ExcelExportModule,
-    FiltersToolPanelModule,
-    ColumnMenuModule,
-    ContextMenuModule,
-    MultiFilterModule,
-    CellSelectionModule,
-    RichSelectModule,
-    PivotModule,
-    SetFilterModule,
-    SideBarModule,
-    StatusBarModule,
-    RowGroupingPanelModule,
-    NumberFilterModule,
-    SelectEditorModule,
-    IntegratedChartsModule.with(AgChartsEnterpriseModule),
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([AllEnterpriseModule.with(AgChartsEnterpriseModule)]);
 
 const colNames = [
     'Station',

@@ -3,6 +3,7 @@ import {
     ClientSideRowModelModule,
     DateFilterModule,
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -14,6 +15,7 @@ import { CustomDateComponent } from './customDateComponent_typescript';
 ModuleRegistry.registerModules([
     TextFilterModule,
     TextEditorModule,
+    NumberEditorModule,
     ClientSideRowModelModule,
     DateFilterModule,
     ValidationModule /* Development Only */,

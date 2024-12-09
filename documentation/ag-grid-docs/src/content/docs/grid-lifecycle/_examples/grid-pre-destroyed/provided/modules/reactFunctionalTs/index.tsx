@@ -2,25 +2,14 @@ import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import type { ColDef, GridApi, GridPreDestroyedEvent, GridReadyEvent } from 'ag-grid-community';
-import {
-    ClientSideRowModelModule,
-    ColumnApiModule,
-    ModuleRegistry,
-    TextEditorModule,
-    ValidationModule,
-} from 'ag-grid-community';
+import { ClientSideRowModelModule, ColumnApiModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
 import type { TAthlete } from './data';
 import { getData } from './data';
 import './styles.css';
 
-ModuleRegistry.registerModules([
-    ColumnApiModule,
-    TextEditorModule,
-    ClientSideRowModelModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ColumnApiModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 interface ColumnWidth {
     field: string;
@@ -38,11 +27,6 @@ const GridExample = () => {
         { field: 'medals.gold', headerName: 'Gold Medals' },
         { field: 'person.age', headerName: 'Age' },
     ]);
-    const defaultColDef = useMemo<ColDef>(() => {
-        return {
-            editable: true,
-        };
-    }, []);
 
     const onGridReady = useCallback((params: GridReadyEvent) => {
         setGridApi(params.api);
@@ -139,7 +123,6 @@ const GridExample = () => {
                         {gridVisible && (
                             <AgGridReact
                                 columnDefs={columnDefs}
-                                defaultColDef={defaultColDef}
                                 rowData={rowData}
                                 onGridReady={onGridReady}
                                 onGridPreDestroyed={onGridPreDestroyed}

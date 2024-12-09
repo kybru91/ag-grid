@@ -1,5 +1,6 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import {
+    CustomFilterModule,
     IServerSideDatasource,
     ModuleRegistry,
     NumberFilterModule,
@@ -27,6 +28,7 @@ ModuleRegistry.registerModules([
     FiltersToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
+    CustomFilterModule,
     RowGroupingModule,
     ServerSideRowModelModule,
     SetFilterModule,

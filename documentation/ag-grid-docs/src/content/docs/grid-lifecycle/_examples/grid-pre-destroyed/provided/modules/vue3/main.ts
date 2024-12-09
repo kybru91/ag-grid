@@ -1,24 +1,13 @@
 import { createApp, defineComponent, onBeforeMount, ref, shallowRef } from 'vue';
 
 import type { ColDef, GridApi, GridPreDestroyedEvent, GridReadyEvent } from 'ag-grid-community';
-import {
-    ClientSideRowModelModule,
-    ColumnApiModule,
-    ModuleRegistry,
-    TextEditorModule,
-    ValidationModule,
-} from 'ag-grid-community';
+import { ClientSideRowModelModule, ColumnApiModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import { getData } from './data';
 import './styles.css';
 
-ModuleRegistry.registerModules([
-    ColumnApiModule,
-    TextEditorModule,
-    ClientSideRowModelModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ColumnApiModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 const VueExample = defineComponent({
     template: `
@@ -47,7 +36,6 @@ const VueExample = defineComponent({
                     style="width: 100%; height: 100%;"
                     :columnDefs="columnDefs"
                     @grid-ready="onGridReady"
-                    :defaultColDef="defaultColDef"
                     :rowData="rowData"
                     @grid-pre-destroyed="onGridPreDestroyed"></ag-grid-vue>
             </div>
@@ -72,9 +60,6 @@ const VueExample = defineComponent({
             },
         ]);
         const gridApi = shallowRef<GridApi | null>(null);
-        const defaultColDef = ref<ColDef>({
-            editable: true,
-        });
 
         const columnsWidthOnPreDestroyed = ref([]);
         const showGrid = ref(true);

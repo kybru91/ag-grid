@@ -6,6 +6,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
 import {
     ModuleRegistry,
+    NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -30,6 +31,7 @@ import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'a
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,

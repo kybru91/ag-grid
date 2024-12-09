@@ -6,6 +6,7 @@ import {
     ModuleRegistry,
     NumberEditorModule,
     NumberFilterModule,
+    RowApiModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -25,6 +26,7 @@ ModuleRegistry.registerModules([
     FiltersToolPanelModule,
     SetFilterModule,
     TextFilterModule,
+    RowApiModule,
     EventApiModule,
     ValidationModule /* Development Only */,
 ]);

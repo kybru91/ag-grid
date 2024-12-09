@@ -1,10 +1,21 @@
 import type { ColDef, FirstDataRenderedEvent, GridApi, GridOptions } from 'ag-grid-community';
-import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([ClientSideRowModelModule, RowGroupingModule, ValidationModule /* Development Only */]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    ClientSideRowModelApiModule,
+    RowGroupingModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi;
 const columnDefs: ColDef[] = [

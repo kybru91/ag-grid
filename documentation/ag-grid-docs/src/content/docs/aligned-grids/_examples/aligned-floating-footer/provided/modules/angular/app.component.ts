@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef, ColGroupDef, GridOptions } from 'ag-grid-community';
 import {
+    AlignedGridsModule,
     ClientSideRowModelModule,
     ColumnAutoSizeModule,
     ModuleRegistry,
@@ -20,6 +21,7 @@ ModuleRegistry.registerModules([
     NumberFilterModule,
     ColumnAutoSizeModule,
     RowStyleModule,
+    AlignedGridsModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,
 ]);

@@ -3,6 +3,7 @@ import {
     ClientSideRowModelModule,
     GridStateModule,
     ModuleRegistry,
+    NumberEditorModule,
     RowSelectionModule,
     TextEditorModule,
     TextFilterModule,
@@ -16,6 +17,7 @@ import {
 ModuleRegistry.registerModules([
     TextEditorModule,
     TextFilterModule,
+    NumberEditorModule,
     RowSelectionModule,
     GridStateModule,
     ClientSideRowModelModule,

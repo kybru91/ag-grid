@@ -1,12 +1,16 @@
 import type { ColDef, GridApi, GridOptions, IServerSideDatasource } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import { HighlightChangesModule, ModuleRegistry, RowApiModule, ValidationModule, createGrid } from 'ag-grid-community';
+import { RowGroupingModule, ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
-ModuleRegistry.registerModules([AllCommunityModule, RowGroupingModule, ServerSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RowApiModule,
+    HighlightChangesModule,
+    RowGroupingModule,
+    ServerSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 let versionCounter: number = 0;
 const columnDefs: ColDef[] = [{ field: 'athlete' }, { field: 'date' }, { field: 'country' }, { field: 'version' }];

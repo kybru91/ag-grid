@@ -1,5 +1,4 @@
-import { createApp, defineComponent } from 'vue';
-import { onMounted, ref } from 'vue';
+import { createApp, defineComponent, onMounted, ref } from 'vue';
 
 import type {
     CellValueChangedEvent,

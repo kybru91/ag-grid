@@ -1,10 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, ICellRendererParams } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    QuickFilterModule,
+    RowApiModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RowApiModule,
+    QuickFilterModule,
+    NumberEditorModule,
+    TextEditorModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const getMedalString = function ({ gold, silver, bronze }: { gold: number; silver: number; bronze: number }) {
     const goldStr = gold > 0 ? `Gold: ${gold} ` : '';

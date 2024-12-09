@@ -1,18 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { CellClassParams, GridApi, GridOptions, ProcessRowGroupForExportParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ExcelExportModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
+import {
+    CellStyleModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ContextMenuModule, ExcelExportModule, RowGroupingModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextFilterModule,
+    NumberFilterModule,
+    CellStyleModule,
     ClientSideRowModelModule,
     ExcelExportModule,
     ColumnMenuModule,
     ContextMenuModule,
     RowGroupingModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let gridApi: GridApi<IOlympicData>;

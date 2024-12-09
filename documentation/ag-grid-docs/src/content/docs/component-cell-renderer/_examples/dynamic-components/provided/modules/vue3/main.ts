@@ -1,7 +1,16 @@
 import { createApp, defineComponent } from 'vue';
 
 import type { ColDef, GridApi, GridReadyEvent, ICellRenderer, ICellRendererParams, IRowNode } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    RenderApiModule,
+    RowApiModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import ChildMessageRenderer from './childMessageRendererVue';
@@ -11,7 +20,15 @@ import ParamsRenderer from './paramsRendererVue';
 import SquareRenderer from './squareRendererVue';
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([
+    RenderApiModule,
+    TextEditorModule,
+    TextFilterModule,
+    NumberEditorModule,
+    RowApiModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const VueExample = defineComponent({
     template: `

@@ -1,22 +1,28 @@
-import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
+import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ExcelExportModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ContextMenuModule, ExcelExportModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import type { IOlympicData } from './interfaces';
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextFilterModule,
+    NumberFilterModule,
     ClientSideRowModelModule,
     ColumnMenuModule,
     ContextMenuModule,
     ExcelExportModule,
+    ValidationModule /* Development Only */,
 ]);
 
 function getNumber(id: string) {

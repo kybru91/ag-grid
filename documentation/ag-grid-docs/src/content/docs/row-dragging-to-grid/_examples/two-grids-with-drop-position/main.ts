@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GetRowIdParams,
@@ -7,10 +6,28 @@ import type {
     GridReadyEvent,
     RowDropZoneParams,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowDragModule,
+    RowStyleModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 // Register the required feature modules with the Grid
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    RowApiModule,
+    TextFilterModule,
+    RowDragModule,
+    RowStyleModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 let rowIdSequence = 100;
 

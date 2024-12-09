@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     CellValueChangedEvent,
     ColDef,
@@ -7,12 +6,23 @@ import type {
     ValueGetterParams,
     ValueSetterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    NumberEditorModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     {

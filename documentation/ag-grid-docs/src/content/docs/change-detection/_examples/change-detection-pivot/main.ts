@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     GetRowIdParams,
     GridApi,
@@ -7,11 +6,25 @@ import type {
     IRowNode,
     ValueGetterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { PivotModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, PivotModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    PivotModule,
+    HighlightChangesModule,
+    ValidationModule /* Development Only */,
+]);
 
 interface Student {
     student: number;

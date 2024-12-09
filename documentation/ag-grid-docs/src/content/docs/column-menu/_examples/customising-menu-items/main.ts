@@ -1,16 +1,19 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GetMainMenuItemsParams, GridApi, GridOptions, MenuItemDef } from 'ag-grid-community';
-import { PostProcessPopupParams, createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    PostProcessPopupParams,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const columnDefs: ColDef[] = [

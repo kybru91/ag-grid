@@ -1,9 +1,19 @@
 import type { ColDef, GetRowIdParams, GridApi, GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { InfiniteRowModelModule } from 'ag-grid-community';
+import {
+    ColumnApiModule,
+    InfiniteRowModelModule,
+    ModuleRegistry,
+    RowSelectionModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, InfiniteRowModelModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    RowSelectionModule,
+    InfiniteRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('');
 

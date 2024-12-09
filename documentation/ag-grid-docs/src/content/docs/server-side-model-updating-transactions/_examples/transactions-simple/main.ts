@@ -8,14 +8,18 @@ import type {
     ServerSideTransaction,
     ServerSideTransactionResult,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import { HighlightChangesModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
 import { ServerSideRowModelApiModule, ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 import { data } from './data';
 import { FakeServer } from './fakeServer';
 
-ModuleRegistry.registerModules([AllCommunityModule, ServerSideRowModelModule, ServerSideRowModelApiModule]);
+ModuleRegistry.registerModules([
+    HighlightChangesModule,
+    ServerSideRowModelModule,
+    ServerSideRowModelApiModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [{ field: 'tradeId' }, { field: 'portfolio' }, { field: 'book' }, { field: 'current' }];
 

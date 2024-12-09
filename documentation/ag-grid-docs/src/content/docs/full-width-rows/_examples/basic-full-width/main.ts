@@ -1,11 +1,21 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions, IsFullWidthRowParams, RowHeightParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    PinnedRowModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { FullWidthCellRenderer } from './fullWidthCellRenderer_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    PinnedRowModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const rowData = createData(100, 'body');
 const pinnedTopRowData = createData(3, 'pinned');

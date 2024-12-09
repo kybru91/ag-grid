@@ -9,10 +9,16 @@ import type {
     ICellRendererParams,
 } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     CsvExportModule,
+    LocaleModule,
     ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    PaginationModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
 } from 'ag-grid-community';
 import {
@@ -33,14 +39,16 @@ import {
 } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberEditorModule,
+    TextEditorModule,
+    LocaleModule,
+    PaginationModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     CsvExportModule,
     ExcelExportModule,
     FiltersToolPanelModule,
-    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnMenuModule,
     ContextMenuModule,
     MultiFilterModule,
@@ -50,6 +58,10 @@ ModuleRegistry.registerModules([
     SideBarModule,
     StatusBarModule,
     RowGroupingPanelModule,
+    TextFilterModule,
+    NumberFilterModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
+    ValidationModule /* Development Only */,
 ]);
 
 class NodeIdRenderer implements ICellRendererComp {

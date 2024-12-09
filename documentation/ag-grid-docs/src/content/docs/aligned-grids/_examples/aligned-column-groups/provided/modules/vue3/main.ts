@@ -1,10 +1,23 @@
 import { createApp, defineComponent } from 'vue';
 
 import type { ColDef, ColGroupDef, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ColumnAutoSizeModule,
+    ModuleRegistry,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    ColumnAutoSizeModule,
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const VueExample = defineComponent({
     template: `

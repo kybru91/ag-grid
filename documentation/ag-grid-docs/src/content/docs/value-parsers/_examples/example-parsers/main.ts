@@ -1,11 +1,15 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { CellValueChangedEvent, GridApi, GridOptions, ValueParserParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([TextEditorModule, ClientSideRowModelModule, ValidationModule /* Development Only */]);
 
 let gridApi: GridApi;
 

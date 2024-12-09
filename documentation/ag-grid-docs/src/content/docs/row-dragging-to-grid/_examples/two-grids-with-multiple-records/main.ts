@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GetRowIdParams,
@@ -8,9 +7,25 @@ import type {
     ICellRendererComp,
     ICellRendererParams,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowDragModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 class SportRenderer implements ICellRendererComp {
     eGui!: HTMLElement;

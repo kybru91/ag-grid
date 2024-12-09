@@ -1,9 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, ColGroupDef, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ColumnAutoSizeModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ColumnAutoSizeModule,
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: (ColDef | ColGroupDef)[] = [
     { field: 'athlete' },

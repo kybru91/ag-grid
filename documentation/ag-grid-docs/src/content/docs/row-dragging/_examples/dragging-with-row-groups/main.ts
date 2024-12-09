@@ -1,22 +1,34 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, RowDragCallbackParams, RowDragEndEvent } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowDragModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    RowGroupingModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    RowDragModule,
+    ClientSideRowModelApiModule,
+    NumberFilterModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
     RowGroupingModule,
     SetFilterModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const rowDrag = function (params: RowDragCallbackParams) {

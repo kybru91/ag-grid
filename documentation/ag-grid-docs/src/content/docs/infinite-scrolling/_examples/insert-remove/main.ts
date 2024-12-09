@@ -11,11 +11,23 @@ import type {
     RowStyle,
     ValueFormatterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { InfiniteRowModelModule } from 'ag-grid-community';
+import {
+    InfiniteRowModelModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowStyleModule,
+    ScrollApiModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, InfiniteRowModelModule]);
+ModuleRegistry.registerModules([
+    RowApiModule,
+    ScrollApiModule,
+    RowStyleModule,
+    InfiniteRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const valueFormatter = function (params: ValueFormatterParams) {
     if (typeof params.value === 'number') {

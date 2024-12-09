@@ -1,8 +1,7 @@
-import { createApp, defineComponent } from 'vue';
-import { ref } from 'vue';
+import { createApp, defineComponent, ref } from 'vue';
 
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import type { ColDef } from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
 ModuleRegistry.registerModules([AllCommunityModule]);

@@ -1,15 +1,26 @@
 import type { ColDef, GridOptions } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
+    GridStateModule,
     ModuleRegistry,
+    RowSelectionModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     colorSchemeVariable,
     createGrid,
     createPart,
     createTheme,
 } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    RowSelectionModule,
+    GridStateModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const myCheckboxStyle = createPart({
     // By setting the feature, adding this part to a theme will remove the

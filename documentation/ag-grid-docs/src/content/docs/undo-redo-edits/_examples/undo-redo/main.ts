@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     CellValueChangedEvent,
     GridApi,
@@ -8,12 +7,26 @@ import type {
     UndoEndedEvent,
     UndoStartedEvent,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ClipboardModule } from 'ag-grid-enterprise';
-import { CellSelectionModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    TextEditorModule,
+    UndoRedoEditModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { CellSelectionModule, ClipboardModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, ClipboardModule, CellSelectionModule]);
+ModuleRegistry.registerModules([
+    UndoRedoEditModule,
+    TextEditorModule,
+    HighlightChangesModule,
+    ClientSideRowModelModule,
+    ClipboardModule,
+    CellSelectionModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi;
 

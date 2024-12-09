@@ -1,16 +1,16 @@
-import { AgChartsCommunityModule } from 'ag-charts-community';
 import type { AgSparklineOptions } from 'ag-charts-community';
+import { AgChartsCommunityModule } from 'ag-charts-community';
 
 import type { GridApi, GridOptions, ValueGetterParams } from 'ag-grid-community';
-import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
 import { SparklinesModule } from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
     SparklinesModule.with(AgChartsCommunityModule),
+    ValidationModule /* Development Only */,
 ]);
 
 let gridApi: GridApi;
@@ -35,7 +35,7 @@ const gridOptions: GridOptions = {
                 return formattedData;
             },
         },
-        { field: 'volume', type: 'numericColumn', maxWidth: 140 },
+        { field: 'volume', maxWidth: 140 },
     ],
     defaultColDef: {
         flex: 1,

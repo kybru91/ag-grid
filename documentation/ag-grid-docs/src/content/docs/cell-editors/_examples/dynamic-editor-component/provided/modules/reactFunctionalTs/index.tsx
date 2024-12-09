@@ -1,7 +1,6 @@
 import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     CellEditingStartedEvent,
     CellEditingStoppedEvent,
@@ -11,10 +10,14 @@ import type {
     RowEditingStartedEvent,
     RowEditingStoppedEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RichSelectModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    TextEditorModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule, RichSelectModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import type { IRow } from './data';
@@ -24,12 +27,14 @@ import NumericCellEditor from './numericCellEditor';
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberEditorModule,
+    TextEditorModule,
     ClientSideRowModelModule,
     ColumnMenuModule,
     ContextMenuModule,
     ColumnsToolPanelModule,
     RichSelectModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const cellEditorSelector: (params: ICellEditorParams<IRow>) => CellEditorSelectorResult | undefined = (

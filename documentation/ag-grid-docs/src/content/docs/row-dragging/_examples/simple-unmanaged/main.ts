@@ -1,11 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GetRowIdParams, GridApi, GridOptions, RowDragMoveEvent } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowDragModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RowDragModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ValidationModule /* Development Only */,
+]);
 
 let immutableStore: any[] = getData();
 

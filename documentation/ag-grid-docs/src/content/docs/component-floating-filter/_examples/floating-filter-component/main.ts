@@ -1,11 +1,21 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions, INumberFilterParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { SliderFloatingFilter } from './sliderFloatingFilter_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    ClientSideRowModelModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 const filterParams: INumberFilterParams = {
     filterOptions: ['greaterThan'],

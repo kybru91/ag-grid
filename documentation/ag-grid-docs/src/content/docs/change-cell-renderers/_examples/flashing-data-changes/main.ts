@@ -1,9 +1,21 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    CellStyleModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RenderApiModule,
+    RowApiModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RenderApiModule,
+    RowApiModule,
+    CellStyleModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 function formatNumber(number: number) {
     return Math.floor(number).toLocaleString();

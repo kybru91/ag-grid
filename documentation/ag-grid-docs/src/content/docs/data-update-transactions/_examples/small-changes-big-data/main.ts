@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GetRowIdParams,
@@ -11,13 +10,31 @@ import type {
     IFilterType,
     IsGroupOpenByDefaultParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    CustomFilterModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
 import { createDataItem, getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowSelectionModule,
+    HighlightChangesModule,
+    ClientSideRowModelModule,
+    RowGroupingModule,
+    CustomFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 let aggCallCount = 0;
 let compareCallCount = 0;

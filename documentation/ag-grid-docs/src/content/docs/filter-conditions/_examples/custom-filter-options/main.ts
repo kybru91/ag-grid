@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GetLocaleTextParams,
@@ -9,12 +8,27 @@ import type {
     INumberFilterParams,
     ITextFilterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    DateFilterModule,
+    LocaleModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 declare let window: any;
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    LocaleModule,
+    TextFilterModule,
+    ClientSideRowModelModule,
+    NumberFilterModule,
+    DateFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 const filterParams: INumberFilterParams = {
     filterOptions: [

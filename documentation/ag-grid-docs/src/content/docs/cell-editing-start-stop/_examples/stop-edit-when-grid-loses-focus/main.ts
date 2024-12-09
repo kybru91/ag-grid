@@ -1,9 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, ICellEditorComp, ICellEditorParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    CustomEditorModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    NumberFilterModule,
+    CustomEditorModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 class YearCellEditor implements ICellEditorComp {
     eGui: any;

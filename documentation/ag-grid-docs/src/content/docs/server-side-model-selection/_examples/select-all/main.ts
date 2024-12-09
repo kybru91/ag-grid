@@ -1,16 +1,24 @@
 import type { GridApi, GridOptions, IServerSideDatasource } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { RowGroupingModule, RowGroupingPanelModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import {
+    ModuleRegistry,
+    NumberFilterModule,
+    PaginationModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { RowGroupingModule, RowGroupingPanelModule, ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    PaginationModule,
     RowGroupingModule,
     ServerSideRowModelModule,
     RowGroupingPanelModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let gridApi: GridApi<IOlympicDataWithId>;

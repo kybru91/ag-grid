@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GridApi,
@@ -7,14 +6,29 @@ import type {
     INumberFilterParams,
     ITextFilterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    CustomFilterModule,
+    DateFilterModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { CustomNumberFilter } from './custom-number-filter_typescript';
 import type { CustomFloatingParams } from './number-floating-filter_typescript';
 import { NumberFloatingFilter } from './number-floating-filter_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    TextFilterModule,
+    NumberFilterModule,
+    DateFilterModule,
+    CustomFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     {

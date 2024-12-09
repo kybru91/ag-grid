@@ -1,22 +1,30 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, IDetailCellRendererParams, IServerSideDatasource } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { MasterDetailModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowApiModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    MasterDetailModule,
+    ServerSideRowModelModule,
+} from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    RowApiModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     MasterDetailModule,
     ColumnMenuModule,
     ContextMenuModule,
     ServerSideRowModelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let gridApi: GridApi;

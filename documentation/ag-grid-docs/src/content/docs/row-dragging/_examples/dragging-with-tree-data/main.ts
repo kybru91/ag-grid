@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     GetRowIdParams,
     GridApi,
@@ -8,13 +7,25 @@ import type {
     RowDragEndEvent,
     ValueFormatterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowDragModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { TreeDataModule } from 'ag-grid-enterprise';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, TreeDataModule]);
+ModuleRegistry.registerModules([
+    RowDragModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    TreeDataModule,
+    ValidationModule /* Development Only */,
+]);
 
 class FileCellRenderer {
     private eGui!: any;

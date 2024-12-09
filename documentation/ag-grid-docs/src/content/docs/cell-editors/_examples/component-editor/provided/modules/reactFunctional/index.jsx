@@ -1,14 +1,26 @@
 import React, { StrictMode, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    CustomEditorModule,
+    ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
 import NumericEditor from './numericEditor.jsx';
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    CustomEditorModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const GridExample = () => {
     const [rowData] = useState([

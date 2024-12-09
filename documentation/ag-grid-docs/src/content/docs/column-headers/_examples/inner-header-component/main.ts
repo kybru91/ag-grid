@@ -1,11 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { CustomInnerHeader } from './customInnerHeader_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     { field: 'athlete', suppressHeaderFilterButton: true, minWidth: 120 },

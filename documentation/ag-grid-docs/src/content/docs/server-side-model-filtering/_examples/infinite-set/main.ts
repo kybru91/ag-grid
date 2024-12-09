@@ -9,22 +9,25 @@ import type {
     SetFilterValuesFuncParams,
     ValueFormatterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { MultiFilterModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import { ModuleRegistry, TextFilterModule, ValidationModule, createGrid } from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ContextMenuModule,
+    MultiFilterModule,
+    ServerSideRowModelModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ColumnMenuModule,
     ContextMenuModule,
     ServerSideRowModelModule,
     SetFilterModule,
     MultiFilterModule,
+    TextFilterModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const columnDefs: ColDef[] = [

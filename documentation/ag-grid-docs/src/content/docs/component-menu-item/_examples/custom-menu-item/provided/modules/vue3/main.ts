@@ -7,22 +7,25 @@ import type {
     GridApi,
     GridReadyEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ClipboardModule } from 'ag-grid-enterprise';
-import { ExcelExportModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { CellSelectionModule } from 'ag-grid-enterprise';
+import { ClientSideRowModelModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
+import {
+    CellSelectionModule,
+    ClipboardModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ExcelExportModule,
+} from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import MenuItem from './menuItemVue';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ColumnMenuModule,
     ContextMenuModule,
     ExcelExportModule,
     CellSelectionModule,
     ClipboardModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const VueExample = defineComponent({

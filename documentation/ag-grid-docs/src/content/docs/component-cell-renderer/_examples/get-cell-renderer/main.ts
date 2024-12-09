@@ -1,11 +1,29 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions, ValueGetterParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    RenderApiModule,
+    RowApiModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { MedalCellRenderer } from './medalCellRenderer_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RenderApiModule,
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    NumberFilterModule,
+    RowApiModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     { field: 'athlete', width: 150 },

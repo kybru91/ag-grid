@@ -1,13 +1,26 @@
 import { createApp, defineComponent } from 'vue';
 
 import type { ColDef, GridReadyEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import MySimpleEditor from './mySimpleEditorVue.ts';
 import './style.css';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const VueExample = defineComponent({
     template: `

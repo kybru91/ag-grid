@@ -1,15 +1,29 @@
 import React, { StrictMode, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, ColGroupDef, ICellRendererParams } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    RowApiModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import type { CustomCellRendererProps } from 'ag-grid-react';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    NumberEditorModule,
+    RowApiModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 export interface ImageCellRendererParams extends CustomCellRendererProps {
     rendererImage: string;

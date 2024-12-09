@@ -1,9 +1,21 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { CellEditRequestEvent, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    NumberEditorModule,
+    TextEditorModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi<IOlympicDataWithId>;
 

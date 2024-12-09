@@ -1,7 +1,21 @@
 import type { CellClassRules, GridApi, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    CellStyleModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowStyleModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([
+    RowStyleModule,
+    CellStyleModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi;
 

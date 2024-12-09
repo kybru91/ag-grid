@@ -1,7 +1,6 @@
 import React, { StrictMode, useCallback, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GetRowIdParams,
@@ -10,13 +9,28 @@ import type {
     RowDragEndEvent,
     RowSelectionOptions,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import type { CustomCellRendererProps } from 'ag-grid-react';
 import { AgGridReact } from 'ag-grid-react';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowDragModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const SportRenderer = (props: CustomCellRendererProps) => {
     return (

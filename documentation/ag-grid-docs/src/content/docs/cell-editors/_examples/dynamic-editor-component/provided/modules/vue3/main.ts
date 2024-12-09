@@ -3,13 +3,18 @@ import { createApp, defineComponent } from 'vue';
 import type {
     CellEditingStartedEvent,
     CellEditingStoppedEvent,
-    CellEditorSelectorResult,
     ColDef,
     ICellEditorParams,
     RowEditingStartedEvent,
     RowEditingStoppedEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    TextEditorModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule, RichSelectModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
@@ -19,11 +24,14 @@ import NumericCellEditor from './numericCellEditorVue.ts';
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberEditorModule,
+    TextEditorModule,
+    ClientSideRowModelModule,
     ColumnMenuModule,
     ContextMenuModule,
     ColumnsToolPanelModule,
     RichSelectModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const VueExample = defineComponent({

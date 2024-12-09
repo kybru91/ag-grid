@@ -1,9 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, ICellRendererParams } from 'ag-grid-community';
-import { ColDef, createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    RowApiModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    TextFilterModule,
+    RowApiModule,
+    ClientSideRowModelModule,
+    TextEditorModule,
+    NumberEditorModule,
+    ValidationModule /* Development Only */,
+]);
 
 export interface ImageCellRendererParams extends ICellRendererParams {
     rendererImage: string;

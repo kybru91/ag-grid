@@ -1,10 +1,25 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { DndSourceOnRowDragParams, GridApi, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    DragAndDropModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowStyleModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    DragAndDropModule,
+    TextFilterModule,
+    RowDragModule,
+    RowStyleModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi;
 

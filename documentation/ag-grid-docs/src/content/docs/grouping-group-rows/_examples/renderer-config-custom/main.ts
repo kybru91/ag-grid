@@ -1,11 +1,19 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { CellDoubleClickedEvent, CellKeyDownEvent, ColDef, GridApi, GridOptions, createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    CellDoubleClickedEvent,
+    CellKeyDownEvent,
+    ClientSideRowModelModule,
+    ColDef,
+    GridApi,
+    GridOptions,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
 import { CustomGroupCellRenderer } from './customGroupCellRenderer_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, RowGroupingModule, ValidationModule /* Development Only */]);
 
 const columnDefs: ColDef[] = [
     {

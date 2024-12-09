@@ -1,16 +1,20 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, RowGroupingPanelModule } from 'ag-grid-enterprise';
-import { PivotModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { ColumnsToolPanelModule, PivotModule, RowGroupingPanelModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ColumnApiModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     PivotModule,
     RowGroupingPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const columnDefs: ColDef[] = [

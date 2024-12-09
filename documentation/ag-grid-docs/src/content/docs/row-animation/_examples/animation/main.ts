@@ -1,11 +1,22 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnMenuModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { ColumnMenuModule, SetFilterModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, ColumnMenuModule, SetFilterModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    NumberFilterModule,
+    ClientSideRowModelModule,
+    ColumnMenuModule,
+    SetFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 let countDownDirection = true;
 

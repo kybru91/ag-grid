@@ -1,22 +1,27 @@
 import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { InfiniteRowModelModule } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    InfiniteRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    PaginationModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule, SetFilterModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import { countries } from './countries.jsx';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
+    PaginationModule,
     InfiniteRowModelModule,
     SetFilterModule,
     ColumnMenuModule,
     ContextMenuModule,
     ColumnsToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const filterParams = { values: countries() };

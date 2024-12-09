@@ -1,13 +1,28 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    RowApiModule,
+    RowSelectionModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
     themeQuartz,
 } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    NumberEditorModule,
+    TextEditorModule,
+    TextFilterModule,
+    NumberFilterModule,
+    RowSelectionModule,
+    RowApiModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const myTheme = themeQuartz.withParams({
     /* bright green, 10% opacity */

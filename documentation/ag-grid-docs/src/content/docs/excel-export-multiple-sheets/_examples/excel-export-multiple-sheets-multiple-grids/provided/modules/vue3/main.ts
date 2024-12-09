@@ -8,14 +8,29 @@ import type {
     ICellRendererParams,
     RowSelectionOptions,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CsvExportModule } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    CsvExportModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { ExcelExportModule, exportMultipleSheetsAsExcel } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, CsvExportModule, ExcelExportModule]);
+ModuleRegistry.registerModules([
+    RowDragModule,
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowSelectionModule,
+    CsvExportModule,
+    ExcelExportModule,
+    ValidationModule /* Development Only */,
+]);
 
 const SportRenderer = defineComponent({
     template: `<i class="far fa-trash-alt" style="cursor: pointer" @click="applyTransaction()"></i>`,

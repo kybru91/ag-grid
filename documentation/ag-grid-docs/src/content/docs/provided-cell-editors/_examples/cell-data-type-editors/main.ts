@@ -1,9 +1,21 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions, INumberCellEditorParams, ValueFormatterParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    CheckboxEditorModule,
+    ClientSideRowModelModule,
+    DateEditorModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    NumberEditorModule,
+    DateEditorModule,
+    CheckboxEditorModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     {

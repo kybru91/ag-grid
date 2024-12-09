@@ -1,7 +1,6 @@
 // NOTE: Angular CLI does not support component CSS imports: angular-cli/issues/23273
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ChangeDetectorRef } from '@angular/core';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import type {
@@ -14,7 +13,14 @@ import type {
     RowSelectionOptions,
     StateUpdatedEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    GridStateModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import {
     CellSelectionModule,
     ColumnsToolPanelModule,
@@ -27,14 +33,16 @@ import type { IOlympicData } from './interfaces';
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
+    RowSelectionModule,
+    GridStateModule,
     ClientSideRowModelModule,
-
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
     SetFilterModule,
     CellSelectionModule,
     PivotModule,
+    ValidationModule /* Development Only */,
 ]);
 
 @Component({

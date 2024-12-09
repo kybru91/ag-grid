@@ -15,10 +15,15 @@ import type {
     ValueSetterParams,
 } from 'ag-grid-community';
 import {
-    AllCommunityModule,
+    CellStyleModule,
     ClientSideRowModelModule,
     CsvExportModule,
     ModuleRegistry,
+    NumberFilterModule,
+    RowSelectionModule,
+    SelectEditorModule,
+    TooltipModule,
+    ValidationModule,
     createGrid,
 } from 'ag-grid-community';
 import {
@@ -44,14 +49,15 @@ import { PersonFilter } from './person-filter_typescript';
 import { WinningsFilter } from './winnings-filter_typescript';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    RowSelectionModule,
+    TooltipModule,
+    CellStyleModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     CsvExportModule,
     ExcelExportModule,
     FiltersToolPanelModule,
-    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnMenuModule,
     ContextMenuModule,
     MultiFilterModule,
@@ -62,6 +68,10 @@ ModuleRegistry.registerModules([
     SideBarModule,
     StatusBarModule,
     RowGroupingPanelModule,
+    NumberFilterModule,
+    SelectEditorModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
+    ValidationModule /* Development Only */,
 ]);
 
 const colNames = [

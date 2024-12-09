@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     CellValueChangedEvent,
     GridApi,
@@ -7,24 +6,35 @@ import type {
     ValueFormatterParams,
     ValueSetterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RichSelectModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    SelectEditorModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    RichSelectModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 
 import { ColourCellRenderer } from './colourCellRenderer_typescript';
 import { getData } from './data';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
     ColumnsToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
     RichSelectModule,
     SetFilterModule,
+    SelectEditorModule,
+    TextEditorModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const carMappings = {

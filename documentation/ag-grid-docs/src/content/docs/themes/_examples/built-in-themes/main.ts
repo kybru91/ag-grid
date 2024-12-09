@@ -1,8 +1,10 @@
 import type { ColDef, GridOptions, GridTheme } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
     themeAlpine,
     themeBalham,
@@ -11,11 +13,13 @@ import {
 import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextEditorModule,
+    TextFilterModule,
     ClientSideRowModelModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const themes: Record<string, GridTheme> = {

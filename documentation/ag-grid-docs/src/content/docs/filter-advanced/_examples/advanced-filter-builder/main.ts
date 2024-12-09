@@ -1,16 +1,24 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { AdvancedFilterModel, FirstDataRenderedEvent, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { AdvancedFilterModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    GridStateModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { AdvancedFilterModule, ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextFilterModule,
+    NumberFilterModule,
+    GridStateModule,
     AdvancedFilterModule,
     ClientSideRowModelModule,
     ColumnMenuModule,
     ContextMenuModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const initialAdvancedFilterModel: AdvancedFilterModel = {

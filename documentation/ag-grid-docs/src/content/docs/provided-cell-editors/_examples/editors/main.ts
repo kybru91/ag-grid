@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GridApi,
@@ -8,14 +7,28 @@ import type {
     ISelectCellEditorParams,
     ITextCellEditorParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    LargeTextEditorModule,
+    ModuleRegistry,
+    SelectEditorModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RichSelectModule } from 'ag-grid-enterprise';
 
 import { colors } from './colors';
 import { ColourCellRenderer } from './colourCellRenderer_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RichSelectModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    RichSelectModule,
+    SelectEditorModule,
+    TextEditorModule,
+    LargeTextEditorModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: ColDef[] = [
     {

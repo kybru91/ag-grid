@@ -4,13 +4,27 @@ import { Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { ColumnMenuModule, ContextMenuModule, ExcelExportModule } from 'ag-grid-enterprise';
 
 import type { IOlympicData } from './interfaces';
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ColumnMenuModule, ContextMenuModule, ExcelExportModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    NumberFilterModule,
+    ClientSideRowModelModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ExcelExportModule,
+    ValidationModule /* Development Only */,
+]);
 
 @Component({
     standalone: true,

@@ -9,22 +9,35 @@ import type {
     RowSelectionOptions,
     StateUpdatedEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, PivotModule } from 'ag-grid-enterprise';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    GridStateModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import {
+    CellSelectionModule,
+    ColumnsToolPanelModule,
+    FiltersToolPanelModule,
+    PivotModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
+    RowSelectionModule,
+    GridStateModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
     SetFilterModule,
     CellSelectionModule,
     PivotModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const VueExample = defineComponent({

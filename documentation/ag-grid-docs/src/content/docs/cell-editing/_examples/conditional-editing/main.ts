@@ -1,9 +1,23 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { CellClassParams, EditableCallbackParams, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    CellStyleModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    RowApiModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RowApiModule,
+    NumberEditorModule,
+    TextEditorModule,
+    CellStyleModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 let editableYear = 2012;
 

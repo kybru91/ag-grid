@@ -11,11 +11,26 @@ import type {
     ICellRendererParams,
     RowSelectionOptions,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([
+    RowDragModule,
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 @Component({
     standalone: true,
     template: ` <i class="far fa-trash-alt" style="cursor: pointer" (click)="applyTransaction()"></i>`,

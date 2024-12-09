@@ -1,8 +1,10 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
+    DateFilterModule,
     ModuleRegistry,
+    NumberFilterModule,
+    ValidationModule,
     createGrid,
     themeQuartz,
 } from 'ag-grid-community';
@@ -15,13 +17,15 @@ import {
 } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnMenuModule,
     ContextMenuModule,
     RowGroupingModule,
     SetFilterModule,
+    NumberFilterModule,
+    DateFilterModule,
+    ValidationModule /* Development Only */,
 ]);
 
 // Set a blue background and red shadows for all menus

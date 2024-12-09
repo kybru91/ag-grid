@@ -1,11 +1,24 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { StatusBarModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { CellSelectionModule, StatusBarModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, CellSelectionModule, StatusBarModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    CellSelectionModule,
+    StatusBarModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi<IOlympicData>;
 

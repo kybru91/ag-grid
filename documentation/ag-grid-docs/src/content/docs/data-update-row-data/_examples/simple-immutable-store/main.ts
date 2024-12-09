@@ -1,17 +1,24 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { StatusBarModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { CellSelectionModule, RowGroupingModule, StatusBarModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ColumnApiModule,
+    TextFilterModule,
+    RowSelectionModule,
     ClientSideRowModelModule,
     CellSelectionModule,
     RowGroupingModule,
     StatusBarModule,
+    ValidationModule /* Development Only */,
 ]);
 
 function getInitialData() {

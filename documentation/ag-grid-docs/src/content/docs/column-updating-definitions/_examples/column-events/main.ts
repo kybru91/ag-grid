@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     ColumnMovedEvent,
@@ -12,11 +11,21 @@ import type {
     GridOptions,
     SortChangedEvent,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { PivotModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, PivotModule]);
+ModuleRegistry.registerModules([
+    ColumnApiModule,
+    ClientSideRowModelModule,
+    PivotModule,
+    ValidationModule /* Development Only */,
+]);
 
 function getColumnDefs(): ColDef[] {
     return [

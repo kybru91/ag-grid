@@ -1,9 +1,23 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { GridApi, GridOptions, IRowNode, RefreshCellsParams } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    PinnedRowModule,
+    RenderApiModule,
+    RowApiModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    RenderApiModule,
+    RowApiModule,
+    HighlightChangesModule,
+    PinnedRowModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 // placing in 13 rows, so there are exactly enough rows to fill the grid, makes
 // the row animation look nice when you see all the rows

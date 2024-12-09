@@ -9,21 +9,25 @@ import type {
     IServerSideGetRowsRequest,
     IsServerSideGroupOpenByDefaultParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, ServerSideRowModelApiModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { TreeDataModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import { ModuleRegistry, TextFilterModule, ValidationModule, createGrid } from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    ServerSideRowModelApiModule,
+    ServerSideRowModelModule,
+    TreeDataModule,
+} from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextFilterModule,
     ColumnsToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
     TreeDataModule,
     ServerSideRowModelModule,
     ServerSideRowModelApiModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let fakeServer: {

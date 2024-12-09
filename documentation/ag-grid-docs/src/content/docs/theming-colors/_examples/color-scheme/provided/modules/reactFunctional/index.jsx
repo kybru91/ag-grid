@@ -3,16 +3,24 @@ import { createRoot } from 'react-dom/client';
 
 import {
     ClientSideRowModelModule,
+    ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     colorSchemeDarkBlue,
     colorSchemeDarkWarm,
     colorSchemeLightCold,
     colorSchemeLightWarm,
+    themeQuartz,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { themeQuartz } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const themeLightWarm = themeQuartz.withPart(colorSchemeLightWarm);
 const themeLightCold = themeQuartz.withPart(colorSchemeLightCold);

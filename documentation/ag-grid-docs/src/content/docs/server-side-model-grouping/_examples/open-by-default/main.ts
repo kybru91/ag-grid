@@ -6,14 +6,18 @@ import type {
     IServerSideGetRowsParams,
     IsServerSideGroupOpenByDefaultParams,
 } from 'ag-grid-community';
-import { GetServerSideGroupLevelParamsParams, ServerSideGroupLevelParams, createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import {
+    GetServerSideGroupLevelParamsParams,
+    ModuleRegistry,
+    ServerSideGroupLevelParams,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { RowGroupingModule, ServerSideRowModelModule } from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
-ModuleRegistry.registerModules([AllCommunityModule, RowGroupingModule, ServerSideRowModelModule]);
+ModuleRegistry.registerModules([RowGroupingModule, ServerSideRowModelModule, ValidationModule /* Development Only */]);
 
 let gridApi: GridApi<IOlympicData>;
 const gridOptions: GridOptions<IOlympicData> = {

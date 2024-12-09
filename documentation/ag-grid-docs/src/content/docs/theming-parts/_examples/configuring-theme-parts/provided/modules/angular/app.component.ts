@@ -5,8 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     colorSchemeDark,
     colorSchemeDarkBlue,
     colorSchemeDarkWarm,
@@ -25,7 +27,14 @@ import {
 } from 'ag-grid-community';
 import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, SideBarModule, ColumnsToolPanelModule, FiltersToolPanelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    SideBarModule,
+    ColumnsToolPanelModule,
+    FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
+]);
 
 @Component({
     standalone: true,

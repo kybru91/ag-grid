@@ -1,11 +1,23 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { InfiniteRowModelModule } from 'ag-grid-community';
+import {
+    InfiniteRowModelModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowStyleModule,
+    ScrollApiModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
-ModuleRegistry.registerModules([AllCommunityModule, InfiniteRowModelModule]);
+ModuleRegistry.registerModules([
+    RowApiModule,
+    ScrollApiModule,
+    RowStyleModule,
+    InfiniteRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const valueFormatter = function (params) {
     if (typeof params.value === 'number') {

@@ -1,19 +1,28 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { IServerSideDatasource, createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, RowGroupingPanelModule } from 'ag-grid-enterprise';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    IServerSideDatasource,
+    ModuleRegistry,
+    NumberFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    FiltersToolPanelModule,
+    RowGroupingModule,
+    RowGroupingPanelModule,
+    ServerSideRowModelModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 
 import { getCountries } from './countries';
 import { CustomAgeFilter } from './customAgeFilter';
 import { createFakeServer, createServerSideDatasource } from './server';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
     ColumnMenuModule,
@@ -22,6 +31,7 @@ ModuleRegistry.registerModules([
     ServerSideRowModelModule,
     SetFilterModule,
     RowGroupingPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const countries = getCountries();

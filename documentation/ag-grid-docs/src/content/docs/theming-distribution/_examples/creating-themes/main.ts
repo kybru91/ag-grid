@@ -1,15 +1,24 @@
 import type { ColDef, GridOptions } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     ModuleRegistry,
+    RowSelectionModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     colorSchemeVariable,
     createGrid,
     createTheme,
     iconSetMaterial,
 } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const myCustomTheme = createTheme()
     // add just the parts you want

@@ -1,9 +1,23 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions, IRowDragItem } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    NumberFilterModule,
+    RowDragModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const athleteRowDragTextCallback = function (params: IRowDragItem, dragItemCount: number) {
     // keep double equals here because data can be a string or number

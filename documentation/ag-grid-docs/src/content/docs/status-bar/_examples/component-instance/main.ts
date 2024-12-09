@@ -1,13 +1,26 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { StatusBarModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowSelectionModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { CellSelectionModule, StatusBarModule } from 'ag-grid-enterprise';
 
 import { ClickableStatusBarComponent } from './clickableStatusBarComponent_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, CellSelectionModule, StatusBarModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    TextFilterModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    CellSelectionModule,
+    StatusBarModule,
+    ValidationModule /* Development Only */,
+]);
 
 export interface IClickableStatusBar {
     setVisible(visible: boolean): void;

@@ -6,23 +6,27 @@ import type {
     IServerSideGetRowsParams,
     SetFilterValuesFuncParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, SetFilterModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { ServerSideRowModelModule } from 'ag-grid-enterprise';
+import { ModuleRegistry, NumberFilterModule, ValidationModule, createGrid } from 'ag-grid-community';
+import {
+    ColumnMenuModule,
+    ColumnsToolPanelModule,
+    ContextMenuModule,
+    RowGroupingModule,
+    ServerSideRowModelModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 
 import { FakeServer } from './fakeServer';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
     ColumnsToolPanelModule,
     ColumnMenuModule,
     ContextMenuModule,
     RowGroupingModule,
     ServerSideRowModelModule,
     SetFilterModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const colDefCountry: ColDef = { field: 'country', rowGroup: true };

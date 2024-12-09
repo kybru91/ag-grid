@@ -1,18 +1,27 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import type {
-    GridApi,
-    GridOptions,
-    IGroupCellRendererParams,
-    RowClassParams,
-    ValueFormatterParams,
+import type { GridApi, GridOptions, RowClassParams, ValueFormatterParams } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowSelectionModule,
+    RowStyleModule,
+    ValidationModule,
+    createGrid,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
 import { createNewRowData, getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    RowSelectionModule,
+    RowApiModule,
+    RowStyleModule,
+    ClientSideRowModelModule,
+    RowGroupingModule,
+    ValidationModule /* Development Only */,
+]);
 
 function poundFormatter(params: ValueFormatterParams) {
     return (

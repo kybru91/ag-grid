@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 
 import { AgGridAngular } from 'ag-grid-angular';
+import type { ColDef } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     CsvExportModule,
     ModuleRegistry,
     NumberFilterModule,
     TextFilterModule,
+    ValidationModule,
 } from 'ag-grid-community';
-import type { ColDef } from 'ag-grid-community';
 import {
     ClipboardModule,
     ColumnMenuModule,
@@ -20,7 +21,12 @@ import {
 import './styles.css';
 
 // Register shared Modules globally
-ModuleRegistry.registerModules([ClientSideRowModelModule, ColumnMenuModule, ContextMenuModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ValidationModule /* Development Only */,
+]);
 
 @Component({
     selector: 'my-app',

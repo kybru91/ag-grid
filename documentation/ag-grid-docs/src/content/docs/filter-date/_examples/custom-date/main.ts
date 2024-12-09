@@ -1,11 +1,23 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    DateFilterModule,
+    ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
 import { CustomDateComponent } from './customDateComponent_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    TextEditorModule,
+    ClientSideRowModelModule,
+    DateFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 const filterParams = {
     comparator: (filterLocalDateAtMidnight: Date, cellValue: string) => {

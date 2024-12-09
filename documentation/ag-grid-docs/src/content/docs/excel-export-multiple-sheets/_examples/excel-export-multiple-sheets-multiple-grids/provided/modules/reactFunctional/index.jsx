@@ -1,15 +1,31 @@
 import React, { StrictMode, useCallback, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CsvExportModule } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    CsvExportModule,
+    ModuleRegistry,
+    RowDragModule,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { ExcelExportModule, exportMultipleSheetsAsExcel } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, CsvExportModule, ExcelExportModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowDragModule,
+    RowSelectionModule,
+    ClientSideRowModelModule,
+    CsvExportModule,
+    ExcelExportModule,
+    ValidationModule /* Development Only */,
+]);
 
 const SportRenderer = (props) => {
     return (

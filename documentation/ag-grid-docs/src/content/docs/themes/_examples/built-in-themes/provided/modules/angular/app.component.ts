@@ -3,21 +3,27 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AgGridAngular } from 'ag-grid-angular';
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { themeAlpine, themeBalham, themeQuartz } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { SideBarModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    themeAlpine,
+    themeBalham,
+    themeQuartz,
+} from 'ag-grid-community';
+import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextEditorModule,
+    TextFilterModule,
     ClientSideRowModelModule,
-
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 @Component({

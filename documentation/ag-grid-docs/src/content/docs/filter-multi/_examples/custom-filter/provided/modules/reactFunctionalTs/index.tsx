@@ -1,14 +1,16 @@
 import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridReadyEvent, IMultiFilterParams } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ClipboardModule } from 'ag-grid-enterprise';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { MultiFilterModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import { ClientSideRowModelModule, ModuleRegistry, NumberFilterModule, ValidationModule } from 'ag-grid-community';
+import {
+    ClipboardModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    FiltersToolPanelModule,
+    MultiFilterModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import YearFilter from './YearFilter';
@@ -17,15 +19,15 @@ import type { IOlympicData } from './interfaces';
 import './style.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
     ClientSideRowModelModule,
-
     MultiFilterModule,
     SetFilterModule,
     ColumnMenuModule,
     ContextMenuModule,
     ClipboardModule,
     FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const GridExample = () => {

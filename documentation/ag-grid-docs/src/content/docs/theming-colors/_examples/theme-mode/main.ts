@@ -1,20 +1,22 @@
 import type { ColDef, GridOptions } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     ModuleRegistry,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
     themeQuartz,
 } from 'ag-grid-community';
 import { ColumnsToolPanelModule, FiltersToolPanelModule, PivotModule, SideBarModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    TextFilterModule,
     ClientSideRowModelModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
     PivotModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const myTheme = themeQuartz

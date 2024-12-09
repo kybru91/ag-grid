@@ -3,10 +3,17 @@ import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
 import type { ColDef, GridApi, GridOptions, ICellRendererComp, ICellRendererParams } from 'ag-grid-community';
 import {
-    AllCommunityModule,
     ClientSideRowModelModule,
     CsvExportModule,
+    LocaleModule,
     ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    PaginationModule,
+    RowSelectionModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
 } from 'ag-grid-community';
 import {
@@ -32,14 +39,17 @@ import { zzzLocale } from './locale';
 const AG_GRID_LOCALE_ZZZ: Record<string, string> = zzzLocale(AG_GRID_LOCALE_DE);
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberEditorModule,
+    TextEditorModule,
+    RowSelectionModule,
+    LocaleModule,
+    PaginationModule,
     ClientSideRowModelModule,
     ClipboardModule,
     ColumnsToolPanelModule,
     CsvExportModule,
     ExcelExportModule,
     FiltersToolPanelModule,
-    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnMenuModule,
     ContextMenuModule,
     MultiFilterModule,
@@ -49,6 +59,10 @@ ModuleRegistry.registerModules([
     SideBarModule,
     StatusBarModule,
     RowGroupingPanelModule,
+    TextFilterModule,
+    NumberFilterModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
+    ValidationModule /* Development Only */,
 ]);
 
 class NodeIdRenderer implements ICellRendererComp {

@@ -1,11 +1,28 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { CellValueChangedEvent, GridApi, GridOptions } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    CellStyleModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
+import { RowGroupingModule, SetFilterModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule, SetFilterModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    CellStyleModule,
+    ClientSideRowModelModule,
+    RowGroupingModule,
+    SetFilterModule,
+    HighlightChangesModule,
+    NumberFilterModule,
+    TextEditorModule,
+    ValidationModule /* Development Only */,
+]);
 
 let gridApi: GridApi;
 

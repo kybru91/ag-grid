@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GridApi,
@@ -7,14 +6,24 @@ import type {
     ValueFormatterParams,
     ValueParserParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    TextEditorModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RichSelectModule } from 'ag-grid-enterprise';
 
 import { colors } from './colors';
 import { ColourCellRenderer } from './colourCellRenderer_typescript';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RichSelectModule]);
+ModuleRegistry.registerModules([
+    TextEditorModule,
+    ClientSideRowModelModule,
+    RichSelectModule,
+    ValidationModule /* Development Only */,
+]);
 
 const valueFormatter = (params: ValueFormatterParams) => {
     const { value } = params;

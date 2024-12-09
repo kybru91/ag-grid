@@ -1,4 +1,3 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     AsyncTransactionsFlushedEvent,
     ColDef,
@@ -7,17 +6,27 @@ import type {
     GridOptions,
     ValueFormatterParams,
 } from 'ag-grid-community';
-import { createGrid } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    CellStyleModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import { RowGroupingModule, RowGroupingPanelModule } from 'ag-grid-enterprise';
 
 import { getData, globalRowData } from './data';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ClientSideRowModelApiModule,
+    CellStyleModule,
     ClientSideRowModelModule,
     RowGroupingModule,
     RowGroupingPanelModule,
+    HighlightChangesModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const UPDATE_COUNT = 20;

@@ -8,15 +8,33 @@ import type {
     ICellRendererParams,
     RowSelectionOptions,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    CellStyleModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    QuickFilterModule,
+    RenderApiModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { FiltersToolPanelModule, RowGroupingModule, SetFilterModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, RowGroupingModule, SetFilterModule, FiltersToolPanelModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    RenderApiModule,
+    RowSelectionModule,
+    CellStyleModule,
+    ClientSideRowModelModule,
+    QuickFilterModule,
+    RowGroupingModule,
+    SetFilterModule,
+    FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const VueExample = defineComponent({
     template: `

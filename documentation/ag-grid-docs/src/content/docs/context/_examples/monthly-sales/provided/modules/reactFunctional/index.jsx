@@ -1,21 +1,32 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    CellStyleModule,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    ModuleRegistry,
+    QuickFilterModule,
+    RenderApiModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { FiltersToolPanelModule, RowGroupingModule, SetFilterModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ClientSideRowModelApiModule,
+    RenderApiModule,
+    RowSelectionModule,
+    CellStyleModule,
+    QuickFilterModule,
     ClientSideRowModelModule,
     RowGroupingModule,
     SetFilterModule,
     FiltersToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const monthValueGetter =

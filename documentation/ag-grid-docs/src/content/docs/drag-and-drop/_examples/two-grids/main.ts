@@ -1,8 +1,27 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    DragAndDropModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowDragModule,
+    RowStyleModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    DragAndDropModule,
+    ClientSideRowModelApiModule,
+    RowApiModule,
+    TextFilterModule,
+    RowDragModule,
+    RowStyleModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 let rowIdSequence = 100;
 
 const leftColumnDefs: ColDef[] = [

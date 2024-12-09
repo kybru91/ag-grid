@@ -1,13 +1,14 @@
 import { createApp, defineComponent } from 'vue';
 
+import type { ColDef } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
     CsvExportModule,
     ModuleRegistry,
     NumberFilterModule,
     TextFilterModule,
+    ValidationModule,
 } from 'ag-grid-community';
-import type { ColDef } from 'ag-grid-community';
 import {
     ClipboardModule,
     ColumnMenuModule,
@@ -20,7 +21,12 @@ import { AgGridVue } from 'ag-grid-vue3';
 import './styles.css';
 
 // Register shared Modules globally
-ModuleRegistry.registerModules([ClientSideRowModelModule, ColumnMenuModule, ContextMenuModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ValidationModule /* Development Only */,
+]);
 
 let rowIdSequence = 100;
 const createRowBlock = () =>

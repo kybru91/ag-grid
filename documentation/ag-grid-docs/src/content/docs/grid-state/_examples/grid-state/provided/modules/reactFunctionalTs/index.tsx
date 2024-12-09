@@ -1,7 +1,6 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     GridPreDestroyedEvent,
@@ -10,25 +9,39 @@ import type {
     RowSelectionOptions,
     StateUpdatedEvent,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule, PivotModule } from 'ag-grid-enterprise';
-import { FiltersToolPanelModule } from 'ag-grid-enterprise';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    GridStateModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    PaginationModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import {
+    CellSelectionModule,
+    ColumnsToolPanelModule,
+    FiltersToolPanelModule,
+    PivotModule,
+    SetFilterModule,
+} from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import type { IOlympicData } from './interfaces';
 import './styles.css';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    NumberFilterModule,
+    RowSelectionModule,
+    GridStateModule,
+    PaginationModule,
     ClientSideRowModelModule,
-
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
     SetFilterModule,
     CellSelectionModule,
     PivotModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const GridExample = () => {

@@ -1,25 +1,27 @@
 import React, { StrictMode, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ClipboardModule } from 'ag-grid-enterprise';
-import { ExcelExportModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
-import { CellSelectionModule } from 'ag-grid-enterprise';
+import { ClientSideRowModelModule, ModuleRegistry, ValidationModule } from 'ag-grid-community';
+import {
+    CellSelectionModule,
+    ClipboardModule,
+    ColumnMenuModule,
+    ContextMenuModule,
+    ExcelExportModule,
+} from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 import MenuItem from './menuItem.jsx';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
-
     ColumnMenuModule,
+
     ContextMenuModule,
     ExcelExportModule,
     CellSelectionModule,
     ClipboardModule,
+    ValidationModule /* Development Only */,
 ]);
 
 const GridExample = () => {

@@ -1,21 +1,29 @@
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import {
-    GetRowIdParams,
-    IAggFuncParams,
-    IDoesFilterPassParams,
-    IFilterComp,
-    IFilterParams,
-    IFilterType,
-    IsGroupOpenByDefaultParams,
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    NumberFilterModule,
+    RowApiModule,
+    TextFilterModule,
+    ValidationModule,
     createGrid,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 
 import { createDataItem, getData } from './data';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule, RowGroupingModule]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelApiModule,
+    TextFilterModule,
+    RowApiModule,
+    HighlightChangesModule,
+    ClientSideRowModelModule,
+    RowGroupingModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 function getRowId(params) {
     return String(params.data.id);

@@ -1,19 +1,26 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { CellSelectionModule } from 'ag-grid-enterprise';
-import { RowGroupingModule } from 'ag-grid-enterprise';
-import { StatusBarModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelModule,
+    ColumnApiModule,
+    ModuleRegistry,
+    RowSelectionModule,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { CellSelectionModule, RowGroupingModule, StatusBarModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ColumnApiModule,
+    TextFilterModule,
+    RowSelectionModule,
     ClientSideRowModelModule,
     RowGroupingModule,
     StatusBarModule,
     CellSelectionModule,
+    ValidationModule /* Development Only */,
 ]);
 
 // creates a unique symbol, eg 'ADG' or 'ZJD'

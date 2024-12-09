@@ -7,7 +7,17 @@ import type {
     GridReadyEvent,
     ValueFormatterParams,
 } from 'ag-grid-community';
-import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import {
+    ClientSideRowModelModule,
+    DateEditorModule,
+    ModuleRegistry,
+    NumberEditorModule,
+    NumberFilterModule,
+    TextEditorModule,
+    TextFilterModule,
+    ValidationModule,
+    createGrid,
+} from 'ag-grid-community';
 import {
     ColumnMenuModule,
     ColumnsToolPanelModule,
@@ -22,16 +32,21 @@ import {
 import { getData } from './data';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
     ClientSideRowModelModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
-    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     ColumnMenuModule,
     ContextMenuModule,
     MultiFilterModule,
     SetFilterModule,
     RowGroupingModule,
+    NumberFilterModule,
+    TextFilterModule,
+    NumberEditorModule,
+    TextEditorModule,
+    DateEditorModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let gridApi: GridApi;

@@ -1,24 +1,33 @@
 import React, { StrictMode, useCallback, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, FirstDataRenderedEvent, GetRowIdFunc, GetRowIdParams, GridReadyEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
-import { MasterDetailModule } from 'ag-grid-enterprise';
-import { ColumnMenuModule, ContextMenuModule } from 'ag-grid-enterprise';
+import {
+    ClientSideRowModelApiModule,
+    ClientSideRowModelModule,
+    HighlightChangesModule,
+    ModuleRegistry,
+    RowApiModule,
+    RowSelectionModule,
+    ValidationModule,
+} from 'ag-grid-community';
+import { ColumnMenuModule, ColumnsToolPanelModule, ContextMenuModule, MasterDetailModule } from 'ag-grid-enterprise';
 import type { CustomDetailCellRendererProps } from 'ag-grid-react';
 import { AgGridReact } from 'ag-grid-react';
 
 import type { IAccount } from './interfaces';
 
 ModuleRegistry.registerModules([
-    AllCommunityModule,
+    ClientSideRowModelApiModule,
+    RowSelectionModule,
+    RowApiModule,
+    HighlightChangesModule,
     ClientSideRowModelModule,
     MasterDetailModule,
     ColumnMenuModule,
     ContextMenuModule,
     ColumnsToolPanelModule,
+    ValidationModule /* Development Only */,
 ]);
 
 let allRowData: any[];

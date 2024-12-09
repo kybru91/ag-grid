@@ -1,7 +1,6 @@
 import React, { StrictMode, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ClientSideRowModelModule } from 'ag-grid-community';
 import type {
     ColDef,
     ColGroupDef,
@@ -9,12 +8,25 @@ import type {
     GridReadyEvent,
     SizeColumnsToFitGridStrategy,
 } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ColumnAutoSizeModule,
+    ModuleRegistry,
+    TextFilterModule,
+    ValidationModule,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
 import './styles.css';
 
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+    TextFilterModule,
+    ColumnAutoSizeModule,
+    AlignedGridsModule,
+    ClientSideRowModelModule,
+    ValidationModule /* Development Only */,
+]);
 
 const GridExample = () => {
     const topGridRef = useRef<AgGridReact>(null);

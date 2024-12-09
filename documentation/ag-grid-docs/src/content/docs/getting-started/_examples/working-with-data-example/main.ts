@@ -1,20 +1,7 @@
 import type { GridApi, GridOptions } from 'ag-grid-community';
-import {
-    ModuleRegistry,
-    NumberFilterModule,
-    SelectEditorModule,
-    TextFilterModule,
-    ValidationModule,
-    createGrid,
-} from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([
-    TextFilterModule,
-    NumberFilterModule,
-    SelectEditorModule,
-    ValidationModule /* Development Only */,
-]);
-
+ModuleRegistry.registerModules([AllCommunityModule]);
 let gridApi: GridApi;
 
 const gridOptions: GridOptions = {

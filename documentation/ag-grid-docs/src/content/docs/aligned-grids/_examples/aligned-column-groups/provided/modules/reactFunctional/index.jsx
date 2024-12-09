@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import {
     AlignedGridsModule,
     ClientSideRowModelModule,
+    ColumnApiModule,
     ColumnAutoSizeModule,
     ModuleRegistry,
     TextFilterModule,
@@ -16,6 +17,7 @@ import './styles.css';
 ModuleRegistry.registerModules([
     TextFilterModule,
     ColumnAutoSizeModule,
+    ColumnApiModule,
     AlignedGridsModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,

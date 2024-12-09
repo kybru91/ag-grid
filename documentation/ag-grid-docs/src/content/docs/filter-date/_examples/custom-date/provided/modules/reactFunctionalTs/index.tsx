@@ -4,10 +4,8 @@ import { createRoot } from 'react-dom/client';
 import type { ColDef } from 'ag-grid-community';
 import {
     ClientSideRowModelModule,
+    DateFilterModule,
     ModuleRegistry,
-    NumberEditorModule,
-    NumberFilterModule,
-    TextEditorModule,
     TextFilterModule,
     ValidationModule,
 } from 'ag-grid-community';
@@ -18,10 +16,8 @@ import type { IOlympicData } from './interfaces';
 import './styles.css';
 
 ModuleRegistry.registerModules([
+    DateFilterModule,
     TextFilterModule,
-    NumberFilterModule,
-    NumberEditorModule,
-    TextEditorModule,
     ClientSideRowModelModule,
     ValidationModule /* Development Only */,
 ]);
@@ -32,22 +28,15 @@ const GridExample = () => {
     const [rowData, setRowData] = useState<IOlympicData[]>();
     const [columnDefs, setColumnDefs] = useState<ColDef[]>([
         { field: 'athlete' },
-        { field: 'age' },
         { field: 'country' },
-        { field: 'year' },
         {
             field: 'date',
             minWidth: 190,
         },
         { field: 'sport' },
-        { field: 'gold' },
-        { field: 'silver' },
-        { field: 'bronze' },
-        { field: 'total' },
     ]);
     const defaultColDef = useMemo<ColDef>(() => {
         return {
-            editable: true,
             flex: 1,
             minWidth: 100,
             filter: true,

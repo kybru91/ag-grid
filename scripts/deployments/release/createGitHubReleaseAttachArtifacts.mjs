@@ -24,7 +24,7 @@ const ghReleaseVersion = `v${releaseVersion}`;
 const releaseBranch = args.releaseBranch;
 const artifactsPath = args.artifactsPath;
 
-const artifactFolders = ['community-modules', 'enterprise-modules', 'packages'];
+const artifactFolders = ['community-modules', 'packages'];
 
 const app = new App({
     appId: AG_GRID_APP_ID,
@@ -100,8 +100,6 @@ async function uploadArtifactsForRelease(release) {
         switch (folder) {
             case 'community-modules':
                 return `@ag-grid-community-${filename}`;
-            case 'enterprise-modules':
-                return `@ag-grid-enterprise-${filename}`;
             default:
                 return filename;
         }

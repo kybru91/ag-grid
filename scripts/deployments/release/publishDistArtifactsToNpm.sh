@@ -21,8 +21,6 @@ publishModules()
   done
 }
 
-publishModules "dist/artifacts/contents/community-modules"
-publishModules "dist/artifacts/contents/enterprise-modules"
 publishModules "dist/artifacts/contents/packages"
 
 

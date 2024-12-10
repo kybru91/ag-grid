@@ -115,7 +115,9 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
     }
 
     private createDefaultContent(params: any) {
-        return `${params.yValue}`;
+        const xValue =
+            this.sparklineOptions.xKey || Array.isArray(this.sparklineOptions.data?.[0]) ? `${params.xValue} ` : '';
+        return `${xValue}${params.yValue}`;
     }
 
     private wrapItemStyler(container: { itemStyler?: any }) {

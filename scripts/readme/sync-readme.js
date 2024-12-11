@@ -16,11 +16,9 @@ const patterns = [
     'packages/ag-grid-react/README.md',
     'packages/ag-grid-community/README.md',
     'packages/ag-grid-vue3/README.md',
-    // Top-Level Framework Modules
-    'community-modules/react/README.md',
-    'community-modules/angular/README.md',
-    'community-modules/angular/projects/ag-grid-angular/README.md',
-    'community-modules/vue3/README.md',
+    // Feature Modules
+    'community-modules/locale/README.md',
+    'community-modules/styles/README.md',
 ];
 
 // Dependencies
@@ -58,6 +56,11 @@ const updateContent = (readme) => {
         .map((s) => titleCase(s))
         .join(' ')
         .trim();
+
+    // For Locale and Style README's, use the default rootReadme.
+    if (readme.includes('community-modules/locale') || readme.includes('community-modules/styles')) {
+        return rootReadme;
+    }
 
     // Don't alter ag-charts-community README
     if (packageName === 'ag-grid-community') {

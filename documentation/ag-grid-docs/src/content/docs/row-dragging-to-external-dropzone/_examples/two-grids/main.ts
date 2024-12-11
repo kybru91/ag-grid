@@ -170,12 +170,12 @@ function addBinZone(params: GridReadyEvent) {
                 icon.style.transform = 'scale(1.5)';
             },
             onDragLeave: () => {
-                eBin.style.color = 'black';
+                eBin.style.removeProperty('color');
                 icon.style.transform = 'scale(1)';
             },
             onDragStop: (dragStopParams) => {
                 binDrop(dragStopParams.node.data);
-                eBin.style.color = 'black';
+                eBin.style.removeProperty('color');
                 icon.style.transform = 'scale(1)';
             },
         };

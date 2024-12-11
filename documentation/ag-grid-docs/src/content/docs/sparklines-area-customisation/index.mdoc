@@ -23,13 +23,26 @@ sparklineOptions: {
     type: 'area',
     fill: 'rgba(216, 204, 235, 0.3)',
     stroke: 'rgb(119,77,185)',
+    marker: {
+        enabled: true,
+        size: 0,
+        itemStyler: (params: any) => {
+            if (params.highlighted) {
+                return {
+                    size: 7
+                };
+            }
+        }
+    },
     highlightStyle: {
         item: {
             fill: 'rgb(143,185,77)',
+            strokeWidth: 0,
         }
     },
     axis: {
-        stroke: 'rgb(204, 204, 235)',
+        type: 'category',
+        stroke: 'rgb(204, 204, 235)'
     }
 }
 ```
@@ -66,9 +79,9 @@ Custom line
 
 The markers are enabled by default but the size has been set to `0`px, making them invisible.
 
-The `size` property in the `highlightStyle` options is `6`px by default, allowing the markers to become visible when in the highlighted state.
+The `size` property in the `marker.itemStyler` is `10`px, allowing the markers to become visible when in the highlighted state.
 
-These formats can be modified to your liking by setting the `marker` and `highlightStyle` options as demonstrated below.
+These formats can be modified to your liking by setting the `marker.itemStyler` and `highlightStyle` options as demonstrated below.
 
 ```js
 sparklineOptions: {
@@ -214,7 +227,7 @@ More advanced customisations are discussed separately in the following sections:
 
 * [Axis](./sparklines-axis-types/) - configure the axis type via `axis` options.
 * [Tooltips](./sparklines-tooltips/) - configure tooltips using `tooltip` options.
-* [Points of Interest](./sparklines-points-of-interest/) - configure individual points of interest using a `formatter`.
+* [Points of Interest](./sparklines-points-of-interest/) - configure individual points of interest using a `itemStyler`.
 
 ## Next Up
 

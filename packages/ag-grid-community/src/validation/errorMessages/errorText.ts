@@ -315,8 +315,6 @@ export const AG_GRID_ERRORS = {
     110: () => 'groupHideOpenParents only works when specifying specific columns for colDef.showRowGroup' as const,
     111: () =>
         'Invalid selection state. When `groupSelectsChildren` is enabled, the state must conform to `IServerSideGroupSelectionState`.' as const,
-    112: ({ googleFont, googleFontsDomain }: { googleFont: string; googleFontsDomain: string }) =>
-        `Theme uses google font ${googleFont} but no value for loadThemeGoogleFonts was provided. Pass true to load fonts from ${googleFontsDomain} or false to silence this warning.` as const,
     113: () =>
         'Set Filter cannot initialise because you are using a row model that does not contain all rows in the browser. Either use a different filter type, or configure Set Filter such that you provide it with values' as const,
     114: ({ component }: { component: string }) =>
@@ -607,6 +605,7 @@ export function getError<TId extends ErrorId, TParams extends GetErrorParams<TId
 export const MISSING_MODULE_REASONS = {
     1: 'Charting Aggregation',
     2: 'pivotResultFields',
+    3: 'setTooltip',
 } as const;
 
 export type MissingModuleErrors = typeof MISSING_MODULE_REASONS;

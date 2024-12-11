@@ -3,13 +3,14 @@ import {
     ClientSideRowModelModule,
     ModuleRegistry,
     NumberEditorModule,
+    NumberFilterModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
     createGrid,
     themeQuartz,
 } from 'ag-grid-community';
-import { ColumnsToolPanelModule, FiltersToolPanelModule, SideBarModule } from 'ag-grid-enterprise';
+import { ColumnsToolPanelModule, FiltersToolPanelModule, PivotModule, SideBarModule } from 'ag-grid-enterprise';
 
 import './style.css';
 
@@ -17,10 +18,12 @@ ModuleRegistry.registerModules([
     NumberEditorModule,
     TextEditorModule,
     TextFilterModule,
+    NumberFilterModule,
     ClientSideRowModelModule,
     SideBarModule,
     ColumnsToolPanelModule,
     FiltersToolPanelModule,
+    PivotModule,
     ValidationModule /* Development Only */,
 ]);
 

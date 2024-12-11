@@ -2,8 +2,10 @@ import { computed, createApp, defineComponent, ref } from 'vue';
 
 import type { ColDef } from 'ag-grid-community';
 import {
+    ClientSideRowModelModule,
     ModuleRegistry,
     NumberEditorModule,
+    NumberFilterModule,
     TextEditorModule,
     TextFilterModule,
     ValidationModule,
@@ -28,13 +30,16 @@ import {
     ContextMenuModule,
     ExcelExportModule,
     FiltersToolPanelModule,
+    PivotModule,
     SideBarModule,
 } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';
 
 ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
     TextEditorModule,
     TextFilterModule,
+    NumberFilterModule,
     NumberEditorModule,
     SideBarModule,
     ColumnsToolPanelModule,
@@ -42,6 +47,7 @@ ModuleRegistry.registerModules([
     ExcelExportModule,
     ColumnMenuModule,
     ContextMenuModule,
+    PivotModule,
     ValidationModule /* Development Only */,
 ]);
 

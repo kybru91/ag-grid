@@ -214,12 +214,12 @@ const VueExample = defineComponent({
                     this.$refs.eBinIcon.style.transform = 'scale(1.5)';
                 },
                 onDragLeave: () => {
-                    this.$refs.eBin.style.color = 'black';
+                    this.$refs.eBin.style.removeProperty('color');
                     this.$refs.eBinIcon.style.transform = 'scale(1)';
                 },
                 onDragStop: (params) => {
                     this.binDrop(params.node.data);
-                    this.$refs.eBin.style.color = 'black';
+                    this.$refs.eBin.style.removeProperty('color');
                     this.$refs.eBinIcon.style.transform = 'scale(1)';
                 },
             };

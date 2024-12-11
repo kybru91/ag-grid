@@ -283,12 +283,8 @@ const updateGridProperties = (getGridPropertiesAndEvents) => {
 
     const optionsForVue = {
         files: './src/components/AgGridVue.vue',
-        from: [
-            /(\/\/ @START_IMPORTS@)[^]*(\/\/ @END_IMPORTS@)/
-        ],
-        to: [
-            `// @START_IMPORTS@${EOL}${importsForEvents}${EOL}// @END_IMPORTS@`
-        ],
+        from: [/(\/\/ @START_IMPORTS@)[^]*(\/\/ @END_IMPORTS@)/],
+        to: [`// @START_IMPORTS@${EOL}${importsForEvents}${EOL}// @END_IMPORTS@`],
     };
 
     replace(optionsForVue).then((filesChecked) => {

@@ -63,7 +63,7 @@ packageNames
             checkDependency(dependencyName, agPackage.agGridPeerDeps[dependencyName], gridNewVersion)
         );
         Object.keys(agPackage.agGridOptionalDeps).forEach((dependencyName) =>
-                checkDependency(dependencyName, agPackage.agGridOptionalDeps[dependencyName], gridNewVersion)
+            checkDependency(dependencyName, agPackage.agGridOptionalDeps[dependencyName], gridNewVersion)
         );
         Object.keys(agPackage.agChartDeps).forEach((dependencyName) =>
             checkDependency(dependencyName, agChartDeps[dependencyName], chartNewVersion)

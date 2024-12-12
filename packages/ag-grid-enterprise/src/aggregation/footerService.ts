@@ -6,37 +6,32 @@ import { _createRowNodeFooter } from './footerUtils';
 export class FooterService extends BeanStub implements NamedBean, IFooterService {
     beanName = 'footerSvc' as const;
 
-    public addNodes(
+    public addTotalRows(
         startIndex: number,
-        nodes: RowNode[],
+        node: RowNode,
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean,
-        rootNode: RowNode | null,
+        isRootNode: boolean,
         position: 'top' | 'bottom'
     ): number {
-        const parentNode = nodes[0]?.parent;
+        let index = startIndex;
 
-        if (!parentNode) return startIndex;
-        let endIndex = startIndex;
-
-        const grandTotal = includeFooterNodes && _getGrandTotalRow(this.gos);
-        const isGroupIncludeFooter = _getGroupTotalRowCallback(this.gos);
-        const groupTotal = includeFooterNodes && isGroupIncludeFooter({ node: parentNode });
-
-        const isRootNode = parentNode === rootNode;
         if (isRootNode) {
+            const grandTotal = includeFooterNodes && _getGrandTotalRow(this.gos);
             if (grandTotal === position) {
-                _createRowNodeFooter(parentNode, this.beans);
-                callback(parentNode.sibling, endIndex++);
+                _createRowNodeFooter(node, this.beans);
+                callback(node.sibling, index++);
             }
-            return endIndex;
+            return index;
         }
 
+        const isGroupIncludeFooter = _getGroupTotalRowCallback(this.gos);
+        const groupTotal = includeFooterNodes && isGroupIncludeFooter({ node });
         if (groupTotal === position) {
-            _createRowNodeFooter(parentNode, this.beans);
-            callback(parentNode.sibling, endIndex++);
+            _createRowNodeFooter(node, this.beans);
+            callback(node.sibling, index++);
         }
-        return endIndex;
+        return index;
     }
 
     public getTopDisplayIndex(

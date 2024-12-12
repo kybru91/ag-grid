@@ -1,12 +1,12 @@
 import type { RowNode } from '../entities/rowNode';
 
 export interface IFooterService {
-    addNodes(
+    addTotalRows(
         startIndex: number,
-        nodes: RowNode[],
+        node: RowNode,
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean,
-        rootNode: RowNode | null,
+        isRootNode: boolean,
         position: 'top' | 'bottom'
     ): number;
 

@@ -975,24 +975,34 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean = false,
         getChildren: (node: RowNode) => RowNode[] | null = (node) => node.childrenAfterGroup,
-        nodes: RowNode[] = this.rootNode ? [this.rootNode] : [],
+        node: RowNode | null = this.rootNode,
         startIndex: number = 0
     ): number {
-        const { footerSvc } = this.beans;
-        let index =
-            footerSvc?.addNodes(startIndex, nodes, callback, includeFooterNodes, this.rootNode, 'top') ?? startIndex;
+        let index = startIndex;
+        if (!node) {
+            return index;
+        }
 
-        for (const node of nodes) {
+        const isRootNode = node === this.rootNode;
+        if (!isRootNode) {
             callback(node, index++);
-            // go to the next level if it is a group
-            if (node.hasChildren() && !node.footer) {
-                const children = getChildren(node);
-                if (children) {
-                    index = this.depthFirstSearchRowNodes(callback, includeFooterNodes, getChildren, children, index);
+        }
+
+        const { footerSvc } = this.beans;
+
+        if (node.hasChildren() && !node.footer) {
+            const children = getChildren(node);
+            if (children) {
+                index = footerSvc?.addTotalRows(index, node, callback, includeFooterNodes, isRootNode, 'top') ?? index;
+                for (const node of children) {
+                    index = this.depthFirstSearchRowNodes(callback, includeFooterNodes, getChildren, node, index);
                 }
+                return (
+                    footerSvc?.addTotalRows(index, node, callback, includeFooterNodes, isRootNode, 'bottom') ?? index
+                );
             }
         }
-        return footerSvc?.addNodes(index, nodes, callback, includeFooterNodes, this.rootNode, 'bottom') ?? index;
+        return index;
     }
 
     // it's possible to recompute the aggregate without doing the other parts

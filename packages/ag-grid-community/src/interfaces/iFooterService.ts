@@ -2,15 +2,13 @@ import type { RowNode } from '../entities/rowNode';
 
 export interface IFooterService {
     addNodes(
-        params: {
-            index: number;
-        },
+        startIndex: number,
         nodes: RowNode[],
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean,
         rootNode: RowNode | null,
         position: 'top' | 'bottom'
-    ): void;
+    ): number;
 
     getTopDisplayIndex(
         rowsToDisplay: RowNode[],

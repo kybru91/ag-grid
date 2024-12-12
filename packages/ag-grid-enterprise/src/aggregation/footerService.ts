@@ -7,20 +7,17 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
     beanName = 'footerSvc' as const;
 
     public addNodes(
-        params: {
-            index: number;
-        },
+        startIndex: number,
         nodes: RowNode[],
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean,
         rootNode: RowNode | null,
         position: 'top' | 'bottom'
-    ): void {
+    ): number {
         const parentNode = nodes[0]?.parent;
 
-        if (!parentNode) return;
-
-        let { index } = params;
+        if (!parentNode) return startIndex;
+        let endIndex = startIndex;
 
         const grandTotal = includeFooterNodes && _getGrandTotalRow(this.gos);
         const isGroupIncludeFooter = _getGroupTotalRowCallback(this.gos);
@@ -30,15 +27,16 @@ export class FooterService extends BeanStub implements NamedBean, IFooterService
         if (isRootNode) {
             if (grandTotal === position) {
                 _createRowNodeFooter(parentNode, this.beans);
-                callback(parentNode.sibling, index++);
+                callback(parentNode.sibling, endIndex++);
             }
-            return;
+            return endIndex;
         }
 
         if (groupTotal === position) {
             _createRowNodeFooter(parentNode, this.beans);
-            callback(parentNode.sibling, index++);
+            callback(parentNode.sibling, endIndex++);
         }
+        return endIndex;
     }
 
     public getTopDisplayIndex(

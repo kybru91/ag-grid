@@ -4,9 +4,9 @@ import { AgCheckbox, AgSelect, Component, RefPlaceholder } from 'ag-grid-communi
 import type { AgGroupComponentParams } from '../../../../../widgets/agGroupComponent';
 import { AgGroupComponent, AgGroupComponentSelector } from '../../../../../widgets/agGroupComponent';
 import { AgSlider } from '../../../../widgets/agSlider';
-import { ChartController } from '../../../chartController';
+import type { ChartController } from '../../../chartController';
 import type { ChartTranslationKey, ChartTranslationService } from '../../../services/chartTranslationService';
-import { ChartMenuContext } from '../../chartMenuContext';
+import type { ChartMenuContext } from '../../chartMenuContext';
 import type { ChartMenuParamsFactory } from '../../chartMenuParamsFactory';
 import type { FontPanelParams } from '../fontPanel';
 import { FontPanel } from '../fontPanel';

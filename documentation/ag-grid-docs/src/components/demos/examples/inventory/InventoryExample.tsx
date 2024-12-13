@@ -3,7 +3,7 @@ import { type ChangeEvent, type FunctionComponent, useCallback, useMemo, useRef,
 import type {
     ColDef,
     GetDetailRowDataParams,
-    SizeColumnsToContentStrategy,
+    SizeColumnsToFitGridStrategy,
     ValueFormatterFunc,
     ValueFormatterParams,
     ValueGetterParams,
@@ -110,7 +110,7 @@ export const InventoryExample: FunctionComponent<Props> = ({ gridTheme = 'ag-the
         }),
         []
     );
-    const autoSizeStrategy = useMemo<SizeColumnsToContentStrategy>(
+    const autoSizeStrategy = useMemo<SizeColumnsToFitGridStrategy>(
         () => ({
             type: 'fitGridWidth',
         }),

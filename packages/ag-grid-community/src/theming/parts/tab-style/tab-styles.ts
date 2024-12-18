@@ -1,6 +1,6 @@
 import { createPart } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
-import { accentColor, foregroundMix } from '../../theme-utils';
+import { accentColor, backgroundColor, foregroundMix } from '../../theme-utils';
 import { tabStyleBaseCSS } from './tab-style-base.css-GENERATED';
 import { tabStyleRolodexCSS } from './tab-style-rolodex.css-GENERATED';
 
@@ -175,9 +175,7 @@ export const tabStyleQuartz = /*#__PURE__*/ createPart({
         tabSelectedBorderColor: {
             ref: 'borderColor',
         },
-        tabSelectedBackgroundColor: {
-            ref: 'backgroundColor',
-        },
+        tabSelectedBackgroundColor: backgroundColor,
     },
     css: tabStyleBaseCSS,
 });
@@ -255,9 +253,7 @@ export const tabStyleRolodex = /*#__PURE__*/ createPart({
         tabSelectedBorderColor: {
             ref: 'borderColor',
         },
-        tabSelectedBackgroundColor: {
-            ref: 'backgroundColor',
-        },
+        tabSelectedBackgroundColor: backgroundColor,
     },
     css: () => tabStyleBaseCSS + tabStyleRolodexCSS,
 });

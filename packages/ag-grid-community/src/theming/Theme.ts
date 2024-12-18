@@ -202,7 +202,8 @@ export class ThemeImpl {
                     variablesCss += wrapPrefix;
                     inheritanceCss += wrapPrefix;
                 }
-                for (const [key, value] of Object.entries(params)) {
+                for (const key of Object.keys(params).sort()) {
+                    const value = params[key];
                     const cssValue = paramValueToCss(key, value);
                     if (cssValue === false) {
                         _error(107, { key, value });

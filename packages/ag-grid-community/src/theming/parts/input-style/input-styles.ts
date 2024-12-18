@@ -1,6 +1,6 @@
 import { createPart } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
-import { accentColor, foregroundBackgroundMix, foregroundMix } from '../../theme-utils';
+import { accentColor, backgroundColor, foregroundBackgroundMix, foregroundMix } from '../../theme-utils';
 import { inputStyleBaseCSS } from './input-style-base.css-GENERATED';
 import { inputStyleBorderedCSS } from './input-style-bordered.css-GENERATED';
 import { inputStyleUnderlinedCSS } from './input-style-underlined.css-GENERATED';
@@ -156,9 +156,7 @@ export const inputStyleBordered = /*#__PURE__*/ createPart({
     params: {
         ...baseParams,
 
-        inputBackgroundColor: {
-            ref: 'backgroundColor',
-        },
+        inputBackgroundColor: backgroundColor,
         inputBorder: true,
         inputBorderRadius: {
             ref: 'borderRadius',

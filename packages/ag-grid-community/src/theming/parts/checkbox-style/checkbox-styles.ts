@@ -1,5 +1,5 @@
 import { createPart } from '../../Part';
-import { accentColor, foregroundBackgroundMix } from '../../theme-utils';
+import { accentColor, backgroundColor, foregroundBackgroundMix } from '../../theme-utils';
 import { checkboxStyleDefaultCSS } from './checkbox-style-default.css-GENERATED';
 
 type CheckboxStyleDefaultParams = {
@@ -76,26 +76,20 @@ export const checkboxStyleDefault = createPart<CheckboxStyleDefaultParams>({
         checkboxBorderRadius: {
             ref: 'borderRadius',
         },
-        checkboxUncheckedBackgroundColor: {
-            ref: 'backgroundColor',
-        },
+        checkboxUncheckedBackgroundColor: backgroundColor,
         checkboxUncheckedBorderColor: foregroundBackgroundMix(0.3),
         checkboxCheckedBackgroundColor: accentColor,
         checkboxCheckedBorderColor: accentColor,
         checkboxCheckedShapeImage: {
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" fill="none"><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M1 3.5 3.5 6l5-5"/></svg>',
         },
-        checkboxCheckedShapeColor: {
-            ref: 'backgroundColor',
-        },
+        checkboxCheckedShapeColor: backgroundColor,
         checkboxIndeterminateBackgroundColor: foregroundBackgroundMix(0.3),
         checkboxIndeterminateBorderColor: foregroundBackgroundMix(0.3),
         checkboxIndeterminateShapeImage: {
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="2" fill="none"><rect width="10" height="2" fill="#000" rx="1"/></svg>',
         },
-        checkboxIndeterminateShapeColor: {
-            ref: 'backgroundColor',
-        },
+        checkboxIndeterminateShapeColor: backgroundColor,
         radioCheckedShapeImage: {
             svg: '<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" fill="none"><circle cx="3" cy="3" r="3" fill="#000"/></svg>',
         },

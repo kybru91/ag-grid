@@ -311,86 +311,6 @@ type CoreParamsDefinitions = {
     headerVerticalPaddingScale: 'infer';
 
     /**
-     * Text color of standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonTextColor: 'infer';
-
-    /**
-     * Font weight of standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonFontWeight: 'infer';
-
-    /**
-     * Background color of standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonBackgroundColor: 'infer';
-
-    /**
-     * Border around standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonBorder: 'infer';
-
-    /**
-     * Corner radius of standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonBorderRadius: 'infer';
-
-    /**
-     * Horizontal padding inside standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonHorizontalPadding: 'infer';
-
-    /**
-     * Vertical padding inside standard action buttons (e.g. "Reset" and "Apply")
-     */
-    buttonVerticalPadding: 'infer';
-
-    /**
-     * Text color of standard action buttons (e.g. "Reset" and "Apply") when hovered
-     */
-    buttonHoverTextColor: 'infer';
-
-    /**
-     * Background color of standard action buttons (e.g. "Reset" and "Apply") when hovered
-     */
-    buttonHoverBackgroundColor: 'infer';
-
-    /**
-     * Border around standard action buttons (e.g. "Reset" and "Apply") when hovered. Only has an effect if a border is enabled with `buttonBorder`.
-     */
-    buttonHoverBorder: 'infer';
-
-    /**
-     * Text color of standard action buttons (e.g. "Reset" and "Apply") when being clicked
-     */
-    buttonActiveTextColor: 'infer';
-
-    /**
-     * Background color of standard action buttons (e.g. "Reset" and "Apply") when being clicked
-     */
-    buttonActiveBackgroundColor: 'infer';
-
-    /**
-     * Border around standard action buttons (e.g. "Reset" and "Apply") when being clicked.
-     */
-    buttonActiveBorder: 'infer';
-
-    /**
-     * Text color of standard action buttons (e.g. "Reset" and "Apply") when disabled
-     */
-    buttonDisabledTextColor: 'infer';
-
-    /**
-     * Background color of standard action buttons (e.g. "Reset" and "Apply") when disabled
-     */
-    buttonDisabledBackgroundColor: 'infer';
-
-    /**
-     * Border around standard action buttons (e.g. "Reset" and "Apply") when disabled.
-     */
-    buttonDisabledBorder: 'infer';
-
-    /**
      * Color for icons, or `inherit` to take on the text color of the containing component
      */
     iconColor: 'infer';
@@ -937,22 +857,6 @@ export const coreDefaults: Readonly<CoreParams> = {
     headerHeight: {
         calc: 'max(iconSize, dataFontSize) + spacing * 4 * headerVerticalPaddingScale',
     },
-    buttonTextColor: 'inherit',
-    buttonFontWeight: 'inherit',
-    buttonBackgroundColor: backgroundColor,
-    buttonBorder: true,
-    buttonBorderRadius: { ref: 'borderRadius' },
-    buttonHorizontalPadding: { calc: 'spacing * 2' },
-    buttonVerticalPadding: { ref: 'spacing' },
-    buttonHoverTextColor: { ref: 'buttonTextColor' },
-    buttonHoverBackgroundColor: { ref: 'rowHoverColor' },
-    buttonHoverBorder: { ref: 'buttonBorder' },
-    buttonActiveTextColor: { ref: 'buttonHoverTextColor' },
-    buttonActiveBackgroundColor: { ref: 'rowHoverColor' },
-    buttonActiveBorder: { color: accentColor },
-    buttonDisabledTextColor: { ref: 'inputDisabledTextColor' },
-    buttonDisabledBackgroundColor: { ref: 'inputDisabledBackgroundColor' },
-    buttonDisabledBorder: { ref: 'inputDisabledBorder' },
     headerVerticalPaddingScale: 1,
     popupShadow: '0 0 16px #00000026',
     cardShadow: '0 1px 4px 1px #00000018',

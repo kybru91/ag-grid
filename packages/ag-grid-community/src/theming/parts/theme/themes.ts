@@ -1,12 +1,6 @@
 import { createTheme } from '../../Theme';
-import {
-    accentColor,
-    accentMix,
-    backgroundColor,
-    foregroundBackgroundMix,
-    foregroundColor,
-    foregroundMix,
-} from '../../theme-utils';
+import { accentColor, accentMix, backgroundColor, foregroundBackgroundMix, foregroundMix } from '../../theme-utils';
+import { buttonStyleAlpine, buttonStyleBalham } from '../button-style/button-styles';
 import { checkboxStyleDefault } from '../checkbox-style/checkbox-styles';
 import { colorSchemeVariable } from '../color-scheme/color-schemes';
 import { iconSetBalham } from '../icon-set/balham/icon-set-balham';
@@ -37,6 +31,7 @@ export const themeQuartz =
 export const themeAlpine =
     /*#__PURE__*/
     createTheme()
+        .withPart(buttonStyleAlpine)
         .withPart(checkboxStyleDefault)
         .withPart(colorSchemeVariable)
         .withPart(iconSetAlpine)
@@ -77,18 +72,12 @@ export const themeAlpine =
             toggleButtonHeight: 18,
             toggleButtonSwitchInset: 1,
             toggleButtonOffBackgroundColor: foregroundBackgroundMix(0.45),
-            // TODO extract into buttonStyleAlpine
-            buttonBorder: { color: accentColor },
-            buttonFontWeight: 600,
-            buttonTextColor: accentColor,
-            buttonHoverBackgroundColor: { ref: 'rowHoverColor' },
-            buttonActiveBackgroundColor: accentColor,
-            buttonActiveTextColor: backgroundColor,
         });
 
 export const themeBalham =
     /*#__PURE__*/
     createTheme()
+        .withPart(buttonStyleBalham)
         .withPart(checkboxStyleDefault)
         .withPart(colorSchemeVariable)
         .withPart(iconSetBalham)
@@ -123,7 +112,6 @@ export const themeBalham =
             iconButtonHoverBackgroundColor: 'transparent',
             iconButtonActiveBackgroundColor: 'transparent',
             fontSize: 12,
-            inputHeight: 24,
             tabSelectedBackgroundColor: backgroundColor,
             headerFontWeight: 'bold',
             toggleButtonWidth: 32,
@@ -132,11 +120,6 @@ export const themeBalham =
             toggleButtonOffBackgroundColor: foregroundBackgroundMix(0.5),
             sideButtonBorder: true,
             sideButtonBarTopPadding: { calc: 'spacing * 4' },
-            // TODO extract into buttonStyleAlpine
-            buttonBorder: { color: foregroundColor, width: 2, style: 'outset' },
-            buttonBackgroundColor: foregroundBackgroundMix(0.07),
-            buttonHoverBackgroundColor: backgroundColor,
-            buttonVerticalPadding: { calc: 'spacing * 0.5' },
         });
 
 // export const themeMaterial =

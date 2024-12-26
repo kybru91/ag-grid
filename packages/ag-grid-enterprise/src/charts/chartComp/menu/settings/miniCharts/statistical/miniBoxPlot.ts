@@ -41,7 +41,7 @@ export class MiniBoxPlot extends MiniChartWithAxes {
         ];
         yScale.range = [size - 1.5 * padding, padding];
 
-        const xScale = new _Scene.CategoryScale();
+        const xScale = new _Scene.BandScale();
         xScale.domain = data.map((_, index) => index);
         xScale.range = [padding, size - padding];
         xScale.paddingInner = 0.4;

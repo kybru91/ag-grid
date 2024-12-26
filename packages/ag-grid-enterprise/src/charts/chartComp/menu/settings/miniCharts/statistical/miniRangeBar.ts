@@ -37,7 +37,7 @@ export class MiniRangeBar extends MiniChartWithAxes {
 
         const { _Scene } = this.agChartsExports;
 
-        const xScale = new _Scene.CategoryScale();
+        const xScale = new _Scene.BandScale();
         xScale.domain = data.map((_, index) => index);
         xScale.range = [padding, size - padding];
         xScale.paddingInner = 0.3;

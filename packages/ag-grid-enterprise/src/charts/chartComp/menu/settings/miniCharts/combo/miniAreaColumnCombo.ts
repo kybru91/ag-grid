@@ -45,7 +45,7 @@ export class MiniAreaColumnCombo extends MiniChartWithAxes {
         });
 
         // scale for area series
-        const xScale = new _Scene.CategoryScale();
+        const xScale = new _Scene.BandScale();
         xScale.range = [padding, size - padding];
         xScale.domain = [0, 1, 2, 3, 4];
         xScale.paddingInner = 1;

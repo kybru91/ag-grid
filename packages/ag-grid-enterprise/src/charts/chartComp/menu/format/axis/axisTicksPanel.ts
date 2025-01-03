@@ -4,7 +4,8 @@ import { Component, RefPlaceholder } from 'ag-grid-community';
 import type { AgGroupComponentParams } from '../../../../../widgets/agGroupComponent';
 import { AgGroupComponentSelector } from '../../../../../widgets/agGroupComponent';
 import { AgColorPickerSelector } from '../../../../widgets/agColorPicker';
-import { AgSlider, AgSliderSelector } from '../../../../widgets/agSlider';
+import type { AgSlider } from '../../../../widgets/agSlider';
+import { AgSliderSelector } from '../../../../widgets/agSlider';
 import type { ChartTranslationService } from '../../../services/chartTranslationService';
 import type { ChartMenuParamsFactory } from '../../chartMenuParamsFactory';
 

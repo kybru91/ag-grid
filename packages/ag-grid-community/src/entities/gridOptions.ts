@@ -2531,7 +2531,7 @@ interface CommonRowSelectionOptions<TData = any, TValue = any> {
      *
      * Choosing `'enableSelection'` allows selection of a row by clicking the row itself.
      * Choosing `'enableDeselection'` allows deselection of a row by CTRL-clicking the row itself.
-     * Choosing `true` allows both selection and deselection of a row by clicking.
+     * Choosing `true` allows both selection of a row by clicking and deselection of a row by CTRL-clicking.
      * Choosing `false` prevents rows from being selected or deselected by clicking.
      *
      * @default false

@@ -8,10 +8,10 @@ const information = JSON.parse(
 );
 
 const sortable = [];
-for(const timestampedVersion in information.time) {
-    if(['created', 'modified'].some(exclude => timestampedVersion === exclude)) continue;
+for (const timestampedVersion in information.time) {
+    if (['created', 'modified'].some((exclude) => timestampedVersion === exclude)) continue;
 
-    sortable.push([timestampedVersion, information.time[timestampedVersion]])
+    sortable.push([timestampedVersion, information.time[timestampedVersion]]);
 }
 
 const sortAlphaNumeric = (a, b) => a[1].localeCompare(b[1], 'en', { numeric: true });
@@ -19,4 +19,3 @@ const sortAlphaNumeric = (a, b) => a[1].localeCompare(b[1], 'en', { numeric: tru
 sortable.sort(sortAlphaNumeric);
 
 console.log(sortable[sortable.length - 1][0]);
-

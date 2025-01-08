@@ -25,7 +25,7 @@ type IconSetOverridesFont = {
 type IconSetOverridesArgs = IconSetOverridesImage | IconSetOverridesFont;
 
 export const iconOverrides = (args: IconSetOverridesArgs) => {
-    const cssParts = [];
+    const cssParts: string[] = [];
     if (args.type === 'image') {
         const { icons, mask } = args;
         for (const [key, value] of Object.entries(icons)) {

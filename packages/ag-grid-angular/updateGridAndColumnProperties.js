@@ -229,6 +229,7 @@ const updatePropertiesBuilt = () => {
         })
         .then((result) => fs.writeFileSync('./projects/ag-grid-angular/src/lib/ag-grid-angular.component.ts', result))
         .catch((error) => {
+            // eslint-disable-next-line no-console
             console.error(error);
             process.exitCode = 1;
         });

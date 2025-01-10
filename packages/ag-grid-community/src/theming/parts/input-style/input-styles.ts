@@ -1,4 +1,4 @@
-import { createPart, createPartSharedBaseParams } from '../../Part';
+import { createPart } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
 import { accentColor, backgroundColor, foregroundBackgroundMix, foregroundMix } from '../../theme-utils';
 import { inputStyleBaseCSS } from './input-style-base.css-GENERATED';
@@ -145,66 +145,75 @@ const baseParams: WithParamTypes<InputStyleParams> = {
     },
 };
 
-export const inputStyleBase = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
-    feature: 'inputStyle',
-    baseParams,
-    css: inputStyleBaseCSS,
-});
+const makeInputStyleBaseTreeShakeable = () =>
+    createPart<InputStyleParams>({
+        feature: 'inputStyle',
+        params: baseParams,
+        css: inputStyleBaseCSS,
+    });
 
-export const inputStyleBordered = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
-    feature: 'inputStyle',
-    baseParams,
-    params: {
-        inputBackgroundColor: backgroundColor,
-        inputBorder: true,
-        inputBorderRadius: {
-            ref: 'borderRadius',
-        },
-        inputPaddingStart: {
-            ref: 'spacing',
-        },
-        inputFocusBorder: {
-            color: accentColor,
-        },
-        inputFocusShadow: {
-            ref: 'focusShadow',
-        },
-        inputDisabledBackgroundColor: foregroundBackgroundMix(0.06),
-        inputDisabledTextColor: {
-            ref: 'textColor',
-            mix: 0.5,
-        },
-        inputInvalidBorder: {
-            color: { ref: 'invalidColor' },
-        },
-    },
-    css: () => inputStyleBaseCSS + inputStyleBorderedCSS,
-});
+export const inputStyleBase = /*#__PURE__*/ makeInputStyleBaseTreeShakeable();
 
-export const inputStyleUnderlined = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
-    feature: 'inputStyle',
-    baseParams,
-    params: {
-        inputBorder: {
-            width: 2,
-            color: foregroundMix(0.3),
-        },
-        inputPaddingStart: {
-            ref: 'spacing',
-        },
-        inputFocusBorder: 'solid 2px var(--ag-accent-color)',
-        inputDisabledTextColor: {
-            ref: 'textColor',
-            mix: 0.5,
-        },
-        inputDisabledBorder: 'solid 1px var(--ag-border-color)',
-        inputInvalidBorder: {
-            width: 2,
-            color: {
-                ref: 'invalidColor',
-                mix: 0.3,
+const makeInputStyleBorderedTreeShakeable = () =>
+    createPart<InputStyleParams>({
+        feature: 'inputStyle',
+        params: {
+            ...baseParams,
+            inputBackgroundColor: backgroundColor,
+            inputBorder: true,
+            inputBorderRadius: {
+                ref: 'borderRadius',
+            },
+            inputPaddingStart: {
+                ref: 'spacing',
+            },
+            inputFocusBorder: {
+                color: accentColor,
+            },
+            inputFocusShadow: {
+                ref: 'focusShadow',
+            },
+            inputDisabledBackgroundColor: foregroundBackgroundMix(0.06),
+            inputDisabledTextColor: {
+                ref: 'textColor',
+                mix: 0.5,
+            },
+            inputInvalidBorder: {
+                color: { ref: 'invalidColor' },
             },
         },
-    },
-    css: () => inputStyleBaseCSS + inputStyleUnderlinedCSS,
-});
+        css: () => inputStyleBaseCSS + inputStyleBorderedCSS,
+    });
+
+export const inputStyleBordered = /*#__PURE__*/ makeInputStyleBorderedTreeShakeable();
+
+const makeInputStyleUnderlinedTreeShakeable = () =>
+    createPart<InputStyleParams>({
+        feature: 'inputStyle',
+        params: {
+            ...baseParams,
+            inputBorder: {
+                width: 2,
+                color: foregroundMix(0.3),
+            },
+            inputPaddingStart: {
+                ref: 'spacing',
+            },
+            inputFocusBorder: 'solid 2px var(--ag-accent-color)',
+            inputDisabledTextColor: {
+                ref: 'textColor',
+                mix: 0.5,
+            },
+            inputDisabledBorder: 'solid 1px var(--ag-border-color)',
+            inputInvalidBorder: {
+                width: 2,
+                color: {
+                    ref: 'invalidColor',
+                    mix: 0.3,
+                },
+            },
+        },
+        css: () => inputStyleBaseCSS + inputStyleUnderlinedCSS,
+    });
+
+export const inputStyleUnderlined = /*#__PURE__*/ makeInputStyleUnderlinedTreeShakeable();

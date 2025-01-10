@@ -65,24 +65,6 @@ export const createPart = <T = unknown>(args: CreatePartArgs<T>): Part<ExpandTyp
     return new PartImpl(args) as any;
 };
 
-type CreatePartArgsWithBaseParams<T> = Omit<CreatePartArgs<T>, 'params'> & {
-    baseParams: WithParamTypes<T>;
-    params?: Partial<WithParamTypes<T>>;
-};
-
-export const createPartSharedBaseParams = <T>(
-    args: CreatePartArgsWithBaseParams<T>
-): Part<ExpandTypeKeys<WithParamTypes<T>>> => {
-    /*#__PURE__*/
-    return createPart<T>({
-        ...args,
-        params: {
-            ...args.params,
-            ...args.baseParams,
-        },
-    });
-};
-
 export const defaultModeName = '$default';
 
 let partCounter = 0;

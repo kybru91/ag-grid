@@ -69,7 +69,7 @@ type CheckboxStyleDefaultParams = {
     radioCheckedShapeImage: never;
 };
 
-export const checkboxStyleDefault = createPart<CheckboxStyleDefaultParams>({
+export const checkboxStyleDefault = /*#__PURE__*/ createPart<CheckboxStyleDefaultParams>({
     feature: 'checkboxStyle',
     params: {
         checkboxBorderWidth: 1,

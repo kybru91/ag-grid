@@ -1,4 +1,4 @@
-import { createPart } from '../../Part';
+import { createPartSharedBaseParams } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
 import { accentColor, backgroundColor, foregroundMix } from '../../theme-utils';
 import { tabStyleBaseCSS } from './tab-style-base.css-GENERATED';
@@ -146,20 +146,19 @@ const baseParams: WithParamTypes<TabStyleParams> = {
  * This base tab style adds no visual styling, it provides a base upon which a
  * tab style can be built by setting the tab-related params
  */
-export const tabStyleBase = createPart<TabStyleParams>({
+export const tabStyleBase = createPartSharedBaseParams<TabStyleParams>({
     feature: 'tabStyle',
-    params: baseParams,
+    baseParams,
     css: tabStyleBaseCSS,
 });
 
 /**
  * Tabs styled for the Quartz theme
  */
-export const tabStyleQuartz = /*#__PURE__*/ createPart({
+export const tabStyleQuartz = /*#__PURE__*/ createPartSharedBaseParams<TabStyleParams>({
     feature: 'tabStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         tabBarBorder: true,
         tabBarBackgroundColor: foregroundMix(0.05),
         tabTextColor: {
@@ -183,11 +182,10 @@ export const tabStyleQuartz = /*#__PURE__*/ createPart({
 /**
  * Tabs styled for the Material theme
  */
-export const tabStyleMaterial = /*#__PURE__*/ createPart({
+export const tabStyleMaterial = /*#__PURE__*/ createPartSharedBaseParams<TabStyleParams>({
     feature: 'tabStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         tabBarBackgroundColor: {
             ref: 'chromeBackgroundColor',
         },
@@ -203,11 +201,10 @@ export const tabStyleMaterial = /*#__PURE__*/ createPart({
 /**
  * Tabs styled for the Alpine theme
  */
-export const tabStyleAlpine = /*#__PURE__*/ createPart({
+export const tabStyleAlpine = /*#__PURE__*/ createPartSharedBaseParams<TabStyleParams>({
     feature: 'tabStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         tabBarBorder: true,
         tabBarBackgroundColor: {
             ref: 'chromeBackgroundColor',
@@ -225,11 +222,10 @@ export const tabStyleAlpine = /*#__PURE__*/ createPart({
  * Tabs where the selected tab appears raised and attached the the active
  * content, like a rolodex or operating system tabs.
  */
-export const tabStyleRolodex = /*#__PURE__*/ createPart({
+export const tabStyleRolodex = /*#__PURE__*/ createPartSharedBaseParams<TabStyleParams>({
     feature: 'tabStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         tabBarBackgroundColor: {
             ref: 'chromeBackgroundColor',
         },

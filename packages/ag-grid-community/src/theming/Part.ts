@@ -60,8 +60,28 @@ type CreatePartArgs<T> = {
  * @param feature an The part feature, e.g. 'iconSet'. Adding a part to a theme will remove any existing part with the same feature.
  * @param variant an optional identifier for debugging, if omitted one will be generated
  */
-export const createPart = <T = unknown>(args: CreatePartArgs<T>): Part<ExpandTypeKeys<WithParamTypes<T>>> =>
-    new PartImpl(args) as any;
+export const createPart = <T = unknown>(args: CreatePartArgs<T>): Part<ExpandTypeKeys<WithParamTypes<T>>> => {
+    /*#__PURE__*/
+    return new PartImpl(args) as any;
+};
+
+type CreatePartArgsWithBaseParams<T> = Omit<CreatePartArgs<T>, 'params'> & {
+    baseParams: WithParamTypes<T>;
+    params?: Partial<WithParamTypes<T>>;
+};
+
+export const createPartSharedBaseParams = <T>(
+    args: CreatePartArgsWithBaseParams<T>
+): Part<ExpandTypeKeys<WithParamTypes<T>>> => {
+    /*#__PURE__*/
+    return createPart<T>({
+        ...args,
+        params: {
+            ...args.params,
+            ...args.baseParams,
+        },
+    });
+};
 
 export const defaultModeName = '$default';
 

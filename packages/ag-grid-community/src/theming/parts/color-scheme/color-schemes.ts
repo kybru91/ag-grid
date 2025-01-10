@@ -1,4 +1,4 @@
-import { createPart } from '../../Part';
+import { createPart, createPartSharedBaseParams } from '../../Part';
 import { defaultLightColorSchemeParams } from '../../core/core-css';
 import { accentMix, foregroundBackgroundMix } from '../../theme-utils';
 
@@ -7,20 +7,20 @@ export const colorSchemeLight = /*#__PURE__*/ createPart({
     params: defaultLightColorSchemeParams,
 });
 
-export const colorSchemeLightWarm = /*#__PURE__*/ createPart({
+export const colorSchemeLightWarm = /*#__PURE__*/ createPartSharedBaseParams({
     feature: 'colorScheme',
+    baseParams: defaultLightColorSchemeParams,
     params: {
-        ...defaultLightColorSchemeParams,
         foregroundColor: '#000000de',
         borderColor: '#60300026',
         chromeBackgroundColor: '#60300005',
     },
 });
 
-export const colorSchemeLightCold = /*#__PURE__*/ createPart({
+export const colorSchemeLightCold = /*#__PURE__*/ createPartSharedBaseParams({
     feature: 'colorScheme',
+    baseParams: defaultLightColorSchemeParams,
     params: {
-        ...defaultLightColorSchemeParams,
         foregroundColor: '#000',
         chromeBackgroundColor: '#f3f8f8',
     },

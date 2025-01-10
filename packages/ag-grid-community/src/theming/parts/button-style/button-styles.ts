@@ -1,4 +1,4 @@
-import { createPart } from '../../Part';
+import { createPart, createPartSharedBaseParams } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
 import { accentColor, backgroundColor, foregroundBackgroundMix, foregroundColor } from '../../theme-utils';
 import { buttonStyleBaseCSS } from './button-style-base.css-GENERATED';
@@ -104,16 +104,16 @@ const baseParams: WithParamTypes<ButtonStyleParams> = {
     buttonDisabledBorder: { ref: 'inputDisabledBorder' },
 };
 
-export const buttonStyleBase = createPart<ButtonStyleParams>({
+export const buttonStyleBase = /*#__PURE__*/ createPartSharedBaseParams<ButtonStyleParams>({
     feature: 'buttonStyle',
-    params: baseParams,
+    baseParams,
     css: buttonStyleBaseCSS,
 });
 
-export const buttonStyleQuartz = /*#__PURE__*/ createPart({
+export const buttonStyleQuartz = /*#__PURE__*/ createPartSharedBaseParams<ButtonStyleParams>({
     feature: 'buttonStyle',
+    baseParams,
     params: {
-        ...baseParams,
         buttonBackgroundColor: backgroundColor,
         buttonBorder: true,
         buttonHoverBackgroundColor: { ref: 'rowHoverColor' },
@@ -122,10 +122,10 @@ export const buttonStyleQuartz = /*#__PURE__*/ createPart({
     css: buttonStyleBaseCSS,
 });
 
-export const buttonStyleAlpine = /*#__PURE__*/ createPart({
+export const buttonStyleAlpine = /*#__PURE__*/ createPartSharedBaseParams<ButtonStyleParams>({
     feature: 'buttonStyle',
+    baseParams,
     params: {
-        ...baseParams,
         buttonBackgroundColor: backgroundColor,
         buttonBorder: { color: accentColor },
         buttonFontWeight: 600,
@@ -137,10 +137,10 @@ export const buttonStyleAlpine = /*#__PURE__*/ createPart({
     css: buttonStyleBaseCSS,
 });
 
-export const buttonStyleBalham = /*#__PURE__*/ createPart({
+export const buttonStyleBalham = /*#__PURE__*/ createPartSharedBaseParams<ButtonStyleParams>({
     feature: 'buttonStyle',
+    baseParams,
     params: {
-        ...baseParams,
         buttonBorder: { color: foregroundColor, width: 2, style: 'outset' },
         buttonActiveBorder: { color: foregroundColor, width: 2, style: 'inset' },
         buttonBackgroundColor: foregroundBackgroundMix(0.07),

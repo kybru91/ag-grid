@@ -1,4 +1,4 @@
-import { createPart } from '../../Part';
+import { createPart, createPartSharedBaseParams } from '../../Part';
 import type { WithParamTypes } from '../../theme-types';
 import { accentColor, backgroundColor, foregroundBackgroundMix, foregroundMix } from '../../theme-utils';
 import { inputStyleBaseCSS } from './input-style-base.css-GENERATED';
@@ -145,17 +145,16 @@ const baseParams: WithParamTypes<InputStyleParams> = {
     },
 };
 
-export const inputStyleBase = createPart<InputStyleParams>({
+export const inputStyleBase = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
     feature: 'inputStyle',
-    params: baseParams,
+    baseParams,
     css: inputStyleBaseCSS,
 });
 
-export const inputStyleBordered = /*#__PURE__*/ createPart({
+export const inputStyleBordered = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
     feature: 'inputStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         inputBackgroundColor: backgroundColor,
         inputBorder: true,
         inputBorderRadius: {
@@ -182,11 +181,10 @@ export const inputStyleBordered = /*#__PURE__*/ createPart({
     css: () => inputStyleBaseCSS + inputStyleBorderedCSS,
 });
 
-export const inputStyleUnderlined = /*#__PURE__*/ createPart({
+export const inputStyleUnderlined = /*#__PURE__*/ createPartSharedBaseParams<InputStyleParams>({
     feature: 'inputStyle',
+    baseParams,
     params: {
-        ...baseParams,
-
         inputBorder: {
             width: 2,
             color: foregroundMix(0.3),

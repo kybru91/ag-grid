@@ -356,13 +356,17 @@ export class AgRichSelect<TValue = any> extends AgPickerField<
             _clearElement(container);
             container.appendChild(pillContainer.getGui());
 
+            const { config, eWrapper, ariaDeleteSelection } = this;
+            const { valueFormatter } = config;
+
             pillContainer.init({
-                eWrapper: this.eWrapper,
+                eWrapper,
+                valueFormatter,
                 onPillMouseDown: (e: MouseEvent) => {
                     e.stopImmediatePropagation();
                 },
                 announceItemFocus: () => {
-                    this.announceAriaValue(this.ariaDeleteSelection);
+                    this.announceAriaValue(ariaDeleteSelection);
                 },
                 getValue: () => this.getValue() as TValue[] | null,
                 setValue: (value: TValue[] | null) => this.setValue(value, true),

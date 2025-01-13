@@ -75,7 +75,7 @@ const makeColorSchemeDarkWarmTreeShakeable = () =>
 
 const darkBlueParams = () =>
     ({
-        ...darkParams,
+        ...darkParams(),
         backgroundColor: '#1f2836',
     }) as const;
 

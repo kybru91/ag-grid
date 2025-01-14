@@ -158,7 +158,7 @@ const makeStyleMaterialTreeShakeable = () => {
     // this part - adding styleMaterial to a theme should override the value of
     // e.g. tabSelectedUnderlineColor, but not add that param to the type if
     // it's not there already
-    const overrides: Partial<
+    const sharedParams: Partial<
         WithParamTypes<StyleMaterialParams & TabStyleParams & CoreParams & ButtonStyleParams & InputStyleParams>
     > = {
         tabSelectedUnderlineColor: { ref: 'primaryColor' },
@@ -194,33 +194,47 @@ const makeStyleMaterialTreeShakeable = () => {
         cellEditingBorder: {
             color: { ref: 'primaryColor' },
         },
+        menuBackgroundColor: { ref: 'backgroundColor' },
+        sideButtonBarBackgroundColor: backgroundColor,
+        sideButtonSelectedBackgroundColor: 'transparent',
+        headerColumnResizeHandleColor: 'none',
+        headerBackgroundColor: {
+            ref: 'backgroundColor',
+        },
+        rowHoverColor: foregroundMix(0.08),
+        headerCellHoverBackgroundColor: foregroundMix(0.05),
     };
 
-    const lightColors = {
+    const lightParams = {
+        ...sharedParams,
         primaryColor: '#3f51b5',
         foregroundColor: '#000D',
         headerTextColor: '#0008',
         accentColor: '#ff4081',
+        checkboxUncheckedBorderColor: foregroundColor,
+        checkboxIndeterminateBackgroundColor: foregroundColor,
+        toggleButtonOffBackgroundColor: foregroundColor,
     } as const;
 
-    const darkColors = {
+    const darkParams = {
+        ...sharedParams,
         primaryColor: '#3f51b5',
         foregroundColor: '#fffD',
         headerTextColor: '#fff8',
         accentColor: '#bb86fc',
+        checkboxUncheckedBorderColor: foregroundBackgroundMix(0.5),
+        checkboxIndeterminateBackgroundColor: foregroundBackgroundMix(0.5),
+        toggleButtonOffBackgroundColor: foregroundBackgroundMix(0.5),
     } as const;
 
     return createPart<StyleMaterialParams>({
         feature: 'styleMaterial',
         css: materialAdjustmentsCSS,
-        params: {
-            ...lightColors,
-            ...overrides,
-        },
+        params: lightParams,
         modeParams: {
-            light: lightColors,
-            dark: darkColors,
-            'dark-blue': darkColors,
+            light: lightParams,
+            dark: darkParams,
+            'dark-blue': darkParams,
         },
     });
 };
@@ -257,25 +271,17 @@ const makeThemeMaterialTreeShakeable = () =>
             wrapperBorderRadius: 0,
             wrapperBorder: false,
             menuBorder: false,
-            menuBackgroundColor: { ref: 'backgroundColor' },
             dialogBorder: false,
             panelTitleBarBorder: false,
             tabSelectedBorderWidth: 0,
             tabSelectedUnderlineTransitionDuration: 0.3,
             sidePanelBorder: false,
-            sideButtonBarBackgroundColor: backgroundColor,
             sideButtonSelectedBorder: false,
             sideButtonSelectedUnderlineWidth: 2,
             sideButtonSelectedUnderlineTransitionDuration: 0.3,
             sideButtonBorder: false,
-            sideButtonSelectedBackgroundColor: 'transparent',
-            headerColumnResizeHandleColor: 'none',
-            headerBackgroundColor: {
-                ref: 'backgroundColor',
-            },
             buttonBorder: false,
             buttonDisabledBorder: false,
-            rowHoverColor: foregroundMix(0.08),
             focusShadow: {
                 spread: 4,
                 color: foregroundMix(0.16),
@@ -299,14 +305,10 @@ const makeThemeMaterialTreeShakeable = () =>
                 color: 'transparent',
             },
             headerFontWeight: 600,
-            headerCellHoverBackgroundColor: foregroundMix(0.05),
             checkboxBorderWidth: 2,
             checkboxBorderRadius: 2,
-            checkboxUncheckedBorderColor: foregroundColor,
-            checkboxIndeterminateBackgroundColor: foregroundColor,
             toggleButtonWidth: 34,
             toggleButtonSwitchInset: 1,
-            toggleButtonOffBackgroundColor: foregroundColor,
             cardShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
             popupShadow: '0 10px 20px rgba(0,0,0,0.25), 0 7px 7px rgba(0,0,0,0.22)',
         });

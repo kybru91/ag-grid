@@ -2,7 +2,7 @@ import { logErrorMessageOnce, paramToVariableName } from '@components/theme-buil
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 
-import { type Theme, _asThemeImpl, styleMaterial, themeMaterial } from 'ag-grid-community';
+import { _asThemeImpl, styleMaterial, themeMaterial } from 'ag-grid-community';
 
 import { useRenderedTheme } from '../../model/rendered-theme';
 import { EditorPanel } from '../editors/EditorPanel';

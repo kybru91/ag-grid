@@ -57,7 +57,7 @@ export const createTheme = (): Theme<CoreParams & WithParamTypes<ButtonStylePara
 
 type GridThemeUseArgs = {
     loadThemeGoogleFonts: boolean | undefined;
-    container: HTMLElement;
+    styleContainer: HTMLElement;
 };
 
 export class ThemeImpl {
@@ -90,14 +90,14 @@ export class ThemeImpl {
      * the theme's parts into document head, or the shadow DOM if the provided
      * container is within a shadow root.
      */
-    _startUse({ container, loadThemeGoogleFonts }: GridThemeUseArgs): void {
+    _startUse({ styleContainer, loadThemeGoogleFonts }: GridThemeUseArgs): void {
         if (IS_SSR) return;
 
         if (FORCE_LEGACY_THEMES) return;
 
         uninstallLegacyCSS();
 
-        _injectCoreAndModuleCSS(container);
+        _injectCoreAndModuleCSS(styleContainer);
 
         const googleFontsUsed = getGoogleFontsUsed(this);
         if (googleFontsUsed.length > 0) {
@@ -109,7 +109,7 @@ export class ThemeImpl {
         }
 
         for (const part of this.parts) {
-            part.use(container);
+            part.use(styleContainer);
         }
     }
 

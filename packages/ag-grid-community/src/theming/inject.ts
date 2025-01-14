@@ -11,22 +11,16 @@ type InjectedStyle = {
     priority: number;
 };
 
-let injectionsByRoot = new WeakMap<HTMLElement, InjectedStyle[]>();
+let injectionsByContainer = new WeakMap<HTMLElement, InjectedStyle[]>();
 
-export const _injectGlobalCSS = (css: string, container: HTMLElement, debugId: string, priority = 0) => {
+export const _injectGlobalCSS = (css: string, styleContainer: HTMLElement, debugId: string, priority = 0) => {
     if (IS_SSR) return;
     if (FORCE_LEGACY_THEMES) return;
 
-    // if the container is attached to the main document, inject into the head
-    // (only one instance of each stylesheet created per document). Otherwise
-    // (and this happens for grids in the shadow root and grids detached form
-    // the DOM) inject into the container itself.
-    const root = container.getRootNode() === document ? document.head : container;
-
-    let injections = injectionsByRoot.get(root);
+    let injections = injectionsByContainer.get(styleContainer);
     if (!injections) {
         injections = [];
-        injectionsByRoot.set(root, injections);
+        injectionsByContainer.set(styleContainer, injections);
     }
     if (injections.find((i) => i.css === css)) return;
 
@@ -45,17 +39,17 @@ export const _injectGlobalCSS = (css: string, container: HTMLElement, debugId: s
         const index = injections.indexOf(insertAfter);
         injections.splice(index + 1, 0, newInjection);
     } else {
-        root.insertBefore(el, root.querySelector(':not(title, meta)'));
+        styleContainer.insertBefore(el, styleContainer.querySelector(':not(title, meta)'));
         injections.push(newInjection);
     }
 };
 
-export const _injectCoreAndModuleCSS = (container: HTMLElement) => {
-    _injectGlobalCSS(coreCSS, container, 'core');
+export const _injectCoreAndModuleCSS = (styleContainer: HTMLElement) => {
+    _injectGlobalCSS(coreCSS, styleContainer, 'core');
     Array.from(_getAllRegisteredModules())
         .sort((a, b) => a.moduleName.localeCompare(b.moduleName))
         .forEach((module) =>
-            module.css?.forEach((css) => _injectGlobalCSS(css, container, `module-${module.moduleName}`))
+            module.css?.forEach((css) => _injectGlobalCSS(css, styleContainer, `module-${module.moduleName}`))
         );
 };
 
@@ -67,7 +61,7 @@ export const _registerGridUsingThemingAPI = (environment: Environment) => {
 export const _unregisterGridUsingThemingAPI = (environment: Environment) => {
     gridsUsingThemingAPI.delete(environment);
     if (gridsUsingThemingAPI.size === 0) {
-        injectionsByRoot = new WeakMap();
+        injectionsByContainer = new WeakMap();
         for (const style of document.head.querySelectorAll('style[data-ag-global-css]')) {
             style.remove();
         }

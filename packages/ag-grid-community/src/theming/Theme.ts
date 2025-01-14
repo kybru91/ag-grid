@@ -6,6 +6,7 @@ import { coreDefaults } from './core/core-css';
 import { IS_SSR, _injectCoreAndModuleCSS, _injectGlobalCSS } from './inject';
 import { buttonStyleQuartz } from './parts/button-style/button-styles';
 import type { ButtonStyleParams } from './parts/button-style/button-styles';
+import { columnDropStyleBordered } from './parts/column-drop-style/column-drop-styles';
 import type { WithParamTypes } from './theme-types';
 import { paramValueToCss } from './theme-types';
 import { paramToVariableName } from './theme-utils';
@@ -48,10 +49,11 @@ export const _asThemeImpl = <TParams>(theme: Theme<TParams>): ThemeImpl => {
 /**
  * Create a custom theme containing core grid styles but no parts.
  */
-// TODO button styles were split out into a part in 33.1 and this part must be
-// bundled by default to avoid a breaking change. In v34
-// withPart(buttonStyleQuartz) can be removed.
-export const createTheme = (): Theme<CoreParams & ButtonStyleParams> => new ThemeImpl().withPart(buttonStyleQuartz);
+// TODO button and column drop styles were split out into a part in 33.1 and
+// must be bundled by default to avoid a breaking change for people using
+// createTheme(). In v34 the withPart calls can be removed.
+export const createTheme = (): Theme<CoreParams & WithParamTypes<ButtonStyleParams>> =>
+    new ThemeImpl().withPart(buttonStyleQuartz).withPart(columnDropStyleBordered);
 
 type GridThemeUseArgs = {
     loadThemeGoogleFonts: boolean | undefined;

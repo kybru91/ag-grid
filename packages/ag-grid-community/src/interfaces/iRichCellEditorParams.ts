@@ -24,7 +24,7 @@ export interface RichSelectParams<TValue = any> extends AgPickerFieldParams {
     placeholder?: string;
     initialInputValue?: string;
 
-    valueFormatter?: (value: TValue[] | TValue) => string | null;
+    valueFormatter?: (value: TValue[] | TValue) => string;
     searchStringCreator?: (values: TValue[]) => string[];
 }
 

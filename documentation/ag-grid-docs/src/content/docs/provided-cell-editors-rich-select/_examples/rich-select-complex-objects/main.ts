@@ -38,6 +38,7 @@ const columnDefs: ColDef[] = [
         field: 'detailedColor',
         width: 290,
         valueFormatter: (p) => `${p.value.name} (${p.value.code})`,
+        valueParser: (p) => p.newValue,
         cellEditor: 'agRichSelectCellEditor',
         cellEditorParams: {
             formatValue: (v) => v.name,

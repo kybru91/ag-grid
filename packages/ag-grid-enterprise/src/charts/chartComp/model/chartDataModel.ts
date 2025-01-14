@@ -392,8 +392,8 @@ export class ChartDataModel extends BeanStub {
                 const selectedColumnState = updatedCol.selected
                     ? matchedDimensionColState
                     : dimensionColState
-                        .filter((cs) => cs !== matchedDimensionColState)
-                        .find(({ selected }) => selected);
+                          .filter((cs) => cs !== matchedDimensionColState)
+                          .find(({ selected }) => selected);
                 // Update the selection state of all dimension columns
                 dimensionColState.forEach((cs) => (cs.selected = cs === selectedColumnState));
             } else {

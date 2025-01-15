@@ -106,7 +106,7 @@ export class Environment extends BeanStub implements NamedBean {
         const { gridTheme } = this;
         let themeClass = '';
         if (gridTheme) {
-            // theming API mode
+            // Theming API mode
             themeClass = `${this.paramsClass} ${gridTheme._getCssClass()}`;
         } else {
             // legacy mode

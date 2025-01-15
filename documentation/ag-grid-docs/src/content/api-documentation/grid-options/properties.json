@@ -1823,7 +1823,13 @@
                 "url": "./theming-fonts/#loading-google-fonts"
             }
         },
-        "styleContainer": {}
+        "themeStyleContainer": {},
+        "themeCssLayer": {
+            "more": {
+                "name": "CSS Layers",
+                "url": "./theming-css/#css-layers"
+            }
+        }
     },
     "tooltips": {
         "meta": {

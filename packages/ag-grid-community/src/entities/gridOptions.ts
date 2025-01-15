@@ -1649,6 +1649,16 @@ export interface GridOptions<TData = any> {
     loadThemeGoogleFonts?: boolean;
 
     /**
+     * The CSS layer that this theme should be rendered onto. If your
+     * application loads its styles into a CSS layer, use this to load the grid
+     * styles into a previous layer so that application styles can override grid
+     * styles.
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     */
+    themeCssLayer?: string;
+
+    /**
      * An element to insert style elements into when injecting styles into the
      * grid. If undefined, styles will be added to the document head for grids
      * rendered in the main document fragment, or to the grid wrapper element
@@ -1657,7 +1667,7 @@ export interface GridOptions<TData = any> {
      *
      * @initial
      */
-    styleContainer?: HTMLElement;
+    themeStyleContainer?: HTMLElement;
 
     // *****************************************************************************************************
     // If you change the callbacks on this interface, you must also update PropertyKeys to be consistent. *

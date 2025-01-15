@@ -13,9 +13,19 @@ type InjectedStyle = {
 
 let injectionsByContainer = new WeakMap<HTMLElement, InjectedStyle[]>();
 
-export const _injectGlobalCSS = (css: string, styleContainer: HTMLElement, debugId: string, priority = 0) => {
+export const _injectGlobalCSS = (
+    css: string,
+    styleContainer: HTMLElement,
+    debugId: string,
+    layer: string | undefined,
+    priority: number
+) => {
     if (IS_SSR) return;
     if (FORCE_LEGACY_THEMES) return;
+
+    if (layer) {
+        css = `@layer ${CSS.escape(layer)} { ${css} }`;
+    }
 
     let injections = injectionsByContainer.get(styleContainer);
     if (!injections) {
@@ -44,12 +54,12 @@ export const _injectGlobalCSS = (css: string, styleContainer: HTMLElement, debug
     }
 };
 
-export const _injectCoreAndModuleCSS = (styleContainer: HTMLElement) => {
-    _injectGlobalCSS(coreCSS, styleContainer, 'core');
+export const _injectCoreAndModuleCSS = (styleContainer: HTMLElement, layer: string | undefined) => {
+    _injectGlobalCSS(coreCSS, styleContainer, 'core', layer, 0);
     Array.from(_getAllRegisteredModules())
         .sort((a, b) => a.moduleName.localeCompare(b.moduleName))
         .forEach((module) =>
-            module.css?.forEach((css) => _injectGlobalCSS(css, styleContainer, `module-${module.moduleName}`))
+            module.css?.forEach((css) => _injectGlobalCSS(css, styleContainer, `module-${module.moduleName}`, layer, 0))
         );
 };
 

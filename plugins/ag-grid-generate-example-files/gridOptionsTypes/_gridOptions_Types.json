@@ -165,7 +165,7 @@
     "typeName": "HTMLElement | null",
     "typesToInclude": []
   },
-  "styleContainer": {
+  "themeStyleContainer": {
     "typeName": "HTMLElement",
     "typesToInclude": []
   },
@@ -311,6 +311,10 @@
   },
   "grandTotalRow": {
     "typeName": "'top' | 'bottom'",
+    "typesToInclude": []
+  },
+  "themeCssLayer": {
+    "typeName": "string",
     "typesToInclude": []
   },
   "rowHeight": {

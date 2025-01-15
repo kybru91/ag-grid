@@ -94,7 +94,7 @@ export class PartImpl implements Part {
         };
     }
 
-    use(styleContainer?: HTMLElement): string | false {
+    use(styleContainer: HTMLElement | undefined, layer: string | undefined): string | false {
         let inject = this._inject;
         if (inject == null) {
             let { css } = this;
@@ -112,7 +112,7 @@ export class PartImpl implements Part {
             this._inject = inject;
         }
         if (inject && styleContainer) {
-            _injectGlobalCSS(inject.css, styleContainer, inject.class, 1);
+            _injectGlobalCSS(inject.css, styleContainer, inject.class, layer, 1);
         }
         return inject ? inject.class : false;
     }

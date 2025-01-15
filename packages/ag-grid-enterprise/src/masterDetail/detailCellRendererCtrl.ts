@@ -96,7 +96,7 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
         // across many instances, and that would be a problem because we set
         // api into gridOptions
         const gridOptions: GridOptions = {
-            styleContainer: this.environment.eStyleContainer,
+            themeStyleContainer: this.environment.eStyleContainer,
             ...params.detailGridOptions,
         };
 

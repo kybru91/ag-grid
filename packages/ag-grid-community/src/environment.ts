@@ -42,13 +42,15 @@ export class Environment extends BeanStub implements NamedBean {
 
     private eGridDiv: HTMLElement;
     public eStyleContainer: HTMLElement;
+    public cssLayer: string | undefined;
 
     public wireBeans(beans: BeanCollection): void {
-        const { eGridDiv } = beans;
+        const { eGridDiv, gridOptions } = beans;
         this.eGridDiv = eGridDiv;
         // NOTE: need to use beans.gridOptions because beans.gos not yet initialised
         this.eStyleContainer =
-            beans.gridOptions.styleContainer ?? (eGridDiv.getRootNode() === document ? document.head : eGridDiv);
+            gridOptions.themeStyleContainer ?? (eGridDiv.getRootNode() === document ? document.head : eGridDiv);
+        this.cssLayer = gridOptions.themeCssLayer;
     }
 
     private sizeEls = new Map<Variable, HTMLElement>();
@@ -154,7 +156,7 @@ export class Environment extends BeanStub implements NamedBean {
 
     public addGlobalCSS(css: string, debugId: string): void {
         if (this.gridTheme) {
-            _injectGlobalCSS(css, this.eStyleContainer, debugId);
+            _injectGlobalCSS(css, this.eStyleContainer, debugId, this.cssLayer, 0);
         } else {
             this.globalCSS.push([css, debugId]);
         }
@@ -270,9 +272,9 @@ export class Environment extends BeanStub implements NamedBean {
         if (newGridTheme !== oldGridTheme) {
             if (newGridTheme) {
                 _registerGridUsingThemingAPI(this);
-                _injectCoreAndModuleCSS(this.eStyleContainer);
+                _injectCoreAndModuleCSS(this.eStyleContainer, this.cssLayer);
                 for (const [css, debugId] of globalCSS) {
-                    _injectGlobalCSS(css, this.eStyleContainer, debugId);
+                    _injectGlobalCSS(css, this.eStyleContainer, debugId, this.cssLayer, 0);
                 }
                 globalCSS.length = 0;
             }
@@ -280,6 +282,7 @@ export class Environment extends BeanStub implements NamedBean {
             newGridTheme?._startUse({
                 loadThemeGoogleFonts: gos.get('loadThemeGoogleFonts'),
                 styleContainer: this.eStyleContainer,
+                cssLayer: this.cssLayer,
             });
             let eParamsStyle = this.eParamsStyle;
             if (!eParamsStyle) {

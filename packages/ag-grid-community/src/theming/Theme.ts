@@ -58,6 +58,7 @@ export const createTheme = (): Theme<CoreParams & WithParamTypes<ButtonStylePara
 type GridThemeUseArgs = {
     loadThemeGoogleFonts: boolean | undefined;
     styleContainer: HTMLElement;
+    cssLayer: string | undefined;
 };
 
 export class ThemeImpl {
@@ -90,14 +91,14 @@ export class ThemeImpl {
      * the theme's parts into document head, or the shadow DOM if the provided
      * container is within a shadow root.
      */
-    _startUse({ styleContainer, loadThemeGoogleFonts }: GridThemeUseArgs): void {
+    _startUse({ styleContainer, cssLayer, loadThemeGoogleFonts }: GridThemeUseArgs): void {
         if (IS_SSR) return;
 
         if (FORCE_LEGACY_THEMES) return;
 
         uninstallLegacyCSS();
 
-        _injectCoreAndModuleCSS(styleContainer);
+        _injectCoreAndModuleCSS(styleContainer, cssLayer);
 
         const googleFontsUsed = getGoogleFontsUsed(this);
         if (googleFontsUsed.length > 0) {
@@ -109,7 +110,7 @@ export class ThemeImpl {
         }
 
         for (const part of this.parts) {
-            part.use(styleContainer);
+            part.use(styleContainer, cssLayer);
         }
     }
 
@@ -122,7 +123,7 @@ export class ThemeImpl {
         if (FORCE_LEGACY_THEMES) return 'ag-theme-quartz';
 
         return (this._cssClassCache ??= deduplicatePartsByFeature(this.parts)
-            .map((part) => part.use())
+            .map((part) => part.use(undefined, undefined))
             .filter(Boolean)
             .join(' '));
     }
@@ -295,7 +296,7 @@ const loadGoogleFont = async (font: string) => {
     const css = `@import url('https://${googleFontsDomain}/css2?family=${encodeURIComponent(font)}:wght@100;200;300;400;500;600;700;800;900&display=swap');\n`;
     // fonts are always installed in the document head, they are inherited in
     // shadow DOM without the need for separate installation
-    _injectGlobalCSS(css, document.head, `googleFont:${font}`);
+    _injectGlobalCSS(css, document.head, `googleFont:${font}`, undefined, 0);
 };
 
 const googleFontsDomain = 'fonts.googleapis.com';

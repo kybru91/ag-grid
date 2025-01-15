@@ -6,7 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nx/js:swc",
-      "dependsOn": ["copySrcFilesForGeneration"],
+      "dependsOn": ["copySrcFilesForGeneration", "ag-shared:build"],
       "inputs": ["{projectRoot}/src/**"],
       "outputs": ["{options.outputPath}"],
       "options": {

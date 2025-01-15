@@ -7339,6 +7339,13 @@
   dependencies:
     "@nx/devkit" "18.3.4"
 
+"@nrwl/devkit@18.3.5":
+  version "18.3.5"
+  resolved "http://52.50.158.57:4873/@nrwl/devkit/-/devkit-18.3.5.tgz#471ed07a59fb03fa62f5c9a9e475baef6a111416"
+  integrity sha512-DIvChKMe4q8CtIsbrumL/aYgf85H5vlT6eF3jnCCWORj6LTwoHtK8Q9ky1+uM82KIM0gaKd32NVDw+w64scHyg==
+  dependencies:
+    "@nx/devkit" "18.3.5"
+
 "@nrwl/esbuild@18.3.4":
   version "18.3.4"
   resolved "http://52.50.158.57:4873/@nrwl/esbuild/-/esbuild-18.3.4.tgz#2ac0610aaa737b26e04d8a5b95544f505d3d7165"
@@ -7436,6 +7443,20 @@
   integrity sha512-M3htxl5WvlNKK5KNOndCAApbyBCZNTFFs+rtdwvudNZk5+84zAAPaWzSoX9C4XLAW78/f98LzF68/ch05aN12A==
   dependencies:
     "@nrwl/devkit" "18.3.4"
+    ejs "^3.1.7"
+    enquirer "~2.3.6"
+    ignore "^5.0.4"
+    semver "^7.5.3"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+    yargs-parser "21.1.1"
+
+"@nx/devkit@18.3.5", "@nx/devkit@^18.3.4":
+  version "18.3.5"
+  resolved "http://52.50.158.57:4873/@nx/devkit/-/devkit-18.3.5.tgz#6ea0306e9658ae59a3728108b0d1a75b8d51d928"
+  integrity sha512-9I0L17t0MN87fL4m4MjDiBxJIx7h5RQY/pTYtt5TBjye0ANb165JeE4oh3ibzfjMzXv42Aej2Gm+cOuSPwzT9g==
+  dependencies:
+    "@nrwl/devkit" "18.3.5"
     ejs "^3.1.7"
     enquirer "~2.3.6"
     ignore "^5.0.4"
@@ -26659,7 +26680,7 @@ process-on-spawn@^1.0.0:
   dependencies:
     fromentries "^1.2.0"
 
-process@~0.11.0:
+process@0.11.10, process@~0.11.0:
   version "0.11.10"
   resolved "http://52.50.158.57:4873/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
   integrity sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==
@@ -30376,6 +30397,11 @@ tinypool@^1.0.0:
   resolved "http://52.50.158.57:4873/tinypool/-/tinypool-1.0.1.tgz#c64233c4fac4304e109a64340178760116dbe1fe"
   integrity sha512-URZYihUbRPcGv95En+sz6MfghfIc2OJ1sv/RmhWZLouPY0/8Vo80viwPvg3dlaS9fuq7fQMEfgRRK7BBZThBEA==
 
+tinypool@^1.0.2:
+  version "1.0.2"
+  resolved "http://52.50.158.57:4873/tinypool/-/tinypool-1.0.2.tgz#706193cc532f4c100f66aa00b01c42173d9051b2"
+  integrity sha512-al6n+QEANGFOMf/dmUMsuS5/r9B06uwlyNjZZql/zv8J7ybHCgoihBNORZCY2mzUuAnomQa2JdhyHKzZxPCrFA==
+
 tinyrainbow@^1.2.0:
   version "1.2.0"
   resolved "http://52.50.158.57:4873/tinyrainbow/-/tinyrainbow-1.2.0.tgz#5c57d2fc0fb3d1afd78465c33ca885d04f02abb5"
@@ -30908,6 +30934,11 @@ typescript@^5.3.3:
   version "5.6.2"
   resolved "http://52.50.158.57:4873/typescript/-/typescript-5.6.2.tgz#d1de67b6bef77c41823f822df8f0b3bcff60a5a0"
   integrity sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==
+
+typescript@^5.4.5:
+  version "5.7.3"
+  resolved "http://52.50.158.57:4873/typescript/-/typescript-5.7.3.tgz#919b44a7dbb8583a9b856d162be24a54bf80073e"
+  integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==
 
 typescript@^5.5.3:
   version "5.7.2"

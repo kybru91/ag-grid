@@ -100,9 +100,7 @@ const extractSubAngularProjectDependencies = (packageDirectory) => {
 };
 
 const ROOT_PACKAGE_JSON = '../../../package.json';
-const packageDirectories = require(ROOT_PACKAGE_JSON).workspaces.packages.workspaces.packages.filter(
-    (d) => !d.startsWith('external/')
-);
+const packageDirectories = require(ROOT_PACKAGE_JSON).workspaces.packages.filter((d) => !d.startsWith('external/'));
 
 const getPackageInformation = () => {
     const packageInformation = {};

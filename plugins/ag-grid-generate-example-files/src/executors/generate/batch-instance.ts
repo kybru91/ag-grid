@@ -1,3 +1,4 @@
+import type { ExecutorContext } from '@nx/devkit';
 import type { BatchExecutorTaskResult } from 'ag-shared/plugin-utils';
 
 import type { ExecutorOptions } from './executor';
@@ -15,7 +16,7 @@ export default async function processor(msg: Message) {
 
     let result: BatchExecutorTaskResult;
     try {
-        await generateFiles(options, gridOptionsTypes);
+        await generateFiles(options, {} as ExecutorContext, gridOptionsTypes);
         result = { task: taskName, result: { success: true, terminalOutput: '' } };
     } catch (e) {
         result = { task: taskName, result: { success: false, terminalOutput: `${e}` } };

@@ -1,3 +1,4 @@
+import type { ExecutorContext } from '@nx/devkit';
 import { readFile, readJSONFile, writeFile } from 'ag-shared/plugin-utils';
 import fs from 'fs/promises';
 import path from 'path';
@@ -38,7 +39,11 @@ export type ExecutorOptions = {
     writeFiles: boolean;
 };
 
-export default async function (options: ExecutorOptions, gridOptionsTypes = getGridOptionsType()) {
+export default async function (
+    options: ExecutorOptions,
+    _ctx: ExecutorContext,
+    gridOptionsTypes = getGridOptionsType()
+) {
     try {
         await generateFiles(options, gridOptionsTypes);
 
@@ -84,6 +89,7 @@ async function getProvidedFiles(folderPath: string) {
 }
 
 export async function generateFiles(options: ExecutorOptions, gridOptionsTypes: Record<string, GridOptionsType>) {
+    console.log('generateFiles', { gridOptionsTypes });
     const isDev = options.mode === 'dev';
     const folderPath = options.examplePath;
 

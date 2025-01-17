@@ -185,10 +185,7 @@
       "cache": false,
       "options": {
         "parallel": false,
-        "commands": [
-          "if (test \"${BUILD_BATCH}\" != \"0\") ; then yarn nx generate-examples ag-grid-docs --batch; fi",
-          "if (test \"${BUILD_BATCH}\" == \"0\") ; then yarn nx generate-examples ag-grid-docs; fi"
-        ]
+        "commands": ["yarn nx generate-examples ag-grid-docs --batch"]
       },
       "configurations": {
         "staging": {},

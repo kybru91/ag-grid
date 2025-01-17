@@ -12,7 +12,7 @@ import {
     getInterfaceFileContents,
     removeModuleRegistration,
 } from './generator/transformation-scripts/parser-utils';
-import type { ExampleConfig, GeneratedContents, InternalFramework } from './generator/types';
+import type { ExampleConfig, GeneratedContents, GridOptionsType, InternalFramework } from './generator/types';
 import { FRAMEWORKS, TYPESCRIPT_INTERNAL_FRAMEWORKS } from './generator/types';
 import {
     getBoilerPlateFiles,
@@ -38,11 +38,9 @@ export type ExecutorOptions = {
     writeFiles: boolean;
 };
 
-const gridOptionsTypes = getGridOptionsType();
-
-export default async function (options: ExecutorOptions) {
+export default async function (options: ExecutorOptions, gridOptionsTypes = getGridOptionsType()) {
     try {
-        await generateFiles(options);
+        await generateFiles(options, gridOptionsTypes);
 
         return { success: true, terminalOutput: `Generating example [${options.examplePath}]` };
     } catch (e) {
@@ -85,7 +83,7 @@ async function getProvidedFiles(folderPath: string) {
     return frameworkProvidedExamples;
 }
 
-export async function generateFiles(options: ExecutorOptions) {
+export async function generateFiles(options: ExecutorOptions, gridOptionsTypes: Record<string, GridOptionsType>) {
     const isDev = options.mode === 'dev';
     const folderPath = options.examplePath;
 

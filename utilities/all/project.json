@@ -178,18 +178,21 @@
       "command": "rimraf -g dist/ 'packages/*/dist/' 'plugins/*/dist/' 'testing/*/dist/' 'documentation/*/dist/' 'documentation/ag-grid-docs/node_modules/.vite/' 'community-modules/locale/umd/'"
     },
     "generate-examples": {
-      "executor": "nx:noop",
-      "dependsOn": ["^generate-example"],
-      "inputs": [
-        {
-          "externalDependencies": ["npm:typescript"]
-        }
-      ],
+      "executor": "nx:run-commands",
+      "dependsOn": ["ag-grid-generate-example-files:build", "^build:types"],
+      "inputs": [],
       "outputs": [],
-      "batch": true,
-      "cache": true,
+      "cache": false,
+      "options": {
+        "parallel": false,
+        "commands": [
+          "if (test \"${BUILD_BATCH}\" != \"0\") ; then yarn nx generate-examples ag-grid-docs --batch; fi",
+          "if (test \"${BUILD_BATCH}\" == \"0\") ; then yarn nx generate-examples ag-grid-docs; fi"
+        ]
+      },
       "configurations": {
         "staging": {},
+        "archive": {},
         "production": {}
       }
     },

@@ -115,7 +115,7 @@
           "if (test \"${BUILD_FWS}\" != \"0\") ; then nx run-many -t build -p @ag-grid-community/angular,@ag-grid-community/react,@ag-grid-community/vue3 --parallel=5; fi",
           "if (test \"${BUILD_PACKAGES}\" != \"0\") ; then nx run-many -t build --projects=tag:package --exclude=tag:framework; fi",
           "if (test \"${BUILD_PACKAGES}\" != \"0\" && test \"${BUILD_FWS}\" != \"0\") ; then nx run-many -t build --projects=tag:package:framework; fi",
-          "if (test \"${BUILD_BATCH}\" != \"0\") ; then nx generate-examples --batch; fi"
+          "nx generate-examples"
         ]
       }
     },

@@ -51,9 +51,8 @@ function getTypeLookupFunc(fileName) {
                 fullLookup[prop] = lookupType(prop as string);
             });
         return fullLookup;
-    } else {
-        console.error('No gridOptions file found');
     }
+    throw new Error('No gridOptions file found');
 }
 
 export function getGridOptionsType(): Record<
@@ -63,5 +62,5 @@ export function getGridOptionsType(): Record<
         typesToInclude: string[];
     }
 > {
-    return getTypeLookupFunc('./plugins/ag-grid-generate-example-files/gridOptionsTypes/baseGridOptions.ts') ?? {};
+    return getTypeLookupFunc('./plugins/ag-grid-generate-example-files/gridOptionsTypes/baseGridOptions.ts');
 }

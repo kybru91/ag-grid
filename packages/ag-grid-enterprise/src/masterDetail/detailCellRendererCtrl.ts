@@ -98,9 +98,6 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
             _warn(267);
         }
 
-        // we clone the detail grid options, as otherwise it would be shared
-        // across many instances, and that would be a problem because we set
-        // api into gridOptions
         const gridOptions: GridOptions = {
             themeStyleContainer: this.environment.eStyleContainer,
             ...params.detailGridOptions,
@@ -111,8 +108,6 @@ export class DetailCellRendererCtrl extends BeanStub implements IDetailCellRende
         if (autoHeight) {
             gridOptions.domLayout = 'autoHeight';
         }
-
-        gridOptions.theme ||= gos.get('theme');
 
         this.comp.setDetailGrid(gridOptions);
     }

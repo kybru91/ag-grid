@@ -6,7 +6,7 @@ import styles from '@pages-styles/pipelineChangelog.module.scss';
 import { IssueColDef, IssueTypeColDef } from '@utils/grid/issueColDefs';
 import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 import classnames from 'classnames';
-import { type ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { type ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 const COLUMN_DEFS = [
     IssueColDef,
@@ -158,13 +158,6 @@ export const Pipeline = () => {
 
         gridApi.setGridOption('quickFilterText', searchQuery);
     }, [gridApi, searchQuery]);
-
-    const onQuickFilterChange = useCallback(
-        (event) => {
-            gridApi.setGridOption('quickFilterText', event.target.value);
-        },
-        [gridApi]
-    );
 
     return (
         <div className={classnames('page-margin', styles.container)}>

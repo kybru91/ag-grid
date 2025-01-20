@@ -6,7 +6,7 @@ import styles from '@pages-styles/pipelineChangelog.module.scss';
 import { IssueColDef, IssueTypeColDef } from '@utils/grid/issueColDefs';
 import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 import classnames from 'classnames';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { type ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 const COLUMN_DEFS = [
     IssueColDef,
@@ -111,14 +111,30 @@ const detailCellRendererParams = (params) => {
     return res;
 };
 
-const extractFilterTerm = (location) =>
-    location && location.search ? new URLSearchParams(location.search).get('searchQuery') : '';
+function useSearchQuery() {
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const handleSearchQueryChange = useCallback((event: ChangeEvent<{ value: string }>) => {
+        const value = event.target?.value;
+        setSearchQuery(value);
+    }, []);
+
+    useEffect(() => {
+        const searchParams = window.location.search;
+        const urlSearchQuery = new URLSearchParams(searchParams).get('searchQuery');
+        const value = searchParams && urlSearchQuery ? urlSearchQuery : '';
+        setSearchQuery(value);
+    }, []);
+
+    return {
+        searchQuery,
+        handleSearchQueryChange,
+    };
+}
 
 export const Pipeline = () => {
     const [rowData, setRowData] = useState(null);
     const [gridApi, setGridApi] = useState(null);
-    const URLFilterSearchQuery = useState(extractFilterTerm(window.location))[0];
-    const searchBarEl = useRef(null);
+    const { searchQuery, handleSearchQueryChange } = useSearchQuery();
 
     useEffect(() => {
         fetch(urlWithBaseUrl('/pipeline/pipeline.json'))
@@ -128,10 +144,20 @@ export const Pipeline = () => {
             });
     }, []);
 
-    const gridReady = (params) => {
-        setGridApi(params.api);
-        params.api.setGridOption('quickFilterText', URLFilterSearchQuery);
-    };
+    const gridReady = useCallback(
+        (params) => {
+            setGridApi(params.api);
+        },
+        [searchQuery]
+    );
+
+    useEffect(() => {
+        if (!gridApi) {
+            return;
+        }
+
+        gridApi.setGridOption('quickFilterText', searchQuery);
+    }, [gridApi, searchQuery]);
 
     const onQuickFilterChange = useCallback(
         (event) => {
@@ -160,8 +186,8 @@ export const Pipeline = () => {
                     type="search"
                     className={styles.searchBar}
                     placeholder={'Search pipeline...'}
-                    ref={searchBarEl}
-                    onChange={onQuickFilterChange}
+                    value={searchQuery}
+                    onChange={handleSearchQueryChange}
                 ></input>
                 <span className={classnames(styles.searchExplainer, 'text-secondary')}>
                     Find pipeline items by issue number, summary content

@@ -67,9 +67,10 @@ export class RowContainerComp extends Component {
     }
 
     private setRowCtrls(rowCtrls: RowCtrl[]): void {
-        const oldRows = { ...this.rowComps };
-        this.rowComps = {};
+        const { rowComps, beans, options, eContainer } = this;
+        const oldRows = { ...rowComps };
 
+        this.rowComps = {};
         this.lastPlacedElement = null;
 
         const orderedRows: [rowComp: RowComp, isNew: boolean][] = [];
@@ -87,14 +88,14 @@ export class RowContainerComp extends Component {
                 if (!rowCtrl.rowNode.displayed) {
                     continue;
                 }
-                rowComp = new RowComp(rowCtrl, this.beans, this.options.type);
+                rowComp = new RowComp(rowCtrl, beans, options.type);
             }
             this.rowComps[instanceId] = rowComp;
             orderedRows.push([rowComp, !existingRowComp]);
         }
 
         for (const oldRowComp of Object.values(oldRows)) {
-            this.eContainer.removeChild(oldRowComp.getGui());
+            eContainer.removeChild(oldRowComp.getGui());
             oldRowComp.destroy();
         }
 
@@ -102,14 +103,14 @@ export class RowContainerComp extends Component {
             const eGui = rowComp.getGui();
             if (!this.ensureDomOrder) {
                 if (isNew) {
-                    this.eContainer.appendChild(eGui);
+                    eContainer.appendChild(eGui);
                 }
             } else {
                 this.ensureDomOrder(eGui);
             }
         }
 
-        _setAriaRole(this.eContainer, 'rowgroup');
+        _setAriaRole(eContainer, 'rowgroup');
     }
 
     public appendRow(element: HTMLElement) {

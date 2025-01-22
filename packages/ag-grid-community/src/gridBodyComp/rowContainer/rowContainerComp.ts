@@ -1,6 +1,5 @@
 import { RowComp } from '../../rendering/row/rowComp';
 import type { RowCtrl, RowCtrlInstanceId } from '../../rendering/row/rowCtrl';
-import { _setAriaRole } from '../../utils/aria';
 import { _ensureDomOrder, _insertWithDomOrder } from '../../utils/dom';
 import type { ComponentSelector } from '../../widgets/component';
 import { Component, RefPlaceholder } from '../../widgets/component';
@@ -13,10 +12,10 @@ function templateFactory(options: RowContainerOptions): string {
         res =
             /* html */
             `<div class="${options.viewport}" data-ref="eViewport" role="presentation">
-                <div class="${options.container}" data-ref="eContainer"></div>
+                <div class="${options.container}" data-ref="eContainer" role="rowgroup"></div>
             </div>`;
     } else {
-        res = /* html */ `<div class="${options.container}" data-ref="eContainer"></div>`;
+        res = /* html */ `<div class="${options.container}" data-ref="eContainer" role="rowgroup"></div>`;
     }
 
     return res;
@@ -109,8 +108,6 @@ export class RowContainerComp extends Component {
                 this.ensureDomOrder(eGui);
             }
         }
-
-        _setAriaRole(eContainer, 'rowgroup');
     }
 
     public appendRow(element: HTMLElement) {

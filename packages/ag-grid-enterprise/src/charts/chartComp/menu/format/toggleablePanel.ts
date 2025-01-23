@@ -8,7 +8,6 @@ import type { ChartMenuParamsFactory } from '../chartMenuParamsFactory';
 export interface ToggleablePanelParams {
     tag: string;
     title?: string;
-    enabled: boolean;
     suppressEnabledCheckbox?: boolean;
     chartMenuParamsFactory: ChartMenuParamsFactory;
     cssIdentifier?: string;
@@ -26,19 +25,18 @@ export class ToggleablePanel extends Component {
     }
 
     public postConstruct() {
-        const { tag, cssIdentifier = 'charts-format-sub-level', title, enabled, suppressEnabledCheckbox } = this.params;
+        const { tag, cssIdentifier = 'charts-format-sub-level', title, suppressEnabledCheckbox } = this.params;
         const groupParams: AgGroupComponentParams =
             this.params.chartMenuParamsFactory.addEnableParams<AgGroupComponentParams>(`${tag}.enabled`, {
                 cssIdentifier,
                 direction: 'vertical',
                 suppressOpenCloseIcons: true,
                 title,
-                enabled,
                 suppressEnabledCheckbox: true,
                 useToggle: !suppressEnabledCheckbox,
             });
         this.setTemplate(
-            /* html */ `<div class="ag-toggleableGroup-panel">
+            /* html */ `<div class="ag-toggleable-group-panel">
                 <ag-group-component data-ref="toggleableGroup">
                 </ag-group-component>
             </div>`,
@@ -47,7 +45,7 @@ export class ToggleablePanel extends Component {
                 toggleableGroup: groupParams,
             }
         );
-        this.addOrRemoveCssClass(`ag-toggleableGroup-panel-no-header`, !title);
+        this.addOrRemoveCssClass(`ag-toggleable-group-panel-no-header`, !title);
     }
 
     public addItem(comp: Component<any>, prepend?: boolean) {

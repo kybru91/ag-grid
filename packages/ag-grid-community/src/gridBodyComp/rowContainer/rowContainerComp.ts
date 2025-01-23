@@ -1,6 +1,6 @@
 import { RowComp } from '../../rendering/row/rowComp';
 import type { RowCtrl, RowCtrlInstanceId } from '../../rendering/row/rowCtrl';
-import { _ensureDomOrder, _insertWithDomOrder } from '../../utils/dom';
+import { _ensureDomOrder } from '../../utils/dom';
 import type { ComponentSelector } from '../../widgets/component';
 import { Component, RefPlaceholder } from '../../widgets/component';
 import type { IRowContainerComp, RowContainerName, RowContainerOptions } from './rowContainerCtrl';
@@ -66,7 +66,7 @@ export class RowContainerComp extends Component {
     }
 
     private setRowCtrls(rowCtrls: RowCtrl[]): void {
-        const { rowComps, beans, options, eContainer } = this;
+        const { rowComps, beans, options } = this;
         const oldRows = { ...rowComps };
 
         this.rowComps = {};
@@ -93,14 +93,15 @@ export class RowContainerComp extends Component {
             orderedRows.push([rowComp, !existingRowComp]);
         }
 
-        for (const oldRowComp of Object.values(oldRows)) {
-            eContainer.removeChild(oldRowComp.getGui());
-            oldRowComp.destroy();
-        }
+        this.removeOldRows(Object.values(oldRows));
+        this.addRowNodes(orderedRows);
+    }
 
-        for (const [rowComp, isNew] of orderedRows) {
+    private addRowNodes(rows: [rowComp: RowComp, isNew: boolean][]): void {
+        const { domOrder, eContainer } = this;
+        for (const [rowComp, isNew] of rows) {
             const eGui = rowComp.getGui();
-            if (!this.ensureDomOrder) {
+            if (!domOrder) {
                 if (isNew) {
                     eContainer.appendChild(eGui);
                 }
@@ -110,13 +111,13 @@ export class RowContainerComp extends Component {
         }
     }
 
-    public appendRow(element: HTMLElement) {
-        if (this.domOrder) {
-            _insertWithDomOrder(this.eContainer, element, this.lastPlacedElement);
-        } else {
-            this.eContainer.appendChild(element);
+    private removeOldRows(rowComps: RowComp[]): void {
+        const { eContainer } = this;
+
+        for (const oldRowComp of rowComps) {
+            eContainer.removeChild(oldRowComp.getGui());
+            oldRowComp.destroy();
         }
-        this.lastPlacedElement = element;
     }
 
     private ensureDomOrder(eRow: HTMLElement): void {

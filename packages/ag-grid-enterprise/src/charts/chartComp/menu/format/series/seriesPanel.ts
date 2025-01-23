@@ -245,7 +245,6 @@ export class SeriesPanel extends Component {
             title: this.translate('dropOff'),
             suppressEnabledCheckbox: false,
             chartMenuParamsFactory: this.chartMenuUtils,
-            enabled: true,
         });
 
         const addItems = (groupComponent: ToggleablePanel) => {

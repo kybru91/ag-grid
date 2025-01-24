@@ -2,12 +2,18 @@ import type { ColDef, ColGroupDef, GridApi, GridOptions, HeaderClassParams } fro
 import {
     ClientSideRowModelModule,
     ModuleRegistry,
+    NumberFilterModule,
     TextFilterModule,
     ValidationModule,
     createGrid,
 } from 'ag-grid-community';
 
-ModuleRegistry.registerModules([ClientSideRowModelModule, TextFilterModule, ValidationModule /* Development Only */]);
+ModuleRegistry.registerModules([
+    ClientSideRowModelModule,
+    TextFilterModule,
+    NumberFilterModule,
+    ValidationModule /* Development Only */,
+]);
 
 const columnDefs: (ColDef | ColGroupDef)[] = [
     {

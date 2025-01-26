@@ -60,4 +60,3 @@ testing/module-size/src/App_AUTO.tsx
 
 vite.config.*.timestamp*
 
-/.env

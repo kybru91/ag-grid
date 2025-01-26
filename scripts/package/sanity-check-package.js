@@ -18,7 +18,7 @@ tsNode.register();
 const targetConfig = process.env.NX_TASK_TARGET_CONFIGURATION || 'development';
 
 const expectedGridVersion =
-    targetConfig === 'production' || targetConfig === 'archive'
+    ((targetConfig === 'production' || targetConfig === 'archive') && process.env !== 'local')
         ? process.env.BUILD_GRID_VERSION
         : JSON.parse(fs.readFileSync('./package.json').toString()).version;
 

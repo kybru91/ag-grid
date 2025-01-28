@@ -32,7 +32,6 @@ const lineOpacity = 'lineOpacity';
 const fillOpacity = 'fillOpacity';
 const labels = 'labels';
 const shadow = 'shadow';
-const direction = 'direction';
 const stageLabels = 'stageLabels';
 const markers = 'markers';
 
@@ -77,7 +76,6 @@ export class SeriesPanel extends Component {
         maxSize: () => this.initSize('maxSize', 'maxSize'),
         dropoff: () => this.initDropOff(),
         stageLabels: () => this.initStageLabels(),
-        direction: () => this.initDirection(),
         reverse: () => this.initReverse(),
     } as const;
 
@@ -102,41 +100,9 @@ export class SeriesPanel extends Component {
         sunburst: [tooltips],
         heatmap: [tooltips, labels, 'lineColor', lineWidth, lineOpacity],
         waterfall: [tooltips, 'connectorLine', 'seriesItems'],
-        funnel: [
-            tooltips,
-            strokeWidth,
-            lineDash,
-            lineOpacity,
-            fillOpacity,
-            labels,
-            direction,
-            'dropoff',
-            stageLabels,
-            shadow,
-        ],
-        'cone-funnel': [
-            tooltips,
-            strokeWidth,
-            lineDash,
-            lineOpacity,
-            fillOpacity,
-            labels,
-            direction,
-            stageLabels,
-            shadow,
-        ],
-        pyramid: [
-            tooltips,
-            strokeWidth,
-            lineDash,
-            lineOpacity,
-            fillOpacity,
-            labels,
-            direction,
-            stageLabels,
-            shadow,
-            'reverse',
-        ],
+        funnel: [tooltips, strokeWidth, lineDash, lineOpacity, fillOpacity, labels, 'dropoff', stageLabels, shadow],
+        'cone-funnel': [tooltips, strokeWidth, lineDash, lineOpacity, fillOpacity, labels, stageLabels, shadow],
+        pyramid: [tooltips, strokeWidth, lineDash, lineOpacity, fillOpacity, labels, stageLabels, shadow, 'reverse'],
     };
 
     constructor(private readonly options: FormatPanelOptions) {
@@ -383,14 +349,6 @@ export class SeriesPanel extends Component {
 
     private initSize(expression: 'size' | 'maxSize', labelKey: 'size' | 'minSize' | 'maxSize'): AgSlider {
         return new AgSlider(this.chartMenuUtils.getDefaultSliderParams(expression, labelKey, 60));
-    }
-
-    private initDirection(): AgSelect {
-        const options: ListOption[] = [
-            { value: 'vertical', text: this.translate('vertical') },
-            { value: 'horizontal', text: this.translate('horizontal') },
-        ];
-        return new AgSelect(this.chartMenuUtils.getDefaultSelectParams(direction, direction, options));
     }
 
     private initReverse(): AgToggleButton {

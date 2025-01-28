@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 
-import type { IHeaderGroupAngularComp } from 'ag-grid-angular';
+import type { IInnerHeaderGroupAngularComp } from 'ag-grid-angular';
 import type { IHeaderGroupParams } from 'ag-grid-community';
 
 export interface ICustomInnerHeaderGroupParams {
@@ -38,7 +38,7 @@ export interface ICustomInnerHeaderGroupParams {
         `,
     ],
 })
-export class CustomInnerHeaderGroup implements IHeaderGroupAngularComp {
+export class CustomInnerHeaderGroup implements IInnerHeaderGroupAngularComp {
     public params!: IHeaderGroupParams & ICustomInnerHeaderGroupParams;
 
     agInit(params: IHeaderGroupParams & ICustomInnerHeaderGroupParams): void {

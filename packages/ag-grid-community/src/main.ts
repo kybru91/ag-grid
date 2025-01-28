@@ -940,6 +940,7 @@ export {
     _setAriaColSpan,
     _setAriaRowIndex,
     _setAriaDisabled,
+    _setAriaHasPopup,
     _removeAriaExpanded,
     _removeAriaSort,
     _setAriaSort,

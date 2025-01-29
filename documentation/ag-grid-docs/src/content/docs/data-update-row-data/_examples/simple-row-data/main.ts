@@ -49,6 +49,11 @@ function onRowDataB() {
     gridApi!.setGridOption('rowData', rowDataB);
 }
 
+function onClearRowData() {
+    // Clear rowData by setting it to an empty array
+    gridApi!.setGridOption('rowData', []);
+}
+
 // setup the grid after the page has finished loading
 document.addEventListener('DOMContentLoaded', function () {
     const gridDiv = document.querySelector<HTMLElement>('#myGrid')!;

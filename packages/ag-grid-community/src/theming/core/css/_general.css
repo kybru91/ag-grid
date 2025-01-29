@@ -396,14 +396,6 @@ always be 0 and then making a row sticky causes the grid to scroll. */
     word-break: break-word;
 }
 
-:where(.ag-cell-wrap-text:not(.ag-cell-auto-height) .ag-cell-wrapper) {
-    height: 100%;
-
-    .ag-cell-value {
-        height: 100%;
-    }
-}
-
 :where(.ag-cell) .ag-icon {
     display: inline-block;
     vertical-align: middle;

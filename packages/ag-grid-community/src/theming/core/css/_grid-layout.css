@@ -142,6 +142,15 @@
     }
 }
 
+:where(.ag-cell-wrap-text:not(.ag-cell-auto-height)) .ag-cell-wrapper {
+    height: 100%;
+    align-items: normal;
+
+    :where(.ag-cell-value) {
+        height: 100%;
+    }
+}
+
 .ag-row > .ag-cell-wrapper.ag-row-group {
     padding-left: calc(
         var(--ag-cell-horizontal-padding) + var(--ag-row-group-indent-size) * var(--ag-indentation-level)

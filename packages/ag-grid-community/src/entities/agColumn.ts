@@ -607,7 +607,7 @@ export class AgColumn<TValue = any>
         if (this.actualWidth !== actualWidth) {
             // disable flex for this column if it was manually resized.
             this.actualWidth = actualWidth;
-            if (this.flex && source !== 'flex' && source !== 'gridInitializing') {
+            if (this.flex != null && source !== 'flex' && source !== 'gridInitializing') {
                 this.flex = null;
             }
 

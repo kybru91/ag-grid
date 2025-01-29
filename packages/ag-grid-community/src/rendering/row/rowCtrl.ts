@@ -832,13 +832,15 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         };
     }
 
-    private findFullWidthRowGui(target: HTMLElement): RowGui | undefined {
-        return this.allRowGuis.find((c) => c.element.contains(target));
-    }
-
     public onKeyboardNavigate(keyboardEvent: KeyboardEvent) {
-        const currentFullWidthComp = this.findFullWidthRowGui(keyboardEvent.target as HTMLElement);
-        const currentFullWidthContainer = currentFullWidthComp ? currentFullWidthComp.element : null;
+        const groupInfo = this.findFullWidthInfoForEvent(keyboardEvent);
+
+        if (!groupInfo) {
+            return;
+        }
+
+        const { rowGui, column } = groupInfo;
+        const currentFullWidthContainer = rowGui.element;
         const isFullWidthContainerFocused = currentFullWidthContainer === keyboardEvent.target;
 
         if (!isFullWidthContainerFocused) {
@@ -851,7 +853,7 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         const cellPosition: CellPosition = {
             rowIndex: node.rowIndex!,
             rowPinned: node.rowPinned,
-            column: (lastFocusedCell?.column as AgColumn) ?? this.getColumnForFullWidth(currentFullWidthComp),
+            column: (lastFocusedCell?.column as AgColumn) ?? column,
         };
 
         navigation?.navigateToNextCell(keyboardEvent, keyboardEvent.key, cellPosition, true);
@@ -1000,6 +1002,25 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         this.beans.eventSvc.dispatchEvent(this.createRowEventWithSource('rowDoubleClicked', mouseEvent));
     }
 
+    public findFullWidthInfoForEvent(event?: Event): { rowGui: RowGui; column: AgColumn } | undefined {
+        if (!event) {
+            return;
+        }
+
+        const rowGui = this.findFullWidthRowGui(event.target as HTMLElement);
+        const column = this.getColumnForFullWidth(rowGui);
+
+        if (!rowGui || !column) {
+            return;
+        }
+
+        return { rowGui, column };
+    }
+
+    private findFullWidthRowGui(target: HTMLElement): RowGui | undefined {
+        return this.allRowGuis.find((c) => c.element.contains(target));
+    }
+
     private getColumnForFullWidth(fullWidthRowGui?: RowGui): AgColumn {
         const { visibleCols } = this.beans;
         switch (fullWidthRowGui?.containerType) {
@@ -1026,19 +1047,25 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
         const { rangeSvc, focusSvc } = this.beans;
         rangeSvc?.removeAllCellRanges();
 
-        const fullWidthRowGui = this.findFullWidthRowGui(mouseEvent.target as HTMLElement);
-        const element = fullWidthRowGui?.element;
+        const groupInfo = this.findFullWidthInfoForEvent(mouseEvent);
+
+        if (!groupInfo) {
+            return;
+        }
+
+        const { rowGui, column } = groupInfo;
+        const element = rowGui.element;
         const target = mouseEvent.target as HTMLElement;
 
         let forceBrowserFocus = true;
 
-        if (element && element.contains(target as HTMLElement) && _isFocusableFormField(target)) {
+        if (element && element.contains(target) && _isFocusableFormField(target)) {
             forceBrowserFocus = false;
         }
 
         focusSvc.setFocusedCell({
             rowIndex: node.rowIndex!,
-            column: this.getColumnForFullWidth(fullWidthRowGui),
+            column,
             rowPinned: node.rowPinned,
             forceBrowserFocus,
         });

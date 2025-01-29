@@ -1043,10 +1043,11 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         const { gos, valueSvc, rowGroupColsSvc } = this.beans;
 
         const isTreeData = gos.get('treeData');
+        const isGroupRows = gos.get('groupDisplayType') === 'groupRows';
 
-        // if not tree datathen we get the value from the group data
+        // if not tree data then we get the value from the group data
         const getValueFromNode = () => {
-            if (isTreeData || !column) {
+            if (isTreeData || isGroupRows || !column) {
                 return node.key;
             }
             const value = node.groupData?.[column.getId()];

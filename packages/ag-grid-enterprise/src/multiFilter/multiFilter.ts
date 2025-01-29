@@ -4,7 +4,6 @@ import type {
     IAfterGuiAttachedParams,
     IDoesFilterPassParams,
     IFilterComp,
-    IFilterDef,
     IFilterParams,
     IMultiFilter,
     IMultiFilterDef,
@@ -24,6 +23,7 @@ import {
     _isNothingFocused,
     _loadTemplate,
     _removeFromArray,
+    _setAriaRole,
 } from 'ag-grid-community';
 
 import { AgGroupComponent } from '../widgets/agGroupComponent';
@@ -174,6 +174,7 @@ export class MultiFilter extends TabGuardComp implements IFilterComp, IMultiFilt
                 menuItemDef: {
                     name,
                     subMenu: [],
+                    subMenuRole: 'dialog',
                     cssClasses: ['ag-multi-filter-menu-item'],
                     menuItem: AgMenuItemRenderer,
                     menuItemParams: {
@@ -461,7 +462,7 @@ export class MultiFilter extends TabGuardComp implements IFilterComp, IMultiFilt
         }
     }
 
-    private createFilter(filterDef: IFilterDef, index: number): AgPromise<IFilterComp> | null {
+    private createFilter(filterDef: IMultiFilterDef, index: number): AgPromise<IFilterComp> | null {
         const { filterModifiedCallback, doesRowPassOtherFilter } = this.params;
         const { filterManager, userCompFactory } = this.beans;
 
@@ -483,7 +484,17 @@ export class MultiFilter extends TabGuardComp implements IFilterComp, IMultiFilt
         }
         const filterPromise = compDetails.newAgStackInstance();
 
-        filterPromise.then((filter) => (filterInstance = filter!));
+        filterPromise.then((filter) => {
+            if (!filter) {
+                return;
+            }
+
+            filterInstance = filter;
+            if (filterDef.display === 'subMenu') {
+                const eGui = filter.getGui();
+                _setAriaRole(eGui, 'dialog');
+            }
+        });
 
         return filterPromise;
     }

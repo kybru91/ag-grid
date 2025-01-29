@@ -43,6 +43,7 @@ export class Environment extends BeanStub implements NamedBean {
     private eGridDiv: HTMLElement;
     public eStyleContainer: HTMLElement;
     public cssLayer: string | undefined;
+    private mutationObserver: MutationObserver;
 
     public wireBeans(beans: BeanCollection): void {
         const { eGridDiv, gridOptions } = beans;
@@ -75,6 +76,10 @@ export class Environment extends BeanStub implements NamedBean {
         this.refreshRowBorderWidthVariable();
 
         this.addDestroyFunc(() => _unregisterGridUsingThemingAPI(this));
+
+        this.mutationObserver = new MutationObserver(() => {
+            this.fireGridStylesChangedEvent('themeChanged');
+        });
     }
 
     public getDefaultRowHeight(): number {
@@ -110,12 +115,21 @@ export class Environment extends BeanStub implements NamedBean {
             themeClass = `${this.paramsClass} ${gridTheme._getCssClass()}`;
         } else {
             // legacy mode
+            this.mutationObserver.disconnect();
             let node: HTMLElement | null = this.eGridDiv;
             while (node) {
+                let isThemeEl = false;
                 for (const className of Array.from(node.classList)) {
                     if (className.startsWith('ag-theme-')) {
+                        isThemeEl = true;
                         themeClass = themeClass ? `${themeClass} ${className}` : className;
                     }
+                }
+                if (isThemeEl) {
+                    this.mutationObserver.observe(node, {
+                        attributes: true,
+                        attributeFilter: ['class'],
+                    });
                 }
                 node = node.parentElement;
             }

@@ -80,6 +80,7 @@ export class Environment extends BeanStub implements NamedBean {
         this.mutationObserver = new MutationObserver(() => {
             this.fireGridStylesChangedEvent('themeChanged');
         });
+        this.addDestroyFunc(() => this.mutationObserver.disconnect());
     }
 
     public getDefaultRowHeight(): number {

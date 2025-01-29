@@ -398,6 +398,7 @@ always be 0 and then making a row sticky causes the grid to scroll. */
 
 :where(.ag-cell-wrap-text:not(.ag-cell-auto-height) .ag-cell-wrapper) {
     height: 100%;
+
     .ag-cell-value {
         height: 100%;
     }

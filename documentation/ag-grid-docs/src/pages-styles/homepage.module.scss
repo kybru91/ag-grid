@@ -32,13 +32,13 @@ body {
     }
 
     &::after {
-        height: calc(var(--background-split));
-        bottom: 0px;
+        height: calc(var(--background-split) + #{$spacing-size-16});
+        bottom: #{-$spacing-size-16};
         background: linear-gradient(var(--gradient-top), var(--color-bg-primary));
     }
 
     #{$selector-darkmode} & {
-        --gradient-top: color-mix(in srgb, #000 25%, var(--color-bg-primary));
+        --gradient-top: color-mix(in srgb, #000 35%, var(--color-bg-primary));
     }
 
     @media screen and (min-width: $breakpoint-hero-small) {

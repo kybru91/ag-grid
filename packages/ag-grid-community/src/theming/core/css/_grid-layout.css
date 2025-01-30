@@ -168,6 +168,12 @@
     outline: initial;
 }
 
+/* remove the box shadow added by default to all focussed divs because rows
+           use a border only to indicate focus */
+.ag-full-width-row.ag-row-focus:focus {
+    box-shadow: none;
+}
+
 .ag-row-drag,
 .ag-selection-checkbox,
 .ag-group-expanded,

@@ -2,6 +2,7 @@ import type {
     AgColumn,
     CellPosition,
     CellRange,
+    Column,
     CsvExportParams,
     GridCtrl,
     GridOptions,
@@ -10,6 +11,7 @@ import type {
     IClipboardCopyRowsParams,
     IClipboardService,
     IRangeService,
+    IRowNode,
     NamedBean,
     ProcessCellForExportParams,
     ProcessRowGroupForExportParams,
@@ -1039,55 +1041,35 @@ export class ClipboardService extends BeanStub implements NamedBean, IClipboardS
         return csvCreator!.getDataAsCsv(exportParams, true);
     }
 
-    private processRowGroupCallback({ node, column }: ProcessRowGroupForExportParams) {
-        const { gos, valueSvc, rowGroupColsSvc } = this.beans;
-
+    private getValueFromNode(node: IRowNode, column?: Column): string | null {
+        const { gos, valueSvc } = this.beans;
         const isTreeData = gos.get('treeData');
         const isGroupRows = gos.get('groupDisplayType') === 'groupRows';
 
         // if not tree data then we get the value from the group data
-        const getValueFromNode = () => {
-            if (isTreeData || isGroupRows || !column) {
-                return node.key;
-            }
-            const value = node.groupData?.[column.getId()];
-            if (
-                !value ||
-                !node.rowGroupColumn ||
-                node.rowGroupColumn.getColDef().useValueFormatterForExport === false
-            ) {
-                return value;
-            }
-            return valueSvc.formatValue(node.rowGroupColumn as AgColumn, node, value) ?? value;
-        };
-        let value = getValueFromNode();
+        if (isTreeData || isGroupRows || !column) {
+            return node.key;
+        }
+        const value = node.groupData?.[column.getId()];
+        if (!value || !node.rowGroupColumn || node.rowGroupColumn.getColDef().useValueFormatterForExport === false) {
+            return value;
+        }
+        return valueSvc.formatValue(node.rowGroupColumn as AgColumn, node, value) ?? value;
+    }
+
+    private processRowGroupCallback({ node, column }: ProcessRowGroupForExportParams) {
+        let value = this.getValueFromNode(node, column);
+        const translate = this.getLocaleTextFunc();
 
         if (node.footer) {
             let suffix = '';
             if (value && value.length) {
                 suffix = ` ${value}`;
             }
-            value = `Total${suffix}`;
+            value = `${translate('footerTotal', 'Total')}${suffix}`;
         }
-        const processCellForClipboard = gos.getCallback('processCellForClipboard');
 
-        if (processCellForClipboard) {
-            let column = node.rowGroupColumn as AgColumn;
-
-            if (!column && node.footer && node.level === -1 && rowGroupColsSvc) {
-                column = rowGroupColsSvc.columns[0];
-            }
-            return processCellForClipboard({
-                value,
-                node,
-                column,
-                type: 'clipboard',
-                formatValue: (valueToFormat) => valueSvc.formatValue(column, node, valueToFormat) ?? valueToFormat,
-                parseValue: (valueToParse) =>
-                    valueSvc.parseValue(column, node, valueToParse, valueSvc.getValue(column, node)),
-            });
-        }
-        return value;
+        return value || '';
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types

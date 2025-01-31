@@ -1,6 +1,7 @@
 import { KeyCode } from '../constants/keyCode';
 import type { NamedBean } from '../context/bean';
 import { BeanStub } from '../context/beanStub';
+import type { BeanCollection } from '../context/context';
 import type { AgColumn } from '../entities/agColumn';
 import type { RowNode } from '../entities/rowNode';
 import { _isGroupRowsSticky } from '../gridOptionsUtils';
@@ -8,12 +9,19 @@ import type { CellPosition } from '../interfaces/iCellPosition';
 import type { IRowNode } from '../interfaces/iRowNode';
 import type { RowPosition } from '../interfaces/iRowPosition';
 import type { RowCtrl } from '../rendering/row/rowCtrl';
+import type { RowSpanService } from '../rendering/spanning/rowSpanService';
 import { _last } from '../utils/array';
 import { _missing } from '../utils/generic';
 import { _warn } from '../validation/logging';
 
 export class CellNavigationService extends BeanStub implements NamedBean {
     beanName = 'cellNavigation' as const;
+
+    private rowSpanSvc: RowSpanService | undefined;
+
+    public wireBeans(beans: BeanCollection) {
+        this.rowSpanSvc = beans.rowSpanSvc;
+    }
 
     // returns null if no cell to focus on, ie at the end of the grid
     public getNextCellToFocus(
@@ -190,6 +198,7 @@ export class CellNavigationService extends BeanStub implements NamedBean {
         }
 
         const rowNode = rowModel.getRow(rowPosition.rowIndex);
+
         const nextStickyPosition = ignoreSticky ? undefined : this.getNextStickyPosition(rowNode);
 
         if (nextStickyPosition) {
@@ -234,7 +243,10 @@ export class CellNavigationService extends BeanStub implements NamedBean {
             return null;
         }
 
-        const rowBelow = this.getRowBelow(lastCell);
+        // adjust spanned cell so when moving down asserts use of last row in cell
+        const adjustedLastCell = this.rowSpanSvc?.getCellEnd(lastCell) ?? lastCell;
+
+        const rowBelow = this.getRowBelow(adjustedLastCell);
         if (rowBelow) {
             return {
                 rowIndex: rowBelow.rowIndex,
@@ -324,7 +336,13 @@ export class CellNavigationService extends BeanStub implements NamedBean {
             return null;
         }
 
-        const rowAbove = this.getRowAbove({ rowIndex: lastCell.rowIndex, rowPinned: lastCell.rowPinned });
+        // adjust spanned cell so when moving up asserts use of first row in cell
+        const adjustedLastCell = this.rowSpanSvc?.getCellStart(lastCell) ?? lastCell;
+
+        const rowAbove = this.getRowAbove({
+            rowIndex: adjustedLastCell.rowIndex,
+            rowPinned: adjustedLastCell.rowPinned,
+        });
 
         if (rowAbove) {
             return {

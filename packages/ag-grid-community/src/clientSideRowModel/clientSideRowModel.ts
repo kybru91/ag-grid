@@ -71,8 +71,6 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         this.filterAggStage = beans.filterAggStage;
     }
 
-    private onRowHeightChanged_debounced = _debounce(this, this.onRowHeightChanged.bind(this), 100);
-
     // top most node of the tree. the children are the user provided data.
     public rootNode: RowNode | null = null;
 
@@ -918,6 +916,10 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         this.depthFirstSearchRowNodes(callback, includeFooterNodes);
     }
 
+    public forEachDisplayedNode(callback: (rowNode: RowNode<any>, index: number) => void): void {
+        this.rowsToDisplay.forEach(callback);
+    }
+
     public forEachNodeAfterFilter(
         callback: (node: RowNode, index: number) => void,
         includeFooterNodes: boolean = false
@@ -1227,16 +1229,6 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         });
     }
 
-    /** This method is debounced. It is used for row auto-height. If we don't debounce,
-     * then the Row Models will end up recalculating each row position
-     * for each row height change and result in the Row Renderer laying out rows.
-     * This is particularly bad if using print layout, and showing eg 1,000 rows,
-     * each row will change it's height, causing Row Model to update 1,000 times.
-     */
-    public onRowHeightChangedDebounced(): void {
-        this.onRowHeightChanged_debounced();
-    }
-
     public resetRowHeights(): void {
         const rootNode = this.rootNode;
         if (!rootNode) {
@@ -1311,5 +1303,13 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         this.lastHighlightedRow = null;
         this.orderedStages = _EmptyArray;
         this.rowsToDisplay = _EmptyArray;
+    }
+
+    private onRowHeightChanged_debounced = _debounce(this, this.onRowHeightChanged.bind(this), 100);
+    /**
+     * @deprecated v33.1
+     */
+    public onRowHeightChangedDebounced(): void {
+        this.onRowHeightChanged_debounced();
     }
 }

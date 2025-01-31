@@ -5,7 +5,9 @@ import type { AgColumnGroup } from '../entities/agColumnGroup';
 import type { ColDef } from '../entities/colDef';
 import type { GridOptions, SelectionColumnDef } from '../entities/gridOptions';
 import type { ColumnEventType } from '../events';
+import type { PropertyValueChangedEvent } from '../gridOptionsService';
 import { _getCheckboxLocation, _getCheckboxes, _getHeaderCheckbox, _isRowSelection } from '../gridOptionsUtils';
+import type { IColumnCollectionService } from '../interfaces/iColumnCollectionService';
 import type { ColKey, ColumnCollections } from './columnModel';
 import { _applyColumnState, _getColumnState } from './columnStateUtils';
 import {
@@ -19,10 +21,10 @@ import {
 
 export const CONTROLS_COLUMN_ID_PREFIX = 'ag-Grid-SelectionColumn' as const;
 
-export class SelectionColService extends BeanStub implements NamedBean {
+export class SelectionColService extends BeanStub implements NamedBean, IColumnCollectionService {
     beanName = 'selectionColSvc' as const;
 
-    public selectionCols: ColumnCollections | null;
+    public columns: ColumnCollections | null;
 
     public postConstruct(): void {
         this.addManagedPropertyListener('rowSelection', (event) => {
@@ -33,13 +35,11 @@ export class SelectionColService extends BeanStub implements NamedBean {
             );
         });
 
-        this.addManagedPropertyListener('selectionColumnDef', (event) => {
-            this.onSelectionColumnDefChanged(event.currentValue, _convertColumnEventSourceType(event.source));
-        });
+        this.addManagedPropertyListener('selectionColumnDef', this.updateColumns.bind(this));
     }
 
-    public addSelectionCols(cols: ColumnCollections): void {
-        const selectionCols = this.selectionCols;
+    public addColumns(cols: ColumnCollections): void {
+        const selectionCols = this.columns;
         if (selectionCols == null) {
             return;
         }
@@ -48,21 +48,21 @@ export class SelectionColService extends BeanStub implements NamedBean {
         _updateColsMap(cols);
     }
 
-    public createSelectionCols(
+    public createColumns(
         cols: ColumnCollections,
         updateOrders: (callback: (cols: AgColumn[] | null) => AgColumn[] | null) => void
     ): void {
         const destroyCollection = () => {
-            _destroyColumnTree(this.beans, this.selectionCols?.tree);
-            this.selectionCols = null;
+            _destroyColumnTree(this.beans, this.columns?.tree);
+            this.columns = null;
         };
 
         const newTreeDepth = cols.treeDepth;
-        const oldTreeDepth = this.selectionCols?.treeDepth ?? -1;
+        const oldTreeDepth = this.columns?.treeDepth ?? -1;
         const treeDepthSame = oldTreeDepth == newTreeDepth;
 
         const list = this.generateSelectionCols();
-        const areSame = _areColIdsEqual(list, this.selectionCols?.list ?? []);
+        const areSame = _areColIdsEqual(list, this.columns?.list ?? []);
 
         if (areSame && treeDepthSame) {
             return;
@@ -72,7 +72,7 @@ export class SelectionColService extends BeanStub implements NamedBean {
         const { colGroupSvc } = this.beans;
         const treeDepth = colGroupSvc?.findDepth(cols.tree) ?? 0;
         const tree = colGroupSvc?.balanceTreeForAutoCols(list, treeDepth) ?? [];
-        this.selectionCols = {
+        this.columns = {
             list,
             tree,
             treeDepth,
@@ -91,6 +91,25 @@ export class SelectionColService extends BeanStub implements NamedBean {
         updateOrders(putSelectionColsFirstInList);
     }
 
+    public updateColumns(event: PropertyValueChangedEvent<'selectionColumnDef'>): void {
+        const source = _convertColumnEventSourceType(event.source);
+        const current = event.currentValue;
+
+        this.columns?.list.forEach((col) => {
+            const newColDef = this.createSelectionColDef(current);
+            col.setColDef(newColDef, null, source);
+            _applyColumnState(this.beans, { state: [{ colId: col.getColId(), ...newColDef }] }, source);
+        });
+    }
+
+    public getColumn(key: ColKey): AgColumn | null {
+        return this.columns?.list.find((col) => _columnsMatch(col, key)) ?? null;
+    }
+
+    public getColumns(): AgColumn[] | null {
+        return this.columns?.list ?? null;
+    }
+
     public isSelectionColumnEnabled(): boolean {
         const { gos, beans } = this;
         const rowSelection = gos.get('rowSelection');
@@ -98,7 +117,7 @@ export class SelectionColService extends BeanStub implements NamedBean {
             return false;
         }
 
-        const hasAutoCols = (beans.autoColSvc?.getAutoCols()?.length ?? 0) > 0;
+        const hasAutoCols = (beans.autoColSvc?.getColumns()?.length ?? 0) > 0;
 
         if (rowSelection.checkboxLocation === 'autoGroupColumn' && hasAutoCols) {
             return false;
@@ -159,14 +178,6 @@ export class SelectionColService extends BeanStub implements NamedBean {
         return [...list, ...colsFiltered];
     }
 
-    public getSelectionCol(key: ColKey): AgColumn | null {
-        return this.selectionCols?.list.find((col) => _columnsMatch(col, key)) ?? null;
-    }
-
-    public getSelectionCols(): AgColumn[] | null {
-        return this.selectionCols?.list ?? null;
-    }
-
     private onSelectionOptionsChanged(
         current: GridOptions['rowSelection'],
         prev: GridOptions['rowSelection'],
@@ -189,16 +200,8 @@ export class SelectionColService extends BeanStub implements NamedBean {
         }
     }
 
-    private onSelectionColumnDefChanged(current: SelectionColumnDef | undefined, source: ColumnEventType) {
-        this.selectionCols?.list.forEach((col) => {
-            const newColDef = this.createSelectionColDef(current);
-            col.setColDef(newColDef, null, source);
-            _applyColumnState(this.beans, { state: [{ colId: col.getColId(), ...newColDef }] }, source);
-        });
-    }
-
     public override destroy(): void {
-        _destroyColumnTree(this.beans, this.selectionCols?.tree);
+        _destroyColumnTree(this.beans, this.columns?.tree);
         super.destroy();
     }
 

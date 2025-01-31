@@ -54,7 +54,7 @@ export class QuickFilterService extends BeanStub<QuickFilterServiceEvent> implem
     public refreshCols(): void {
         const { autoColSvc, colModel, gos, pivotResultCols } = this.beans;
         const pivotMode = colModel.isPivotMode();
-        const groupAutoCols = autoColSvc?.getAutoCols();
+        const groupAutoCols = autoColSvc?.getColumns();
         const providedCols = colModel.getColDefCols();
 
         let columnsForQuickFilter =

@@ -596,7 +596,7 @@ export class ColumnFilterService extends BeanStub implements NamedBean {
     private updateDependentFilters(): void {
         // Group column filters can be dependant on underlying column filters, but don't normally get created until they're used for the first time.
         // Instead, create them by default when any filter changes.
-        this.beans.autoColSvc?.getAutoCols()?.forEach((groupColumn) => {
+        this.beans.autoColSvc?.getColumns()?.forEach((groupColumn) => {
             if (isGroupFilter(groupColumn)) {
                 this.getOrCreateFilterWrapper(groupColumn);
             }

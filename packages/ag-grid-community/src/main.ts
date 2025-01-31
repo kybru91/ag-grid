@@ -31,7 +31,6 @@ export {
     _convertColumnEventSourceType,
     _columnsMatch,
 } from './columns/columnUtils';
-export { IAutoColService } from './interfaces/iAutoColService';
 export type { SelectionColService } from './columns/selectionColService';
 export {
     SizeColumnsToFitGridColumnLimits,
@@ -312,6 +311,7 @@ export { AlignedGrid } from './interfaces/iAlignedGrid';
 export type { MenuService } from './misc/menu/menuService';
 export { _setColMenuVisible } from './misc/menu/menuService';
 export type { IColsService } from './interfaces/iColsService';
+export type { IColumnCollectionService } from './interfaces/iColumnCollectionService';
 
 // editing / cellEditors
 export {
@@ -610,7 +610,7 @@ export {
 export { _getClientSideRowModel, _getServerSideRowModel } from './api/rowModelApiUtils';
 export { AgEventType, AgPublicEventType, _ALL_EVENTS, _PUBLIC_EVENTS } from './eventTypes'; // TODO: remove _ALL_EVENTS, _PUBLIC_EVENTS if not required by VUE
 export type { FocusService } from './focusService';
-export type { GridOptionsService } from './gridOptionsService';
+export type { GridOptionsService, PropertyValueChangedEvent } from './gridOptionsService';
 export { PropertyChangedEvent } from './gridOptionsService';
 export {
     _getCallbackForEvent,

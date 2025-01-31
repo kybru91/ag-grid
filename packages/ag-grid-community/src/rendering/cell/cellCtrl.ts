@@ -850,7 +850,7 @@ export class CellCtrl extends BeanStub {
         this.onEditorAttachedFuncs = [];
     }
 
-    public setFocusedCellPosition(cellPosition: CellPosition): void {
+    public setFocusedCellPosition(_cellPosition: CellPosition): void {
         // noop, used by spannedCellCtrl
     }
 

@@ -11,7 +11,7 @@ export class SpannedRowCtrl extends RowCtrl {
         this.getAllCellCtrls().forEach((c) => c.refreshAriaRowIndex());
     }
 
-    protected override getInitialRowClasses(rowContainerType: RowContainerType): string[] {
+    protected override getInitialRowClasses(_rowContainerType: RowContainerType): string[] {
         return ['ag-spanned-row'];
     }
 

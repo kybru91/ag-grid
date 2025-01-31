@@ -1,11 +1,8 @@
 import { BeanStub } from '../../context/beanStub';
-import type { BeanCollection } from '../../context/context';
 import type { AgColumn } from '../../entities/agColumn';
-import { SpanRowsParams } from '../../entities/colDef';
+import type { SpanRowsParams } from '../../entities/colDef';
 import type { RowNode } from '../../entities/rowNode';
 import type { CellPosition } from '../../interfaces/iCellPosition';
-import type { IRowModel } from '../../interfaces/iRowModel';
-import type { ValueService } from '../../valueService/valueService';
 import { _normalisePinnedValue } from './spannedRowRenderer';
 
 export const _doesColumnSpan = (column: AgColumn) => {
@@ -85,8 +82,6 @@ export class CellSpan {
  * Only create if spanning is enabled for this column.
  */
 export class RowSpanCache extends BeanStub {
-    private valueService: ValueService;
-
     private centerValueNodeMap: Map<RowNode, CellSpan>;
 
     // pinned rows

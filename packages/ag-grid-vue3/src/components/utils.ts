@@ -843,6 +843,11 @@ export interface Props<TData> {
          * @initial
          */
     ensureDomOrder?: boolean | undefined,
+    /** When `true`, enables the cell span feature allowing for the use of the `colDef.spanRows` property.
+         * @default false
+         * @initial
+         */
+    enableCellSpan?: boolean | undefined,
     /** Set to `true` to operate the grid in RTL (Right to Left) mode.
          * @default false
          * @initial
@@ -1737,6 +1742,7 @@ export function getProps() {
         allowShowChangeAfterFilter: undefined,
         domLayout: undefined,
         ensureDomOrder: undefined,
+        enableCellSpan: undefined,
         enableRtl: undefined,
         suppressColumnVirtualisation: undefined,
         suppressMaxRenderedRowRestriction: undefined,

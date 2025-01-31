@@ -82,10 +82,6 @@
     border-bottom: var(--ag-row-border);
 }
 
-.ag-spanned-row > .ag-cell {
-    background-color: var(--ag-background-color);
-}
-
 /* Hide the border of the last last row when there is no gap between the row and
    grid edge to prevent a double border. The use of the child  combinator `>`
    is to ensure that the ag-body-vertical-content-no-gap class only hides the
@@ -120,6 +116,10 @@
 
 .ag-cell {
     border-right: var(--ag-column-border);
+}
+
+.ag-spanned-row > .ag-cell {
+    background-color: var(--ag-background-color);
 }
 
 /* Only display the right border of the rightmost column when there is a gap between the column and grid edge */

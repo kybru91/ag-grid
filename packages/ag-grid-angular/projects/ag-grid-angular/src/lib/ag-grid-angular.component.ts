@@ -1025,6 +1025,11 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
      * @initial
      */
     @Input({ transform: booleanAttribute }) public ensureDomOrder: boolean | undefined = undefined;
+    /** When `true`, enables the cell span feature allowing for the use of the `colDef.spanRows` property.
+     * @default false
+     * @initial
+     */
+    @Input({ transform: booleanAttribute }) public enableCellSpan: boolean | undefined = undefined;
     /** Set to `true` to operate the grid in RTL (Right to Left) mode.
      * @default false
      * @initial

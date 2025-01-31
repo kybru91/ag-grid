@@ -137,6 +137,6 @@ export class RowSpanService extends BeanStub<'spannedCellsUpdated'> implements N
 
     public override destroy(): void {
         super.destroy();
-        this.spanningColumns = null!;
+        this.spanningColumns.clear();
     }
 }

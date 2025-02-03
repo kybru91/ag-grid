@@ -36,7 +36,9 @@
                             "type": "item",
                             "title": "React Best Practices",
                             "path": "react-hooks",
-                            "frameworks": ["react"]
+                            "frameworks": [
+                                "react"
+                            ]
                         }
                     ]
                 },
@@ -58,7 +60,9 @@
                             "type": "item",
                             "title": "Testing Async",
                             "path": "testing-async",
-                            "frameworks": ["angular"]
+                            "frameworks": [
+                                "angular"
+                            ]
                         },
                         {
                             "type": "item",
@@ -79,7 +83,9 @@
                             "type": "item",
                             "title": "Installation",
                             "path": "installation",
-                            "frameworks": ["javascript"]
+                            "frameworks": [
+                                "javascript"
+                            ]
                         }
                     ]
                 }
@@ -1117,9 +1123,23 @@
                         },
                         {
                             "type": "item",
-                            "title": "Row Hierarchy",
-                            "path": "tree-data-hierarchy",
-                            "isEnterprise": true
+                            "title": "Supplying Data",
+                            "path": "tree-data-data",
+                            "isEnterprise": true,
+                            "children": [
+                                {
+                                    "type": "item",
+                                    "title": "Data Paths",
+                                    "path": "tree-data-paths",
+                                    "isEnterprise": true
+                                },
+                                {
+                                    "type": "item",
+                                    "title": "Nested Records",
+                                    "path": "tree-data-nesting",
+                                    "isEnterprise": true
+                                }
+                            ]
                         },
                         {
                             "type": "item",
@@ -1601,7 +1621,9 @@
                             "type": "item",
                             "title": "NgZone",
                             "path": "angular-ngzone",
-                            "frameworks": ["angular"]
+                            "frameworks": [
+                                "angular"
+                            ]
                         }
                     ]
                 }

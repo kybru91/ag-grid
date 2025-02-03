@@ -28,8 +28,6 @@ const docs = defineCollection({
                 })
             )
             .optional(),
-
-        migrationVersion: z.string().optional(),
     }),
 });
 

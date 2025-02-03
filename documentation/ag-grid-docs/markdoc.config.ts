@@ -1,13 +1,10 @@
 import { isFramework } from '@ag-website-shared/markdoc/functions/isFramework';
 import { isNotJavascriptFramework } from '@ag-website-shared/markdoc/functions/isNotJavascriptFramework';
-import { getMigrationVersionPatch, migrationVersion } from '@ag-website-shared/markdoc/functions/migrationVersion';
 import { heading } from '@ag-website-shared/markdoc/nodes/heading';
 import { br } from '@ag-website-shared/markdoc/tags/br';
 import { embedSnippet } from '@ag-website-shared/markdoc/tags/embedSnippet';
 import { enterpriseIcon } from '@ag-website-shared/markdoc/tags/enterpriseIcon';
 import { expandingSection } from '@ag-website-shared/markdoc/tags/expandingSection';
-import { getChangelogSection } from '@ag-website-shared/markdoc/tags/getChangelogSection';
-import { getDocumentationArchiveSection } from '@ag-website-shared/markdoc/tags/getDocumentationArchiveSection';
 import { idea } from '@ag-website-shared/markdoc/tags/idea';
 import { image } from '@ag-website-shared/markdoc/tags/image';
 import { kbd } from '@ag-website-shared/markdoc/tags/kbd';
@@ -21,13 +18,12 @@ import { warning } from '@ag-website-shared/markdoc/tags/warning';
 import { Markdoc, component, defineMarkdocConfig } from '@astrojs/markdoc/config';
 import { getFrameworkCapitalised } from '@utils/markdoc/getFrameworkCapitalised';
 
-import { agChartsVersion, agGridVersion } from './src/constants';
+import { agGridVersion } from './src/constants';
 import { link } from './src/utils/markdoc/tags/link';
 
 export default defineMarkdocConfig({
     variables: {
         agGridVersion,
-        agChartsVersion,
     },
     nodes: {
         heading,
@@ -54,8 +50,6 @@ export default defineMarkdocConfig({
         isFramework,
         isNotJavascriptFramework,
         getFrameworkCapitalised,
-        migrationVersion,
-        migrationVersionPatch: getMigrationVersionPatch('grid'),
     },
     tags: {
         kbd,
@@ -71,8 +65,6 @@ export default defineMarkdocConfig({
         idea,
         openInCTA,
         expandingSection,
-        documentationArchiveSection: getDocumentationArchiveSection('grid'),
-        changelogSection: getChangelogSection('grid'),
         enterpriseIcon,
         video,
         licenseSetup: {
@@ -233,6 +225,9 @@ export default defineMarkdocConfig({
         },
         moduleMappings: {
             render: component('./src/components/module-mappings/ModuleMappings.astro'),
+        },
+        upgrade33: {
+            render: component('./src/components/upgrade-33.astro'),
         },
     },
 });

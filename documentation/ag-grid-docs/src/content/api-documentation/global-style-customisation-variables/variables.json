@@ -205,8 +205,8 @@
             "description": "Colour of the border between grid rows, or `transparent` to display no border",
             "type": "CSS color (e.g. `red` or `#fff`)"
         },
-        "--ag-row-header-selected-color": {
-            "description": "Background colour of the Row Header Column cell when the range selects all cells for that row.",
+        "--ag-row-numbers-selected-color": {
+            "description": "Background color of the Row Numbers cells when the range selects all cells for that row.",
             "type": "CSS color (e.g. `red` or `#fff`)"
         },
         "--ag-menu-border-color": {

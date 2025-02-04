@@ -756,7 +756,7 @@ export type ColumnEventType =
     | 'pivotChart'
     | 'columnRowGroupChanged'
     | 'cellDataTypeInferred'
-    | 'rowHeaderColService'
+    | 'rowNumbersService'
     | 'viewportSizeFeature';
 
 export interface ColumnEvent<T extends AgEventType | ColumnEventName = any, TData = any, TContext = any>

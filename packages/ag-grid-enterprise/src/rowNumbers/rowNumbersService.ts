@@ -16,7 +16,7 @@ import type {
     CellClassParams,
     CellPosition,
     ColDef,
-    IRowHeaderColsService,
+    IRowNumbersService,
     NamedBean,
     PropertyValueChangedEvent,
     RowNumbersOptions,
@@ -25,7 +25,7 @@ import type {
     _HeaderComp,
 } from 'ag-grid-community';
 
-export class RowNumbersService extends BeanStub implements NamedBean, IRowHeaderColsService {
+export class RowNumbersService extends BeanStub implements NamedBean, IRowNumbersService {
     beanName = 'rowNumbersSvc' as const;
 
     public columns: _ColumnCollections | null;
@@ -87,7 +87,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowHeader
             map: {},
         };
 
-        updateOrders(this.putRowHeaderColsFirstInList);
+        updateOrders(this.putRowNumbersColsFirstInList);
     }
 
     public handleMouseDownOnCell(cellPosition: CellPosition, mouseEvent: MouseEvent): boolean {
@@ -110,7 +110,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowHeader
         this.refreshSelectionIntegration();
 
         this.columns?.list.forEach((col) => {
-            const newColDef = this.createRowHeaderColDef();
+            const newColDef = this.createRowNumbersColDef();
             col.setColDef(newColDef, null, source);
             _applyColumnState(this.beans, { state: [{ colId: col.getColId(), ...newColDef }] }, source);
         });
@@ -170,7 +170,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowHeader
                 skipHeader: true,
                 skipHeaderGroups: true,
                 silent: true,
-                source: 'rowHeaderColService',
+                source: 'rowNumbersService',
             });
         }
 
@@ -180,16 +180,16 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowHeader
         });
     }
 
-    private putRowHeaderColsFirstInList(list: AgColumn[], cols?: AgColumn[] | null): AgColumn[] | null {
+    private putRowNumbersColsFirstInList(list: AgColumn[], cols?: AgColumn[] | null): AgColumn[] | null {
         if (!cols) {
             return null;
         }
-        // we use colId, and not instance, to remove old rowHeaderCols
+        // we use colId, and not instance, to remove old rowNumbersCols
         const colsFiltered = cols.filter((col) => !isRowNumberCol(col));
         return [...list, ...colsFiltered];
     }
 
-    private createRowHeaderColDef(): ColDef {
+    private createRowNumbersColDef(): ColDef {
         const { gos } = this.beans;
         const enableRTL = gos.get('enableRtl');
         return {
@@ -274,7 +274,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowHeader
             return [];
         }
 
-        const colDef = this.createRowHeaderColDef();
+        const colDef = this.createRowNumbersColDef();
         const colId = colDef.colId!;
         beans.validation?.validateColDef(colDef, colId, true);
         const col = new AgColumn(colDef, null, colId, false);

@@ -19,7 +19,7 @@ const gridOptions = {
 ## Cell Selection
 
 When the grid is configured with [Cell Selection](./cell-selection/), Row Numbers will automatically integrate with it. This integration works
-by selecting all cells in the row where the Row Number was clicked. To prevent this, the `suppressCellSelectionIntegration` option can be used.
+by selecting all cells in the row where the Row Number was clicked.
 
 ```{% frameworkTransform=true %}
 const gridOptions = {
@@ -29,8 +29,10 @@ const gridOptions = {
 }
 ```
 
-### RowNumbersOptions
-{% interfaceDocumentation interfaceName="RowNumbersOptions" config={ "description": "" } names=["suppressCellSelectionIntegration"] /%}
+### Suppressing Integration
+
+To prevent the default behaviour where Row Numbers integrates with the `suppressCellSelectionIntegration` option should be used.
+
 ```{% frameworkTransform=true %}
 const gridOptions = {
     rowNumbers: {
@@ -39,6 +41,9 @@ const gridOptions = {
     cellSelection: true
 }
 ```
+
+{% interfaceDocumentation interfaceName="RowNumbersOptions" config={ "description": "" } names=["suppressCellSelectionIntegration"] /%}
+
 {% gridExampleRunner title="Row Numbers with Cell Selection" name="row-numbers-cell-selection" /%}
 
 ## Value Export

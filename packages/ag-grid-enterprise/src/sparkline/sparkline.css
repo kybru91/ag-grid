@@ -4,11 +4,5 @@
     width: 100%;
     left: 0;
     top: 0;
-}
-
-.ag-sparkline-wrapper :where(.ag-charts-wrapper) {
     line-height: initial;
-
-    --ag-charts-align: flex-start;
-    --ag-charts-justify: flex-start;
 }

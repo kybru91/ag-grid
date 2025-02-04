@@ -9,7 +9,12 @@ import type { AgColumn } from '../entities/agColumn';
 import type { AgColumnGroup } from '../entities/agColumnGroup';
 import { isColumnGroup } from '../entities/agColumnGroup';
 import type { RowNode } from '../entities/rowNode';
-import { _canSkipShowingRowGroup, _isClientSideRowModel, _isServerSideRowModel } from '../gridOptionsUtils';
+import {
+    _addGridCommonParams,
+    _canSkipShowingRowGroup,
+    _isClientSideRowModel,
+    _isServerSideRowModel,
+} from '../gridOptionsUtils';
 import type {
     ExportParams,
     ProcessGroupHeaderForExportParams,
@@ -97,7 +102,7 @@ export class GridSerializer extends BeanStub implements NamedBean {
             return;
         }
 
-        const shouldRowBeSkipped: boolean = rowSkipper(this.gos.addGridCommonParams({ node }));
+        const shouldRowBeSkipped: boolean = rowSkipper(_addGridCommonParams(this.gos, { node }));
 
         if (shouldRowBeSkipped) {
             return;
@@ -109,7 +114,7 @@ export class GridSerializer extends BeanStub implements NamedBean {
         });
 
         if (params.getCustomContentBelowRow) {
-            const content = params.getCustomContentBelowRow(this.gos.addGridCommonParams({ node }));
+            const content = params.getCustomContentBelowRow(_addGridCommonParams(this.gos, { node }));
             if (content) {
                 gridSerializingSession.addCustomContent(content);
             }
@@ -420,7 +425,7 @@ export class GridSerializer extends BeanStub implements NamedBean {
             let name: string;
             if (processGroupHeaderCallback) {
                 name = processGroupHeaderCallback(
-                    this.gos.addGridCommonParams({
+                    _addGridCommonParams(this.gos, {
                         columnGroup: columnGroup,
                     })
                 );

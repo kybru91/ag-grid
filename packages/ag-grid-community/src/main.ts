@@ -618,6 +618,7 @@ export type { FocusService } from './focusService';
 export type { GridOptionsService, PropertyValueChangedEvent } from './gridOptionsService';
 export { PropertyChangedEvent } from './gridOptionsService';
 export {
+    _addGridCommonParams,
     _getCallbackForEvent,
     _combineAttributesAndGridOptions,
     _processOnChange,

@@ -16,8 +16,7 @@ import type {
 } from '../entities/dataType';
 import type { RowNode } from '../entities/rowNode';
 import type { ColumnEventType, FilterChangedEventSourceType } from '../events';
-import { _getGroupAggFiltering, _isSetFilterByDefault } from '../gridOptionsUtils';
-import type { WithoutGridCommon } from '../interfaces/iCommon';
+import { _addGridCommonParams, _getGroupAggFiltering, _isSetFilterByDefault } from '../gridOptionsUtils';
 import type { FilterModel, IFilter, IFilterComp, IFilterParams } from '../interfaces/iFilter';
 import type { UserCompDetails } from '../interfaces/iUserCompDetails';
 import { _exists, _jsonEquals } from '../utils/generic';
@@ -533,7 +532,7 @@ export class ColumnFilterService extends BeanStub implements NamedBean {
     }
 
     public createFilterParams(column: AgColumn, colDef: ColDef): IFilterParams {
-        const params: IFilterParams = this.gos.addGridCommonParams({
+        const params: IFilterParams = _addGridCommonParams(this.gos, {
             column,
             colDef,
             rowModel: this.beans.rowModel, // @deprecated v33.1
@@ -653,13 +652,13 @@ export class ColumnFilterService extends BeanStub implements NamedBean {
             defaultFloatingFilterType = 'agReadOnlyFloatingFilter';
         }
 
-        const params: WithoutGridCommon<IFloatingFilterParams<IFilter>> = {
+        const params: IFloatingFilterParams<IFilter> = _addGridCommonParams(this.gos, {
             column: column,
             filterParams: finalFilterParams,
             currentParentModel: () => this.getCurrentFloatingFilterParentModel(column),
             parentFilterInstance,
             showParentFilter,
-        };
+        });
 
         return _getFloatingFilterCompDetails(userCompFactory, colDef, params, defaultFloatingFilterType);
     }

@@ -11,6 +11,7 @@ import type { IColumnCollectionService } from '../interfaces/iColumnCollectionSe
 import type { ColKey, ColumnCollections } from './columnModel';
 import { _applyColumnState, _getColumnState } from './columnStateUtils';
 import {
+    SELECTION_COLUMN_ID,
     _areColIdsEqual,
     _columnsMatch,
     _convertColumnEventSourceType,
@@ -18,8 +19,6 @@ import {
     _updateColsMap,
     isColumnSelectionCol,
 } from './columnUtils';
-
-export const CONTROLS_COLUMN_ID_PREFIX = 'ag-Grid-SelectionColumn' as const;
 
 export class SelectionColService extends BeanStub implements NamedBean, IColumnCollectionService {
     beanName = 'selectionColSvc' as const;
@@ -156,7 +155,7 @@ export class SelectionColService extends BeanStub implements NamedBean, IColumnC
             // overrides
             ...filteredSelColDef,
             // non-overridable properties
-            colId: CONTROLS_COLUMN_ID_PREFIX,
+            colId: SELECTION_COLUMN_ID,
         };
     }
 
@@ -171,15 +170,6 @@ export class SelectionColService extends BeanStub implements NamedBean, IColumnC
         const col = new AgColumn(colDef, null, colId, false);
         this.createBean(col);
         return [col];
-    }
-
-    public putSelectionColsFirstInList(list: AgColumn[], cols?: AgColumn[] | null): AgColumn[] | null {
-        if (!cols) {
-            return null;
-        }
-        // we use colId, and not instance, to remove old selectionCols
-        const colsFiltered = cols.filter((col) => !isColumnSelectionCol(col));
-        return [...list, ...colsFiltered];
     }
 
     private onSelectionOptionsChanged(

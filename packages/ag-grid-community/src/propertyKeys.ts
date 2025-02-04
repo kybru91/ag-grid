@@ -100,7 +100,6 @@ const OBJECT_GRID_OPTIONS: KeysLike<object | HTMLElement>[] = [
     'initialState',
     'autoSizeStrategy',
     'selectionColumnDef',
-    'rowHeaderColumnDef',
 ];
 
 // only used internally
@@ -163,6 +162,7 @@ const OTHER_GRID_OPTIONS: GridOptionKey[] = ['theme', 'rowSelection'];
 export const _BOOLEAN_MIXED_GRID_OPTIONS: KeysOfType<boolean>[] = [
     'cellSelection',
     'sideBar',
+    'rowNumbers',
     'suppressGroupChangesColumnVisibility',
     'groupAggFiltering',
     'suppressStickyTotalRow',
@@ -310,7 +310,6 @@ export const _BOOLEAN_GRID_OPTIONS: KeysOfType<boolean>[] = [
     'maintainColumnOrder',
     'enableStrictPivotColumnOrder',
     'suppressSetFilterByDefault',
-    'enableRowHeaderColumn',
 ];
 
 // Used in example generation

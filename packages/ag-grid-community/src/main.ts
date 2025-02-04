@@ -24,8 +24,8 @@ export { GroupInstanceIdCreator } from './columns/groupInstanceIdCreator';
 export {
     GROUP_AUTO_COLUMN_ID,
     SELECTION_COLUMN_ID,
-    ROW_HEADER_COLUMN_ID,
-    isRowHeaderCol,
+    ROW_NUMBERS_COLUMN_ID,
+    isRowNumberCol,
     isColumnSelectionCol,
     isColumnGroupAutoCol,
     _destroyColumnTree,
@@ -840,7 +840,7 @@ export {
     UseGroupTotalRow,
     GetChartMenuItems,
 } from './entities/gridOptions';
-export type { RowHeaderColumnDef } from './interfaces/rowHeaderColumn';
+export type { RowNumbersOptions } from './interfaces/rowNumbers';
 export type { ManagedGridOptionKey, ManagedGridOptions } from './gridOptionsInitial';
 
 export {

@@ -1,4 +1,4 @@
-import { isColumnSelectionCol, isRowHeaderCol } from '../../columns/columnUtils';
+import { isColumnSelectionCol, isRowNumberCol } from '../../columns/columnUtils';
 import { _getCellRendererDetails, _getLoadingCellRendererDetails } from '../../components/framework/userCompUtils';
 import { BeanStub } from '../../context/beanStub';
 import type { BeanCollection } from '../../context/context';
@@ -620,7 +620,7 @@ export class CellCtrl extends BeanStub {
         if (!this.eGui) {
             return;
         }
-        if (isRowHeaderCol(this.column)) {
+        if (isRowNumberCol(this.column)) {
             suppressCellFocus = true;
         }
         _addOrRemoveAttribute(this.eGui, 'tabindex', suppressCellFocus ? undefined : -1);

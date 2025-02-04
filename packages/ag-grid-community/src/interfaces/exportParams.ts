@@ -105,7 +105,7 @@ export interface ExportParams<T> extends BaseExportParams {
     /**
      * Set to `true` to allow the contents of the Header Row Column to be exported.
      */
-    exportRowHeaderColumn?: boolean;
+    exportRowNumbers?: boolean;
 }
 
 export type PackageFileParams<T> = T & {

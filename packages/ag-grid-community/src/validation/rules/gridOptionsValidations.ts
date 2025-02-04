@@ -177,8 +177,8 @@ const GRID_OPTION_VALIDATIONS: () => Validations<GridOptions> = () => {
                 rowDragEntireRow: { required: [false, undefined] },
             },
         },
-        enableRowHeaderColumn: {
-            module: 'RowHeaderColumn',
+        rowNumbers: {
+            module: 'RowNumbers',
         },
         getContextMenuItems: { module: 'ContextMenu' },
         getLocaleText: { module: 'Locale' },

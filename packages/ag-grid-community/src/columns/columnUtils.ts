@@ -14,7 +14,7 @@ import type { ColumnState, ColumnStateParams } from './columnStateUtils';
 
 export const GROUP_AUTO_COLUMN_ID = 'ag-Grid-AutoColumn' as const;
 export const SELECTION_COLUMN_ID = 'ag-Grid-SelectionColumn' as const;
-export const ROW_HEADER_COLUMN_ID = 'ag-Grid-RowHeaderColumn' as const;
+export const ROW_NUMBERS_COLUMN_ID = 'ag-Grid-RowNumbersColumn' as const;
 
 // Possible candidate for reuse (alot of recursive traversal duplication)
 export function _getColumnsFromTree(rootColumns: (AgColumn | AgProvidedColumnGroup)[]): AgColumn[] {
@@ -78,9 +78,9 @@ export function isColumnSelectionCol(col: ColKey): boolean {
     return id?.startsWith(SELECTION_COLUMN_ID) ?? false;
 }
 
-export function isRowHeaderCol(col: ColKey): boolean {
+export function isRowNumberCol(col: ColKey): boolean {
     const id = typeof col === 'string' ? col : 'getColId' in col ? col.getColId() : col.colId;
-    return id?.startsWith(ROW_HEADER_COLUMN_ID) ?? false;
+    return id?.startsWith(ROW_NUMBERS_COLUMN_ID) ?? false;
 }
 
 export function convertColumnTypes(type: string | string[]): string[] {

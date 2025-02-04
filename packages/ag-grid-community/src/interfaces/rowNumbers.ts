@@ -1,6 +1,6 @@
 import type { ColDef } from '../entities/colDef';
 
-export interface RowHeaderColumnDef
+export interface RowNumbersOptions
     extends Pick<
         ColDef,
         | 'contextMenuItems'
@@ -14,13 +14,12 @@ export interface RowHeaderColumnDef
         | 'headerComponentParams'
         | 'suppressHeaderContextMenu'
         | 'suppressHeaderKeyboardEvent'
-        | 'cellRenderer'
-        | 'cellRendererParams'
-        | 'cellRendererSelector'
         | 'tooltipField'
         | 'tooltipValueGetter'
         | 'tooltipComponent'
         | 'tooltipComponentParams'
+        | 'valueGetter'
+        | 'valueFormatter'
         | 'width'
         | 'initialWidth'
         | 'maxWidth'

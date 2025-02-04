@@ -233,7 +233,7 @@ export interface CoreBeanCollection {
     pivotResultCols?: IPivotResultColsService;
     autoColSvc?: IColumnCollectionService;
     selectionColSvc?: SelectionColService;
-    rowHeaderColSvc?: IRowHeaderColsService;
+    rowNumbersSvc?: IRowHeaderColsService;
     colDefFactory?: ColumnDefFactory;
     colAutosize?: ColumnAutosizeService;
     rowGroupColsSvc?: IColsService;
@@ -410,7 +410,7 @@ export type BeanName =
     | 'focusSvc'
     | 'footerSvc'
     | 'funcColsSvc'
-    | 'rowHeaderColSvc'
+    | 'rowNumbersSvc'
     | 'pivotColsSvc'
     | 'rowGroupColsSvc'
     | 'valueColsSvc'

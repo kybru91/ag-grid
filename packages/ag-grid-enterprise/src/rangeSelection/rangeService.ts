@@ -41,7 +41,7 @@ import {
     _makeNull,
     _missing,
     _warn,
-    isRowHeaderCol,
+    isRowNumberCol,
 } from 'ag-grid-community';
 
 import { CellRangeFeature } from './cellRangeFeature';
@@ -355,9 +355,9 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService {
             return;
         }
 
-        const isRowHeaderColumnEnabled = gos.get('enableRowHeaderColumn');
-        const allColumnsRange = isRowHeaderCol(cell.column);
-        if (isRowHeaderColumnEnabled) {
+        const isRowNumbersEnabled = gos.get('rowNumbers');
+        const allColumnsRange = isRowNumberCol(cell.column);
+        if (isRowNumbersEnabled) {
             this.setSelectionMode(allColumnsRange);
         }
 
@@ -400,7 +400,7 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService {
 
         const cellRange = _last(this.cellRanges);
 
-        this.setSelectionMode(isRowHeaderCol(cellPosition.column));
+        this.setSelectionMode(isRowNumberCol(cellPosition.column));
         this.updateRangeEnd(cellRange, cellPosition);
     }
 
@@ -1030,7 +1030,7 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService {
     }
 
     private shouldSkipCurrentColumn(currentColumn: AgColumn): boolean {
-        return isRowHeaderCol(currentColumn);
+        return isRowNumberCol(currentColumn);
     }
 
     private dispatchChangedEvent(started: boolean, finished: boolean, id?: string): void {
@@ -1054,7 +1054,7 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService {
 
     private getColumnsFromModel(cols?: (string | AgColumn)[]): AgColumn[] | undefined {
         const { gos, visibleCols } = this;
-        const isRowHeaderActive = gos.get('enableRowHeaderColumn');
+        const isRowHeaderActive = gos.get('rowNumbers');
 
         if (!cols || this.selectionMode === SelectionMode.ALL_COLUMNS) {
             cols = visibleCols.allCols;

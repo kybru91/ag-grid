@@ -1,5 +1,5 @@
 import type { ColumnModel } from '../columns/columnModel';
-import { isColumnGroupAutoCol, isColumnSelectionCol, isRowHeaderCol } from '../columns/columnUtils';
+import { isColumnGroupAutoCol, isColumnSelectionCol, isRowNumberCol } from '../columns/columnUtils';
 import { GroupInstanceIdCreator } from '../columns/groupInstanceIdCreator';
 import type { VisibleColsService } from '../columns/visibleColsService';
 import type { NamedBean } from '../context/bean';
@@ -43,12 +43,12 @@ export class GridSerializer extends BeanStub implements NamedBean {
     }
 
     public serialize<T>(gridSerializingSession: GridSerializingSession<T>, params: ExportParams<T> = {}): string {
-        const { allColumns, columnKeys, skipRowGroups, exportRowHeaderColumn } = params;
+        const { allColumns, columnKeys, skipRowGroups, exportRowNumbers } = params;
         const columnsToExport = this.getColumnsToExport({
             allColumns,
             skipRowGroups,
             columnKeys: columnKeys as (string | AgColumn)[] | undefined,
-            exportRowHeaderColumn,
+            exportRowNumbers,
         });
 
         return [
@@ -348,10 +348,10 @@ export class GridSerializer extends BeanStub implements NamedBean {
     private getColumnsToExport(params: {
         allColumns?: boolean;
         skipRowGroups?: boolean;
-        exportRowHeaderColumn?: boolean;
+        exportRowNumbers?: boolean;
         columnKeys?: (string | AgColumn)[];
     }): AgColumn[] {
-        const { allColumns = false, skipRowGroups = false, exportRowHeaderColumn = false, columnKeys } = params;
+        const { allColumns = false, skipRowGroups = false, exportRowNumbers = false, columnKeys } = params;
         const { colModel, gos, visibleCols } = this;
         const isPivotMode = colModel.isPivotMode();
 
@@ -360,7 +360,7 @@ export class GridSerializer extends BeanStub implements NamedBean {
                 return false;
             }
 
-            return !isRowHeaderCol(col) || exportRowHeaderColumn;
+            return !isRowNumberCol(col) || exportRowNumbers;
         };
 
         if (columnKeys && columnKeys.length) {

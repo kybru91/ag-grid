@@ -22,7 +22,7 @@
 @use './parts/date-time';
 @use './parts/native-inputs';
 @use './parts/advanced-filter';
-@use './parts/row-header-column';
+@use './parts/row-numbers';
 
 @mixin general-styles() {
     .ag-measurement-container {
@@ -47,7 +47,7 @@
     @include charts.output();
     @include date-time.output();
     @include advanced-filter.output();
-    @include row-header-column.output();
+    @include row-numbers.output();
 }
 
 @mixin native-input-styles() {

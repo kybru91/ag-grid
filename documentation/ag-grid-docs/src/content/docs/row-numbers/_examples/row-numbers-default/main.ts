@@ -1,12 +1,8 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
-import { RowHeaderColumnModule } from 'ag-grid-enterprise';
+import { RowNumbersModule } from 'ag-grid-enterprise';
 
-ModuleRegistry.registerModules([
-    ClientSideRowModelModule,
-    RowHeaderColumnModule,
-    ValidationModule /* Development Only */,
-]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, RowNumbersModule, ValidationModule /* Development Only */]);
 
 const columnDefs: ColDef[] = [
     { field: 'athlete' },
@@ -25,7 +21,7 @@ const gridOptions: GridOptions<IOlympicData> = {
         flex: 1,
         minWidth: 100,
     },
-    enableRowHeaderColumn: true,
+    rowNumbers: true,
     columnDefs: columnDefs,
     rowData: null,
 };

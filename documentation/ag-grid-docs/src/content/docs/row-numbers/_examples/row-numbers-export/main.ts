@@ -1,10 +1,10 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
-import { CellSelectionModule, ContextMenuModule, ExcelExportModule, RowHeaderColumnModule } from 'ag-grid-enterprise';
+import { CellSelectionModule, ContextMenuModule, ExcelExportModule, RowNumbersModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
     ClientSideRowModelModule,
-    RowHeaderColumnModule,
+    RowNumbersModule,
     CellSelectionModule,
     ExcelExportModule,
     ContextMenuModule,
@@ -28,12 +28,12 @@ const gridOptions: GridOptions<IOlympicData> = {
         flex: 1,
         minWidth: 100,
     },
-    enableRowHeaderColumn: true,
+    rowNumbers: true,
     defaultCsvExportParams: {
-        exportRowHeaderColumn: true,
+        exportRowNumbers: true,
     },
     defaultExcelExportParams: {
-        exportRowHeaderColumn: true,
+        exportRowNumbers: true,
     },
     columnDefs: columnDefs,
     cellSelection: {

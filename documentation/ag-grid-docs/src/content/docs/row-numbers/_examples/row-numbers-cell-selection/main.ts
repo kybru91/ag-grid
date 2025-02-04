@@ -1,10 +1,10 @@
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import { ClientSideRowModelModule, ModuleRegistry, ValidationModule, createGrid } from 'ag-grid-community';
-import { CellSelectionModule, RowHeaderColumnModule } from 'ag-grid-enterprise';
+import { CellSelectionModule, RowNumbersModule } from 'ag-grid-enterprise';
 
 ModuleRegistry.registerModules([
     ClientSideRowModelModule,
-    RowHeaderColumnModule,
+    RowNumbersModule,
     CellSelectionModule,
     ValidationModule /* Development Only */,
 ]);
@@ -27,7 +27,7 @@ const gridOptions: GridOptions<IOlympicData> = {
         minWidth: 100,
     },
     cellSelection: true,
-    enableRowHeaderColumn: true,
+    rowNumbers: true,
     columnDefs: columnDefs,
     rowData: null,
 };

@@ -570,6 +570,12 @@
                             "type": "item",
                             "title": "Full Width Rows",
                             "path": "full-width-rows"
+                        },
+                        {
+                            "type": "item",
+                            "title": "Row Numbers",
+                            "path": "row-numbers",
+                            "isEnterprise": true
                         }
                     ]
                 },
@@ -1261,12 +1267,6 @@
                             "type": "item",
                             "title": "Context Menu",
                             "path": "context-menu",
-                            "isEnterprise": true
-                        },
-                        {
-                            "type": "item",
-                            "title": "Row Header Column",
-                            "path": "row-header-column",
                             "isEnterprise": true
                         },
                         {

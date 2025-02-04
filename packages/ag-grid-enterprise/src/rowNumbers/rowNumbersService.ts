@@ -1,37 +1,36 @@
 import {
     AgColumn,
     BeanStub,
-    ROW_HEADER_COLUMN_ID,
+    ROW_NUMBERS_COLUMN_ID,
     _applyColumnState,
     _areColIdsEqual,
-    _columnsMatch,
     _convertColumnEventSourceType,
     _debounce,
     _destroyColumnTree,
     _getRowNode,
     _selectAllCells,
     _updateColsMap,
-    isRowHeaderCol,
+    isRowNumberCol,
 } from 'ag-grid-community';
 import type {
     CellClassParams,
     CellPosition,
     ColDef,
-    ColKey,
     IRowHeaderColsService,
     NamedBean,
     PropertyValueChangedEvent,
-    RowHeaderColumnDef,
+    RowNumbersOptions,
     RowPosition,
     _ColumnCollections,
     _HeaderComp,
 } from 'ag-grid-community';
 
-export class RowHeaderColService extends BeanStub implements NamedBean, IRowHeaderColsService {
-    beanName = 'rowHeaderColSvc' as const;
+export class RowNumbersService extends BeanStub implements NamedBean, IRowHeaderColsService {
+    beanName = 'rowNumbersSvc' as const;
 
     public columns: _ColumnCollections | null;
     private isIntegratedWithSelection: boolean = false;
+    private rowNumberOverrides: RowNumbersOptions;
 
     public postConstruct(): void {
         const refreshCells_debounced = _debounce(this, this.refreshCells.bind(this, false, true), 10);
@@ -40,13 +39,10 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
             rangeSelectionChanged: () => this.refreshCells(true),
         });
 
-        this.addManagedPropertyListeners(
-            ['rowHeaderColumnDef', 'cellSelection'],
-            (e: PropertyValueChangedEvent<any>) => {
-                this.refreshSelectionIntegration();
-                this.updateColumns(e);
-            }
-        );
+        this.addManagedPropertyListeners(['rowNumbers', 'cellSelection'], (e: PropertyValueChangedEvent<any>) => {
+            this.refreshSelectionIntegration();
+            this.updateColumns(e);
+        });
 
         this.refreshSelectionIntegration();
     }
@@ -73,7 +69,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         const oldTreeDepth = this.columns?.treeDepth ?? -1;
         const treeDepthSame = oldTreeDepth == newTreeDepth;
 
-        const list = this.generateRowHeaderCols();
+        const list = this.generateRowNumberCols();
         const areSame = _areColIdsEqual(list, this.columns?.list ?? []);
 
         if (areSame && treeDepthSame) {
@@ -110,19 +106,18 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
 
     public updateColumns(event: PropertyValueChangedEvent<any>): void {
         const source = _convertColumnEventSourceType(event.source);
-        const current = event.currentValue;
 
         this.refreshSelectionIntegration();
 
         this.columns?.list.forEach((col) => {
-            const newColDef = this.createRowHeaderColDef(current);
+            const newColDef = this.createRowHeaderColDef();
             col.setColDef(newColDef, null, source);
             _applyColumnState(this.beans, { state: [{ colId: col.getColId(), ...newColDef }] }, source);
         });
     }
 
-    public getColumn(key: ColKey): AgColumn | null {
-        return this.columns?.list.find((col) => _columnsMatch(col, key)) ?? null;
+    public getColumn(): AgColumn | null {
+        return this.columns?.list.find(isRowNumberCol) ?? null;
     }
 
     public getColumns(): AgColumn[] | null {
@@ -132,7 +127,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
     public setupForHeader(comp: _HeaderComp): void {
         const { column } = comp.params;
         const eGui = comp.getGui();
-        if (!isRowHeaderCol(column)) {
+        if (!isRowNumberCol(column)) {
             return;
         }
 
@@ -142,10 +137,17 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
     }
 
     private refreshSelectionIntegration(): void {
-        const { gos, beans } = this;
-        const rowHeaderColDef = gos.get('rowHeaderColumnDef');
+        const { beans } = this;
 
-        this.isIntegratedWithSelection = !!beans.rangeSvc && !rowHeaderColDef?.suppressCellSelectionIntegration;
+        this.refreshRowNumberOverrides();
+
+        this.isIntegratedWithSelection = !!beans.rangeSvc && !this.rowNumberOverrides?.suppressCellSelectionIntegration;
+    }
+
+    private refreshRowNumberOverrides(): void {
+        const rowNumbers = this.gos.get('rowNumbers');
+
+        this.rowNumberOverrides = rowNumbers && typeof rowNumbers === 'object' ? rowNumbers : {};
     }
 
     private onHeaderClick(): void {
@@ -156,7 +158,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
     }
 
     private refreshCells(force?: boolean, runAutoSize?: boolean): void {
-        const column = this.getColumn(ROW_HEADER_COLUMN_ID);
+        const column = this.getColumn();
 
         if (!column) {
             return;
@@ -164,7 +166,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
 
         if (runAutoSize) {
             this.beans.colAutosize?.autoSizeCols({
-                colKeys: [ROW_HEADER_COLUMN_ID],
+                colKeys: [ROW_NUMBERS_COLUMN_ID],
                 skipHeader: true,
                 skipHeaderGroups: true,
                 silent: true,
@@ -183,19 +185,23 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
             return null;
         }
         // we use colId, and not instance, to remove old rowHeaderCols
-        const colsFiltered = cols.filter((col) => !isRowHeaderCol(col));
+        const colsFiltered = cols.filter((col) => !isRowNumberCol(col));
         return [...list, ...colsFiltered];
     }
 
-    private createRowHeaderColDef(def?: RowHeaderColumnDef): ColDef {
+    private createRowHeaderColDef(): ColDef {
         const { gos } = this.beans;
-        const rowHeaderColumnDef = def ?? gos.get('rowHeaderColumnDef');
         const enableRTL = gos.get('enableRtl');
         return {
             // overridable properties
             minWidth: 60,
             width: 60,
             resizable: false,
+            valueGetter: (p) => (p.node?.rowIndex || 0) + 1,
+            // overrides
+            ...this.rowNumberOverrides,
+            // non-overridable properties
+            colId: ROW_NUMBERS_COLUMN_ID,
             suppressHeaderMenuButton: true,
             sortable: false,
             suppressMovable: true,
@@ -207,21 +213,16 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
             suppressSizeToFit: true,
             suppressNavigable: true,
             headerClass: this.getHeaderClass(),
-            valueGetter: (p) => (p.node?.rowIndex || 0) + 1,
             cellClass: this.getCellClass.bind(this),
             cellAriaRole: 'rowheader',
-            // overrides
-            ...rowHeaderColumnDef,
-            // non-overridable properties
-            colId: ROW_HEADER_COLUMN_ID,
         };
     }
 
     private getHeaderClass(): string[] {
-        const cssClass = ['ag-header-row-header'];
+        const cssClass = ['ag-row-number-header'];
 
         if (this.isIntegratedWithSelection) {
-            cssClass.push('ag-header-row-selection-enabled');
+            cssClass.push('ag-row-number-selection-enabled');
         }
 
         return cssClass;
@@ -231,7 +232,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         const { beans } = this;
         const { rangeSvc, gos } = beans;
         const { node } = params;
-        const cssClasses = ['ag-header-row-cell'];
+        const cssClasses = ['ag-row-number-cell'];
         const cellSelection = gos.get('cellSelection');
 
         if (!rangeSvc || !cellSelection) {
@@ -239,7 +240,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         }
 
         if (this.isIntegratedWithSelection) {
-            cssClasses.push('ag-header-row-selection-enabled');
+            cssClasses.push('ag-row-number-selection-enabled');
         }
 
         const ranges = rangeSvc.getCellRanges();
@@ -248,18 +249,18 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
             return cssClasses;
         }
 
-        // -1 here because we shouldn't consider this Row Header Column
+        // -1 here because we shouldn't include the column added by this service
         const allColsLen = this.beans.visibleCols.allCols.length - 1;
         const shouldHighlight = typeof cellSelection === 'object' && cellSelection.enableHeaderHighlight;
 
         for (const range of ranges) {
             if (rangeSvc.isRowInRange(node.rowIndex!, node.rowPinned, range)) {
                 if (shouldHighlight) {
-                    cssClasses.push('ag-header-row-range-highlight');
+                    cssClasses.push('ag-row-number-range-highlight');
                 }
 
                 if (range.columns.length === allColsLen) {
-                    cssClasses.push('ag-header-row-range-selected');
+                    cssClasses.push('ag-row-number-range-selected');
                 }
             }
         }
@@ -267,9 +268,9 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         return cssClasses;
     }
 
-    private generateRowHeaderCols(): AgColumn[] {
+    private generateRowNumberCols(): AgColumn[] {
         const { gos, beans } = this;
-        if (!gos.get('enableRowHeaderColumn')) {
+        if (!gos.get('rowNumbers')) {
             return [];
         }
 
@@ -281,7 +282,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         return [col];
     }
 
-    // focus is disabled on the Row Header cells, when a click happens on it,
+    // focus is disabled on the Row Numbers cells, when a click happens on it,
     // it should focus the first cell of that row.
     private focusFirstRenderedCellAtRowPosition(rowPosition: RowPosition) {
         const { beans } = this;
@@ -292,7 +293,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
         }
 
         const colsInViewport = beans.colViewport.getColsWithinViewport(rowNode);
-        const column = colsInViewport.find((col) => col.colId !== ROW_HEADER_COLUMN_ID);
+        const column = colsInViewport.find(isRowNumberCol);
 
         if (!column) {
             return;
@@ -311,6 +312,7 @@ export class RowHeaderColService extends BeanStub implements NamedBean, IRowHead
 
     public override destroy(): void {
         _destroyColumnTree(this.beans, this.columns?.tree);
+        (this.rowNumberOverrides as any) = null;
         super.destroy();
     }
 }

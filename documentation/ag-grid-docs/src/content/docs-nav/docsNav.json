@@ -582,6 +582,12 @@
                         },
                         {
                             "type": "item",
+                            "title": "Row Numbers",
+                            "path": "row-numbers",
+                            "isEnterprise": true
+                        },
+                        {
+                            "type": "item",
                             "title": "Row Spanning",
                             "path": "row-spanning"
                         },
@@ -631,12 +637,6 @@
                             "type": "item",
                             "title": "Full Width Rows",
                             "path": "full-width-rows"
-                        },
-                        {
-                            "type": "item",
-                            "title": "Row Numbers",
-                            "path": "row-numbers",
-                            "isEnterprise": true
                         }
                     ]
                 },

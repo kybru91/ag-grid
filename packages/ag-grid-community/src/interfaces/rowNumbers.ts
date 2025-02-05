@@ -23,11 +23,8 @@ export interface RowNumbersOptions
         | 'valueGetter'
         | 'valueFormatter'
         | 'width'
-        | 'initialWidth'
         | 'maxWidth'
         | 'minWidth'
-        | 'flex'
-        | 'initialFlex'
         | 'resizable'
     > {
     /**

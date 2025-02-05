@@ -7,6 +7,7 @@
     color: var(--ag-header-text-color);
     font-size: var(--ag-header-font-size);
     font-family: var(--ag-header-font-family);
+    justify-content: end;
     font-weight: var(--ag-header-font-weight);
 }
 

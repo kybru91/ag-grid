@@ -200,6 +200,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
             width: 60,
             resizable: false,
             valueGetter: (p) => (p.node?.rowIndex || 0) + 1,
+            contextMenuItems: this.isIntegratedWithSelection ? undefined : () => [],
             // overrides
             ...this.rowNumberOverrides,
             // non-overridable properties
@@ -214,6 +215,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
             suppressFillHandle: true,
             suppressAutoSize: true,
             suppressSizeToFit: true,
+            suppressHeaderContextMenu: true,
             suppressNavigable: true,
             headerClass: this.getHeaderClass(),
             cellClass: this.getCellClass.bind(this),

@@ -15,7 +15,6 @@ export interface RowNumbersOptions
         | 'headerStyle'
         | 'headerComponent'
         | 'headerComponentParams'
-        | 'suppressHeaderContextMenu'
         | 'suppressHeaderKeyboardEvent'
         | 'tooltipField'
         | 'tooltipValueGetter'

@@ -12,6 +12,7 @@ import type { HeaderRowContainerCtrl } from '../headerRendering/rowContainer/hea
 import type { ProcessUnpinnedColumnsParams } from '../interfaces/iCallbackParams';
 import type { ColumnPinnedType } from '../interfaces/iColumn';
 import type { WithoutGridCommon } from '../interfaces/iCommon';
+import { isRowNumberCol } from '../main';
 import { _getInnerWidth } from '../utils/dom';
 import { _warn } from '../validation/logging';
 
@@ -75,6 +76,10 @@ export class PinnedColumnService extends BeanStub implements NamedBean {
                 viewportWidth: bodyWidth,
             };
             columnsToRemove = processUnpinnedColumns(params) as AgColumn[];
+        }
+
+        if (columnsToRemove && columnsToRemove.length) {
+            columnsToRemove = columnsToRemove.filter((col) => !isRowNumberCol(col));
         }
 
         this.setColsPinned(columnsToRemove, null, 'viewportSizeFeature');

@@ -413,6 +413,7 @@ export class GridBodyScrollFeature extends BeanStub {
     }
 
     public setVerticalScrollPosition(vScrollPosition: number): void {
+        this.requireUpdatedScrollPosition();
         this.eBodyViewport.scrollTop = vScrollPosition;
     }
 

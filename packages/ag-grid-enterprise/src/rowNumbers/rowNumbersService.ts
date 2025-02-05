@@ -32,7 +32,10 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
     beanName = 'rowNumbersSvc' as const;
 
     public columns: _ColumnCollections | null;
+
     private isIntegratedWithSelection: boolean = false;
+    private isSuppressCellSelectionIntegration: boolean;
+
     private rowNumberOverrides: RowNumbersOptions;
 
     public postConstruct(): void {
@@ -145,14 +148,49 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         const cellSelection = gos.get('cellSelection');
         this.refreshRowNumberOverrides();
 
-        this.isIntegratedWithSelection =
-            !!rangeSvc && !!cellSelection && !this.rowNumberOverrides?.suppressCellSelectionIntegration;
+        this.isIntegratedWithSelection = !!rangeSvc && !!cellSelection && !this.isSuppressCellSelectionIntegration;
     }
 
     private refreshRowNumberOverrides(): void {
         const rowNumbers = this.gos.get('rowNumbers');
+        this.rowNumberOverrides = {};
 
-        this.rowNumberOverrides = rowNumbers && typeof rowNumbers === 'object' ? rowNumbers : {};
+        if (!rowNumbers || typeof rowNumbers !== 'object') {
+            return;
+        }
+
+        if (rowNumbers.suppressCellSelectionIntegration) {
+            this.isSuppressCellSelectionIntegration = true;
+        }
+
+        const colDefValidProps: (keyof RowNumbersOptions)[] = [
+            'contextMenuItems',
+            'context',
+            'onCellClicked',
+            'onCellContextMenu',
+            'onCellDoubleClicked',
+            'headerTooltip',
+            'headerStyle',
+            'headerComponent',
+            'headerComponentParams',
+            'suppressHeaderKeyboardEvent',
+            'tooltipField',
+            'tooltipValueGetter',
+            'tooltipComponent',
+            'tooltipComponentParams',
+            'valueGetter',
+            'valueFormatter',
+            'width',
+            'maxWidth',
+            'minWidth',
+            'resizable',
+        ];
+
+        for (const prop of colDefValidProps) {
+            if (rowNumbers[prop] != null) {
+                this.rowNumberOverrides[prop] = rowNumbers[prop];
+            }
+        }
     }
 
     private onHeaderClick(): void {
@@ -330,7 +368,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         }
 
         const colsInViewport = beans.colViewport.getColsWithinViewport(rowNode);
-        const column = colsInViewport.find(isRowNumberCol);
+        const column = colsInViewport.find((col) => !isRowNumberCol(col));
 
         if (!column) {
             return;

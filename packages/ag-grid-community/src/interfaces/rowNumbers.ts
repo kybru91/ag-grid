@@ -28,7 +28,8 @@ export interface RowNumbersOptions
         | 'resizable'
     > {
     /**
-     * Set to `true` to prevent the automatic integration with Cell Selection
+     * Set to `true` to prevent selecting all the currently visible cells in the row when clicking a Row Number.
+     * @default false
      */
     suppressCellSelectionIntegration?: boolean;
 }

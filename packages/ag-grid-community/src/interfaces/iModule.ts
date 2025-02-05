@@ -93,7 +93,6 @@ export type InternalModuleName =
     | 'PinnedColumn'
     | 'Popup'
     | 'QuickFilterCore'
-    | 'RowNumbers'
     | 'SharedAggregation'
     | 'SharedDragAndDrop'
     | 'SharedExport'

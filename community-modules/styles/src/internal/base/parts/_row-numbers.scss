@@ -25,20 +25,12 @@
         .ag-cell.ag-row-number-cell:not(.ag-cell-last-left-pinned) {
             border-right: var(--ag-pinned-column-border);
         }
-
-        :where(.ag-row-number-cell.ag-row-number-selection-enabled) {
-            cursor: e-resize;
-        }
     }
 
     :where(.ag-rtl) {
         .ag-row-number-header,
         .ag-cell.ag-row-number-cell:not(.ag-cell-first-right-pinned) {
             border-left: var(--ag-pinned-column-border);
-        }
-
-        :where(.ag-row-number-cell.ag-row-number-selection-enabled) {
-            cursor: w-resize;
         }
     }
 }

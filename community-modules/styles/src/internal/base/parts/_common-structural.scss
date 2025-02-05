@@ -1682,10 +1682,14 @@
     // *****************************
     // */
     .ag-row-number-cell {
-        display: flex;
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
+        @include ag.unthemed-rtl(
+            (
+                text-align: right,
+            )
+        );
     }
 
     // /**

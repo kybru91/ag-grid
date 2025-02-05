@@ -1,13 +1,12 @@
 .ag-row-number-cell {
-    display: flex;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
+    text-align: right;
     background-color: var(--ag-header-background-color);
     color: var(--ag-header-text-color);
     font-size: var(--ag-header-font-size);
     font-family: var(--ag-header-font-family);
-    justify-content: end;
     font-weight: var(--ag-header-font-weight);
 }
 

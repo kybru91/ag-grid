@@ -26,6 +26,7 @@ export class RangeHeaderHighlightFeature extends BeanStub {
 
         this.addManagedEventListeners({
             rangeSelectionChanged: this.onRangeSelectionChanged.bind(this),
+            columnPinned: this.onRangeSelectionChanged.bind(this),
         });
     }
 

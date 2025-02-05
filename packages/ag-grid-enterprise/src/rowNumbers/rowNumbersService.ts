@@ -138,10 +138,12 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
 
     private refreshSelectionIntegration(): void {
         const { beans } = this;
-
+        const { gos, rangeSvc } = beans;
+        const cellSelection = gos.get('cellSelection');
         this.refreshRowNumberOverrides();
 
-        this.isIntegratedWithSelection = !!beans.rangeSvc && !this.rowNumberOverrides?.suppressCellSelectionIntegration;
+        this.isIntegratedWithSelection =
+            !!rangeSvc && !!cellSelection && !this.rowNumberOverrides?.suppressCellSelectionIntegration;
     }
 
     private refreshRowNumberOverrides(): void {
@@ -205,6 +207,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
             suppressHeaderMenuButton: true,
             sortable: false,
             suppressMovable: true,
+            lockPinned: true,
             pinned: enableRTL ? 'right' : 'left',
             lockPosition: enableRTL ? 'right' : 'left',
             editable: false,

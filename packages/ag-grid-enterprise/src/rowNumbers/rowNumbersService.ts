@@ -2,6 +2,7 @@ import {
     AgColumn,
     BeanStub,
     ROW_NUMBERS_COLUMN_ID,
+    _addGridCommonParams,
     _applyColumnState,
     _areColIdsEqual,
     _convertColumnEventSourceType,
@@ -21,6 +22,8 @@ import type {
     PropertyValueChangedEvent,
     RowNumbersOptions,
     RowPosition,
+    ValueFormatterParams,
+    ValueGetterParams,
     _ColumnCollections,
     _HeaderComp,
 } from 'ag-grid-community';
@@ -167,19 +170,43 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         }
 
         if (runAutoSize) {
-            this.beans.colAutosize?.autoSizeCols({
-                colKeys: [ROW_NUMBERS_COLUMN_ID],
-                skipHeader: true,
-                skipHeaderGroups: true,
-                silent: true,
-                source: 'rowNumbersService',
-            });
+            const width = this.beans.autoWidthCalc?.getPreferredWidthForElements([this.createDummyElement(column)], 2);
+            if (width != null) {
+                this.beans.colResize?.setColumnWidths(
+                    [{ key: column, newWidth: width }],
+                    false,
+                    true,
+                    'rowNumbersService'
+                );
+            }
         }
 
         this.beans.rowRenderer.refreshCells({
             columns: [column],
             force,
         });
+    }
+
+    private createDummyElement(column: AgColumn): HTMLDivElement {
+        const div = document.createElement('div');
+        div.classList.add('ag-cell-value', 'ag-cell');
+
+        let value = String(this.beans.rowModel.getRowCount() + 1);
+
+        if (typeof this.rowNumberOverrides.valueFormatter === 'function') {
+            const valueFormatterParams: ValueFormatterParams = _addGridCommonParams(this.beans.gos, {
+                data: undefined,
+                value,
+                node: null,
+                column,
+                colDef: column.colDef,
+            });
+            value = this.rowNumberOverrides.valueFormatter(valueFormatterParams);
+        }
+
+        div.textContent = value;
+
+        return div;
     }
 
     private putRowNumbersColsFirstInList(list: AgColumn[], cols?: AgColumn[] | null): AgColumn[] | null {
@@ -194,12 +221,13 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
     private createRowNumbersColDef(): ColDef {
         const { gos } = this.beans;
         const enableRTL = gos.get('enableRtl');
+
         return {
             // overridable properties
             minWidth: 60,
             width: 60,
             resizable: false,
-            valueGetter: (p) => (p.node?.rowIndex || 0) + 1,
+            valueGetter: this.valueGetter,
             contextMenuItems: this.isIntegratedWithSelection ? undefined : () => [],
             // overrides
             ...this.rowNumberOverrides,
@@ -221,6 +249,10 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
             cellClass: this.getCellClass.bind(this),
             cellAriaRole: 'rowheader',
         };
+    }
+
+    private valueGetter(params: ValueGetterParams): string {
+        return String((params.node?.rowIndex || 0) + 1);
     }
 
     private getHeaderClass(): string[] {

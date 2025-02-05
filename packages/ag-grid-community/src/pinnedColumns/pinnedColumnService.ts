@@ -1,5 +1,6 @@
 import { dispatchColumnPinnedEvent } from '../columns/columnEventUtils';
 import type { ColKey } from '../columns/columnModel';
+import { isRowNumberCol } from '../columns/columnUtils';
 import type { NamedBean } from '../context/bean';
 import { BeanStub } from '../context/beanStub';
 import type { AgColumn } from '../entities/agColumn';
@@ -78,7 +79,7 @@ export class PinnedColumnService extends BeanStub implements NamedBean {
         }
 
         if (columnsToRemove && columnsToRemove.length) {
-            columnsToRemove = columnsToRemove.filter((col) => !col.colDef.lockPinned);
+            columnsToRemove = columnsToRemove.filter((col) => !isRowNumberCol(col));
         }
 
         this.setColsPinned(columnsToRemove, null, 'viewportSizeFeature');
@@ -248,12 +249,18 @@ export class PinnedColumnService extends BeanStub implements NamedBean {
         while ((indexLeft < pinnedLeftColumns.length || indexRight < pinnedRightColumns.length) && spaceNecessary > 0) {
             if (indexRight < pinnedRightColumns.length) {
                 const currentColumn = pinnedRightColumns[indexRight++];
+                if (currentColumn.colDef.lockPinned) {
+                    continue;
+                }
                 spaceNecessary -= currentColumn.getActualWidth();
                 columnsToRemove.push(currentColumn);
             }
 
             if (indexLeft < pinnedLeftColumns.length && spaceNecessary > 0) {
                 const currentColumn = pinnedLeftColumns[indexLeft++];
+                if (currentColumn.colDef.lockPinned) {
+                    continue;
+                }
                 spaceNecessary -= currentColumn.getActualWidth();
                 columnsToRemove.push(currentColumn);
             }

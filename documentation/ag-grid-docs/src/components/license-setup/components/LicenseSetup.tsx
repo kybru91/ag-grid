@@ -101,7 +101,16 @@ export const LicenseSetup: FunctionComponent<Props> = ({ library, framework, pat
 
     return (
         <>
-            <div className={styles.form}>
+            <Note>
+                You can test AG Grid Enterprise locally without a licence. To test in production, access support and
+                remove the watermark & console warnings,{' '}
+                <a href="../community-vs-enterprise/#request-an-enterprise-bundle-trial-licence">
+                    request a trial licence
+                </a>
+                .
+            </Note>
+
+            <form className={styles.form}>
                 <h2 id="validate-your-license">
                     Validate Your Licence
                     <LinkIcon href="#validate-your-license" />
@@ -135,19 +144,6 @@ export const LicenseSetup: FunctionComponent<Props> = ({ library, framework, pat
                         {message}. <EmailSales />
                     </Warning>
                 ))}
-
-                <Note>
-                    You can test AG Grid Enterprise locally without a licence. To test in your environment,{' '}
-                    <a
-                        href={urlWithPrefix({
-                            url: './licensing/#request-an-enterprise-bundle-trial-license-key',
-                            framework,
-                        })}
-                    >
-                        request a trial licence
-                    </a>
-                    .
-                </Note>
 
                 <div className={styles.licenseData}>
                     {hasValue(userLicense) && (
@@ -209,8 +205,6 @@ export const LicenseSetup: FunctionComponent<Props> = ({ library, framework, pat
                 </div>
 
                 <div className={styles.results}>
-                    <br />
-
                     <h3 id="add-your-dependencies">
                         Add Your Dependencies
                         <LinkIcon href="#add-your-dependencies" />
@@ -350,7 +344,7 @@ export const LicenseSetup: FunctionComponent<Props> = ({ library, framework, pat
                         <p>Select your enterprise products above to view seed repositories.</p>
                     )}
                 </div>
-            </div>
+            </form>
         </>
     );
 };

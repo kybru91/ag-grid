@@ -52,6 +52,8 @@ export class RangeHeaderHighlightFeature extends BeanStub {
             columnMoved: listener,
             columnGroupOpened: listener,
         });
+
+        listener();
     }
 
     public onRangeSelectionChanged(): void {

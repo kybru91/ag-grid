@@ -11,6 +11,7 @@ import {
     _destroyColumnTree,
     _getRowNode,
     _selectAllCells,
+    _setAriaLabel,
     _updateColsMap,
     isRowNumberCol,
 } from 'ag-grid-community';
@@ -137,6 +138,8 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
         if (!isRowNumberCol(column)) {
             return;
         }
+
+        _setAriaLabel(eGridHeader, 'Row Number');
 
         this.addManagedElementListeners(eGridHeader, {
             click: this.onHeaderClick.bind(this),

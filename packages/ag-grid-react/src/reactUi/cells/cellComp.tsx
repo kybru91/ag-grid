@@ -448,7 +448,7 @@ const CellComp = ({
         cellCtrl.setComp(
             compProxy,
             eRef,
-            eWrapper.current,
+            eWrapper.current ?? undefined,
             cellWrapperOrUndefined,
             printLayout,
             editingRow,

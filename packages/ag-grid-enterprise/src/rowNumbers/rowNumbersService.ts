@@ -257,7 +257,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
     }
 
     private createRowNumbersColDef(): ColDef {
-        const { gos } = this.beans;
+        const { gos, contextMenuSvc } = this.beans;
         const enableRTL = gos.get('enableRtl');
 
         return {
@@ -266,7 +266,7 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
             width: 60,
             resizable: false,
             valueGetter: this.valueGetter,
-            contextMenuItems: this.isIntegratedWithSelection ? undefined : () => [],
+            contextMenuItems: this.isIntegratedWithSelection || !contextMenuSvc ? undefined : () => [],
             // overrides
             ...this.rowNumberOverrides,
             // non-overridable properties

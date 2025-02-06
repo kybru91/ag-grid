@@ -4,6 +4,7 @@ import type { AgColumn, AgColumnGroup, IHeaderCellComp } from 'ag-grid-community
 
 export class RangeHeaderHighlightFeature extends BeanStub {
     private columnMap: Map<AgColumn, boolean> = new Map();
+    private isActive: boolean = false;
     constructor(
         private column: AgColumn | AgColumnGroup,
         private comp: IHeaderCellComp
@@ -13,11 +14,11 @@ export class RangeHeaderHighlightFeature extends BeanStub {
     }
 
     public postConstruct(): void {
-        this.setupRangeHeaderHighlight();
-        this.addManagedEventListeners({
-            columnMoved: () => this.onRangeSelectionChanged(),
-            columnGroupOpened: () => this.onRangeSelectionChanged(),
+        this.addManagedPropertyListener('cellSelection', () => {
+            this.refreshActive();
         });
+        this.refreshActive();
+        this.setupRangeHeaderHighlight();
     }
 
     private resetColumnMap(): void {
@@ -35,21 +36,29 @@ export class RangeHeaderHighlightFeature extends BeanStub {
         }
     }
 
-    private setupRangeHeaderHighlight(): void {
+    private refreshActive(): void {
         const { gos, rangeSvc } = this.beans;
         const selection = gos.get('cellSelection');
 
-        if (!selection || !rangeSvc || typeof selection !== 'object' || !selection.enableHeaderHighlight) {
-            return;
-        }
+        this.isActive = !!(selection && rangeSvc && typeof selection === 'object' && selection.enableHeaderHighlight);
+    }
+
+    private setupRangeHeaderHighlight(): void {
+        const listener = this.onRangeSelectionChanged.bind(this);
 
         this.addManagedEventListeners({
-            rangeSelectionChanged: this.onRangeSelectionChanged.bind(this),
-            columnPinned: this.onRangeSelectionChanged.bind(this),
+            rangeSelectionChanged: listener,
+            columnPinned: listener,
+            columnMoved: listener,
+            columnGroupOpened: listener,
         });
     }
 
     public onRangeSelectionChanged(): void {
+        if (!this.isActive) {
+            return;
+        }
+
         this.resetColumnMap();
 
         const ranges = this.beans.rangeSvc!.getCellRanges();

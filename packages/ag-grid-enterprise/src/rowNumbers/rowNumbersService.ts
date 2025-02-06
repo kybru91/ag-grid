@@ -360,15 +360,23 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
     // focus is disabled on the Row Numbers cells, when a click happens on it,
     // it should focus the first cell of that row.
     private focusFirstRenderedCellAtRowPosition(rowPosition: RowPosition) {
-        const { beans } = this;
-        const rowNode = _getRowNode(beans, rowPosition);
+        const { beans, gos } = this;
+        const { visibleCols, colViewport } = beans;
+        const pinnedCols = gos.get('enableRtl') ? visibleCols.rightCols : visibleCols.leftCols;
+        let columns: AgColumn[];
 
-        if (!rowNode) {
-            return;
+        if (pinnedCols.length == 1) {
+            const rowNode = _getRowNode(beans, rowPosition);
+
+            if (!rowNode) {
+                return;
+            }
+            columns = colViewport.getColsWithinViewport(rowNode);
+        } else {
+            columns = pinnedCols;
         }
 
-        const colsInViewport = beans.colViewport.getColsWithinViewport(rowNode);
-        const column = colsInViewport.find((col) => !isRowNumberCol(col));
+        const column = columns.find((col) => !isRowNumberCol(col));
 
         if (!column) {
             return;

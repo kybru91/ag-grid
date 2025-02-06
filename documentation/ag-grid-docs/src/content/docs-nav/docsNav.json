@@ -78,7 +78,7 @@
                                 },
                                 {
                                     "title": "React Testing Library",
-                                    "url": "https://blog.ag-grid.com/unit-testing-ag-grid-react-components-with-react-testing-library-and-vitest/",
+                                    "url": "https://blog.ag-grid.com/unit-testing-ag-grid-react-tables-with-react-testing-library-and-vitest/",
                                     "frameworks": ["react"]
                                 }
                             ]

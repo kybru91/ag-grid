@@ -6,6 +6,7 @@ import {
     backgroundColor,
     foregroundBackgroundMix,
     foregroundColor,
+    foregroundHeaderBackgroundMix,
     foregroundMix,
 } from '../theme-utils';
 
@@ -870,7 +871,7 @@ export const coreDefaults: Readonly<CoreParams> = {
     rangeSelectionChartBackgroundColor: '#0058FF1A',
     rangeSelectionChartCategoryBackgroundColor: '#00FF841A',
     rangeSelectionHighlightColor: accentMix(0.5),
-    rangeHeaderHighlightColor: foregroundMix(0.08),
+    rangeHeaderHighlightColor: foregroundHeaderBackgroundMix(0.08),
     rowNumbersSelectedColor: accentMix(0.5),
     rowHoverColor: accentMix(0.08),
     columnHoverColor: accentMix(0.05),

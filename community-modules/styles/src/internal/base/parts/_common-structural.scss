@@ -1685,6 +1685,7 @@
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
+        user-select: none;
         @include ag.unthemed-rtl(
             (
                 text-align: right,

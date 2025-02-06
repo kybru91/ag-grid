@@ -3,6 +3,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-align: right;
+    user-select: none;
     background-color: var(--ag-header-background-color);
     color: var(--ag-header-text-color);
     font-size: var(--ag-header-font-size);

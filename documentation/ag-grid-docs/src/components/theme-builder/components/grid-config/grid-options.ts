@@ -9,7 +9,7 @@ export const productionConfigFields = [
     'columnHover',
     'rowGrouping',
     'columnResizing',
-    'headerHighlight',
+    'cellSelectionHeaderHighlight',
     'rowNumbers',
     'rowDrag',
     'rowSelection',
@@ -74,7 +74,7 @@ export const buildGridOptions = (config: GridConfig): GridOptions => {
         enableCharts: true,
         columnHoverHighlight: config.columnHover,
         cellSelection: {
-            enableHeaderHighlight: config.headerHighlight,
+            enableHeaderHighlight: config.cellSelectionHeaderHighlight,
         },
         rowData: defaultRowData(),
         columnDefs: config.columnGroupsDeep

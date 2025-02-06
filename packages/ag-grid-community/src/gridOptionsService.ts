@@ -251,10 +251,9 @@ export class GridOptionsService extends BeanStub implements NamedBean {
     public addGridCommonParams<T extends AgGridCommon<TData, TContext>, TData = any, TContext = any>(
         params: WithoutGridCommon<T>
     ): T {
-        const updatedParams = params as T;
-        updatedParams.api = this.api;
-        updatedParams.context = this.gridOptionsContext;
-        return updatedParams;
+        (params as T).api = this.api;
+        (params as T).context = this.gridOptionsContext;
+        return params as T;
     }
 
     public assertModuleRegistered<

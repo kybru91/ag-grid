@@ -1,19 +1,38 @@
+import 'ag-grid-community';
 import { BeanStub } from 'ag-grid-community';
-import type { AgColumn, IHeaderCellComp } from 'ag-grid-community';
+import type { AgColumn, AgColumnGroup, IHeaderCellComp } from 'ag-grid-community';
 
 export class RangeHeaderHighlightFeature extends BeanStub {
+    private columnMap: Map<AgColumn, boolean> = new Map();
     constructor(
-        private column: AgColumn,
+        private column: AgColumn | AgColumnGroup,
         private comp: IHeaderCellComp
     ) {
         super();
-
-        this.column = column;
-        this.comp = comp;
+        this.resetColumnMap();
     }
 
     public postConstruct(): void {
         this.setupRangeHeaderHighlight();
+        this.addManagedEventListeners({
+            columnMoved: () => this.onRangeSelectionChanged(),
+            columnGroupOpened: () => this.onRangeSelectionChanged(),
+        });
+    }
+
+    private resetColumnMap(): void {
+        this.columnMap.clear();
+
+        let columns: AgColumn[] | null;
+        if (this.column.isColumn) {
+            columns = [this.column];
+        } else {
+            columns = this.column.getDisplayedLeafColumns();
+        }
+
+        for (const column of columns) {
+            this.columnMap.set(column, false);
+        }
     }
 
     private setupRangeHeaderHighlight(): void {
@@ -30,23 +49,34 @@ export class RangeHeaderHighlightFeature extends BeanStub {
         });
     }
 
-    onRangeSelectionChanged(): void {
+    public onRangeSelectionChanged(): void {
+        this.resetColumnMap();
+
         const ranges = this.beans.rangeSvc!.getCellRanges();
         let hasRange = false;
+        let isAllColumnRange = true;
 
         for (const range of ranges) {
             if (hasRange) {
                 break;
             }
+
             for (const column of range.columns) {
-                if (column === this.column) {
-                    hasRange = true;
-                    break;
+                if (this.columnMap.has(column as AgColumn)) {
+                    this.columnMap.set(column as AgColumn, true);
+                    hasRange ||= true;
                 }
             }
         }
 
-        this.comp.addOrRemoveCssClass('ag-header-range-highlight', hasRange);
+        for (const value of Array.from(this.columnMap.values())) {
+            if (value === false) {
+                isAllColumnRange = false;
+                break;
+            }
+        }
+
+        this.comp.addOrRemoveCssClass('ag-header-range-highlight', hasRange && isAllColumnRange);
     }
 
     public override destroy(): void {

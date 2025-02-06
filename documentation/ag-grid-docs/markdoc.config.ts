@@ -22,6 +22,7 @@ import { video } from '@ag-website-shared/markdoc/tags/video';
 import { videoSection } from '@ag-website-shared/markdoc/tags/videoSection';
 import { warning } from '@ag-website-shared/markdoc/tags/warning';
 import { Markdoc, component, defineMarkdocConfig } from '@astrojs/markdoc/config';
+import { chartsVersion, chartsVersionPatch } from '@utils/markdoc/functions/chartsVersion';
 import { getFrameworkCapitalised } from '@utils/markdoc/getFrameworkCapitalised';
 
 import { agChartsVersion, agGridVersion } from './src/constants';
@@ -60,6 +61,8 @@ export default defineMarkdocConfig({
         getFrameworkCapitalised,
         migrationVersion,
         migrationVersionPatch: getMigrationVersionPatch(versionsData),
+        chartsVersion,
+        chartsVersionPatch,
     },
     tags: {
         kbd,

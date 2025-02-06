@@ -1,6 +1,7 @@
 import {
     AgColumn,
     BeanStub,
+    KeyCode,
     ROW_NUMBERS_COLUMN_ID,
     _addGridCommonParams,
     _applyColumnState,
@@ -131,14 +132,16 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
     }
 
     public setupForHeader(comp: _HeaderComp): void {
-        const { column } = comp.params;
-        const eGui = comp.getGui();
+        const { column, eGridHeader } = comp.params;
+
         if (!isRowNumberCol(column)) {
             return;
         }
 
-        this.addManagedElementListeners(eGui, {
+        this.addManagedElementListeners(eGridHeader, {
             click: this.onHeaderClick.bind(this),
+            keydown: this.onHeaderKeyDown.bind(this),
+            focus: this.onHeaderFocus.bind(this),
         });
     }
 
@@ -191,6 +194,17 @@ export class RowNumbersService extends BeanStub implements NamedBean, IRowNumber
                 this.rowNumberOverrides[prop] = rowNumbers[prop];
             }
         }
+    }
+
+    private onHeaderFocus(): void {
+        this.beans.ariaAnnounce?.announceValue('Press Space to select all cells', 'ariaSelectAllCells');
+    }
+
+    private onHeaderKeyDown(e: KeyboardEvent): void {
+        if (!this.isIntegratedWithSelection || e.key !== KeyCode.SPACE) {
+            return;
+        }
+        _selectAllCells(this.beans);
     }
 
     private onHeaderClick(): void {

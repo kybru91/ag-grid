@@ -1,5 +1,4 @@
 import type { AgColumn } from '../../entities/agColumn';
-import type { RowStyle } from '../../entities/gridOptions';
 import type { RowContainerType } from '../../gridBodyComp/rowContainer/rowContainerCtrl';
 import type { CellCtrl } from '../cell/cellCtrl';
 import { RowCtrl } from '../row/rowCtrl';

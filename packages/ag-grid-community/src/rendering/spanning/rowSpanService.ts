@@ -6,7 +6,6 @@ import type { CellPosition } from '../../interfaces/iCellPosition';
 import { _debounce } from '../../utils/function';
 import type { CellSpan } from './rowSpanCache';
 import { RowSpanCache } from './rowSpanCache';
-import { _normalisePinnedValue } from './spannedRowRenderer';
 
 export class RowSpanService extends BeanStub<'spannedCellsUpdated'> implements NamedBean {
     beanName = 'rowSpanSvc' as const;

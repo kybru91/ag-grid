@@ -4,7 +4,7 @@ import { Component, RefPlaceholder } from 'ag-grid-community';
 import type { AgGroupComponent, AgGroupComponentParams } from '../../../../../widgets/agGroupComponent';
 import { AgGroupComponentSelector } from '../../../../../widgets/agGroupComponent';
 import type { ChartTranslationService } from '../../../services/chartTranslationService';
-import { isCartesian, isFunnel, isPolar } from '../../../utils/seriesTypeMapper';
+import { isCartesian, isPolar } from '../../../utils/seriesTypeMapper';
 import { ChartMenuParamsFactory } from '../../chartMenuParamsFactory';
 import type { FormatPanelOptions } from '../formatPanel';
 import { ChartTitlePanel } from './chartTitlePanel';

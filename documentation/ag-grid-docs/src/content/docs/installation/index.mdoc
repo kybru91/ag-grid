@@ -58,8 +58,26 @@ npm install ag-grid-enterprise
 ```
 
 {% note %}
-You can test AG Grid Enterprise locally without a licence. To test in production, access support and remove the watermark & console warnings, [request a trial licence](./community-vs-enterprise/#request-an-enterprise-bundle-trial-licence).
+You can test AG Grid Enterprise locally without a licence. To test in production, access support, and remove the watermark and console warnings, [request a trial licence](./community-vs-enterprise/#request-an-enterprise-bundle-trial-licence).
 {% /note %}
+
+{% if isFramework("react") %}
+{% note %}
+`ag-grid-react` and `ag-grid-enterprise` versions must be identical to ensure that all features work correctly.
+{% /note %}
+{% /if %}
+
+{% if isFramework("angular") %}
+{% note %}
+`ag-grid-angular` and `ag-grid-enterprise` versions must be identical to ensure that all features work correctly.
+{% /note %}
+{% /if %}
+
+{% if isFramework("vue") %}
+{% note %}
+`ag-grid-vue3` and `ag-grid-enterprise` versions must be identical to ensure that all features work correctly.
+{% /note %}
+{% /if %}
 
 {% if isFramework("react", "angular", "vue") %}
 ## Importing

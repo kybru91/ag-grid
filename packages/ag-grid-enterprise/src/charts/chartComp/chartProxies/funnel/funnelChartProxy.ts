@@ -19,9 +19,20 @@ export class FunnelChartProxy extends ChartProxy<AgStandaloneChartOptions, Funne
     ): AgStandaloneChartOptions {
         return {
             ...commonChartOptions,
-            data: params.data,
+            data: this.tranformFunnelData(params),
             series: this.getSeries(params) as AgStandaloneChartOptions['series'],
         };
+    }
+
+    private tranformFunnelData(params: UpdateParams): any[] {
+        const { data } = params;
+        const [{ id }] = params.categories;
+
+        return data.map((d, index) => ({
+            ...d,
+            id: index,
+            toString: () => d[id],
+        }));
     }
 
     protected override getSeriesChartThemeDefaults(): AgChartThemeOverrides[FunnelChartTypes] {

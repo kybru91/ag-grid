@@ -68,7 +68,7 @@ export class RowSpanService extends BeanStub<'spannedCellsUpdated'> implements N
             if (this.pinnedTimeout != null) {
                 return;
             }
-            this.pinnedTimeout = setTimeout(() => {
+            this.pinnedTimeout = window.setTimeout(() => {
                 this.pinnedTimeout = null;
                 this.buildPinnedCaches();
 
@@ -84,7 +84,7 @@ export class RowSpanService extends BeanStub<'spannedCellsUpdated'> implements N
             return;
         }
 
-        this.modelTimeout = setTimeout(() => {
+        this.modelTimeout = window.setTimeout(() => {
             this.modelTimeout = null;
             this.buildModelCaches();
 

@@ -2492,6 +2492,20 @@
         "documentationUrl": null
     },
     {
+        "key": "AG-12732",
+        "issueType": "Task",
+        "componentsByName": ["Grid"],
+        "summary": "[Row Selection] Allow deselecting rows by clicking on them without need for CTRL/COMMAND",
+        "versions": ["33.0.0"],
+        "status": "Done",
+        "resolution": "Done",
+        "features": ["Row_Selection"],
+        "moreInformation": null,
+        "deprecationNotes": null,
+        "breakingChangesNotes": null,
+        "documentationUrl": null
+    },
+    {
         "key": "AG-12701",
         "issueType": "Bug",
         "componentsByName": ["Grid"],

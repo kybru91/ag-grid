@@ -90,7 +90,7 @@ async function getProvidedFiles(folderPath: string) {
 }
 
 export async function generateFiles(options: ExecutorOptions, gridOptionsTypes: Record<string, GridOptionsType>) {
-    const isDev = false; // options.mode === 'dev';
+    const isDev = options.mode === 'dev';
     const folderPath = options.examplePath;
 
     const sourceFileList = await getSourceFileList(folderPath);

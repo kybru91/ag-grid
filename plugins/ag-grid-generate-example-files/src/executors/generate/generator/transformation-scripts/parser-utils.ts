@@ -71,6 +71,10 @@ export function isInstanceMethod(methods: string[], property: any): boolean {
     return methods.map(getFunctionName).filter((name) => name === property.name).length > 0;
 }
 
+export function removeCreateGridImport(imports: string[]): string[] {
+    return imports.map((i) => i.replace(`, createGrid`, ''));
+}
+
 export const enum NodeType {
     Variable = 'VariableDeclaration',
     Function = 'FunctionDeclaration',

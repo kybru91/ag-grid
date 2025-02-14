@@ -13,6 +13,7 @@ import {
     handleRowGenericInterface,
     isInstanceMethod,
     preferParamsApi,
+    removeCreateGridImport,
 } from './parser-utils';
 import {
     EventAndCallbackNames,
@@ -63,7 +64,8 @@ function getModuleImports(
     if (bindings.moduleRegistration) {
         imports.push(bindings.moduleRegistration);
     }
-    return imports;
+
+    return removeCreateGridImport(imports);
 }
 
 function getImports(

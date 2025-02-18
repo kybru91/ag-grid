@@ -964,11 +964,6 @@
                             "type": "item",
                             "title": "Full Row",
                             "path": "cell-editing-full-row"
-                        },
-                        {
-                            "type": "item",
-                            "title": "Change Detection",
-                            "path": "change-detection"
                         }
                     ]
                 },
@@ -1655,6 +1650,11 @@
                     "type": "group",
                     "title": "Performance",
                     "children": [
+                        {
+                            "type": "item",
+                            "title": "Change Detection",
+                            "path": "change-detection"
+                        },
                         {
                             "type": "item",
                             "title": "DOM Virtualisation",

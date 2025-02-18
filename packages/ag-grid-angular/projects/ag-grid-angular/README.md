@@ -190,7 +190,18 @@ $ npm install --save ag-grid-angular
 
 <!-- START SETUP -->
 
-**1. Register Modules**
+**1. Import the Angular Data Grid**
+
+```js
+import { Component } from '@angular/core';
+
+// Angular Data Grid Component
+import { AgGridAngular } from 'ag-grid-angular';
+// Column Definition Type Interface
+import { ColDef } from 'ag-grid-community';
+```
+
+**2. Register Modules**
 
 Register the `AllCommunityModule` to access all Community features:
 
@@ -205,17 +216,6 @@ ModuleRegistry.registerModules([AllCommunityModule]);
     <p>ℹ️ <b>Note:</b></p>
     <p>To minimize bundle size, only register the modules you want to use. See the <a href="https://www.ag-grid.com/angular-data-grid/modules/">Modules</a> page for more information.</p>
 </blockquote>
-
-**2. Import the Angular Data Grid**
-
-```js
-import { Component } from '@angular/core';
-
-// Angular Data Grid Component
-import { AgGridAngular } from 'ag-grid-angular';
-// Column Definition Type Interface
-import { ColDef } from 'ag-grid-community';
-```
 
 **3. Define Rows and Columns**
 

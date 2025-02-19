@@ -3,6 +3,8 @@ import type {
     AgChartTheme,
     AgChartThemeName,
     AgSparklineOptions,
+    AgSparklineTooltipRendererParams,
+    AgSparklineTooltipRendererResult,
     AgTooltipRendererResult,
 } from 'ag-charts-types';
 
@@ -12,6 +14,16 @@ import { Component, RefPlaceholder, _observeResize } from 'ag-grid-community';
 import { wrapFn } from './sparklinesUtils';
 
 export const DEFAULT_THEMES = ['ag-default', 'ag-material', 'ag-sheets', 'ag-polychroma', 'ag-vivid'];
+
+function tooltipRendererWithXValue(
+    params: AgSparklineTooltipRendererParams<unknown>
+): AgSparklineTooltipRendererResult {
+    return { content: `${params.xValue} ${params.yValue}` };
+}
+
+function tooltipRenderer(params: AgSparklineTooltipRendererParams<unknown>): AgSparklineTooltipRendererResult {
+    return { content: `${params.yValue}` };
+}
 
 export class SparklineCellRenderer extends Component implements ICellRenderer {
     private readonly eSparkline: HTMLElement = RefPlaceholder;
@@ -69,10 +81,12 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
             if (this.sparklineOptions.tooltip?.renderer) {
                 this.wrapTooltipRenderer();
             } else {
+                const tupleData = Array.isArray(this.sparklineOptions.data?.[0]);
+                const hasXKey = this.sparklineOptions.xKey != null;
+                const renderer = tupleData || hasXKey ? tooltipRendererWithXValue : tooltipRenderer;
                 this.sparklineOptions.tooltip = {
                     ...this.sparklineOptions.tooltip,
-                    renderer: (params: any) =>
-                        ({ content: this.createDefaultContent(params) }) as AgTooltipRendererResult,
+                    renderer,
                 };
             }
 
@@ -136,14 +150,17 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
         };
     }
 
-    private createDefaultContent(params: any, userRendererResult?: AgTooltipRendererResult): string {
+    private createDefaultContent(
+        params: AgSparklineTooltipRendererParams<unknown>,
+        userRendererResult?: AgTooltipRendererResult
+    ): AgSparklineTooltipRendererResult {
         const userTitle = userRendererResult?.title;
         const xKeyProvided = this.sparklineOptions.xKey;
         const tupleData = Array.isArray(this.sparklineOptions.data?.[0]);
 
         const showXValue = !userTitle && (xKeyProvided || tupleData);
 
-        return `${showXValue ? `${params.xValue} ` : ''}${params.yValue}`;
+        return showXValue ? tooltipRendererWithXValue(params) : tooltipRenderer(params);
     }
 
     private wrapItemStyler(container: { itemStyler?: any }) {
@@ -168,7 +185,7 @@ export class SparklineCellRenderer extends Component implements ICellRenderer {
                     return userRendererResult;
                 }
                 return {
-                    content: this.createDefaultContent(tooltipParams, userRendererResult),
+                    ...this.createDefaultContent(tooltipParams, userRendererResult),
                     ...userRendererResult,
                 };
             }),

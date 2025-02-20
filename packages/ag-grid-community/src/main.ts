@@ -207,6 +207,7 @@ export {
     ISimpleFilterParams,
     SimpleFilterParams,
     ISimpleFilterModel,
+    ISimpleFilterModelType,
     ICombinedSimpleModel,
     JoinOperator,
     IFilterPlaceholderFunctionParams,

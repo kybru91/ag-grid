@@ -1183,13 +1183,13 @@
         "findGetNumMatches": {
             "more": {
                 "name": "Using Find with Cell Components",
-                "url": "./find//#using-find-with-cell-components"
+                "url": "./find/#using-find-with-cell-components"
             }
         },
         "findGetParts": {
             "more": {
                 "name": "Using Find with Cell Components",
-                "url": "./find//#using-find-with-cell-components"
+                "url": "./find/#using-find-with-cell-components"
             }
         }
     }

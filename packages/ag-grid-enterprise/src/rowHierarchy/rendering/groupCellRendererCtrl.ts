@@ -392,9 +392,7 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
                 _warn(179);
             }
         } else {
-            const localeTextFunc = this.getLocaleTextFunc();
-            const footerTotalPrefix = localeTextFunc('footerTotal', 'Total');
-            footerValue = footerTotalPrefix + ' ' + (this.params.value != null ? this.params.value : '');
+            footerValue = this.beans.footerSvc?.getTotalValue(this.params.value) ?? '';
         }
 
         const innerCompDetails = this.getInnerCompDetails(this.params);
@@ -463,6 +461,14 @@ export class GroupCellRendererCtrl extends BeanStub implements IGroupCellRendere
             return _getInnerCellRendererDetails<GroupCellRendererParams>(
                 this.userCompFactory,
                 relatedColDef.cellRendererParams,
+                params
+            );
+        }
+
+        if (this.beans.findSvc?.isMatch(params.node, params.column!)) {
+            return _getCellRendererDetails(
+                this.userCompFactory,
+                { ...relatedColDef, cellRenderer: 'agFindCellRenderer' },
                 params
             );
         }

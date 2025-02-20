@@ -406,6 +406,14 @@ export interface ColDef<TData = any, TValue = any> extends AbstractColDef<TData,
     /** The parameters to be passed to the `dateComponent`. */
     dateComponentParams?: any;
 
+    // *** Find *** //
+    /**
+     * When using Find with custom cell renderers, this allows providing a custom value to search within.
+     * E.g. if the cell renderer is displaying text that is different from the cell formatted value.
+     * Returning `null` means Find will not search within the cell.
+     */
+    getFindText?: (params: GetFindTextParams<TData, TValue>) => string | null;
+
     // *** Column Headers *** //
     /**
      * The custom header component to be used for rendering the component header. If none specified the default AG Grid header component is used.
@@ -825,7 +833,7 @@ export interface HeaderCheckboxSelectionCallback<TData = any, TValue = any> {
     (params: HeaderCheckboxSelectionCallbackParams<TData, TValue>): boolean;
 }
 
-export interface GetQuickFilterTextParams<TData = any, TValue = any> extends AgGridCommon<TData, any> {
+interface GetTextParams<TData = any, TContext = any, TValue = any> extends AgGridCommon<TData, TContext> {
     /** Value for the cell. */
     value: TValue | null | undefined;
     /** Row node for the given row */
@@ -836,6 +844,14 @@ export interface GetQuickFilterTextParams<TData = any, TValue = any> extends AgG
     column: Column<TValue>;
     /** ColDef provided for this column */
     colDef: ColDef<TData, TValue>;
+}
+
+export interface GetQuickFilterTextParams<TData = any, TValue = any> extends GetTextParams<TData, any, TValue> {}
+
+export interface GetFindTextParams<TData = any, TContext = any, TValue = any>
+    extends GetTextParams<TData, TContext, TValue> {
+    /** Get formatted value for the cell (or `null` if no `valueFormatter`) */
+    getValueFormatted: () => string | null;
 }
 
 export type ColumnMenuTab = 'filterMenuTab' | 'generalMenuTab' | 'columnsMenuTab';

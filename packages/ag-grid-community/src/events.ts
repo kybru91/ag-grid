@@ -2,6 +2,7 @@ import type { AgChartThemeOverrides } from 'ag-charts-types';
 
 import type { ColDef } from './entities/colDef';
 import type { GridOptions } from './entities/gridOptions';
+import type { RowNode } from './entities/rowNode';
 import type { AgEventType, AgInternalEventType, AgPublicEventType } from './eventTypes';
 import type { FilterRequestSource } from './filter/iColumnFilter';
 import type { CellRange, CellRangeParams } from './interfaces/IRangeService';
@@ -12,6 +13,7 @@ import type { Column, ColumnEventName, ColumnGroup, ColumnPinnedType, ProvidedCo
 import type { AgGridCommon, WithoutGridCommon } from './interfaces/iCommon';
 import type { BuildEventTypeMap } from './interfaces/iEventEmitter';
 import type { IFilterComp } from './interfaces/iFilter';
+import type { FindMatch } from './interfaces/iFind';
 import type { IRowNode, RowPinnedType } from './interfaces/iRowNode';
 import type { RowNodeTransaction } from './interfaces/rowNodeTransaction';
 import type { ServerSideTransactionResult } from './interfaces/serverSideTransaction';
@@ -117,6 +119,7 @@ export type AgEventTypeParams<TData = any, TContext = any> = BuildEventTypeMap<
         rowDragLeave: RowDragLeaveEvent<TData, TContext>;
         rowDragEnd: RowDragEndEvent<TData, TContext>;
         rowDragCancel: RowDragCancelEvent<TData, TContext>;
+        findChanged: FindChangedEvent<TData, TContext>;
         // Internal events
         beforeRefreshModel: BeforeRefreshModelEvent<TData, TContext>;
         scrollbarWidthChanged: ScrollbarWidthChangedEvent<TData, TContext>;
@@ -165,6 +168,7 @@ export type AgEventTypeParams<TData = any, TContext = any> = BuildEventTypeMap<
         recalculateRowBounds: RecalculateRowBoundsEvent<TData, TContext>;
         stickyTopOffsetChanged: StickyTopOffsetChangedEvent<TData, TContext>;
         overlayExclusiveChanged: AgEvent<'overlayExclusiveChanged'>;
+        rowNodeDataChanged: RowNodeDataChangedEvent<TData, TContext>;
     }
 >;
 
@@ -378,6 +382,15 @@ export interface FilterDestroyedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'filterDestroyed', TData, TContext> {
     source: 'api' | 'columnChanged' | 'gridDestroyed' | 'advancedFilterEnabled' | 'paramsUpdated';
     column: Column;
+}
+
+export interface FindChangedEvent<TData = any, TContext = any> extends AgGlobalEvent<'findChanged', TData, TContext> {
+    /** The current search value. */
+    findSearchValue: string | undefined;
+    /** The active match, or `undefined` if no active match. */
+    activeMatch: FindMatch<TData> | undefined;
+    /** The total number of matches in the grid. */
+    totalMatches: number;
 }
 
 export interface SortChangedEvent<TData = any, TContext = any> extends AgGlobalEvent<'sortChanged', TData, TContext> {
@@ -1153,3 +1166,7 @@ export interface RecalculateRowBoundsEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'recalculateRowBounds', TData, TContext> {}
 export interface StickyTopOffsetChangedEvent<TData = any, TContext = any>
     extends AgGlobalEvent<'stickyTopOffsetChanged', TData, TContext> {}
+export interface RowNodeDataChangedEvent<TData = any, TContext = any>
+    extends AgGlobalEvent<'rowNodeDataChanged', TData, TContext> {
+    node: RowNode<TData>;
+}

@@ -56,6 +56,7 @@ import type {
     FilterChangedEvent,
     FilterModifiedEvent,
     FilterOpenedEvent,
+    FindChangedEvent,
     FirstDataRenderedEvent,
     FullWidthCellKeyDownEvent,
     GridColumnsChangedEvent,
@@ -159,6 +160,7 @@ import type { Column } from '../interfaces/iColumn';
 import type { AgGridCommon } from '../interfaces/iCommon';
 import type { IDatasource } from '../interfaces/iDatasource';
 import type { ExcelExportParams, ExcelStyle } from '../interfaces/iExcelCreator';
+import type { FindOptions } from '../interfaces/iFind';
 import type { HeaderPosition } from '../interfaces/iHeaderPosition';
 import type { ILoadingCellRendererParams } from '../interfaces/iLoadingCellRenderer';
 import type { IRowDragItem } from '../interfaces/iRowDragItem';
@@ -554,6 +556,16 @@ export interface GridOptions<TData = any> {
      * @initial
      */
     excelStyles?: ExcelStyle[];
+
+    // *** Find *** //
+    /**
+     * Text to find within the grid.
+     */
+    findSearchValue?: string;
+    /**
+     * Options for the Find feature.
+     */
+    findOptions?: FindOptions;
 
     // *** Filter *** //
     /**
@@ -2146,6 +2158,11 @@ export interface GridOptions<TData = any> {
      * Advanced Filter Builder visibility has changed (opened or closed).
      */
     onAdvancedFilterBuilderVisibleChanged?(event: AdvancedFilterBuilderVisibleChangedEvent<TData>): void;
+
+    /**
+     * Find details have changed (e.g. Find search value, active match, or updates to grid cells).
+     */
+    onFindChanged?(event: FindChangedEvent<TData>): void;
 
     // *** Integrated Charts *** //
     /**

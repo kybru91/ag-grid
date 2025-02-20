@@ -270,15 +270,21 @@ export class CellCtrl extends BeanStub {
         // if node is stub, and no group data for this node (groupSelectsChildren can populate group data)
         const isSsrmLoading = rowNode.stub && rowNode.groupData?.[column.getId()] == null;
         const colDef = column.getColDef();
-        const isCellRenderer = this.isCellRenderer();
 
-        if (isSsrmLoading || isCellRenderer) {
+        if (isSsrmLoading || this.isCellRenderer()) {
             const params = this.createCellRendererParams();
             if (!isSsrmLoading || isRowNumberCol(column)) {
                 compDetails = _getCellRendererDetails(userCompFactory, colDef, params);
             } else {
                 compDetails = _getLoadingCellRendererDetails(userCompFactory, colDef, params);
             }
+        } else if (beans.findSvc?.isMatch(rowNode, column)) {
+            const params = this.createCellRendererParams();
+            compDetails = _getCellRendererDetails(
+                userCompFactory,
+                { ...column.getColDef(), cellRenderer: 'agFindCellRenderer' },
+                params
+            );
         }
 
         this.comp.setRenderDetails(compDetails, valueToDisplay, forceNewCellRendererInstance);

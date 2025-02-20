@@ -52,6 +52,7 @@ import type { IContextMenuService } from '../interfaces/iContextMenu';
 import type { ICsvCreator } from '../interfaces/iCsvCreator';
 import type { IExcelCreator } from '../interfaces/iExcelCreator';
 import type { IExpansionService } from '../interfaces/iExpansionService';
+import type { IFindService } from '../interfaces/iFind';
 import type { IFooterService } from '../interfaces/iFooterService';
 import type { IFrameworkOverrides } from '../interfaces/iFrameworkOverrides';
 import type { IGroupHideOpenParentsService } from '../interfaces/iGroupHideOpenParentsService';
@@ -174,7 +175,8 @@ export type UserComponentName =
     | 'agSelectedRowCountComponent'
     | 'agTotalRowCountComponent'
     | 'agFilteredRowCountComponent'
-    | 'agTotalAndFilteredRowCountComponent';
+    | 'agTotalAndFilteredRowCountComponent'
+    | 'agFindCellRenderer';
 
 export type ClassImp = new (...args: []) => object;
 export type ComponentMeta =
@@ -307,6 +309,7 @@ export interface CoreBeanCollection {
     touchSvc?: TouchService;
     rowSpanSvc?: RowSpanService;
     spannedRowRenderer?: SpannedRowRenderer;
+    findSvc?: IFindService;
 }
 
 export type BeanCollection = CoreBeanCollection & {
@@ -405,6 +408,7 @@ export type BeanName =
     | 'filterMenuFactory'
     | 'filterStage'
     | 'filterValueSvc'
+    | 'findSvc'
     | 'flashCellSvc'
     | 'flattenStage'
     | 'focusSvc'

@@ -16,6 +16,7 @@ import type {
     ExcelExportParams,
     ExcelStyle,
     FillOperationParams,
+    FindOptions,
     FocusGridInnerElementParams,
     GetChartMenuItems,
     GetChartToolbarItems,
@@ -138,6 +139,7 @@ import type {
     FilterChangedEvent,
     FilterModifiedEvent,
     FilterOpenedEvent,
+    FindChangedEvent,
     FirstDataRenderedEvent,
     FullWidthCellKeyDownEvent,
     GridColumnsChangedEvent,
@@ -488,6 +490,12 @@ export interface Props<TData> {
          * @initial
          */
     excelStyles?: ExcelStyle[] | undefined,
+    /** Text to find within the grid.
+         */
+    findSearchValue?: string | undefined,
+    /** Options for the Find feature.
+         */
+    findOptions?: FindOptions | undefined,
     /** Rows are filtered using this text as a Quick Filter.
          * Only supported for Client-Side Row Model.
          */
@@ -1544,6 +1552,7 @@ export interface Props<TData> {
    'onFilter-changed'?: FilterChangedEvent<TData>,
    'onFilter-modified'?: FilterModifiedEvent<TData>,
    'onAdvanced-filter-builder-visible-changed'?: AdvancedFilterBuilderVisibleChangedEvent<TData>,
+   'onFind-changed'?: FindChangedEvent<TData>,
    'onChart-created'?: ChartCreatedEvent<TData>,
    'onChart-range-selection-changed'?: ChartRangeSelectionChangedEvent<TData>,
    'onChart-options-changed'?: ChartOptionsChangedEvent<TData>,
@@ -1670,6 +1679,8 @@ export function getProps() {
         defaultExcelExportParams: undefined,
         suppressExcelExport: undefined,
         excelStyles: undefined,
+        findSearchValue: undefined,
+        findOptions: undefined,
         quickFilterText: undefined,
         cacheQuickFilter: undefined,
         includeHiddenColumnsInQuickFilter: undefined,
@@ -2010,7 +2021,8 @@ export function getProps() {
         'onRow-drag-move': undefined,
         'onRow-drag-leave': undefined,
         'onRow-drag-end': undefined,
-        'onRow-drag-cancel': undefined
+        'onRow-drag-cancel': undefined,
+        'onFind-changed': undefined
 // @END_EVENT_PROPS@
 
     };

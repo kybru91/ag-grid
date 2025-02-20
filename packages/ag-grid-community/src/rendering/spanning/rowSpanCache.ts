@@ -169,7 +169,7 @@ export class RowSpanCache extends BeanStub {
         switch (pinned) {
             case 'center':
                 rowModel.forEachDisplayedNode?.((node: RowNode) => {
-                    const isNodeInPage = !pagination || pagination.isRowPresent(node);
+                    const isNodeInPage = !pagination || pagination.isRowInPage(node.rowIndex!);
                     if (!isNodeInPage) {
                         return;
                     }

@@ -2758,20 +2758,6 @@
         "documentationUrl": null
     },
     {
-        "key": "AG-7642",
-        "issueType": "Bug",
-        "componentsByName": ["Grid"],
-        "summary": "[Integrated] Unable to override series fill and stroke for Cross-Filtering charts.",
-        "versions": ["33.0.0"],
-        "status": "Done",
-        "resolution": "Done",
-        "features": ["Integrated"],
-        "moreInformation": "As a workaround, you can use the `itemStyler`.\nSee an example at https://plnkr.co/edit/O6UBygyeWy8sIX8a?open=main.js",
-        "deprecationNotes": null,
-        "breakingChangesNotes": null,
-        "documentationUrl": null
-    },
-    {
         "key": "AG-7440",
         "issueType": "Task",
         "componentsByName": ["Grid"],
@@ -5449,7 +5435,7 @@
         "key": "AG-8385",
         "issueType": "Bug",
         "componentsByName": ["Grid"],
-        "summary": "AG Grid appends an empty <div> at the end of the DOM",
+        "summary": "Using the sparklines module appends an empty <div> at the end of the DOM",
         "versions": ["32.1.0"],
         "status": "Done",
         "resolution": "Done",
@@ -18035,14 +18021,14 @@
         "key": "AG-7403",
         "issueType": "Task",
         "componentsByName": ["Grid"],
-        "summary": "[API] Remove deprecated ag-grid-column components",
+        "summary": "[API] Remove deprecated ag-grid-column/AgGridColumn components ",
         "versions": ["29.0.0"],
         "status": "Done",
         "resolution": "Done",
         "features": ["API"],
         "moreInformation": null,
         "deprecationNotes": null,
-        "breakingChangesNotes": "<p><u>AG Grid Column / AgGridColumn Components</u></p>\n<p>The framework column components were previously deprecrated and have now been removed. Define your column definitions in code via <code>gridOptions.columnDefs</code> or set directly on the AG Grid Component via the <code>columnDefs</code> property.</p>",
+        "breakingChangesNotes": "<p><u>AG Grid Column / AgGridColumn Components</u></p>\n<p>The framework column components were previously deprecated and have now been removed. Define your column definitions in code via <code>gridOptions.columnDefs</code> or set directly on the AG Grid Component via the <code>columnDefs</code> property.</p>",
         "documentationUrl": null
     },
     {
